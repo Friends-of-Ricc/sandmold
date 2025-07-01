@@ -18,8 +18,8 @@ The architecture is incredibly modular, allowing for more people to add more scr
 * Use `REQUIREMENTS.md` before coding anything. We need to ensure our solution respects 100% those requirements.
 * If a decision is made, a succint rationale (the WHAT and the WHY) needs to be there. Eg, "we chose Pulumi vs Terraform because.."
 
-## Architecture
+## Terminology
 
-A lab setup will need two inputs:
+Technically, every lab setup consists in a `classroom` will need two inputs:
 * a small "TFvars" for project/folder/nilling setup
-* a bigger YAML for the folder/project config.
+* a bigger YAML for the folder/project config (**classroom** config). See `etc/samples` for some inspiration.
