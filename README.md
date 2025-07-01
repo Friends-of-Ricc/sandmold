@@ -33,11 +33,23 @@ Also nice to haves:
   * Three-tier web application [GH](https://github.com/GoogleCloudPlatform/terraform-google-three-tier-web-app/tree/sic-jss-3) - [Guide](https://cloud.google.com/architecture/application-development/three-tier-web-app?_gl=1*1vwq5ks*_ga*MTU4NDM3ODU4My4xNzUxMzU5MDE2*_ga_WH2QY8WWF5*czE3NTEzNjQ0NzAkbzIkZzEkdDE3NTEzNjQ2MTgkajEyJGwwJGgw)
 
 
+## Goals
+
+* Enable Operators to do Ops scenarios on GCP.
+* Leverage  App Hub to list/host applications.
+* Create a shared Ops environment (multi-project monitoring, if needed, Cost monitoring, Logs sync, ..)
+
+## Non-goals for 1.0
+
+* Networking is not in scope for `v1.0`. For the moment, projects are disconnected. More will come.
+* `IAM`. For the moment, classroom users will be given a sample `all/Editor` role, if not owner. More granular IAM will come after 1.0.
 
 ## Owners
 
 * Riccardo `palladius`
 * Leonid `minherz`
+
+Contributing: see `CONTRIBUTING.md`
 
 ## Architecture
 
