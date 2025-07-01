@@ -1,4 +1,5 @@
 # yaml dammit YAML support!!!!!
+# schoolroom
 folder:
   org_id: 3462375241231423
   parent_folder_id: 3462375241231423 # same as org_id - root folder
@@ -8,24 +9,31 @@ folder:
 #  labels:
 #    class: class_2teachers_6
   domain: google.com
-apps:
-  - app: heapster_shop
-    project: teacherz  # will be padded by some random hex/numb
-    users:
+schoolbenches:
+  # schoolbench 1
+  - project: teacherz  # will be padded by some random hex/numb
+    apps:
+    - heapster_shop
+    seats:
     - leoy@google.com
     - ricc@google.com
-  - app: bank_of_anthos
-    project: boa01  # will be padded by some random hex/numb
-    users:
+  # schoolbench 2
+  - project: boa01  # will be padded by some random hex/numb, -> "boa01-123abc"
+    apps:
+    - bank_of_anthos
+    - bank_of_anthos_scenario123
+    seats:
     - student01@gmail.com
     - student02@gmail.com
-  - app: bank_of_anthos
+  - apps:
+    - bank_of_anthos
+    - bank_of_anthos_scenario123
     project: boa02
-    users:
+    seats:
     - student03@gmail.com
     - student04@gmail.com
   - app: cheap_jss
     project: boa03
-    users:
+    seats:
     - student05@gmail.com
     - student06@gmail.com
