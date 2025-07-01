@@ -8,6 +8,8 @@ spec:
   dependsOn:
   - sandmold.dev/v1alpha1/Folder
   - sandmold.dev/v1alpha1/Project
+  install: TODO
+  repo: https://github.com/GoogleCloudPlatform/microservices-demo
   # components:
   #   - name: frontend
   #     type: Deployment
