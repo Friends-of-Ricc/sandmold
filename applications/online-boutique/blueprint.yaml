@@ -1,0 +1,53 @@
+
+apiVersion: sandmold.dev/v1alpha1
+kind: Blueprint
+metadata:
+  name: online-boutique
+spec:
+  description: "A sample blueprint for the Google Cloud Online Boutique microservices demo, inspired by K8s/KCC objects."
+  dependsOn:
+  - sandmold.dev/v1alpha1/Folder
+  - sandmold.dev/v1alpha1/Project
+  # components:
+  #   - name: frontend
+  #     type: Deployment
+  #     dependsOn:
+  #       - productcatalogservice
+  #       - cartservice
+  #       - currencyservice
+  #       - paymentservice
+  #       - shippingservice
+  #       - emailservice
+  #       - adservice
+  #       - recommendationservice
+    # - name: productcatalogservice
+    #   type: Deployment
+    # - name: cartservice
+    #   type: Deployment
+    #   dependsOn:
+    #     - redis-cart
+    # - name: redis-cart
+    #   type: RedisInstance # Represents a managed Redis instance
+    # - name: currencyservice
+    #   type: Deployment
+    # - name: paymentservice
+    #   type: Deployment
+    # - name: shippingservice
+    #   type: Deployment
+    # - name: emailservice
+    #   type: Deployment
+    # - name: adservice
+    #   type: Deployment
+    # - name: recommendationservice
+    #   type: Deployment
+    #   dependsOn:
+    #     - productcatalogservice
+    # - name: checkoutservice
+    #   type: Deployment
+      # dependsOn:
+      #   - cartservice
+      #   - currencyservice
+      #   - paymentservice
+      #   - shippingservice
+      #   - emailservice
+      #   - productcatalogservice
