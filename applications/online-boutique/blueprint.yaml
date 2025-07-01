@@ -10,6 +10,11 @@ spec:
   - sandmold.dev/v1alpha1/Project
   install: TODO
   repo: https://github.com/GoogleCloudPlatform/microservices-demo
+  variables:
+    - name: PROJECT_ID
+      description: "The Google Cloud Project ID to deploy Online Boutique to."
+    - name: REGION
+      description: "The Google Cloud region to deploy Online Boutique to."
   # components:
   #   - name: frontend
   #     type: Deployment

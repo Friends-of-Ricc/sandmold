@@ -1,0 +1,17 @@
+
+apiVersion: sandmold.dev/v1alpha1
+kind: Blueprint
+metadata:
+  name: bank-of-anthos
+spec:
+  description: "A sample blueprint for the Bank of Anthos microservices demo, inspired by K8s/KCC objects."
+  dependsOn:
+  - sandmold.dev/v1alpha1/Folder
+  - sandmold.dev/v1alpha1/Project
+  install: TODO
+  repo: https://github.com/GoogleCloudPlatform/bank-of-anthos
+  variables:
+    - name: PROJECT_ID
+      description: "The Google Cloud Project ID to deploy Bank of Anthos to."
+    - name: REGION
+      description: "The Google Cloud region to deploy Bank of Anthos to."
