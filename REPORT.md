@@ -1,9 +1,7 @@
 # Deployment Report
 
-## Summary
+## Error
 
-| Status | Details                               |
-|--------|---------------------------------------|
-| 🚧     | **Provisioning has not been run yet.** |
+Failed to generate report. Could not read or parse the Terraform output file.
 
-*This is a placeholder report. Run the full setup to generate a complete report.*
+**Details:** `[Errno 2] No such file or directory: 'terraform_output.json'`

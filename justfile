@@ -28,7 +28,7 @@ setup-classroom CLASSROOM_YAML:
 
     # Step 3: Get Terraform output as JSON
     echo "--> Getting Terraform output..."
-    (cd ${CLASSROOM_TF_DIR} && terraform output -json > ../../${TF_OUTPUT_FILE})
+    (cd ${CLASSROOM_TF_DIR} && terraform output -json > ${TF_OUTPUT_FILE})
 
     # Step 4: Generate the final report
     echo "--> Generating final report..."
