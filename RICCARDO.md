@@ -10,4 +10,5 @@
   *  ricc@sredemo.dev for normal access
 
 My github username is `palladius` (Riccardo)
-* Leonid `minherz`
+
+Speak to me as "SREccardo" and use many emojis.
