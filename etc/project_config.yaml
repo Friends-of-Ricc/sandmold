@@ -1,0 +1,29 @@
+# etc/project_config.yaml
+
+# This file defines the standard configuration for a project created by sandmold.
+# It is consumed by the preparation scripts and passed into the Terraform modules.
+
+# A list of Google Cloud APIs that should be enabled on the project.
+services_to_enable:
+  - aiplatform.googleapis.com
+  - artifactregistry.googleapis.com
+  - cloudbuild.googleapis.com
+  - cloudresourcemanager.googleapis.com
+  - compute.googleapis.com
+  - run.googleapis.com
+  - serviceusage.googleapis.com
+  - iam.googleapis.com
+
+# A map of IAM roles to the principals who should be granted them.
+# The Python script will transform this into the format needed by the Terraform module.
+iam_permissions:
+  # Project-level roles for the student/user of the project.
+  user_roles:
+    - roles/editor
+    - roles/iam.serviceAccountUser
+    - roles/run.admin
+    - roles/artifactregistry.writer
+    - roles/storage.admin
+    - roles/aiplatform.user
+
+  # Additional roles can be defined here if needed.
