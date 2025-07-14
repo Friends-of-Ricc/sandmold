@@ -1,25 +1,24 @@
 # yaml dammit YAML support!!!!!
 # schoolroom
 folder:
-  org_id: 3462375241231423
-  parent_folder_id: 3462375241231423 # same as org_id - root folder
-  billing_account_id: "01C588-4823BC-27F650"
+  org_id: 791852209422
+  parent_folder_id: 791852209422 # same as org_id - root folder
+  billing_account_id: "0189FA-E139FD-136A58"
   name: class_2teachers_6students
   description: Class with 2 teachers and 6 students
-  tags:
-    tagKeys/123456789012: "tagValues/123456789012" # TODO: Replace with your actual tagKey and tagValue
   env:
     # - name: TF_VAR_BILLING_ACCOUNT_ID
     #   value: 012345-678901-234567 # dummy billing account
     - name: TF_VAR_ORGANIZATION_ID
-      value: 3462375241231423
+      value: 791852209422
     - name: TF_VAR_PARENT_FOLDER_ID
-      value: 3462375241231423 # same as org_id - root folder
+      value: 791852209422 # same as org_id - root folder
     - name: TF_VAR_GOOGLE_CLOUD_REGION
       value: us-central1
 #  labels:
 #    class: class_2teachers_6
   domain: sredemo.dev
+  # Demo Id:
 schoolbenches:
   # schoolbench 1
   - project: teacherz  # will be padded by some random hex/numb
