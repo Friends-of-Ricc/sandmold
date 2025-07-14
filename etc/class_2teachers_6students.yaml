@@ -46,5 +46,4 @@ schoolbenches:
   - app: cheap_jss
     project: boa03
     seats:
-    - student05@gmail.com
     - student06@gmail.com

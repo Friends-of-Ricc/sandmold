@@ -33,7 +33,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m id                  = (known after apply)
       [32m+[0m[0m lifecycle_state     = (known after apply)
       [32m+[0m[0m name                = (known after apply)
-      [32m+[0m[0m parent              = "folders/791852209422"
+      [32m+[0m[0m parent              = "folders/1000371719973"
     }
 
 [1m  # module.project["boa01"].google_project.new[0][0m will be created
@@ -919,3 +919,293 @@ Changes to Outputs:
         }
     }
 [0m[1mgoogle_folder.classroom: Creating...[0m[0m
+[0m[1mgoogle_folder.classroom: Still creating... [10s elapsed][0m[0m
+[0m[1mgoogle_folder.classroom: Creation complete after 13s [id=folders/64504091340][0m
+[0m[1mmodule.project["boa02"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].random_string.suffix: Creation complete after 0s [id=ruva][0m
+[0m[1mmodule.project["boa03"].random_string.suffix: Creation complete after 0s [id=dutz][0m
+[0m[1mmodule.project["teacherz"].random_string.suffix: Creation complete after 0s [id=9bkq][0m
+[0m[1mmodule.project["boa01"].random_string.suffix: Creation complete after 0s [id=rrww][0m
+[0m[1mmodule.project["boa03"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project.new[0]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project.new[0]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project.new[0]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project.new[0]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project.new[0]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project.new[0]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project.new[0]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project.new[0]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project.new[0]: Creation complete after 30s [id=projects/boa03-dutz][0m
+[0m[1mmodule.project["boa02"].google_project.new[0]: Creation complete after 30s [id=projects/boa02-ruva][0m
+[0m[1mmodule.project["boa01"].google_project.new[0]: Creation complete after 31s [id=projects/boa01-rrww][0m
+[0m[1mmodule.project["teacherz"].google_project.new[0]: Creation complete after 32s [id=projects/teacherz-9bkq][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["aiplatform.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudbuild.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudbuild.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["serviceusage.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudbuild.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["serviceusage.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["run.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["run.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["run.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudbuild.googleapis.com"]: Creation complete after 23s [id=boa01-rrww/cloudbuild.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creation complete after 23s [id=boa01-rrww/cloudresourcemanager.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["serviceusage.googleapis.com"]: Creation complete after 23s [id=boa01-rrww/serviceusage.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["iam.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["iam.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudbuild.googleapis.com"]: Creation complete after 24s [id=teacherz-9bkq/cloudbuild.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["aiplatform.googleapis.com"]: Creation complete after 24s [id=teacherz-9bkq/aiplatform.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creation complete after 24s [id=teacherz-9bkq/cloudresourcemanager.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["run.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["artifactregistry.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["serviceusage.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["serviceusage.googleapis.com"]: Creation complete after 24s [id=boa03-dutz/serviceusage.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creation complete after 24s [id=boa03-dutz/cloudresourcemanager.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["aiplatform.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["iam.googleapis.com"]: Creation complete after 3s [id=boa02-ruva/iam.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["artifactregistry.googleapis.com"]: Creation complete after 2s [id=boa02-ruva/artifactregistry.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["aiplatform.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["artifactregistry.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["run.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["iam.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["run.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["run.googleapis.com"]: Creation complete after 34s [id=boa02-ruva/run.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudbuild.googleapis.com"]: Creation complete after 34s [id=boa02-ruva/cloudbuild.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudbuild.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["iam.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["artifactregistry.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["artifactregistry.googleapis.com"]: Creation complete after 11s [id=boa03-dutz/artifactregistry.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["iam.googleapis.com"]: Creation complete after 4s [id=boa01-rrww/iam.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["iam.googleapis.com"]: Creation complete after 20s [id=boa03-dutz/iam.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["run.googleapis.com"]: Creation complete after 19s [id=boa03-dutz/run.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["iam.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["aiplatform.googleapis.com"]: Creation complete after 21s [id=boa02-ruva/aiplatform.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["serviceusage.googleapis.com"]: Creation complete after 21s [id=boa02-ruva/serviceusage.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["iam.googleapis.com"]: Creation complete after 3s [id=teacherz-9bkq/iam.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["artifactregistry.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["aiplatform.googleapis.com"]: Creation complete after 22s [id=boa01-rrww/aiplatform.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["artifactregistry.googleapis.com"]: Creation complete after 4s [id=teacherz-9bkq/artifactregistry.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["serviceusage.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudbuild.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["cloudbuild.googleapis.com"]: Creation complete after 21s [id=boa03-dutz/cloudbuild.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["artifactregistry.googleapis.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["artifactregistry.googleapis.com"]: Creation complete after 3s [id=boa01-rrww/artifactregistry.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["serviceusage.googleapis.com"]: Still creating... [20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["cloudresourcemanager.googleapis.com"]: Creation complete after 22s [id=boa02-ruva/cloudresourcemanager.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["serviceusage.googleapis.com"]: Creation complete after 21s [id=teacherz-9bkq/serviceusage.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [30s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [40s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [50s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m20s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Still creating... [1m20s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [1m0s elapsed][0m[0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["run.googleapis.com"]: Creation complete after 1m22s [id=boa01-rrww/run.googleapis.com][0m
+[0m[1mmodule.project["boa01"].google_project_service.apis["compute.googleapis.com"]: Creation complete after 1m23s [id=boa01-rrww/compute.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["run.googleapis.com"]: Creation complete after 1m13s [id=teacherz-9bkq/run.googleapis.com][0m
+[0m[1mmodule.project["teacherz"].google_project_service.apis["compute.googleapis.com"]: Creation complete after 1m12s [id=teacherz-9bkq/compute.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["aiplatform.googleapis.com"]: Creation complete after 1m13s [id=boa03-dutz/aiplatform.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_service.apis["compute.googleapis.com"]: Creation complete after 1m13s [id=boa03-dutz/compute.googleapis.com][0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Still creating... [1m20s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_service.apis["compute.googleapis.com"]: Creation complete after 1m22s [id=boa02-ruva/compute.googleapis.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student06@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/run.admin/user:student03@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/editor/user:leoy@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/aiplatform.user/user:student03@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/editor/user:student06@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student06@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/run.admin/user:student04@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/aiplatform.user/user:student06@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/run.admin/user:ricc@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/editor/user:student04@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/run.admin/user:ricc@google.com"]: Creation complete after 8s [id=teacherz-9bkq/roles/run.admin/user:ricc@google.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/storage.admin/user:student01@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/editor/user:leoy@google.com"]: Creation complete after 9s [id=teacherz-9bkq/roles/editor/user:leoy@google.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student03@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/editor/user:student06@gmail.com"]: Creation complete after 9s [id=boa03-dutz/roles/editor/user:student06@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/run.admin/user:student01@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/editor/user:student04@gmail.com"]: Creation complete after 9s [id=boa02-ruva/roles/editor/user:student04@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/aiplatform.user/user:leoy@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/aiplatform.user/user:student03@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/run.admin/user:student03@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student06@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/run.admin/user:student04@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/aiplatform.user/user:student06@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student06@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student06@gmail.com"]: Creation complete after 10s [id=boa03-dutz/roles/iam.serviceAccountUser/user:student06@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student02@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/run.admin/user:student04@gmail.com"]: Creation complete after 10s [id=boa02-ruva/roles/run.admin/user:student04@gmail.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/storage.admin/user:student06@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student06@gmail.com"]: Creation complete after 10s [id=boa03-dutz/roles/artifactregistry.writer/user:student06@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student01@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/run.admin/user:student03@gmail.com"]: Creation complete after 11s [id=boa02-ruva/roles/run.admin/user:student03@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/storage.admin/user:student04@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/aiplatform.user/user:student06@gmail.com"]: Creation complete after 11s [id=boa03-dutz/roles/aiplatform.user/user:student06@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student04@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/aiplatform.user/user:student03@gmail.com"]: Creation complete after 11s [id=boa02-ruva/roles/aiplatform.user/user:student03@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student03@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student01@gmail.com"]: Creation complete after 7s [id=boa01-rrww/roles/artifactregistry.writer/user:student01@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student02@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/run.admin/user:student01@gmail.com"]: Creation complete after 9s [id=boa01-rrww/roles/run.admin/user:student01@gmail.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/run.admin/user:student05@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student02@gmail.com"]: Creation complete after 8s [id=boa01-rrww/roles/iam.serviceAccountUser/user:student02@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/aiplatform.user/user:student02@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/storage.admin/user:student01@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student03@gmail.com"]: Creation complete after 7s [id=boa02-ruva/roles/artifactregistry.writer/user:student03@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/aiplatform.user/user:ricc@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/storage.admin/user:student01@gmail.com"]: Creation complete after 11s [id=boa01-rrww/roles/storage.admin/user:student01@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/editor/user:student03@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student04@gmail.com"]: Creation complete after 8s [id=boa02-ruva/roles/artifactregistry.writer/user:student04@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/storage.admin/user:student02@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student03@gmail.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/storage.admin/user:student04@gmail.com"]: Creation complete after 8s [id=boa02-ruva/roles/storage.admin/user:student04@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/storage.admin/user:student03@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/storage.admin/user:student06@gmail.com"]: Creation complete after 9s [id=boa03-dutz/roles/storage.admin/user:student06@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/editor/user:student02@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student03@gmail.com"]: Creation complete after 10s [id=boa02-ruva/roles/iam.serviceAccountUser/user:student03@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/editor/user:student01@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/aiplatform.user/user:leoy@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/aiplatform.user/user:leoy@google.com"]: Creation complete after 10s [id=teacherz-9bkq/roles/aiplatform.user/user:leoy@google.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/aiplatform.user/user:student05@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/storage.admin/user:ricc@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student01@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/editor/user:student01@gmail.com"]: Creation complete after 7s [id=boa01-rrww/roles/editor/user:student01@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/storage.admin/user:leoy@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/aiplatform.user/user:student02@gmail.com"]: Creation complete after 8s [id=boa01-rrww/roles/aiplatform.user/user:student02@gmail.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student05@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/storage.admin/user:student02@gmail.com"]: Creation complete after 7s [id=boa01-rrww/roles/storage.admin/user:student02@gmail.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/run.admin/user:student06@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:student02@gmail.com"]: Creation complete after 9s [id=boa01-rrww/roles/artifactregistry.writer/user:student02@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/editor/user:ricc@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/editor/user:student02@gmail.com"]: Creation complete after 8s [id=boa01-rrww/roles/editor/user:student02@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/aiplatform.user/user:student04@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/aiplatform.user/user:ricc@google.com"]: Creation complete after 8s [id=teacherz-9bkq/roles/aiplatform.user/user:ricc@google.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:leoy@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/storage.admin/user:student03@gmail.com"]: Creation complete after 8s [id=boa02-ruva/roles/storage.admin/user:student03@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:ricc@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/editor/user:student03@gmail.com"]: Creation complete after 8s [id=boa02-ruva/roles/editor/user:student03@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/run.admin/user:leoy@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:ricc@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student01@gmail.com"]: Creation complete after 9s [id=boa01-rrww/roles/iam.serviceAccountUser/user:student01@gmail.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/aiplatform.user/user:student01@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/storage.admin/user:ricc@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/aiplatform.user/user:student04@gmail.com"]: Creation complete after 8s [id=boa02-ruva/roles/aiplatform.user/user:student04@gmail.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student04@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/storage.admin/user:leoy@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/run.admin/user:student06@gmail.com"]: Creation complete after 10s [id=boa03-dutz/roles/run.admin/user:student06@gmail.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/editor/user:student05@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/editor/user:ricc@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/storage.admin/user:ricc@google.com"]: Creation complete after 14s [id=teacherz-9bkq/roles/storage.admin/user:ricc@google.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:leoy@google.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:leoy@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:ricc@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/run.admin/user:leoy@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/storage.admin/user:student05@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/aiplatform.user/user:student01@gmail.com"]: Creation complete after 8s [id=boa01-rrww/roles/aiplatform.user/user:student01@gmail.com][0m
+[0m[1mmodule.project["boa03"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student05@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:ricc@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/run.admin/user:leoy@google.com"]: Creation complete after 15s [id=teacherz-9bkq/roles/run.admin/user:leoy@google.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/run.admin/user:student02@gmail.com"]: Creating...[0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/storage.admin/user:leoy@google.com"]: Creation complete after 16s [id=teacherz-9bkq/roles/storage.admin/user:leoy@google.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/editor/user:ricc@google.com"]: Creation complete after 16s [id=teacherz-9bkq/roles/editor/user:ricc@google.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:leoy@google.com"]: Creation complete after 15s [id=teacherz-9bkq/roles/iam.serviceAccountUser/user:leoy@google.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:ricc@google.com"]: Creation complete after 15s [id=teacherz-9bkq/roles/iam.serviceAccountUser/user:ricc@google.com][0m
+[0m[1mmodule.project["boa02"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student04@gmail.com"]: Creation complete after 8s [id=boa02-ruva/roles/iam.serviceAccountUser/user:student04@gmail.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:leoy@google.com"]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:ricc@google.com"]: Creation complete after 16s [id=teacherz-9bkq/roles/artifactregistry.writer/user:ricc@google.com][0m
+[0m[1mmodule.project["teacherz"].google_project_iam_member.permissions["roles/artifactregistry.writer/user:leoy@google.com"]: Creation complete after 11s [id=teacherz-9bkq/roles/artifactregistry.writer/user:leoy@google.com][0m
+[0m[1mmodule.project["boa01"].google_project_iam_member.permissions["roles/run.admin/user:student02@gmail.com"]: Creation complete after 8s [id=boa01-rrww/roles/run.admin/user:student02@gmail.com][0m
