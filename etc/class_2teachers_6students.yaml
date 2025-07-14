@@ -2,8 +2,9 @@
 # schoolroom
 folder:
   org_id: 791852209422
-  parent_folder_id: 791852209422 # same as org_id - root folder
-  billing_account_id: "0189FA-E139FD-136A58"
+  parent_folder_id: 1000371719973
+  #billing_account_id: "0189FA-E139FD-136A58" # cant use it
+  billing_account_id: "01C588-4823BC-27F650"
   name: class_2teachers_6students
   description: Class with 2 teachers and 6 students
   env:
