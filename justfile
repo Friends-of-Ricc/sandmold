@@ -15,12 +15,6 @@ setup-classroom CLASSROOM_YAML:
     TF_LOG_FILE="terraform_apply.log"
     REPORT_FILE="REPORT.md"
 
-    # Check for required environment variables
-    if [ -z "$TF_VAR_BILLING_ACCOUNT_ID" ]; then
-        echo "ERROR: TF_VAR_BILLING_ACCOUNT_ID environment variable is not set."
-        exit 1
-    fi
-
     # Step 1: Prepare Terraform variables from YAML
     echo "--> Preparing Terraform variables..."
     ./bin/prepare_tf_vars.py \

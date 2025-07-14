@@ -52,7 +52,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_dir):
     tf_vars = {
         'folder_name': classroom_config.get('folder', {}).get('name'),
         'parent_folder': f"folders/{classroom_config.get('folder', {}).get('parent_folder_id')}",
-        'billing_account_id': os.environ.get('TF_VAR_BILLING_ACCOUNT_ID', 'YOUR_BILLING_ACCOUNT_ID'),
+        'billing_account_id': classroom_config.get('folder', {}).get('billing_account_id'),
         'teachers': [f"user:{teacher}" for teacher in classroom_config.get('folder', {}).get('teachers', [])],
         'student_projects': student_projects,
         'services_to_enable': project_config.get('services_to_enable', []),
