@@ -50,7 +50,8 @@ resource "google_project" "new" {
   project_id         = local.final_project_id
   name               = local.final_project_id
   billing_account    = var.billing_account_id
-  parent             = var.parent
+  folder_id          = substr(var.parent, 0, 8) == "folders/" ? split("/", var.parent)[1] : null
+  org_id             = substr(var.parent, 0, 13) == "organizations/" ? split("/", var.parent)[1] : null
 }
 
 # Enable the specified APIs on the project.
