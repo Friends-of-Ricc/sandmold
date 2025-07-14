@@ -20,7 +20,12 @@ test-yaml CLASSROOM_YAML:
 # Setup a classroom environment based on a YAML configuration
 # Usage: just setup-classroom etc/class_2teachers_6students.yaml
 setup-classroom CLASSROOM_YAML:
-    ./bin/setup-classroom.sh "$(pwd)/{{CLASSROOM_YAML}}"
+    ./bin/setup-classroom.sh {{CLASSROOM_YAML}}
+
+# Setup a classroom environment based on a YAML configuration
+# Usage: just setup-classroom etc/class_2teachers_6students.yaml
+setup-sample-class:
+    just setup-classroom etc/class_2teachers_6students.yaml
 
 # Teardown a classroom environment
 teardown-classroom CLASSROOM_YAML:

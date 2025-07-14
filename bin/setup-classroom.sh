@@ -35,7 +35,7 @@ RELATIVE_TF_VARS_PATH="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
 
 # Debugging: Print path passed to prepare_tf_vars.py
 echo "DEBUG: Passing to prepare_tf_vars.py: ${CLASSROOM_YAML}"
-uv run python ./bin/prepare_tf_vars.py --classroom-yaml "${CLASSROOM_YAML}" --project-config-yaml etc/project_config.yaml --output-file ${FULL_TF_VARS_PATH}
+uv run python ./bin/prepare_tf_vars.py --classroom-yaml "${CLASSROOM_YAML}" --project-config-yaml etc/project_config.yaml --output-file ${FULL_TF_VARS_PATH} --project-root "$(pwd)"
 
 # Step 3: Run Terraform
 echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"

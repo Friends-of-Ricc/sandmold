@@ -3,7 +3,7 @@ folder:
   org_id: 791852209422 # sredemo.dev
   parent_folder_id: 194703823593 # sredemo.dev / test-sandmold / sandmold-1
   billing_account_id: "01C588-4823BC-27F650"
-  name: class_2t_6s
+  name: class-2t-6s
   description: |
     Class with 2 teachers and 6 students, this time existing for real
   env:

@@ -23,14 +23,18 @@ import sys
 
 def parse_yaml(file_path):
     """Parses a YAML file."""
+    print(f"DEBUG: Attempting to open file: {file_path}", file=sys.stderr)
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
-def main(classroom_yaml_path, project_config_yaml_path, output_file):
+def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root):
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
     """
-    classroom_config = parse_yaml(classroom_yaml_path)
+    # Construct absolute path to classroom YAML
+    absolute_classroom_yaml_path = os.path.join(project_root, classroom_yaml_path)
+
+    classroom_config = parse_yaml(absolute_classroom_yaml_path)
     project_config = parse_yaml(project_config_yaml_path)
 
     # Prepare the student_projects variable
@@ -72,6 +76,7 @@ if __name__ == '__main__':
     parser.add_argument('--classroom-yaml', required=True, help='Path to the classroom YAML file.')
     parser.add_argument('--project-config-yaml', required=True, help='Path to the project config YAML file.')
     parser.add_argument('--output-file', required=True, help='Path to the output terraform.tfvars.json file.')
+    parser.add_argument('--project-root', required=True, help='The absolute path to the project root directory.')
     args = parser.parse_args()
 
-    main(args.classroom_yaml, args.project_config_yaml, args.output_file)
+    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root)
