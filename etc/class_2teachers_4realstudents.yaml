@@ -13,8 +13,8 @@ folder:
   #  class: class_2teachers_6
   domain: sredemo.dev
   teachers:
-  - teacher1@example.com
-  - teacher2@example.com
+  - ricc@google.com
+  - leoy@google.com
 schoolbenches:
   # schoolbench 1 - teachers
   - project: insegnanti
@@ -43,7 +43,7 @@ schoolbenches:
     - babenko@google.com
 
   - app: cheap_jss
-    project: ricc_personal
+    project: ricc-personal
     seats:
     - palladiusbonton@gmail.com
 

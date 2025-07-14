@@ -10,3 +10,12 @@ We need to have some sort of naming convention, so that every time I call the sc
 Make sure to migrate existing tfstate to the migrated one (subfolder or workflow).
 
 Make a plan before implementing, and wait for user to confirm its good.
+
+
+## Output and TFVARS and Report
+
+All these files need to be multi tennant.
+
+1. iac/terraform/1a_classroom_setup/terraform_output.json
+2. iac/terraform/1a_classroom_setup/terraform.tfvars.json
+3. REPORT.md

@@ -26,7 +26,7 @@ def parse_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
-def main(classroom_yaml_path, project_config_yaml_path, output_dir):
+def main(classroom_yaml_path, project_config_yaml_path, output_file):
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
     """
@@ -62,11 +62,9 @@ def main(classroom_yaml_path, project_config_yaml_path, output_dir):
         'folder_tags': classroom_config.get('folder', {}).get('tags', {})
     }
 
-    output_path = os.path.join(output_dir, 'terraform.tfvars.json')
-    with open(output_path, 'w') as f:
-        json.dump(tf_vars, f, indent=2)
-
-    print(f"Successfully generated {output_path}", file=sys.stderr)
+    if output_file:
+        with open(output_file, 'w') as f:
+            json.dump(tf_vars, f, indent=2)
 
     # Print the folder name to stdout so it can be captured by the calling script
     print(classroom_config.get('folder', {}).get('name'))
@@ -75,7 +73,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate terraform.tfvars.json from YAML configs.')
     parser.add_argument('--classroom-yaml', required=True, help='Path to the classroom YAML file.')
     parser.add_argument('--project-config-yaml', required=True, help='Path to the project config YAML file.')
-    parser.add_argument('--output-dir', required=True, help='Directory to write the terraform.tfvars.json file to.')
+    parser.add_argument('--output-file', required=True, help='Path to the output terraform.tfvars.json file.')
     args = parser.parse_args()
 
-    main(args.classroom_yaml, args.project_config_yaml, args.output_dir)
+    main(args.classroom_yaml, args.project_config_yaml, args.output_file)
