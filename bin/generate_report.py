@@ -16,12 +16,28 @@
 
 import argparse
 import json
+import yaml
 
-def generate_markdown_report(data):
-    """Generates a markdown report from the terraform output data."""
+def parse_yaml(file_path):
+    """Parses a YAML file."""
+    with open(file_path, 'r') as f:
+        return yaml.safe_load(f)
+
+def generate_markdown_report(tf_data, classroom_data):
+    """Generates a markdown report from the terraform and classroom data."""
     
-    projects = data.get('projects', {}).get('value', {})
-    folder_id = data.get('folder_id', {}).get('value', 'N/A')
+    projects = tf_data.get('projects', {}).get('value', {})
+    folder_id = tf_data.get('folder_id', {}).get('value', 'N/A')
+
+    # Create a lookup map from the classroom data
+    project_details_map = {}
+    for bench in classroom_data.get('schoolbenches', []):
+        project_name = bench.get('project')
+        if project_name:
+            project_details_map[project_name] = {
+                'users': ", ".join(bench.get('seats', [])),
+                'apps': ", ".join(bench.get('apps', ['-']))
+            }
 
     report_lines = [
         "# Deployment Report",
@@ -33,38 +49,42 @@ def generate_markdown_report(data):
         "",
         "## Project Details",
         "",
-        "| Project Name | Project ID | Project Number |",
-        "|--------------|------------|----------------|",
+        "| Project Name | Project ID | Users | Applications (Planned) |",
+        "|--------------|------------|-------|------------------------|",
     ]
 
     for name, details in projects.items():
-        report_lines.append(f"| {name} | `{details.get('project_id')}` | `{details.get('project_number')}` |")
+        classroom_details = project_details_map.get(name, {})
+        users = classroom_details.get('users', 'N/A')
+        apps = classroom_details.get('apps', '-')
+        report_lines.append(f"| {name} | `{details.get('project_id')}` | {users} | {apps} |")
 
     return "\n".join(report_lines)
 
-def main(tf_output_json_path, report_path):
+def main(tf_output_json_path, classroom_yaml_path, report_path):
     """
-    Parses the terraform output JSON and generates a markdown report.
+    Parses terraform output and classroom YAML to generate a markdown report.
     """
     try:
         with open(tf_output_json_path, 'r') as f:
             tf_data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error reading or parsing terraform output file: {e}")
-        # Create a report indicating the error
-        report_content = f"""# Deployment Report
-
-## Error
-
-Failed to generate report. Could not read or parse the Terraform output file.
-
-**Details:** `{e}`
-"""
+        report_content = f"# Deployment Report\n\n## Error\n\nFailed to generate report. Could not read or parse the Terraform output file.\n\n**Details:** `{e}`"
         with open(report_path, 'w') as f:
             f.write(report_content)
         return
 
-    report_content = generate_markdown_report(tf_data)
+    try:
+        classroom_data = parse_yaml(classroom_yaml_path)
+    except FileNotFoundError as e:
+        print(f"Error reading classroom YAML file: {e}")
+        report_content = f"# Deployment Report\n\n## Error\n\nFailed to generate report. Could not read the classroom YAML file.\n\n**Details:** `{e}`"
+        with open(report_path, 'w') as f:
+            f.write(report_content)
+        return
+
+    report_content = generate_markdown_report(tf_data, classroom_data)
 
     with open(report_path, 'w') as f:
         f.write(report_content)
@@ -74,7 +94,8 @@ Failed to generate report. Could not read or parse the Terraform output file.
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate a markdown report from terraform output.')
     parser.add_argument('--tf-output-json', required=True, help='Path to the terraform output JSON file.')
+    parser.add_argument('--classroom-yaml', required=True, help='Path to the classroom YAML file.')
     parser.add_argument('--report-path', required=True, help='Path to write the final REPORT.md file.')
     args = parser.parse_args()
 
-    main(args.tf_output_json, args.report_path)
+    main(args.tf_output_json, args.classroom_yaml, args.report_path)

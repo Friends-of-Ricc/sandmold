@@ -1,7 +1,15 @@
 # Deployment Report
 
-## Error
+## Summary
 
-Failed to generate report. Could not read or parse the Terraform output file.
+- **Folder ID:** `64504091340`
+- **Total Projects Created:** 4
 
-**Details:** `[Errno 2] No such file or directory: 'terraform_output.json'`
+## Project Details
+
+| Project Name | Project ID | Project Number |
+|--------------|------------|----------------|
+| boa01 | `boa01-rrww` | `994565223816` |
+| boa02 | `boa02-ruva` | `688713234475` |
+| boa03 | `boa03-dutz` | `404151034664` |
+| teacherz | `teacherz-9bkq` | `834908815552` |

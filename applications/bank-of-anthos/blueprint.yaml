@@ -15,3 +15,13 @@ spec:
       description: "The Google Cloud Project ID to deploy Bank of Anthos to."
     - name: REGION
       description: "The Google Cloud region to deploy Bank of Anthos to."
+  gcp_prerequisites:
+    APIs:
+      - name: container.googleapis.com
+        description: "Google Kubernetes Engine API"
+      - name: cloudresourcemanager.googleapis.com
+        description: "Cloud Resource Manager API"
+      - name: iam.googleapis.com
+        description: "Identity and Access Management API"
+      # - name: cloudbilling.googleapis.com
+      #   description: "Cloud Billing API"

@@ -34,6 +34,7 @@ setup-classroom CLASSROOM_YAML:
     echo "--> Generating final report..."
     ./bin/generate_report.py \
         --tf-output-json ${TF_OUTPUT_FILE} \
+        --classroom-yaml {{CLASSROOM_YAML}} \
         --report-path ${REPORT_FILE}
 
     echo "--- Classroom Setup Complete ---"
