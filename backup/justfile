@@ -12,7 +12,7 @@ setup-classroom CLASSROOM_YAML:
     # Define paths
     CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
     TF_VARS_FILE="${CLASSROOM_TF_DIR}/terraform.tfvars.json"
-    TF_OUTPUT_FILE="terraform_output.json"
+    TF_LOG_FILE="terraform_apply.log"
     REPORT_FILE="REPORT.md"
 
     # Step 1: Prepare Terraform variables from YAML
@@ -24,16 +24,12 @@ setup-classroom CLASSROOM_YAML:
 
     # Step 2: Run Terraform
     echo "--> Initializing and applying Terraform..."
-    (cd ${CLASSROOM_TF_DIR} && terraform init && terraform apply -auto-approve)
+    (cd ${CLASSROOM_TF_DIR} && terraform init && terraform apply -auto-approve) | tee ${TF_LOG_FILE}
 
-    # Step 3: Get Terraform output as JSON
-    echo "--> Getting Terraform output..."
-    (cd ${CLASSROOM_TF_DIR} && terraform output -json > ../../${TF_OUTPUT_FILE})
-
-    # Step 4: Generate the final report
+    # Step 3: Generate the final report
     echo "--> Generating final report..."
     ./bin/generate_report.py \
-        --tf-output-json ${TF_OUTPUT_FILE} \
+        --tf-output-log ${TF_LOG_FILE} \
         --report-path ${REPORT_FILE}
 
     echo "--- Classroom Setup Complete ---"
