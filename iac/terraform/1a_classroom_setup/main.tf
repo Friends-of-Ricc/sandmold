@@ -14,6 +14,7 @@ resource "google_folder" "classroom" {
   display_name = var.folder_name
   parent       = var.parent_folder
   tags         = var.folder_tags
+  deletion_protection = false
 }
 
 # Grant folder-level permissions to teachers

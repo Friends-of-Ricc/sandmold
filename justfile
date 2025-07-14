@@ -1,5 +1,8 @@
 
 
+init:
+    uv pip install -r pyproject.toml
+
 # list all targets
 list:
     just -l
@@ -18,12 +21,12 @@ setup-classroom CLASSROOM_YAML:
     # Define paths
     CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
     TF_VARS_FILE="${CLASSROOM_TF_DIR}/terraform.tfvars.json"
-    TF_OUTPUT_FILE="terraform_output.json"
-    REPORT_FILE="REPORT.md"
+    TF_OUTPUT_FILE="iac/terraform/output/terraform_output.json"
+    REPORT_FILE="iac/terraform/output/REPORT.md"
 
     # Step 1: Prepare Terraform variables from YAML
     echo "--> Preparing Terraform variables..."
-    ./bin/prepare_tf_vars.py \
+    /Users/ricc/git/vibecoding/bingems/.venv/bin/python ./bin/prepare_tf_vars.py \
         --classroom-yaml {{CLASSROOM_YAML}} \
         --project-config-yaml etc/project_config.yaml \
         --output-dir ${CLASSROOM_TF_DIR}
@@ -45,3 +48,20 @@ setup-classroom CLASSROOM_YAML:
 
     echo "--- Classroom Setup Complete ---"
     echo "See ${REPORT_FILE} for details."
+
+# Setup a sample classroom environment
+setup-sample-class:
+    just setup-classroom etc/class_2teachers_6students.yaml
+
+# Teardown a classroom environment
+teardown-sample-class:
+    #!/usr/bin/env bash
+    set -e
+    echo "--- Starting Classroom Teardown ---"
+    CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
+    (cd ${CLASSROOM_TF_DIR} && terraform destroy -auto-approve -target='module.project["teacherz"]' -target='module.project["boa01"]' -target='module.project["boa02"]' -target='module.project["boa03"]')
+    while ! (cd ${CLASSROOM_TF_DIR} && terraform destroy -auto-approve); do
+        echo "Teardown failed, retrying in 60 seconds..."
+        sleep 60
+    done
+    echo "--- Classroom Teardown Complete ---"

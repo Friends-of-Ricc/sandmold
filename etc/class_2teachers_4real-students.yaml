@@ -1,0 +1,57 @@
+# My second class.
+folder:
+  org_id: 791852209422 # sredemo.dev
+  parent_folder_id: 194703823593 # sredemo.dev / test-sandmold / sandmold-1
+  billing_account_id: "01C588-4823BC-27F650"
+  name: class_2t_6s
+  description: |
+    Class with 2 teachers and 6 students, this time existing for real
+  env:
+    - name: GOOGLE_CLOUD_REGION
+      value: europe-west4
+  #labels:
+  #  class: class_2teachers_6
+  domain: sredemo.dev
+  teachers:
+  - teacher1@example.com
+  - teacher2@example.com
+schoolbenches:
+  # schoolbench 1
+  - project: teacherz  # will be padded by some random hex/numb
+    apps:
+    - heapster_shop
+    seats:
+    - ricc@google.com
+    - palladiusbonton@gmail.com
+
+  # schoolbench 2
+  - project: leo
+    apps:
+    - bank_of_anthos
+    seats:
+    - leoy@google.com
+
+  - app: cheap_jss
+    project: daniel
+    seats:
+    - stamer@google.com
+
+  - app: cheap_jss
+    project: babenko
+    seats:
+    - babenko@google.com
+
+  - app: cheap_jss
+    project: ricc_personal
+    seats:
+    - palladiusbonton@gmail.com
+
+common:
+  # common to all schoolbenches  - TODO(gemini-cli): to be implemented
+  - project: _ALL_STUDENTS  # Can be _ALL or  _ALL_STUDENTS and it becomes an iteration over the following list.
+    # adds this apps to all student apps.
+    apps:
+    - heapster_shop
+    # adds this person to all students
+    seats:
+    - ricc@google.com

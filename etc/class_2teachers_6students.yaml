@@ -38,7 +38,7 @@ schoolbenches:
     - student02@gmail.com
   - apps:
     - bank_of_anthos
-    - bank_of_anthos_scenario123
+    #- bank_of_anthos_scenario123
     project: boa02
     seats:
     - student03@gmail.com
