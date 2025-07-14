@@ -13,6 +13,9 @@ services_to_enable:
   - run.googleapis.com
   - serviceusage.googleapis.com
   - iam.googleapis.com
+  - monitoring.googleapis.com
+  - logging.googleapis.com
+  - apphub.googleapis.com
 
 # A map of IAM roles to the principals who should be granted them.
 # The Python script will transform this into the format needed by the Terraform module.

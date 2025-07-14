@@ -97,3 +97,11 @@ We expect the following to happen:
 3. Each project should have teachers under `folder.teachers` as additional owners. This can be implemented at project level or folder level - you choose. Folder level seems DRYer.
 4. Apps are installed on top of each project. This is done at a future stage. If an app fails, project stays.
 5. A final report should show what worked and what didn't (eg "project boa03 couldnt be created since student06@gmail.com doesnt exist", and "bank_of_anthos couldnt be installed on boa2 project because ERROR_OF_INSTALL").
+
+
+## Additional features
+
+* In folder mode, we want to use "App Hub". Every application we install in a project will have an App Hub application
+
+
+## App Hub applications

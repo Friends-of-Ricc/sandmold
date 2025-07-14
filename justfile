@@ -1,3 +1,9 @@
+
+
+# list all targets
+list:
+    just -l
+
 # Run tests (currently a placeholder)
 test:
     echo "No tests defined yet."
