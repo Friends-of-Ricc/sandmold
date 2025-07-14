@@ -1,24 +1,38 @@
-### Plan: Multi-Stage Terraform Project Setup
+### Plan: A Modular, DRY, and Scalable Terraform Setup
 
-This plan outlines the steps to create a multi-stage Terraform configuration for provisioning Google Cloud projects based on a YAML configuration file.
+This plan outlines a robust, professional, and maintainable Terraform architecture using modules to support all requirements, including CUJ001 (Classroom) and CUJ002 (Single User).
 
-- [ ] **Phase 1: Scaffolding & Configuration Processing**
-    - [ ] Create the directory structure under `iac/terraform/` mirroring the `vendor/genai-factory/cloud-run-single` model (`0_projects`, `1_apps`).
-    - [ ] Create a `project_config.yaml` in `etc/` to define APIs and IAM roles, inspired by `genai-factory`.
-    - [ ] Create a Python script (`bin/generate_tf_vars.py`) that parses both `etc/class_2teachers_6students.yaml` and `etc/project_config.yaml` and generates a `terraform.tfvars.json` file for the `0_projects` stage.
+- [ ] **Phase 1: Foundational Modules and Interfaces**
+    - [ ] Create a new file `doc/TF_INTERFACES.md` to formally document the Input/Output contract for all modules and configurations. It should also have a Mermaid graph to show this visually.
+    - [ ] Create the core reusable module: `iac/terraform/modules/project/`. This module will be responsible for creating/sourcing a single GCP project, enabling APIs, and setting IAM permissions. It will be the single source of truth for project configuration.
+    - [ ] Create the directory structure for the different configurations: `iac/terraform/1a_classroom_setup/` (for CUJ001), `iac/terraform/1b_single_user_setup/` (for CUJ002), and `iac/terraform/2_apps_deployment/`.
 
-- [ ] **Phase 2: Terraform Project Creation (`0_projects`)**
-    - [ ] In `iac/terraform/0_projects/variables.tf`, define variables to accept the structured data from the generated `terraform.tfvars.json` (e.g., a list of project objects, APIs to enable, and IAM roles to grant).
-    - [ ] In `iac/terraform/0_projects/main.tf`, implement the core logic:
-        - [ ] Use the `random_string` resource to generate a 4-character hex suffix for each project ID to ensure uniqueness.
-        - [ ] Use a `for_each` loop over the list of projects to create a `google_project` resource for each `schoolbench`.
-        - [ ] For each created project, use a `for_each` loop to enable the APIs defined in `project_config.yaml` using the `google_project_service` resource.
-        - [ ] For each created project, use nested `for_each` loops to iterate through the `seats` and the roles defined in `project_config.yaml`, creating `google_project_iam_member` resources to grant the specified permissions.
-    - [ ] In `iac/terraform/0_projects/outputs.tf`, export the created project IDs, names, and other relevant details. This will serve as the input for the subsequent `1_apps` stage.
+- [ ] **Phase 2: Configuration Processing**
+    - [ ] Create a `project_config.yaml` in `etc/` to define the standard set of APIs and IAM roles for any project.
+    - [ ] Create a Python script (`bin/generate_tf_vars.py`) that parses the classroom YAML (e.g., `etc/class_2teachers_6students.yaml`) and `etc/project_config.yaml`.
+        - [ ] The script will generate the `terraform.tfvars.json` file needed by the `1a_classroom_setup` configuration.
+        - [ ] The script will also be responsible for generating a final `REPORT.md` after `terraform apply` is run.
 
-- [ ] **Phase 3: Placeholder for Application Deployment (`1_apps`)**
-    - [ ] In `iac/terraform/1_apps/`, create a `README.md` file.
-    - [ ] The `README.md` will explain that this stage is for application deployment and will consume the outputs from the `0_projects` stage. It will serve as a placeholder for future implementation.
+- [ ] **Phase 3: Classroom Configuration (`1a_classroom_setup` - CUJ001)**
+    - [ ] This configuration will be responsible for classroom-specific logic.
+    - [ ] In `main.tf`, it will:
+        - [ ] Create the `google_folder`.
+        - [ ] Grant folder-level IAM roles to `teachers`.
+        - [ ] Use a `for_each` loop to call the `modules/project` for each student, passing the appropriate variables.
+    - [ ] In `outputs.tf`, it will output a `projects` map that is compatible with the `2_apps_deployment` stage.
 
-- [ ] **Phase 4: Documentation**
-    - [ ] Create a `README.md` in `iac/terraform/` explaining the new workflow: how to use the script and apply the Terraform configurations.
+- [ ] **Phase 4: Single User Configuration (`1b_single_user_setup` - CUJ002)**
+    - [ ] This will be a very lean configuration that provides a simple experience for the single user.
+    - [ ] It will primarily be a thin wrapper that calls the `modules/project` once.
+    - [ ] It will feature a simple `variables.tf` and a clear `README.md` guiding the user on how to create their `terraform.tfvars` file.
+    - [ ] Its `outputs.tf` will produce a `projects` map that is structurally identical to the classroom output, ensuring pluggability with the `2_apps_deployment` stage.
+
+- [ ] **Phase 5: Application Deployment (`2_apps_deployment`)**
+    - [ ] This configuration will be designed to be completely agnostic of the previous stage.
+    - [ ] It will take the `projects` map as input and will be responsible for deploying the specified applications.
+    - [ ] A `README.md` will serve as a placeholder for the actual deployment logic.
+
+- [ ] **Phase 6: Documentation**
+    - [ ] Update the main `README.md` in `iac/terraform/` to explain the new modular architecture and the workflows for both CUJ001 and CUJ002.
+    - [ ] The `doc/TF_INTERFACES.md` will serve as the detailed technical documentation for the module contracts.
+    - [ ] The Python script will generate the final `REPORT.md`.

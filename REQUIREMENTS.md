@@ -37,6 +37,7 @@ So we need to both be able to have:
 * **CUJ002** (single mode, BYOI). In this mode, we do not provision anything beforehand. The user is given the isntructions and configuration needed to create a project with credit under their own org. In this case, we
   * This is useful when we don't know the identity of the student so they "bring your own identity".
   * In this case, we need for this to be VERY easy and simple for users to create project and install apps on top of it. Some functionalities (like shared observability) will NOT be available.
+  * In this modality, we need to be open to both EXISTING (use) or non-existing (create) project
 
 ##  Permissions
 
