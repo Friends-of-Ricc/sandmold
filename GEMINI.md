@@ -17,6 +17,7 @@ The architecture is incredibly modular, allowing for more people to add more scr
 
 * Use `REQUIREMENTS.md` for this repo
 * **plan before executing**. Write your plan in `PLAN.md` and make sure user reviews, edits, before executing.
+  * Plan should have a short steps list which we can mark as done as we proceed.
 * before coding anything. We need to ensure our solution respects 100% `REQUIREMENTS.md` and `PLAN.md`.
 * If a decision is made, a succinct rationale (the WHAT and the WHY) needs to be there. Eg, "we chose Pulumi vs Terraform because.."
 

@@ -14,3 +14,5 @@ A script will take in input the YAML and do something so that terraform is then 
 3. [SKIP FOR NOW] install those applications. For now, we skip (3) and just add some sort of todo and ensure its doable. We concentrate on step `0_projects/` and ensure this produces enough outputs that can be then used by the app installation module.
 
 
+Once again, lets start with a PLAN which i can share with my Terraform experts, before proceeding.
+Plan should have a short steps list which we can mark as done as we proceed.
