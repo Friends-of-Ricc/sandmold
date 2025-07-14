@@ -38,6 +38,9 @@ So we need to both be able to have:
   * This is useful when we don't know the identity of the student so they "bring your own identity".
   * In this case, we need for this to be VERY easy and simple for users to create project and install apps on top of it. Some functionalities (like shared observability) will NOT be available.
 
+##  Permissions
+
+Be inspired by  https://github.com/GoogleCloudPlatform/genai-factory/blob/master/cloud-run-single/0-projects/data/project.yaml (probably available locally under `vendor/genai-factory/cloud-run-single/0-projects/data/project.yaml`) to have a maintainable list of permissions / API sto enable, and so on.
 
 ## Outputs
 
