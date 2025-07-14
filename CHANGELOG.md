@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.7
+
+- Implemented Terraform workspaces to isolate state for each classroom, preventing conflicts.
+- Updated `justfile` to manage workspaces automatically based on the classroom YAML.
+- Migrated existing Terraform state to a dedicated workspace.
+
 ## 0.0.5
 
 - Implemented a modular and robust Terraform infrastructure for provisioning Google Cloud resources.
