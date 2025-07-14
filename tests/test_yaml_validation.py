@@ -3,13 +3,19 @@
 import argparse
 import yaml
 import sys
-
 import os
 
 def validate_project_names(classroom_yaml_path):
     """Validates that project names in the classroom YAML do not contain underscores."""
-    # Construct the absolute path to the YAML file
-    absolute_yaml_path = os.path.abspath(classroom_yaml_path)
+    os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    absolute_yaml_path = os.path.join(project_root, classroom_yaml_path)
+
+    parser.add_argument('--root-dir', required=True, help='The root directory of the project.')
+    args = parser.parse_args()
+
+    absolute_yaml_path = os.path.join(args.root_dir, args.classroom_yaml)
 
     with open(absolute_yaml_path, 'r') as f:
         classroom_config = yaml.safe_load(f)

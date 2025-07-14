@@ -65,9 +65,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file):
     if output_file:
         with open(output_file, 'w') as f:
             json.dump(tf_vars, f, indent=2)
-
-    # Print the folder name to stdout so it can be captured by the calling script
-    print(classroom_config.get('folder', {}).get('name'))
+        print(f"Successfully generated {output_file}", file=sys.stderr)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate terraform.tfvars.json from YAML configs.')
