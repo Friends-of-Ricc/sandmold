@@ -42,3 +42,9 @@ variable "iam_user_roles" {
   type        = list(string)
   default     = []
 }
+
+variable "folder_tags" {
+  description = "A map of tags to apply to the folder."
+  type        = map(string)
+  default     = {}
+}

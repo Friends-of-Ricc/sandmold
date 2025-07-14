@@ -6,6 +6,8 @@ folder:
   billing_account_id: "01C588-4823BC-27F650"
   name: class_2teachers_6students
   description: Class with 2 teachers and 6 students
+  tags:
+    tagKeys/123456789012: "tagValues/123456789012" # TODO: Replace with your actual tagKey and tagValue
   env:
     # - name: TF_VAR_BILLING_ACCOUNT_ID
     #   value: 012345-678901-234567 # dummy billing account
@@ -17,7 +19,7 @@ folder:
       value: us-central1
 #  labels:
 #    class: class_2teachers_6
-  domain: google.com
+  domain: sredemo.dev
 schoolbenches:
   # schoolbench 1
   - project: teacherz  # will be padded by some random hex/numb
