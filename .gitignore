@@ -1,3 +1,9 @@
 .echodo_history
 .bin/
 .env
+
+# Terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+
