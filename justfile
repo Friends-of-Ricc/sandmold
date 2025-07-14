@@ -24,16 +24,16 @@ setup-classroom CLASSROOM_YAML:
     TF_OUTPUT_FILE="iac/terraform/output/terraform_output.json"
     REPORT_FILE="iac/terraform/output/REPORT.md"
 
-    # Step 1: Prepare Terraform variables from YAML
+    # Step 1: Prepare Terraform variables from YAML and get the workspace name
     echo "--> Preparing Terraform variables..."
-    /Users/ricc/git/vibecoding/bingems/.venv/bin/python ./bin/prepare_tf_vars.py \
+    WORKSPACE_NAME=$(/Users/ricc/git/vibecoding/bingems/.venv/bin/python ./bin/prepare_tf_vars.py \
         --classroom-yaml {{CLASSROOM_YAML}} \
         --project-config-yaml etc/project_config.yaml \
-        --output-dir ${CLASSROOM_TF_DIR}
+        --output-dir ${CLASSROOM_TF_DIR})
 
     # Step 2: Run Terraform
-    echo "--> Initializing and applying Terraform..."
-    (cd ${CLASSROOM_TF_DIR} && terraform init && terraform apply -auto-approve)
+    echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"
+    (cd ${CLASSROOM_TF_DIR} && terraform init && terraform workspace select -or-create ${WORKSPACE_NAME} && terraform apply -auto-approve)
 
     # Step 3: Get Terraform output as JSON
     echo "--> Getting Terraform output..."
@@ -54,14 +54,18 @@ setup-sample-class:
     just setup-classroom etc/class_2teachers_6students.yaml
 
 # Teardown a classroom environment
-teardown-sample-class:
+teardown-classroom CLASSROOM_YAML:
     #!/usr/bin/env bash
     set -e
     echo "--- Starting Classroom Teardown ---"
     CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
-    (cd ${CLASSROOM_TF_DIR} && terraform destroy -auto-approve -target='module.project["teacherz"]' -target='module.project["boa01"]' -target='module.project["boa02"]' -target='module.project["boa03"]')
-    while ! (cd ${CLASSROOM_TF_DIR} && terraform destroy -auto-approve); do
-        echo "Teardown failed, retrying in 60 seconds..."
-        sleep 60
-    done
+    
+    # Get the workspace name
+    WORKSPACE_NAME=$(/Users/ricc/git/vibecoding/bingems/.venv/bin/python ./bin/prepare_tf_vars.py \
+        --classroom-yaml {{CLASSROOM_YAML}} \
+        --project-config-yaml etc/project_config.yaml \
+        --output-dir ${CLASSROOM_TF_DIR})
+
+    (cd ${CLASSROOM_TF_DIR} && terraform workspace select ${WORKSPACE_NAME} && terraform destroy -auto-approve)
     echo "--- Classroom Teardown Complete ---"
+

@@ -1,7 +1,10 @@
 # This is to set up the project metadata and dependencies for the Python part of it using `uv`.
 [project]
+
 name = "sandmold"
-version = "0.1.0"
+
+version = "0.1.1"
+
 dependencies = [
     "pyyaml",
 ]
