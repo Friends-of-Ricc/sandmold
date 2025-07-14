@@ -105,3 +105,11 @@ We expect the following to happen:
 
 
 ## App Hub applications
+
+* Every app should be wrapped around.
+* Ensure the right fields are in the `blueprint.yaml`.
+
+## Logging and Monitoring
+
+* Enable APIs
+* Possibly generate a centralized Ops view.
