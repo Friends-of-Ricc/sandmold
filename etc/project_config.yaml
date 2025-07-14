@@ -29,7 +29,7 @@ iam_permissions:
     - roles/storage.admin
     - roles/aiplatform.user
 
-   teacher_roles_in_teacher_project:
+  teacher_roles_in_teacher_project:
     - roles/editor
     - roles/iam.serviceAccountUser
     - roles/run.admin
@@ -37,7 +37,7 @@ iam_permissions:
     - roles/storage.admin
     - roles/aiplatform.user
 
-    teacher_roles_in_tenant_project:
+  teacher_roles_in_tenant_project:
     - roles/owner
     - roles/iam.serviceAccountUser
     - roles/iam.administrator

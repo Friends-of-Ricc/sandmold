@@ -16,8 +16,9 @@ folder:
   - teacher1@example.com
   - teacher2@example.com
 schoolbenches:
-  # schoolbench 1
-  - project: teacherz  # will be padded by some random hex/numb
+  # schoolbench 1 - teachers
+  - project: insegnanti
+    type: teacher
     apps:
     - heapster_shop
     seats:

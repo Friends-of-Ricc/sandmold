@@ -23,6 +23,7 @@ folder:
 schoolbenches:
   # schoolbench 1
   - project: teacherz  # will be padded by some random hex/numb
+    type: teacher
     apps:
     - heapster_shop
     seats:

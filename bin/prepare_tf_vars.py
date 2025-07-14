@@ -19,6 +19,8 @@ import json
 import yaml
 import os
 
+import sys
+
 def parse_yaml(file_path):
     """Parses a YAML file."""
     with open(file_path, 'r') as f:
@@ -64,7 +66,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_dir):
     with open(output_path, 'w') as f:
         json.dump(tf_vars, f, indent=2)
 
-    print(f"Successfully generated {output_path}")
+    print(f"Successfully generated {output_path}", file=sys.stderr)
 
     # Print the folder name to stdout so it can be captured by the calling script
     print(classroom_config.get('folder', {}).get('name'))

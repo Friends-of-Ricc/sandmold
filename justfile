@@ -21,8 +21,12 @@ setup-classroom CLASSROOM_YAML:
     # Define paths
     CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
     TF_VARS_FILE="${CLASSROOM_TF_DIR}/terraform.tfvars.json"
-    TF_OUTPUT_FILE="iac/terraform/output/terraform_output.json"
-    REPORT_FILE="iac/terraform/output/REPORT.md"
+    TF_OUTPUT_DIR="iac/terraform/output"
+    TF_OUTPUT_FILE="${TF_OUTPUT_DIR}/terraform_output.json"
+    REPORT_FILE="${TF_OUTPUT_DIR}/REPORT.md"
+
+    # Create the output directory if it doesn't exist
+    mkdir -p ${TF_OUTPUT_DIR}
 
     # Step 1: Prepare Terraform variables from YAML and get the workspace name
     echo "--> Preparing Terraform variables..."
@@ -41,7 +45,7 @@ setup-classroom CLASSROOM_YAML:
 
     # Step 4: Generate the final report
     echo "--> Generating final report..."
-    ./bin/generate_report.py \
+    /Users/ricc/git/vibecoding/bingems/.venv/bin/python ./bin/generate_report.py \
         --tf-output-json ${TF_OUTPUT_FILE} \
         --classroom-yaml {{CLASSROOM_YAML}} \
         --report-path ${REPORT_FILE}
