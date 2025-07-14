@@ -58,6 +58,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_dir):
         'services_to_enable': project_config.get('services_to_enable', []),
         'iam_user_roles': user_roles,
         'folder_tags': classroom_config.get('folder', {}).get('tags', {})
+    }
 
     output_path = os.path.join(output_dir, 'terraform.tfvars.json')
     with open(output_path, 'w') as f:
