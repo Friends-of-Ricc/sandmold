@@ -1,0 +1,25 @@
+list:
+    just -l
+
+
+# Download all the repositories
+download-em-all: genai-factory microservices-demo cloud-foundation-fabric bank-of-anthos
+
+# Luca Prete great work on GenAI using Fabric FAST
+genai-factory:
+    ls -al genai-factory || git clone https://github.com/GoogleCloudPlatform/genai-factory
+
+
+# Heapster Shop / Online Boutique
+microservices-demo:
+    ls -al microservices-demo || git clone https://github.com/GoogleCloudPlatform/microservices-demo
+
+
+# Google Cloud Foundation Fabric + FAST
+cloud-foundation-fabric:
+    git clone https://github.com/GoogleCloudPlatform/cloud-foundation-fabric/
+
+
+# De BoA
+bank-of-anthos:
+    git clone https://github.com/GoogleCloudPlatform/bank-of-anthos

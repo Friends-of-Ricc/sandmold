@@ -3,7 +3,19 @@
 
 I expect all the IAC code to be under iac/technology/ `iac/pulumi/` or `iac/terraform/`.
 
-The system allows some pluggable applications. Every app should have some standard blueprint k8s-like yaml
+The system allows some pluggable applications. Every app should have some standard blueprint k8s-like yaml.
+
+## Architecture
+
+* a Lab has metadata and multiple seats. A lab maps to a Cloud Folder.
+* a Seat has multiple Principals (users) and Applications.
+* An applicaion can participate in a seat in max cardinality of 1.
+
+For instance, 
+
+## Seat
+
+A seat is the atom of appplication + user
 
 ## Applications
 
