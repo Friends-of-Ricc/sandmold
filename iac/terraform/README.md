@@ -2,41 +2,72 @@
 
 This directory contains all the Terraform code for provisioning Google Cloud resources for the Sandmold project.
 
-## Architecture
+## How it Works: From YAML to Report
 
-The infrastructure is designed to be modular, reusable, and support two primary use cases (CUJs), as defined in the main `REQUIREMENTS.md`. The core of the architecture is the `modules/project` module, which is the single source of truth for creating and configuring a standard GCP project.
+The entire classroom provisioning process is orchestrated by a single command: `just setup-classroom <path_to_yaml>`. This command automates a series of steps that transform your high-level YAML definition into live cloud resources and a final summary report.
 
-A detailed breakdown of the module and configuration interfaces can be found in `doc/TF_INTERFACES.md`.
+### Data Flow Diagram
 
-## Workflows
+This diagram illustrates how the files are processed and what artifacts are created at each step.
 
-There are two distinct workflows for provisioning resources.
+```mermaid
+graph TD
+    subgraph "1. User Input"
+        A[classroom.yaml]
+    end
 
-### 1. Classroom Setup (CUJ001)
+    subgraph "2. Orchestration (just setup-classroom)"
+        B(prepare_tf_vars.py)
+        C(terraform apply)
+        D(terraform output)
+        E(generate_report.py)
+    end
 
-This workflow is for instructors who want to pre-provision a Google Cloud Folder and a set of projects for a classroom of students.
+    subgraph "3. Artifacts"
+        F[terraform.tfvars.json]
+        G[terraform.tfstate]
+        H[terraform_output.json]
+        I[REPORT.md]
+    end
 
-*   **Configuration**: `1a_classroom_setup/`
-*   **Entrypoint**: The master `setup.sh` script (or `just` command) in the root of the repository.
-*   **Process**:
-    1.  The user populates a classroom YAML file (e.g., `etc/class_2teachers_6students.yaml`).
-    2.  The `setup.sh` script calls `bin/prepare_tf_vars.py` to generate the necessary `terraform.tfvars.json`.
-    3.  The script runs `terraform apply` within the `1a_classroom_setup` directory.
-    4.  The script calls `bin/generate_report.py` to create a final `REPORT.md`.
+    A -- feeds --> B
+    B -- creates --> F
+    F -- is read by --> C
+    C -- creates/updates --> G
+    C -- enables --> D
+    D -- creates --> H
+    A -- feeds --> E
+    H -- feeds --> E
+    E -- creates --> I
 
-### 2. Single User Setup (CUJ002)
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style I fill:#ccf,stroke:#333,stroke-width:2px
+```
 
-This workflow is for individual users who want to provision a single project in their own account ("Bring Your Own Identity").
+### Step-by-Step Breakdown
 
-*   **Configuration**: `1b_single_user_setup/`
-*   **Instructions**: See the `README.md` within that directory for detailed, user-friendly instructions.
-*   **Process**:
-    1.  The user creates a `terraform.tfvars` file with their specific details (project ID, billing account, etc.).
-    2.  The user runs `terraform init` and `terraform apply` directly from the `1b_single_user_setup` directory.
+1.  **Input: The Classroom YAML (`etc/class_2teachers_6students.yaml`)**
+    *   This is the starting point. You define the folder, billing account, projects, users, and applications in this human-readable file.
 
-### 3. Application Deployment
+2.  **Step 1: Generate TFVARS (`bin/prepare_tf_vars.py`)**
+    *   The `just` command first calls this Python script.
+    *   It reads your classroom YAML and the shared `etc/project_config.yaml`.
+    *   It processes this data and creates a new file: `iac/terraform/1a_classroom_setup/terraform.tfvars.json`. This file is a structured variable file that Terraform can understand.
 
-After either of the above setup workflows are complete, the `2_apps_deployment` configuration can be run to install applications on the newly created projects.
+3.  **Step 2: Apply Terraform (`terraform apply`)**
+    *   With the `terraform.tfvars.json` file in place, the `just` command runs `terraform apply` inside the `iac/terraform/1a_classroom_setup/` directory.
+    *   Terraform reads the `.tf` files and the `.tfvars.json` file.
+    *   It communicates with Google Cloud to create the folder, projects, and IAM permissions as defined.
+    *   As it works, Terraform creates and updates a critical file: `iac/terraform/1a_classroom_setup/terraform.tfstate`. This file stores the state of your managed infrastructure. **It is very important and is committed to the repository.**
 
-*   **Configuration**: `2_apps_deployment/`
-*   **Status**: This stage is currently a placeholder. See the `README.md` in that directory for the future implementation plan.
+4.  **Step 3: Extract Outputs (`terraform output -json`)**
+    *   After a successful `apply`, the `just` command runs `terraform output -json`.
+    *   This command reads the `terraform.tfstate` file and extracts the values of all the `output` variables you defined (like the final project IDs and folder ID).
+    *   It saves this information into a new file in the root directory: `terraform_output.json`.
+
+5.  **Step 4: Generate Final Report (`bin/generate_report.py`)**
+    *   Finally, the `just` command calls the reporting script.
+    *   This script reads two files: the `terraform_output.json` (to know what was created) and the original `classroom.yaml` (to know what was intended).
+    *   It combines this information to generate the final, user-friendly `REPORT.md`, complete with project details, user lists, and direct links to the Google Cloud Console.
+
+This automated, multi-stage process ensures that the infrastructure is provisioned consistently and that you always get a clear, accurate report of the results.
