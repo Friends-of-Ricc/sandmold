@@ -57,7 +57,9 @@ def generate_markdown_report(tf_data, classroom_data):
         classroom_details = project_details_map.get(name, {})
         users = classroom_details.get('users', 'N/A')
         apps = classroom_details.get('apps', '-')
-        report_lines.append(f"| {name} | `{details.get('project_id')}` | {users} | {apps} |")
+        project_id = details.get('project_id')
+        iam_link = f"https://console.cloud.google.com/iam-admin/iam?project={project_id}"
+        report_lines.append(f"| {name} | [`{project_id}`]({iam_link}) | {users} | {apps} |")
 
     return "\n".join(report_lines)
 

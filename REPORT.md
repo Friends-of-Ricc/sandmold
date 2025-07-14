@@ -7,9 +7,9 @@
 
 ## Project Details
 
-| Project Name | Project ID | Project Number |
-|--------------|------------|----------------|
-| boa01 | `boa01-rrww` | `994565223816` |
-| boa02 | `boa02-ruva` | `688713234475` |
-| boa03 | `boa03-dutz` | `404151034664` |
-| teacherz | `teacherz-9bkq` | `834908815552` |
+| Project Name | Project ID | Users | Applications (Planned) |
+|--------------|------------|-------|------------------------|
+| boa01 | `boa01-rrww` | student01@gmail.com, student02@gmail.com | bank_of_anthos, bank_of_anthos_scenario123 |
+| boa02 | `boa02-ruva` | student03@gmail.com, student04@gmail.com | bank_of_anthos, bank_of_anthos_scenario123 |
+| boa03 | `boa03-dutz` | student06@gmail.com, palladiusbonton@gmail.com | - |
+| teacherz | `teacherz-9bkq` | leoy@google.com, ricc@google.com | heapster_shop |
