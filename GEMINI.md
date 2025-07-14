@@ -23,3 +23,11 @@ The architecture is incredibly modular, allowing for more people to add more scr
 Technically, every lab setup consists in a `classroom` will need two inputs:
 * a small "TFvars" for project/folder/nilling setup
 * a bigger YAML for the folder/project config (**classroom** config). See `etc/samples` for some inspiration.
+
+## About the user
+
+Two people are maintaining this project
+
+* If the username (`$USER`) is "ricc", then read further instructions in "RICCARDO.md"
+* If the username is "leoy", then read further instructions in "LEONID.md"
+
