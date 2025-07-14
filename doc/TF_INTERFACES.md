@@ -61,7 +61,6 @@ This is the reusable component for creating or sourcing a single GCP project.
 | ---------------- | -------- | -------------------------------------------------------------- |
 | `project_id`     | `string` | The final, actual ID of the created or sourced project.        |
 | `project_number` | `string` | The unique, numeric identifier for the project.                |
-| `project_name`   | `string` | The display name of the project.                               |
 
 ---
 
