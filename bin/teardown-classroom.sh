@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 set -e
 
-CLASSROOM_YAML=$1
+CLASSROOM_YAML="$1"
+CLASSROOM_TF_DIR="$2"
 
-echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} ---"
+if [ -z "$CLASSROOM_TF_DIR" ]; then
+    echo "Error: Terraform directory not provided. Usage: $0 <classroom_yaml> <terraform_dir>"
+    exit 1
+fi
 
-CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
+echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
-# Get the workspace name
-WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq .folder.name)
+# Get the workspace name from the new schema
+WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
 
-# Create dedicated directories for the classroom
-CLASSROOM_VARS_ROOT_DIR="${CLASSROOM_TF_DIR}/workspaces/${WORKSPACE_NAME}"
+# The tfvars file is now in the root of the TF directory
+TF_VARS_FILE="terraform.tfvars.json"
 
-# This is the path relative to CLASSROOM_TF_DIR that terraform destroy will use
-RELATIVE_TF_VARS_PATH="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
-
-(cd ${CLASSROOM_TF_DIR} && terraform workspace select ${WORKSPACE_NAME} && terraform destroy -auto-approve -var-file=${RELATIVE_TF_VARS_PATH})
+(cd "${CLASSROOM_TF_DIR}" && terraform workspace select "${WORKSPACE_NAME}" && terraform destroy -auto-approve -var-file="${TF_VARS_FILE}")
 
 echo "--- Classroom Teardown Complete ---"

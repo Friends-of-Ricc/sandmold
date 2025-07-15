@@ -1,5 +1,3 @@
-
-
 # This is more meaningful to Riccardo as a Rails dev.
 RAILS_ROOT := justfile_directory()
 
@@ -35,10 +33,15 @@ setup-sample-class:
     just setup-classroom etc/samples/class_2teachers_6students.yaml
 
 # Teardown a classroom environment
-teardown-classroom CLASSROOM_YAML:
-    ./bin/teardown-classroom.sh {{CLASSROOM_YAML}}
+teardown-classroom CLASSROOM_YAML TF_DIR='iac/terraform/1a_classroom_setup':
+    ./bin/teardown-classroom.sh {{CLASSROOM_YAML}} {{TF_DIR}}
 
 
 preflight-check-sample-class:
     echo "Running preflight checks for sample class..."
     bin/preflight-checks.py etc/samples/class_2teachers_6students.yaml
+
+# Find open, non-Google billing accounts
+open-baids:
+    @echo "🔎 Searching for open, non-Google billing accounts..."
+    @gcloud billing accounts list --filter="open=true AND parent!='organizations/433637338589'" --format="table(name, displayName, parent)"
