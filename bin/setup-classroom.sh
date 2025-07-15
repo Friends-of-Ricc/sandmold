@@ -1,58 +1,58 @@
 #!/usr/bin/env bash
 set -e
 
+# cd to the root of the git repository
 cd $(git rev-parse --show-toplevel)
 
-CLASSROOM_YAML=$1
+CLASSROOM_YAML="$1"
+CLASSROOM_TF_DIR="$2" # New argument
 
-echo "--- Starting Classroom Setup for ${CLASSROOM_YAML} ---"
+if [ -z "$CLASSROOM_TF_DIR" ]; then
+    echo "Error: Terraform directory not provided. Usage: $0 <classroom_yaml> <terraform_dir>"
+    exit 1
+fi
 
-# Debugging: Print current working directory and received YAML path
+echo "--- Starting Classroom Setup for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
+
+# Debugging info
 echo "DEBUG: Current working directory: $(pwd)"
 echo "DEBUG: CLASSROOM_YAML received: ${CLASSROOM_YAML}"
+echo "DEBUG: CLASSROOM_TF_DIR received: ${CLASSROOM_TF_DIR}"
 
-# Define paths
-CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
-TF_OUTPUT_FILE="terraform_output.json"
-REPORT_FILE="REPORT.md"
+# Define output file paths, now inside the TF directory
+TF_OUTPUT_FILE="${CLASSROOM_TF_DIR}/terraform_output.json"
+REPORT_FILE="${CLASSROOM_TF_DIR}/REPORT.md"
+FULL_TF_VARS_PATH="${CLASSROOM_TF_DIR}/terraform.tfvars.json"
 
-# Step 1: Validate the classroom YAML
-# echo "--> Validating classroom YAML..."
-# just test-yaml ${CLASSROOM_YAML}
+# Step 1: (omitted)
 
-# Step 2: Prepare Terraform variables from YAML and get the workspace name
+# Step 2: Prepare Terraform variables
 echo "--> Preparing Terraform variables..."
 WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .folder.name)
 echo "Workspace name: ${WORKSPACE_NAME}"
 
-# Create dedicated directories for the classroom
-CLASSROOM_VARS_ROOT_DIR="${CLASSROOM_TF_DIR}/workspaces/${WORKSPACE_NAME}"
-mkdir -p ${CLASSROOM_VARS_ROOT_DIR}
-
-# This is the absolute path where prepare_tf_vars.py will write the file
-FULL_TF_VARS_PATH="${CLASSROOM_VARS_ROOT_DIR}/terraform.tfvars.json"
-
-# This is the path relative to CLASSROOM_TF_DIR that terraform apply will use
-RELATIVE_TF_VARS_PATH="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
-
-# Debugging: Print path passed to prepare_tf_vars.py
-echo "DEBUG: Passing to prepare_tf_vars.py: ${CLASSROOM_YAML}"
-uv run python ./bin/prepare_tf_vars.py --classroom-yaml "${CLASSROOM_YAML}" --project-config-yaml etc/project_config.yaml --output-file ${FULL_TF_VARS_PATH} --project-root "$(pwd)"
+# No longer creating a 'workspaces' subdirectory.
+# prepare_tf_vars.py will write directly to FULL_TF_VARS_PATH.
+echo "DEBUG: Writing tfvars to: ${FULL_TF_VARS_PATH}"
+uv run python ./bin/prepare_tf_vars.py --classroom-yaml "${CLASSROOM_YAML}" --project-config-yaml etc/project_config.yaml --output-file "${FULL_TF_VARS_PATH}" --project-root "$(pwd)"
 
 # Step 3: Run Terraform
 echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"
-(cd ${CLASSROOM_TF_DIR} && terraform init && terraform workspace select -or-create ${WORKSPACE_NAME} && terraform apply -auto-approve -var-file=${RELATIVE_TF_VARS_PATH})
+# The -var-file path is now simpler, relative to CLASSROOM_TF_DIR
+(cd "${CLASSROOM_TF_DIR}" && terraform init && terraform workspace select -or-create "${WORKSPACE_NAME}" && terraform apply -auto-approve -var-file="terraform.tfvars.json")
 
 # Step 4: Get Terraform output as JSON
 echo "--> Getting Terraform output..."
-(cd ${CLASSROOM_TF_DIR} && terraform output -json > ../../../${TF_OUTPUT_FILE})
+# Output is now redirected to the file inside CLASSROOM_TF_DIR
+(cd "${CLASSROOM_TF_DIR}" && terraform output -json > "terraform_output.json")
 
 # Step 5: Generate the final report
 echo "--> Generating final report..."
-uv run ./bin/generate_report.py \
-    --tf-output-json ${TF_OUTPUT_FILE} \
-    --classroom-yaml ${CLASSROOM_YAML} \
-    --report-path ${REPORT_FILE}
+# The script now reads from and writes to files inside CLASSROOM_TF_DIR
+uv run ./bin/generate_report.py 
+    --tf-output-json "${TF_OUTPUT_FILE}" 
+    --classroom-yaml "${CLASSROOM_YAML}" 
+    --report-path "${REPORT_FILE}"
 
 echo "--- Classroom Setup Complete ---"
 echo "See ${REPORT_FILE} for details."

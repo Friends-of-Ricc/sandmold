@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.9
+
+- Refactor: `setup-classroom.sh` now accepts a Terraform directory argument, making it more flexible.
+- Feat: All script outputs (`REPORT.md`, `terraform_output.json`, etc.) are now stored within the specified Terraform directory, improving organization.
+- Fix: Removed the creation of a nested `workspaces` directory, simplifying the file structure.
+
 ## 0.0.8
 
 - Fix: Correctly extract workspace name in `setup-classroom.sh` by using `yq -r`.
