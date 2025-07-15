@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0
+
+- **Feat: Adopt Kubernetes-style schema for Classroom YAML.**
+  - The classroom YAML structure has been refactored to follow a Kubernetes-style object model (`apiVersion`, `kind`, `metadata`, `spec`). This improves versioning, clarity, and future automation capabilities.
+  - The Terraform workspace name is now derived from `metadata.name`, while a new optional `spec.folder.displayName` field controls the user-facing Google Cloud Folder name.
+  - Renamed `type` to `desk-type` in the schoolbench definition for better clarity.
+  - All documentation and sample files have been updated to the new, more robust schema.
+
 ## 0.0.9
 
 - Refactor: `setup-classroom.sh` now accepts a Terraform directory argument, making it more flexible.

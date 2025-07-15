@@ -1,60 +1,64 @@
 # My second class.
-folder:
-  org_id: 791852209422 # sredemo.dev
-  parent_folder_id: 194703823593 # sredemo.dev / test-sandmold / sandmold-1
-  billing_account_id: "01C588-4823BC-27F650"
-  name: class-2t-6s
-  description: |
-    Class with 2 teachers and 6 students, this time existing for real
-  env:
-    - name: GOOGLE_CLOUD_REGION
-      value: europe-west4
-  #labels:
-  #  class: class_2teachers_6let;s
-  domain: sredemo.dev
-  teachers:
-  - ricc@google.com
-  - leoy@google.com
-schoolbenches:
-  # schoolbench 1 - teachers
-  - project: insegnanti
-    type: teacher
-    apps:
-    - heapster_shop
-    seats:
+apiVersion: sandmold.io/v1alpha1
+kind: Classroom
+metadata:
+  name: class-2teachers-4realstudents
+spec:
+  folder:
+    org_id: 791852209422 # sredemo.dev
+    parent_folder_id: 194703823593 # sredemo.dev / test-sandmold / sandmold-1
+    billing_account_id: "01C588-4823BC-27F650"
+    displayName: Three teachers 4 real students
+    domain: sredemo.dev
+    description: |
+      Class with 3 teachers and 4 real students
+    teachers:
     - ricc@google.com
-    - palladiusbonton@gmail.com
-
-  # schoolbench 2
-  - project: leo
-    apps:
-    - bank_of_anthos
-    seats:
     - leoy@google.com
-
-  - app: cheap_jss
-    project: daniel
-    seats:
     - stamer@google.com
-
-  - app: cheap_jss
-    project: babenko
-    seats:
-    - babenko@google.com
-
-  - app: cheap_jss
-    project: ricc-personal
-    seats:
-    - palladiusbonton@gmail.com
-
-common:
+    env:
+      - name: GOOGLE_CLOUD_REGION
+        value: europe-west4
   schoolbenches:
-    # common to all schoolbenches  - TODO(gemini-cli): to be implemented
-    foreach_project:
-      applies_to: ALL_STUDENTS  # Can be _ALL or  _ALL_STUDENTS and it becomes an iteration over the following list.
-      # adds this apps to all student apps.
+    # schoolbench 1 - teachers
+    - project: insegnanti
+      desk-type: teacher
       apps:
       - heapster_shop
-      # adds this person to all students
       seats:
       - ricc@google.com
+      - palladiusbonton@gmail.com
+
+    # schoolbench 2
+    - project: leo
+      apps:
+      - bank_of_anthos
+      seats:
+      - leoy@google.com
+
+    - app: cheap_jss
+      project: daniel
+      seats:
+      - stamer@google.com
+
+    - app: cheap_jss
+      project: babenko
+      seats:
+      - babenko@google.com
+
+    - app: cheap_jss
+      project: ricc-personal
+      seats:
+      - palladiusbonton@gmail.com
+
+  common:
+    schoolbenches:
+      # common to all schoolbenches  - TODO(gemini-cli): to be implemented
+      foreach_project:
+        applies_to: ALL_STUDENTS  # Can be _ALL or  _ALL_STUDENTS and it becomes an iteration over the following list.
+        # adds this apps to all student apps.
+        apps:
+        - heapster_shop
+        # adds this person to all students
+        seats:
+        - ricc@google.com

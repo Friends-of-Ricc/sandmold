@@ -1,52 +1,51 @@
 # yaml dammit YAML support!!!!!
-# schoolroom
-folder:
-  org_id: 791852209422
-  parent_folder_id: 1000371719973
-  #billing_account_id: "0189FA-E139FD-136A58" # cant use it
-  billing_account_id: "01C588-4823BC-27F650"
-  name: class_2teachers_6students
-  description: Class with 2 teachers and 6 students
-  env:
-    # # - name: TF_VAR_BILLING_ACCOUNT_ID
-    # #   value: 012345-678901-234567 # dummy billing account
-    # - name: TF_VAR_ORGANIZATION_ID
-    #   value: 791852209422
-    # - name: TF_VAR_PARENT_FOLDER_ID
-    #   value: 791852209422 # same as org_id - root folder
-    - name: TF_VAR_GOOGLE_CLOUD_REGION
-      value: us-central1
+apiVersion: sandmold.io/v1alpha1
+kind: Classroom
+metadata:
+  name: class-2teachers-6students
   labels:
-  - class_2teachers_6
-  - ricc_fecit
-#    class: class_2teachers_6
-  domain: sredemo.dev
-schoolbenches:
-  # schoolbench 1
-  - project: teacherz  # will be padded by some random hex/numb
-    type: teacher
-    apps:
-    - heapster_shop
-    seats:
+    class: class_2teachers_6
+    author: ricc
+spec:
+  folder:
+    org_id: 791852209422
+    parent_folder_id: 1000371719973
+    billing_account_id: "01C588-4823BC-27F650"
+    displayName: class-2teachers-6students
+    domain: sredemo.dev
+    description: Class with 2 teachers and 6 students
+    teachers:
     - leoy@google.com
     - ricc@google.com
-  # schoolbench 2
-  - project: boa01  # will be padded by some random hex/numb, -> "boa01-123abc"
-    apps:
-    - bank_of_anthos
-    - bank_of_anthos_scenario123
-    seats:
-    - student01@gmail.com
-    - student02@gmail.com
-  - apps:
-    - bank_of_anthos
-    #- bank_of_anthos_scenario123
-    project: boa02
-    seats:
-    - student03@gmail.com
-    - student04@gmail.com
-  - app: cheap_jss
-    project: boa03
-    seats:
-    - student06@gmail.com
-    - palladiusbonton@gmail.com
+    env:
+      - name: TF_VAR_GOOGLE_CLOUD_REGION
+        value: us-central1
+  schoolbenches:
+    # schoolbench 1
+    - project: teacherz  # will be padded by some random hex/numb
+      desk-type: teacher
+      apps:
+      - heapster_shop
+      seats:
+      - leoy@google.com
+      - ricc@google.com
+    # schoolbench 2
+    - project: boa01  # will be padded by some random hex/numb, -> "boa01-123abc"
+      apps:
+      - bank_of_anthos
+      - bank_of_anthos_scenario123
+      seats:
+      - student01@gmail.com
+      - student02@gmail.com
+    - apps:
+      - bank_of_anthos
+      #- bank_of_anthos_scenario123
+      project: boa02
+      seats:
+      - student03@gmail.com
+      - student04@gmail.com
+    - app: cheap_jss
+      project: boa03
+      seats:
+      - student06@gmail.com
+      - palladiusbonton@gmail.com

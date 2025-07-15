@@ -1,116 +1,81 @@
-Every Class (1a stage) stanza YAML will have the following fields:
+# Classroom YAML Schema Definition (sandmold.io/v1alpha1)
 
-## Main
+To ensure consistency, versioning, and clarity, classroom configuration files follow a Kubernetes-style object structure. Every classroom YAML must contain the following top-level fields:
 
-* `folder`: contains the high level classroom fields.
-* `schoolbenches`: contains info re array of seats
-* `common`: contains common information to all schoolbenches. Info here will be "UNIONed" to the existing one (apps for bench 1 will become "apps )
+- `apiVersion`: The version of the schema. For now, this must be `sandmold.io/v1alpha1`.
+- `kind`: The type of object. This must be `Classroom`.
+- `metadata`: Data that helps uniquely identify the object, such as its name and labels.
+- `spec`: The detailed specification for the desired state of the classroom.
 
-## "folder" stanza
+---
 
-* org_id (mandatory): numeric org id
-* domain (mandatory): string org domain. They need to coincide.
-* parent_folder_id: folder_id or org_id under which the classroom will be constructed.
-*  billing_account_id  (mandatory): Who pays for it. Example: "01C588-4823BC-27F650"
-*  name (mandatory): The folder name. Make this sticky and dont change often, since this is the workspace too.
-*  workspace_id (optional): the workspace name. If omitted, defaults to the name.
-*  description (mandatory): user way to document what this is for.
-*  env (optional): an ARRAY of (name: string, value: string). Example:
-```yaml
-    env:
-    - name: GOOGLE_CLOUD_REGION
-      value: europe-west4
-```
-* labels (optional): an array of  (key: string, value: string). Exmaple:
-```yaml
-    env:
-    - key: cost-center
-      value: hhgttg-0042
-```
-* `teachers` (mandatory): An array of teachers emails. These will be created
-
-## "schoolbenches" stanza
-
-This contains an array of School Benches. Each bench contains 1+ students, 0+ apps. the metaphor is that you can have 1/2 students per bench. This is ideal for workshops where sometimes you want to pair-program to overcome the limitations of a single human (speed + teamwork over completeness).
-
-A schoolbench is an array with following fields:
-*  `project` (mandatory - for now): used to create a project. Given project creation/deletion stickiness on GCP, a padding of pseudorandom alphanums will be added to the end of it.
-* `type` (optional): "teacher" or "student". Default: "student".
-  * "student": default behaviour, for 1+ students.
-  * "teacher": there should be at most 1 but this is not enforced for now. This is de facto a "cattedra".
-* `apps` (optional): array of 0+ application names. This is important for stage 2. Note a desk with NO apps might still make sense.
-* `app` (optional): a single application name. This is just syntactic sugare. These are equivalent:
-```yaml
-    apps:
-    - heapster_shop
-     app: heapster_shop
-```
-* `seats` (mandatory): array of emails.
-
-## "Common" stanza
-
-Common stanza is a convenience place in order NOT to repeat ourselves too much.
-
-Example:
+## Example
 
 ```yaml
-schoolbenches:
-  - app: jss
-    project: prj1
-    seats:
-    - user1@gmail.com
-  - app: heapster_shop
-    project: prj2
-    seats:
-    - user2@gmail.com
-  - ...
-common:
+apiVersion: sandmold.io/v1alpha1
+kind: Classroom
+metadata:
+  name: class-2teachers-6students
+  labels:
+    class: class_2teachers_6
+    author: ricc
+spec:
+  folder:
+    # ... folder details ...
   schoolbenches:
-    foreach_project:
-      applies_to: ALL_STUDENTS
-      apps:
-      - heapster_shop
-      seats:
-      - user1@gmail.com
+    # ... schoolbenches details ...
+  common:
+    # ... common details ...
 ```
 
-Will produce the equivalent config as this:
+---
 
+## 1. `apiVersion` (string, mandatory)
 
-```yaml
-schoolbenches:
-  - apps:
-    - jss
-    - heapster_shop
-    project: prj1
-    seats:
-    - user1@gmail.com # twice, ignore the second.
+The API version for this object.
+- **Value**: Must be `sandmold.io/v1alpha1`.
 
-  - apps:
-    - heapster_shop # twice, ignore the second.
-    project: prj2
-    seats:
-    - user1@gmail.com
-    - user2@gmail.com
-  - ...
-```
+## 2. `kind` (string, mandatory)
 
-Note: the *applies_to* can apply to
-* ALL_STUDENTS (all students and teachers)
-* ALL (both students and teachers)
+The kind of object this file represents.
+- **Value**: Must be `Classroom`.
 
+## 3. `metadata` (object, mandatory)
 
+Contains metadata for the classroom.
+- `name` (string, mandatory): The name of the classroom. This should be unique and is used for identification.
+- `labels` (object, optional): A map of key-value pairs to apply as labels to the classroom resources.
 
-# Future extensions
+## 4. `spec` (object, mandatory)
 
-Ignore these for now, it's mortly for vision and documentation.
+The specification for the classroom setup. This contains all the configuration details.
 
-== IGNORE START ==
+### `spec.folder` (object, mandatory)
 
-In the future we might want:
+Contains the high-level classroom fields.
+- `org_id` (numeric, mandatory): The numeric ID of the Google Cloud organization.
+- `domain` (string, mandatory): The domain of the organization (e.g., `sredemo.dev`).
+- `parent_folder_id` (string, mandatory): The ID of the folder or organization under which the classroom will be created.
+- `billing_account_id` (string, mandatory): The billing account ID to associate with the projects.
+- `description` (string, mandatory): A user-friendly description of the classroom's purpose.
+- `teachers` (list of strings, mandatory): A list of teacher email addresses.
+- `env` (list of objects, optional): A list of environment variables to set. Each object must have `name` and `value` string keys.
+- `labels` (list of objects, optional): A list of labels to apply. Each object must have `key` and `value` string keys.
 
-1. Make project non-mandatory.
-2. Make schoolbenches non mandatory, just set up a single schoolbench template and have terraform iterate through a number of them.
-3. Same as 2 - maybe by just giving a list of - say - 51 emails and define the bench size (in this case, if size is "2", it will be 26 benches, the last being single occupant).
+### `spec.schoolbenches` (list of objects, mandatory)
 
-== /IGNORE END ==
+Contains an array of "school benches," where each bench represents one or more students sharing a project.
+- `project` (string, mandatory): The base name for the Google Cloud project. A random suffix will be added to ensure uniqueness. Must not contain underscores.
+- `desk-type` (string, optional): The type of desk. Can be `student` (default) or `teacher` (for the "cattedra").
+- `seats` (list of strings, mandatory): A list of student email addresses for this bench.
+- `apps` (list of strings, optional): A list of application names to deploy for this bench.
+- `app` (string, optional): Syntactic sugar for a single application in the `apps` list.
+
+### `spec.common` (object, optional)
+
+A convenience stanza to apply common configuration to all schoolbenches, reducing repetition.
+- `schoolbenches`:
+  - `foreach_project`:
+    - `applies_to` (string, mandatory): Specifies which benches to apply the common config to. Must be `ALL_STUDENTS` or `ALL`.
+    - `apps` (list of strings, optional): A list of apps to add to every bench.
+    - `seats` (list of strings, optional): A list of users to add to every bench.
