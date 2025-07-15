@@ -50,9 +50,10 @@ def check_billing_account(billing_id):
     if data:
         name = data.get('displayName', 'N/A')
         is_open = "Open" if data.get('open', False) else "Closed"
+        billing_url = f"https://console.cloud.google.com/billing/{billing_id}"
         print(f"   - {Colors.BOLD}Name:{Colors.ENDC} {name}")
         print(f"   - {Colors.BOLD}Status:{Colors.ENDC} {is_open}")
-        # Note: Billing account type (invoice, card) isn't exposed via this API.
+        print(f"   - {Colors.BOLD}Link:{Colors.ENDC} {Colors.BLUE}{billing_url}{Colors.ENDC}")
     else:
         print(f"   {Colors.RED}Could not retrieve details for this billing account.{Colors.ENDC}")
 
@@ -79,7 +80,7 @@ def display_folder_tree(folder_id, prefix=""):
         for i, project in enumerate(projects):
             is_last = i == len(projects) - 1 and not (folders and i < len(folders) -1)
             connector = "└── " if is_last else "├── "
-            print(f"{prefix}{connector}{Colors.CYAN}🛠️  {project.get('name')} ({project.get('projectId')}){Colors.ENDC}")
+            print(f"{prefix}{connector}{Colors.CYAN}🧩 {project.get('name')} ({project.get('projectId')}){Colors.ENDC}")
 
 
 def main():
@@ -107,7 +108,9 @@ def main():
 
     check_billing_account(billing_id)
 
-    print(f"\n{Colors.YELLOW}🌳 Exploring Target Folder Contents: {parent_folder_id}{Colors.ENDC}")
+    folder_url = f"https://console.cloud.google.com/welcome?folder={parent_folder_id}"
+    print(f"\n{Colors.YELLOW}🌳 Exploring Target Folder: {parent_folder_id}{Colors.ENDC}")
+    print(f"   - {Colors.BOLD}Link:{Colors.ENDC} {Colors.BLUE}{folder_url}{Colors.ENDC}")
     display_folder_tree(parent_folder_id)
 
 
