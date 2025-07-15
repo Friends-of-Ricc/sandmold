@@ -38,3 +38,7 @@ setup-sample-class:
 teardown-classroom CLASSROOM_YAML:
     ./bin/teardown-classroom.sh {{CLASSROOM_YAML}}
 
+
+preflight-check-sample-class:
+    echo "Running preflight checks for sample class..."
+    bin/preflight-checks.py etc/samples/class_2teachers_6students.yaml
