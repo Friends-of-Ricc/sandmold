@@ -38,8 +38,11 @@ teardown-classroom CLASSROOM_YAML TF_DIR='iac/terraform/1a_classroom_setup':
 
 
 preflight-check-sample-class:
-    echo "Running preflight checks for sample class..."
-    bin/preflight-checks.py etc/samples/class_2teachers_6students.yaml
+    just preflight-check etc/samples/class_2teachers_6students.yaml
+
+# Run a preflight check on a specific classroom YAML
+preflight-check CLASSROOM_YAML:
+    @./bin/preflight-checks.py {{CLASSROOM_YAML}}
 
 # Find open, non-Google billing accounts
 open-baids:

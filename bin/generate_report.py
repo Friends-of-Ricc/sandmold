@@ -23,7 +23,7 @@ def parse_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
-def generate_markdown_report(tf_data, classroom_data):
+def generate_markdown_report(tf_data, classroom_data, classroom_yaml_path):
     """Generates a markdown report from the terraform and classroom data."""
     
     # Extract top-level data
@@ -72,10 +72,13 @@ def generate_markdown_report(tf_data, classroom_data):
         "",
         "```bash",
         f"# To tear down this specific classroom:",
-        f"just teardown-classroom etc/samples/{workspace_name}.yaml",
+        f"just teardown-classroom {classroom_yaml_path}",
         "",
         f"# To re-provision this specific classroom:",
-        f"just setup-classroom etc/samples/{workspace_name}.yaml",
+        f"just setup-classroom {classroom_yaml_path}",
+        "",
+        f"# To run a preflight check on this classroom:",
+        f"just preflight-check {classroom_yaml_path}",
         "```",
         "",
     ])
@@ -177,7 +180,7 @@ def main(tf_output_json_path, classroom_yaml_path, report_path):
             f.write(report_content)
         return
 
-    report_content = generate_markdown_report(tf_data, classroom_data)
+    report_content = generate_markdown_report(tf_data, classroom_data, classroom_yaml_path)
 
     with open(report_path, 'w') as f:
         f.write(report_content)

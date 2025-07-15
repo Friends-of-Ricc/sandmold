@@ -16,10 +16,13 @@
 
 ```bash
 # To tear down this specific classroom:
-just teardown-classroom etc/samples/class-2teachers-6students.yaml
+just teardown-classroom etc/samples/class_2teachers_6students.yaml
 
 # To re-provision this specific classroom:
-just setup-classroom etc/samples/class-2teachers-6students.yaml
+just setup-classroom etc/samples/class_2teachers_6students.yaml
+
+# To run a preflight check on this classroom:
+just preflight-check etc/samples/class_2teachers_6students.yaml
 ```
 
 ## 🧑‍🎓 Student & Project Assignments

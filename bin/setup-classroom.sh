@@ -49,10 +49,7 @@ echo "--> Getting Terraform output..."
 # Step 5: Generate the final report
 echo "--> Generating final report..."
 # The script now reads from and writes to files inside CLASSROOM_TF_DIR
-uv run ./bin/generate_report.py 
-    --tf-output-json "${TF_OUTPUT_FILE}" 
-    --classroom-yaml "${CLASSROOM_YAML}" 
-    --report-path "${REPORT_FILE}"
+uv run ./bin/generate_report.py --tf-output-json "${TF_OUTPUT_FILE}" --classroom-yaml "${CLASSROOM_YAML}" --report-path "${REPORT_FILE}"
 
 echo "--- Classroom Setup Complete ---"
 echo "See ${REPORT_FILE} for details."
