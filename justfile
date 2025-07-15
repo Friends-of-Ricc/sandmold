@@ -17,8 +17,8 @@ init:
 # Run tests (currently a placeholder)
 test:
     #echo "No tests defined yet."
-    just test-yaml etc/class_2teachers_6students.yaml
-    just test-yaml etc/class_2teachers_4realstudents.yaml
+    just test-yaml etc/samples/class_2teachers_6students.yaml
+    just test-yaml etc/samples/class_2teachers_4realstudents.yaml
 
 # Test a classroom YAML file for common errors
 test-yaml CLASSROOM_YAML:
@@ -32,7 +32,7 @@ setup-classroom CLASSROOM_YAML:
 # Setup a classroom environment based on a YAML configuration
 # Usage: just setup-classroom etc/class_2teachers_6students.yaml
 setup-sample-class:
-    just setup-classroom etc/class_2teachers_6students.yaml
+    just setup-classroom etc/samples/class_2teachers_6students.yaml
 
 # Teardown a classroom environment
 teardown-classroom CLASSROOM_YAML:
