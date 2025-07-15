@@ -11,9 +11,9 @@ terraform {
 
 # Create the main folder for the classroom
 resource "google_folder" "classroom" {
-  display_name = var.folder_name
+  display_name = var.folder_display_name
   parent       = var.parent_folder
-  tags         = var.folder_tags
+  # tags         = var.folder_tags
   deletion_protection = false
 }
 

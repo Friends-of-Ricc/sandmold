@@ -25,12 +25,12 @@ test-yaml CLASSROOM_YAML:
     uv run python ./tests/test_yaml_validation.py --classroom-yaml {{CLASSROOM_YAML}} --root-dir "{{RAILS_ROOT}}"
 
 # Setup a classroom environment based on a YAML configuration
-# Usage: just setup-classroom etc/class_2teachers_6students.yaml
-setup-classroom CLASSROOM_YAML:
-    ./bin/setup-classroom.sh {{CLASSROOM_YAML}}
+# Usage: just setup-classroom etc/samples/class_2teachers_6students.yaml
+setup-classroom CLASSROOM_YAML TF_DIR='iac/terraform/1a_classroom_setup':
+    ./bin/setup-classroom.sh {{CLASSROOM_YAML}} {{TF_DIR}}
 
 # Setup a classroom environment based on a YAML configuration
-# Usage: just setup-classroom etc/class_2teachers_6students.yaml
+# Usage: just setup-sample-class
 setup-sample-class:
     just setup-classroom etc/samples/class_2teachers_6students.yaml
 

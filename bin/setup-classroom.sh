@@ -28,7 +28,7 @@ FULL_TF_VARS_PATH="${CLASSROOM_TF_DIR}/terraform.tfvars.json"
 
 # Step 2: Prepare Terraform variables
 echo "--> Preparing Terraform variables..."
-WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .folder.name)
+WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
 echo "Workspace name: ${WORKSPACE_NAME}"
 
 # No longer creating a 'workspaces' subdirectory.

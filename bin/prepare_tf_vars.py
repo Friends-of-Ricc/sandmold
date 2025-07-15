@@ -37,9 +37,13 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     classroom_config = parse_yaml(absolute_classroom_yaml_path)
     project_config = parse_yaml(project_config_yaml_path)
 
+    spec = classroom_config.get('spec', {})
+    metadata = classroom_config.get('metadata', {})
+    folder_spec = spec.get('folder', {})
+
     # Prepare the student_projects variable
     student_projects = []
-    for bench in classroom_config.get('schoolbenches', []):
+    for bench in spec.get('schoolbenches', []):
         project_id_prefix = bench.get('project')
         users = bench.get('seats', [])
         if project_id_prefix and users:
@@ -55,15 +59,18 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
         # The actual users will be substituted by Terraform for each project
         iam_permissions[role] = [] # Placeholder, will be populated in TF
 
+    # Default folder display name to metadata name if not provided
+    folder_display_name = folder_spec.get('displayName', metadata.get('name'))
+
     tf_vars = {
-        'folder_name': classroom_config.get('folder', {}).get('name'),
-        'parent_folder': f"folders/{classroom_config.get('folder', {}).get('parent_folder_id')}",
-        'billing_account_id': classroom_config.get('folder', {}).get('billing_account_id'),
-        'teachers': [f"user:{teacher}" for teacher in classroom_config.get('folder', {}).get('teachers', [])],
+        'folder_display_name': folder_display_name,
+        'parent_folder': f"folders/{folder_spec.get('parent_folder_id')}",
+        'billing_account_id': folder_spec.get('billing_account_id'),
+        'teachers': [f"user:{teacher}" for teacher in folder_spec.get('teachers', [])],
         'student_projects': student_projects,
         'services_to_enable': project_config.get('services_to_enable', []),
         'iam_user_roles': user_roles,
-        'folder_tags': classroom_config.get('folder', {}).get('tags', {})
+        'folder_tags': metadata.get('labels', {}) # Use metadata labels as folder tags
     }
 
     if output_file:

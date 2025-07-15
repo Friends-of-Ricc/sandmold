@@ -1,6 +1,6 @@
 # iac/terraform/1a_classroom_setup/variables.tf
 
-variable "folder_name" {
+variable "folder_display_name" {
   description = "The name of the Google Cloud Folder to create."
   type        = string
 }

@@ -4,7 +4,7 @@ kind: Classroom
 metadata:
   name: class-2teachers-6students
   labels:
-    class: class_2teachers_6
+    classroom: 2teachers_6students
     author: ricc
 spec:
   folder:
