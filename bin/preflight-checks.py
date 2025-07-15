@@ -101,16 +101,18 @@ def main():
 
     billing_id = folder_spec.get('billing_account_id')
     parent_folder_id = folder_spec.get('parent_folder_id')
+    org_id = folder_spec.get('org_id')
 
-    if not billing_id or not parent_folder_id:
-        print(f"{Colors.RED}❌ YAML must contain 'spec.folder.billing_account_id' and 'spec.folder.parent_folder_id'.{Colors.ENDC}", file=sys.stderr)
+    if not all([billing_id, parent_folder_id, org_id]):
+        print(f"{Colors.RED}❌ YAML must contain 'spec.folder.billing_account_id', 'spec.folder.parent_folder_id', and 'spec.folder.org_id'.{Colors.ENDC}", file=sys.stderr)
         sys.exit(1)
 
     check_billing_account(billing_id)
 
-    folder_url = f"https://console.cloud.google.com/welcome?folder={parent_folder_id}"
-    print(f"\n{Colors.YELLOW}🌳 Exploring Target Folder: {parent_folder_id}{Colors.ENDC}")
-    print(f"   - {Colors.BOLD}Link:{Colors.ENDC} {Colors.BLUE}{folder_url}{Colors.ENDC}")
+    # Construct a more useful URL that opens the resource manager scoped to the organization
+    resource_manager_url = f"https://console.cloud.google.com/cloud-resource-manager?organization={org_id}"
+    print(f"\n{Colors.YELLOW}🌳 Exploring parent folder ({parent_folder_id}) contents:{Colors.ENDC}")
+    print(f"   - {Colors.BOLD}Link to Org Resource Manager:{Colors.ENDC} {Colors.BLUE}{resource_manager_url}{Colors.ENDC}")
     display_folder_tree(parent_folder_id)
 
 
