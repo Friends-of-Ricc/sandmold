@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1
+
+- **Feat: Enhance `REPORT.md` with actionable details.**
+  - The generated report is now a complete, user-centric document.
+  - It includes both student-centric and project-centric tables for a comprehensive overview.
+  - Adds a "Handy Commands" section with direct `just` commands for teardown, setup, and preflight checks for the specific classroom.
+  - The "Class Details" section is enriched with the folder name, description, teacher list, and student/project counts.
+- **Fix:** Corrected a persistent bug in `setup-classroom.sh` to ensure all classroom artifacts (`tfvars`, `tfoutput`, `log`, `REPORT.md`) are correctly placed in their isolated, multi-tenant workspace directories.
+
 ## 0.3.0
 
 - **Success: Successfully provisioned a multi-project classroom.**
@@ -47,7 +56,7 @@
 ## 0.0.5
 
 - Implemented a modular and robust Terraform infrastructure for provisioning Google Cloud resources.
-- Supports two distinct workflows: multi-project classroom setup (CUJ001) and single-project user setup (CUJ002).
+- Supports two distinct workflows: multi-project classroom setup (CUJ001) and single-user setup (CUJ002).
 - Created a reusable `project` module as the single source of truth for project configuration.
 - Added a `just setup-classroom` command to orchestrate the entire classroom provisioning workflow.
 
