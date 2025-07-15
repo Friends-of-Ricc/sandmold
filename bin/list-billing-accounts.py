@@ -66,7 +66,15 @@ def print_table(accounts):
 
 def main():
     """Main function to list billing accounts."""
-    current_user = run_gcloud_command(["gcloud", "config", "get-value", "account"])
+    try:
+        user_email_process = subprocess.run(
+            ["gcloud", "config", "get-value", "account"],
+            capture_output=True, text=True, check=True, encoding='utf-8'
+        )
+        current_user = user_email_process.stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        current_user = "N/A"
+
     print(f"{Colors.YELLOW}🔎 Billing Accounts accessible by: {Colors.BOLD}{current_user}{Colors.ENDC}\n")
 
     all_accounts = run_gcloud_command(["gcloud", "billing", "accounts", "list", "--format=json"])

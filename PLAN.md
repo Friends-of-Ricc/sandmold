@@ -26,10 +26,8 @@ This revised plan incorporates feedback from `doc/POTENTIAL_GAPS.md` to ensure a
     - [ ] Its placeholder `README.md` will be updated to include a **sub-plan**, outlining the future strategy for parsing `blueprint.yaml` files and translating them into deployment actions (e.g., using a Helm or Kubernetes provider).
 
 - [ ] **Phase 6: Orchestration and Documentation**
-    - [ ] Create a master **wrapper script** (e.g., in `justfile` or `setup.sh`) that orchestrates the entire workflow:
-        1.  Calls `prepare_tf_vars.py`.
-        2.  Runs `terraform apply` and captures `stdout`/`stderr` to a log file for rich error analysis.
-        3.  Calls `generate_report.py`, feeding it the log file contents.
+    - [ ] Create a master **wrapper script** (e.g., in `justfile` or `setup.sh`) that orchestrates the entire workflow.
+    - [ ] **Multi-Tenant Artifacts:** For each classroom setup, a dedicated directory will be created at `iac/terraform/1a_classroom_setup/workspaces/<classroom_name>/`. All artifacts for that run—including `terraform.tfvars.json`, `terraform_output.json`, `REPORT.md`, and `terraform_apply.log`—will be stored in this isolated directory to ensure true multi-tenancy.
     - [ ] Update the main `README.md` in `iac/terraform/` to explain the new modular architecture and the workflows.
     - [ ] The `doc/TF_INTERFACES.md` will serve as the detailed technical documentation for the module contracts.
     - [ ] The `generate_report.py` script will create the final `REPORT.md`.
