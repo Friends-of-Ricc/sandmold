@@ -10,7 +10,7 @@ folder:
     - name: GOOGLE_CLOUD_REGION
       value: europe-west4
   #labels:
-  #  class: class_2teachers_6
+  #  class: class_2teachers_6let;s
   domain: sredemo.dev
   teachers:
   - ricc@google.com
@@ -48,11 +48,13 @@ schoolbenches:
     - palladiusbonton@gmail.com
 
 common:
-  # common to all schoolbenches  - TODO(gemini-cli): to be implemented
-  - project: _ALL_STUDENTS  # Can be _ALL or  _ALL_STUDENTS and it becomes an iteration over the following list.
-    # adds this apps to all student apps.
-    apps:
-    - heapster_shop
-    # adds this person to all students
-    seats:
-    - ricc@google.com
+  schoolbenches:
+    # common to all schoolbenches  - TODO(gemini-cli): to be implemented
+    foreach_project:
+      applies_to: ALL_STUDENTS  # Can be _ALL or  _ALL_STUDENTS and it becomes an iteration over the following list.
+      # adds this apps to all student apps.
+      apps:
+      - heapster_shop
+      # adds this person to all students
+      seats:
+      - ricc@google.com

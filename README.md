@@ -62,3 +62,7 @@ erDiagram
     SEAT ||--|{ USER : assigned_to
 ```
 
+## Implementation
+
+Check `IMPLEMENTATION.md` for current state of implementation.
+_[X] Creation of folder-based

@@ -1,1 +1,11 @@
+.echodo_history
+.bin/
+.env
+
+# Terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+.venv
+.terraform
 uv.lock
