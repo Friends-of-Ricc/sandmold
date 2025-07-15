@@ -6,11 +6,12 @@ metadata:
   labels:
     classroom: 2teachers_6students
     author: ricc
+    env: development
 spec:
   folder:
     org_id: 791852209422
     parent_folder_id: '1000371719973'
-    billing_account_id: "01C588-4823BC-27F650"
+    billing_account_id: "01EA9E-528725-FACCCF"
     displayName: 2 teachers 6 students
     domain: sredemo.dev
     description: Class with 2 teachers and 6 students

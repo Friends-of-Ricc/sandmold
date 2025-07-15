@@ -66,3 +66,11 @@ erDiagram
 
 Check `IMPLEMENTATION.md` for current state of implementation.
 _[X] Creation of folder-based
+
+## Testing
+
+You can test the YAML quality with `just test-yaml YOUR_CONFIG.yaml`.
+
+You can also do more interesting preflight checks like :
+
+![preflight checks](doc/preflight-check-screenshot.png)

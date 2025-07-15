@@ -50,10 +50,22 @@ def check_billing_account(billing_id):
     if data:
         name = data.get('displayName', 'N/A')
         is_open = "Open" if data.get('open', False) else "Closed"
+        currency = data.get('currencyCode', 'N/A')
+        parent = data.get('parent')
         billing_url = f"https://console.cloud.google.com/billing/{billing_id}"
+
         print(f"   - {Colors.BOLD}Name:{Colors.ENDC} {name}")
         print(f"   - {Colors.BOLD}Status:{Colors.ENDC} {is_open}")
+        print(f"   - {Colors.BOLD}Currency:{Colors.ENDC} {currency}")
         print(f"   - {Colors.BOLD}Link:{Colors.ENDC} {Colors.BLUE}{billing_url}{Colors.ENDC}")
+
+        if parent:
+            org_id = parent.split('/')[-1]
+            org_command = ["gcloud", "organizations", "describe", org_id, "--format=json"]
+            org_data = run_gcloud_command(org_command)
+            if org_data:
+                org_domain = org_data.get('displayName', 'N/A')
+                print(f"   - {Colors.BOLD}Parent:{Colors.ENDC} {parent} ({org_domain})")
     else:
         print(f"   {Colors.RED}Could not retrieve details for this billing account.{Colors.ENDC}")
 
@@ -109,9 +121,13 @@ def main():
 
     check_billing_account(billing_id)
 
-    # Construct a more useful URL that opens the resource manager scoped to the organization
+    # Get organization domain
+    org_command = ["gcloud", "organizations", "describe", str(org_id), "--format=json"]
+    org_data = run_gcloud_command(org_command)
+    org_domain = org_data.get('displayName', 'N/A') if org_data else 'N/A'
+
     resource_manager_url = f"https://console.cloud.google.com/cloud-resource-manager?organization={org_id}"
-    print(f"\n{Colors.YELLOW}🌳 Exploring parent folder ({parent_folder_id}) contents:{Colors.ENDC}")
+    print(f"\n{Colors.YELLOW}🌳 Exploring parent folder ({parent_folder_id}) in Org: {org_id} ({org_domain}){Colors.ENDC}")
     print(f"   - {Colors.BOLD}Link to Org Resource Manager:{Colors.ENDC} {Colors.BLUE}{resource_manager_url}{Colors.ENDC}")
     display_folder_tree(parent_folder_id)
 
