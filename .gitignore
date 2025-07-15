@@ -8,3 +8,4 @@
 *.tfstate.*
 .venv
 .terraform
+uv.lock

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.8
+
+- Fix: Correctly extract workspace name in `setup-classroom.sh` by using `yq -r`.
+- Fix: Resolve argument parsing error in `test_yaml_validation.py`.
+- Chore: Update `justfile` to provide the project root directory to tests.
+
 ## 0.0.7
 
 - Implemented Terraform workspaces to isolate state for each classroom, preventing conflicts.

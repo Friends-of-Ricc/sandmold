@@ -13,6 +13,8 @@ echo "DEBUG: CLASSROOM_YAML received: ${CLASSROOM_YAML}"
 
 # Define paths
 CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
+TF_OUTPUT_FILE="terraform_output.json"
+REPORT_FILE="REPORT.md"
 
 # Step 1: Validate the classroom YAML
 # echo "--> Validating classroom YAML..."
@@ -20,7 +22,7 @@ CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
 
 # Step 2: Prepare Terraform variables from YAML and get the workspace name
 echo "--> Preparing Terraform variables..."
-WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq .folder.name)
+WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .folder.name)
 echo "Workspace name: ${WORKSPACE_NAME}"
 
 # Create dedicated directories for the classroom
