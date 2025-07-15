@@ -17,6 +17,7 @@ services_to_enable:
   - monitoring.googleapis.com
   - logging.googleapis.com
   - apphub.googleapis.com
+  - cloudquotas.googleapis.com # This is used to manage quotas.
 
 # A map of IAM roles to the principals who should be granted them.
 # The Python script will transform this into the format needed by the Terraform module.
