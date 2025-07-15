@@ -2,6 +2,7 @@
 
 # This file defines the standard configuration for a project created by sandmold.
 # It is consumed by the preparation scripts and passed into the Terraform modules.
+# You can modify this file to customize the project setup.
 
 # A list of Google Cloud APIs that should be enabled on the project.
 services_to_enable:

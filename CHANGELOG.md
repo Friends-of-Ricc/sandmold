@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- **Success: Successfully provisioned a multi-project classroom.**
+  - After extensive debugging of IAM permissions and billing account constraints, the `just setup-sample-class` command now runs to completion.
+  - The root cause was a combination of project quotas, billing account organization policies, and fine-grained IAM permissions (`billing.resourceAssociations.create`).
+- **Chore: Cleaned up project artifacts.**
+  - Removed the obsolete `backup/` directory.
+  - Deleted stray `REPORT.md` files, ensuring reports are only generated within their isolated workspace directories.
+
 ## 0.2.0
 
 - **Feat: Implement comprehensive YAML validation suite.**
