@@ -9,9 +9,9 @@ metadata:
 spec:
   folder:
     org_id: 791852209422
-    parent_folder_id: 1000371719973
+    parent_folder_id: '1000371719973'
     billing_account_id: "01C588-4823BC-27F650"
-    displayName: class-2teachers-6students
+    displayName: 2 teachers 6 students
     domain: sredemo.dev
     description: Class with 2 teachers and 6 students
     teachers:
@@ -25,27 +25,27 @@ spec:
     - project: teacherz  # will be padded by some random hex/numb
       desk-type: teacher
       apps:
-      - heapster_shop
+      - online-boutique
+      - bank-of-anthos
+      - sandmold-web
       seats:
       - leoy@google.com
       - ricc@google.com
     # schoolbench 2
-    - project: boa01  # will be padded by some random hex/numb, -> "boa01-123abc"
+    - project: project-boa01  # will be padded by some random hex/numb, -> "boa01-123abc"
       apps:
-      - bank_of_anthos
-      - bank_of_anthos_scenario123
+      - online-boutique
       seats:
       - student01@gmail.com
       - student02@gmail.com
     - apps:
-      - bank_of_anthos
-      #- bank_of_anthos_scenario123
-      project: boa02
+      - online-boutique
+      project: project-boa02
       seats:
       - student03@gmail.com
       - student04@gmail.com
-    - app: cheap_jss
-      project: boa03
+    - app: online-boutique
+      project: project-boa03
       seats:
       - student06@gmail.com
       - palladiusbonton@gmail.com

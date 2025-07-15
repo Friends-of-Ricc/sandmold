@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0
+
+- **Feat: Implement comprehensive YAML validation suite.**
+  - Created a modular and extensible validation framework in `tests/validation/`.
+  - Added robust checks for schema correctness, data types, and mandatory fields.
+  - Implemented regex-based validation for constrained fields like GCP Project IDs and environment variable names.
+  - Added checks for business logic, such as uniqueness of project names and ensuring specified applications exist in the `applications/` directory.
+  - Greatly improved user experience with colorful, emoji-rich output, including a validation synopsis.
+
 ## 0.1.0
 
 - **Feat: Adopt Kubernetes-style schema for Classroom YAML.**
