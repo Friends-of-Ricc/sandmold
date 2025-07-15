@@ -43,5 +43,4 @@ preflight-check-sample-class:
 
 # Find open, non-Google billing accounts
 open-baids:
-    @echo "🔎 Searching for open, non-Google billing accounts..."
-    @gcloud billing accounts list --filter="open=true AND parent!='organizations/433637338589'" --format="table(name, displayName, parent)"
+    @bin/list-billing-accounts.py
