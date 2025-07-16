@@ -15,7 +15,7 @@ echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DI
 WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
 
 # The tfvars file is now inside the dedicated workspace directory
-TF_VARS_FILE="../workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
+TF_VARS_FILE="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
 
 (cd "${CLASSROOM_TF_DIR}" && terraform workspace select "${WORKSPACE_NAME}" && terraform destroy -auto-approve -var-file="${TF_VARS_FILE}")
 
