@@ -12,8 +12,13 @@ __pycache__/
 **/.terraform/*
 *.tfstate
 *.tfstate.*
+iac/terraform/1a_classroom_setup/workspaces/*/*_apply.log
+
+# Python
 .venv
-.terraform
-uv.lockterraform_apply.log
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 uv.lock
-terraform_apply.log
+

@@ -2,7 +2,7 @@
 apiVersion: sandmold.io/v1alpha1
 kind: Classroom
 metadata:
-  name: 2teachers-3x2students
+  name: ng2teachers-3x2students
   labels:
     classroom: 2teachers_3x2students
     author: ricc
@@ -12,7 +12,7 @@ spec:
     org_id: 791852209422
     parent_folder_id: '1000371719973'
     billing_account_id: "010405-23D342-257054"
-    displayName: 2 teachers and 3x2 students
+    displayName: ng2teachers-3x2students
     domain: sredemo.dev
     description: |
       Class with 2 teachers and 6 students,

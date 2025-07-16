@@ -13,7 +13,7 @@ terraform {
 resource "google_folder" "classroom" {
   display_name = var.folder_display_name
   parent       = var.parent_folder
-  # tags         = var.folder_tags
+  labels       = var.folder_tags
   deletion_protection = false
 }
 
@@ -40,6 +40,7 @@ module "project" {
   billing_account_id = var.billing_account_id
   parent             = google_folder.classroom.name
   services_to_enable = var.services_to_enable
+  labels             = each.value.labels
 
   # Create the IAM map for this specific project
   iam_permissions = {

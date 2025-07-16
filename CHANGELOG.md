@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.3.7
+
+- **Feat: Standardize labels from `project_config.yaml`.**
+  - The `prepare_tf_vars.py` script now merges labels defined in `etc/project_config.yaml` for both folders and projects.
+  - This allows for standardized, centrally-managed labels to be applied to all resources.
+
+## 0.3.6
+
+- **Chore: Update feature documentation.**
+  - Added a detailed "Implementation" section to the `p4_cute_labels.md` feature request document.
+
+## 0.3.5
+
+- **Feat: Add labels to folders and projects.**
+  - Folders are now tagged with a `sandmold: true` label.
+  - Projects are now tagged with a `desk-type: teacher` or `desk-type: student` label.
+  - This logic is implemented in `bin/prepare_tf_vars.py` and the Terraform configurations.
+
+## 0.3.4
+
+- **Feat: Add project prefixes based on user type.**
+  - Project IDs are now automatically prefixed with `tch-` for `teacher` type and `std-` for `student` type.
+  - This logic is implemented in `bin/prepare_tf_vars.py`.
+  - Added documentation for this feature in `doc/feature-requests/P3-project-prefix-by-type.md`.
+
+## 0.3.3
+
+- **Feat: Add bulk classroom operations to `justfile`.**
+  - Introduced `classroom-up-all` to set up all classrooms defined in `etc/samples/`.
+  - Introduced `classroom-down-all` to tear down all classrooms defined in `etc/samples/`.
+
+## 0.3.2
+
+- **Chore: Harmonize documentation with `justfile` commands.**
+  - Updated all user-facing documentation (`README.md`, `CHANGELOG.md`, `REPORT.md`, etc.) to reflect the new `just classroom-ACTION` command naming convention.
+  - `setup-classroom` is now `classroom-up`.
+  - `teardown-classroom` is now `classroom-down`.
+  - `preflight-check` is now `classroom-inspect`.
+  - `setup-sample-class` is now `classroom-up-sampleclass`.
+- **Fix: Corrected `classroom-up` script to handle Terraform variable paths correctly.**
+  - The `-var-file` argument now uses a relative path, resolving the `terraform apply` failure.
+- **Fix: Updated sample classroom YAML to prevent folder name collisions.**
+  - The `displayName` in `class_2teachers_6students.yaml` is now unique, preventing "display name uniqueness" errors on subsequent runs.
+
 ## 0.3.1
 
 - **Feat: Enhance `REPORT.md` with actionable details.**

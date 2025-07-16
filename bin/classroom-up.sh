@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+set -o pipefail
 
 # cd to the root of the git repository
 cd "$(git rev-parse --show-toplevel)"
@@ -25,9 +26,12 @@ mkdir -p "${CLASSROOM_WORKSPACE_DIR}"
 TF_VARS_FILE="$(pwd)/${CLASSROOM_WORKSPACE_DIR}/terraform.tfvars.json"
 TF_OUTPUT_FILE="$(pwd)/${CLASSROOM_WORKSPACE_DIR}/terraform_output.json"
 REPORT_FILE="$(pwd)/${CLASSROOM_WORKSPACE_DIR}/REPORT.md"
-APPLY_LOG_FILE="$(pwd)/${CLASSROOM_WORKSPACE_DIR}/terraform_apply.log"
+# New timestamped log file
+TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+APPLY_LOG_FILE="$(pwd)/${CLASSROOM_WORKSPACE_DIR}/${TIMESTAMP}_apply.log"
 
 echo "DEBUG: All artifacts will be stored in: ${CLASSROOM_WORKSPACE_DIR}"
+echo "DEBUG: Terraform logs will be saved to: ${APPLY_LOG_FILE}"
 
 # --- Step 2: Prepare Terraform variables ---
 echo "--> Preparing Terraform variables..."
@@ -37,13 +41,17 @@ uv run python ./bin/prepare_tf_vars.py \
     --output-file "${TF_VARS_FILE}" \
     --project-root "$(pwd)"
 
-# --- Step 3: Run Terraform, capturing output to a log file ---
+# --- Step 3: Run Terraform, teeing output to a log file ---
 echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"
+
+# Calculate the relative path for the tfvars file from the terraform directory
+RELATIVE_TF_VARS_FILE=$(realpath --relative-to="${CLASSROOM_TF_DIR}" "${TF_VARS_FILE}")
+
 # The -var-file path is now relative to the CLASSROOM_TF_DIR
 (cd "${CLASSROOM_TF_DIR}" && 
     terraform init && 
     terraform workspace select -or-create "${WORKSPACE_NAME}" && 
-    terraform apply -auto-approve -var-file="${TF_VARS_FILE}") > "${APPLY_LOG_FILE}" 2>&1
+    terraform apply -auto-approve -var-file="${RELATIVE_TF_VARS_FILE}") 2>&1 | tee "${APPLY_LOG_FILE}"
 
 # --- Step 4: Get Terraform output as JSON ---
 echo "--> Getting Terraform output..."

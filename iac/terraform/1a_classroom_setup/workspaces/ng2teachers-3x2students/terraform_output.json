@@ -1,0 +1,61 @@
+{
+  "folder_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "23702781076"
+  },
+  "projects": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "std-heapster01": [
+          "object",
+          {
+            "project_id": "string",
+            "project_number": "string"
+          }
+        ],
+        "std-heapster02": [
+          "object",
+          {
+            "project_id": "string",
+            "project_number": "string"
+          }
+        ],
+        "std-heapster03": [
+          "object",
+          {
+            "project_id": "string",
+            "project_number": "string"
+          }
+        ],
+        "tch-teacherz": [
+          "object",
+          {
+            "project_id": "string",
+            "project_number": "string"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "std-heapster01": {
+        "project_id": "std-heapster01-ijui",
+        "project_number": "528280735259"
+      },
+      "std-heapster02": {
+        "project_id": "std-heapster02-0lb3",
+        "project_number": "841440754146"
+      },
+      "std-heapster03": {
+        "project_id": "std-heapster03-8adw",
+        "project_number": "427765759391"
+      },
+      "tch-teacherz": {
+        "project_id": "tch-teacherz-ptki",
+        "project_number": "43017676246"
+      }
+    }
+  }
+}

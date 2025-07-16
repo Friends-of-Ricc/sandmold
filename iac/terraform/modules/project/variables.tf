@@ -33,3 +33,10 @@ variable "iam_permissions" {
   type        = map(list(string))
   default     = {}
 }
+
+variable "labels" {
+  description = "A map of labels to apply to the project."
+  type        = map(string)
+  default     = {}
+}
+

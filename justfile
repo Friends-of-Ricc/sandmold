@@ -52,3 +52,19 @@ classroom-inspect CLASSROOM_YAML:
 # Find open, non-Google billing accounts
 open-baids:
     @bin/list-billing-accounts.py
+
+# --- Bulk Operations ---
+
+# Setup all classroom environments from etc/samples/
+classroom-up-all:
+    @for yaml_file in $(find etc/samples -name '*.yaml'); do \
+        echo "--- [justfile] Setting up classroom from $yaml_file ---"; \
+        just classroom-up $yaml_file; \
+    done
+
+# Teardown all classroom environments from etc/samples/
+classroom-down-all:
+    @for yaml_file in $(find etc/samples -name '*.yaml'); do \
+        echo "--- Tearing down classroom from $yaml_file ---"; \
+        just classroom-down $yaml_file; \
+    done

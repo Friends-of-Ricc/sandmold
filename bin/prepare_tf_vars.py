@@ -43,13 +43,26 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
 
     # Prepare the student_projects variable
     student_projects = []
+    project_labels = project_config.get('projects', {}).get('labels', {})
     for bench in spec.get('schoolbenches', []):
         project_id_prefix = bench.get('project')
         users = bench.get('seats', [])
+        desk_type = bench.get('desk-type', 'student') # Default to student
+
+        if desk_type == 'teacher':
+            project_id_prefix = f"tch-{project_id_prefix}"
+        else: # For 'student' or any other type
+            project_id_prefix = f"std-{project_id_prefix}"
+
+        # Merge project-specific labels with the common labels
+        labels = project_labels.copy()
+        labels['desk-type'] = desk_type
+
         if project_id_prefix and users:
             student_projects.append({
                 'project_id_prefix': project_id_prefix,
-                'users': [f"user:{user}" for user in users]
+                'users': [f"user:{user}" for user in users],
+                'labels': labels
             })
 
     # Prepare the iam_permissions map
@@ -62,6 +75,11 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     # Default folder display name to metadata name if not provided
     folder_display_name = folder_spec.get('displayName', metadata.get('name'))
 
+    # Merge folder labels from classroom and project configs
+    folder_tags = metadata.get('labels', {})
+    folder_tags.update(project_config.get('folders', {}).get('labels', {}))
+
+
     tf_vars = {
         'folder_display_name': folder_display_name,
         'parent_folder': f"folders/{folder_spec.get('parent_folder_id')}",
@@ -70,7 +88,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
         'student_projects': student_projects,
         'services_to_enable': project_config.get('services_to_enable', []),
         'iam_user_roles': user_roles,
-        'folder_tags': metadata.get('labels', {}) # Use metadata labels as folder tags
+        'folder_tags': folder_tags
     }
 
     if output_file:

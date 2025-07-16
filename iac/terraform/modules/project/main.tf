@@ -52,6 +52,7 @@ resource "google_project" "new" {
   billing_account    = var.billing_account_id
   folder_id          = substr(var.parent, 0, 8) == "folders/" ? split("/", var.parent)[1] : null
   org_id             = substr(var.parent, 0, 13) == "organizations/" ? split("/", var.parent)[1] : null
+  labels             = var.labels
   deletion_policy    = "DELETE"
 }
 
