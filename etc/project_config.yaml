@@ -45,14 +45,14 @@ iam_permissions:
 
   # Additional roles can be defined here if needed.
 folders:
-  labels:
+  tags:
     # Labels to apply to the folders created for the project.
     environment: development
     #team: data-science
     createdby: sandmold
 
 projects:
-  labels:
+  tags:
     # Labels to apply to the projects created by sandmold.
     environment: development
     #team: data-science

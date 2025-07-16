@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.9
+
+- **Feat: Standardize project tags from `project_config.yaml`.**
+  - The `prepare_tf_vars.py` script now reads the `projects.tags` section from `etc/project_config.yaml` and applies them as labels to the projects.
+- **Chore: Refactor labeling/tagging implementation.**
+  - Corrected the implementation to use the term `tags` in the `project_config.yaml` as requested, while applying them as `labels` in the Terraform code, which is the correct argument for the `google_project` resource.
+  - Removed the non-functional folder tagging logic.
+
+## 0.3.8
+
+- **Feat: Standardize project labels from `project_config.yaml`.**
+  - The `prepare_tf_vars.py` script now merges labels defined in the `projects.tags` section of `etc/project_config.yaml` with the `desk-type` label.
+  - This allows for standardized, centrally-managed labels to be applied to all projects.
+- **Chore: Corrected folder tagging implementation.**
+  - Removed the non-functional folder tagging logic, as the Terraform provider does not support it in the desired way.
+
 ## 0.3.7
 
 - **Feat: Standardize labels from `project_config.yaml`.**

@@ -27,7 +27,7 @@ test-yaml CLASSROOM_YAML:
 # Setup a classroom environment based on a YAML configuration
 # Usage: just classroom-up etc/samples/class_2teachers_6students.yaml
 classroom-up CLASSROOM_YAML:
-    ./bin/classroom-up.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
+    time bin/classroom-up.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
 
 # Setup a classroom environment based on a YAML configuration
 classroom-up-sampleclass:
@@ -35,7 +35,7 @@ classroom-up-sampleclass:
 
 # Teardown a classroom environment
 classroom-down CLASSROOM_YAML:
-    ./bin/classroom-down.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
+    time bin/classroom-down.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
 
 # teardown a classroom from default SAMPLE_CLASSROOM_YAML
 classroom-down-sampleclass:

@@ -27,6 +27,7 @@ variable "student_projects" {
   type = list(object({
     project_id_prefix = string
     users             = list(string)
+    labels            = map(string)
   }))
   default = []
 }

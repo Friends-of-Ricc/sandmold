@@ -13,7 +13,6 @@ terraform {
 resource "google_folder" "classroom" {
   display_name = var.folder_display_name
   parent       = var.parent_folder
-  labels       = var.folder_tags
   deletion_protection = false
 }
 
