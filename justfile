@@ -1,5 +1,7 @@
 # This is more meaningful to Riccardo as a Rails dev.
 RAILS_ROOT := justfile_directory()
+SAMPLE_CLASSROOM_YAML := "etc/samples/class_2teachers_6students.yaml"
+CLASSROOM_TF_DIR := 'iac/terraform/1a_classroom_setup'
 
 # list all targets. This should be the first target in the file and DEFAULT
 list:
@@ -23,26 +25,29 @@ test-yaml CLASSROOM_YAML:
     uv run python ./tests/test_yaml_validation.py --classroom-yaml {{CLASSROOM_YAML}} --root-dir "{{RAILS_ROOT}}"
 
 # Setup a classroom environment based on a YAML configuration
-# Usage: just setup-classroom etc/samples/class_2teachers_6students.yaml
-setup-classroom CLASSROOM_YAML TF_DIR='iac/terraform/1a_classroom_setup':
-    ./bin/setup-classroom.sh {{CLASSROOM_YAML}} {{TF_DIR}}
+# Usage: just classroom-up etc/samples/class_2teachers_6students.yaml
+classroom-up CLASSROOM_YAML:
+    ./bin/classroom-up.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
 
 # Setup a classroom environment based on a YAML configuration
-# Usage: just setup-sample-class
-setup-sample-class:
-    just setup-classroom etc/samples/class_2teachers_6students.yaml
+classroom-up-sampleclass:
+    just classroom-up {{SAMPLE_CLASSROOM_YAML}}
 
 # Teardown a classroom environment
-teardown-classroom CLASSROOM_YAML TF_DIR='iac/terraform/1a_classroom_setup':
-    ./bin/teardown-classroom.sh {{CLASSROOM_YAML}} {{TF_DIR}}
+classroom-down CLASSROOM_YAML:
+    ./bin/classroom-down.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
 
+# teardown a classroom from default SAMPLE_CLASSROOM_YAML
+classroom-down-sampleclass:
+    just classroom-down {{SAMPLE_CLASSROOM_YAML}}
 
-preflight-check-sample-class:
-    just preflight-check etc/samples/class_2teachers_6students.yaml
+# inspect a classroom from default SAMPLE_CLASSROOM_YAML
+classroom-inspect-sampleclass:
+    just classroom-inspect {{SAMPLE_CLASSROOM_YAML}}
 
 # Run a preflight check on a specific classroom YAML
-preflight-check CLASSROOM_YAML:
-    @./bin/preflight-checks.py {{CLASSROOM_YAML}}
+classroom-inspect CLASSROOM_YAML:
+    @bin/classroom-inspect.py {{CLASSROOM_YAML}}
 
 # Find open, non-Google billing accounts
 open-baids:

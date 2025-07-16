@@ -34,3 +34,6 @@ Two people are maintaining this project. Read additiona user constants as follow
 * If the username (`$USER`) is "ricc", then read further instructions in "RICCARDO.md"
 * If the username is "leoy", then read further instructions in "LEONID.md"
 
+## GCP and Terraform
+
+GCP and Terraform have some limitation. These are described in `doc/billing/CRM_LIMITS.md`.
