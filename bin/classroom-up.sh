@@ -45,7 +45,7 @@ uv run python ./bin/prepare_tf_vars.py \
 echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"
 
 # Calculate the relative path for the tfvars file from the terraform directory
-RELATIVE_TF_VARS_FILE="../workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
+RELATIVE_TF_VARS_FILE="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
 
 # The -var-file path is now relative to the CLASSROOM_TF_DIR
 (cd "${CLASSROOM_TF_DIR}" && 

@@ -22,3 +22,4 @@ __pycache__/
 *.pyd
 uv.lock
 
+etc/samples/image.png

@@ -1,20 +1,19 @@
 # 🌪️ Classroom Destroyed 🌪️
 
-**Timestamp:** 2025-07-16 20:38:35
+**Timestamp:** 2025-07-16 20:38:36
 
 ## Class Details
 
-- **Workspace Name:** `ng2teachers-3x2students`
+- **Workspace Name:** `ng2teachers-4realstudents`
 - **Original Folder Name:** None
-- **Original Folder ID:** 1000371719973
-- **Description:** Class with 2 teachers and 6 students,
-2 students per bench (in team).
+- **Original Folder ID:** 194703823593
+- **Description:** Class with 3 teachers and 4 real students
 
 ## ⚡ Handy Commands
 
 ```bash
 # To re-provision this specific classroom:
-just classroom-up etc/samples/class_2teachers_6students.yaml
+just classroom-up etc/samples/class_2teachers_4realstudents.yaml
 ```
 
 ## 🧑‍🎓 Student & Project Assignments

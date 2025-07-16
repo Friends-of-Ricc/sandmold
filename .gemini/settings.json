@@ -1,5 +1,11 @@
 {
   "checkpointing": {
     "enabled": true
-  }
+  },
+  "coreTools": [
+    "ShellTool(ls)",
+    "ShellTool(echo)",
+    "ShellTool(pwd)"
+]
+//  "excludeTools": ["run_shell_command(rm)"]
 }

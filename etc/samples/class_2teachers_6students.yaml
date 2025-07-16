@@ -12,7 +12,7 @@ spec:
     org_id: 791852209422
     parent_folder_id: '1000371719973'
     billing_account_id: "010405-23D342-257054"
-    displayName: ng2teachers-3x2students
+    #OBSOLETE displayName: ng2teachers-3x2students
     domain: sredemo.dev
     description: |
       Class with 2 teachers and 6 students,
