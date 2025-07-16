@@ -6,18 +6,19 @@
 
 # A list of Google Cloud APIs that should be enabled on the project.
 services_to_enable:
-  - aiplatform.googleapis.com
-  - artifactregistry.googleapis.com
-  - cloudbuild.googleapis.com
+  #- aiplatform.googleapis.com
+  #- artifactregistry.googleapis.com
+  #- cloudbuild.googleapis.com
   - cloudresourcemanager.googleapis.com
-  - compute.googleapis.com
-  - run.googleapis.com
+  # Compute is VERY expensive, so we do not enable it by default.
+  #- compute.googleapis.com
+  #- run.googleapis.com
   - serviceusage.googleapis.com
   - iam.googleapis.com
   - monitoring.googleapis.com
   - logging.googleapis.com
   - apphub.googleapis.com
-  - cloudquotas.googleapis.com # This is used to manage quotas.
+  #- cloudquotas.googleapis.com # This is used to manage quotas.
 
 # A map of IAM roles to the principals who should be granted them.
 # The Python script will transform this into the format needed by the Terraform module.
@@ -27,17 +28,18 @@ iam_permissions:
     - roles/editor
     - roles/iam.serviceAccountUser
     - roles/run.admin
-    - roles/artifactregistry.writer
+    #- roles/artifactregistry.writer
     - roles/storage.admin
     - roles/aiplatform.user
 
   teacher_roles_in_teacher_project:
     - roles/editor
     - roles/iam.serviceAccountUser
-    - roles/run.admin
-    - roles/artifactregistry.writer
-    - roles/storage.admin
-    - roles/aiplatform.user
+    # - roles/editor
+    # - roles/run.admin
+    # - roles/artifactregistry.writer
+    # - roles/storage.admin
+    # - roles/aiplatform.user
 
   teacher_roles_in_students_project:
     - roles/owner
@@ -48,9 +50,9 @@ iam_permissions:
 folders:
   tags:
     # Labels to apply to the folders created for the project.
-    environment: development
-    #team: data-science
-    createdby: sandmold
+    env: test
+    #environment: development
+    created-by: sandmold
 
 projects:
   labels:
