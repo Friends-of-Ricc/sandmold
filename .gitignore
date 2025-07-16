@@ -14,4 +14,6 @@ __pycache__/
 *.tfstate.*
 .venv
 .terraform
+uv.lockterraform_apply.log
 uv.lock
+terraform_apply.log
