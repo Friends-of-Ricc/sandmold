@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.12
+
+- **Feat: Add teardown report generation.**
+  - The `classroom-down.sh` script now generates a `REPORT.md` file indicating that the classroom has been destroyed, including a timestamp.
+- **Fix: Ensure workspace directory exists for teardown report.**
+  - The `classroom-down.sh` script now re-creates the workspace directory after destroying the resources, ensuring a location exists to write the teardown report.
+
 ## 0.3.11
 
 - **Fix: Correct variable name in `prepare_tf_vars.py`.**

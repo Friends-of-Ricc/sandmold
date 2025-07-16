@@ -2,6 +2,7 @@
 apiVersion: sandmold.io/v1alpha1
 kind: Classroom
 metadata:
+  # Do NOT change this!
   name: ng2teachers-4realstudents
   labels:
     classroom: 2teachers_4realstudents
@@ -13,7 +14,7 @@ spec:
     org_id: 791852209422 # sredemo.dev
     parent_folder_id: "194703823593" # sredemo.dev / test-sandmold / sandmold-1
     billing_account_id: "01C588-4823BC-27F650"
-    displayName: ng2teachers-4realstudents
+    displayName: 2 Teachers 4 Real Students NG
     domain: sredemo.dev
     description: |
       Class with 3 teachers and 4 real students
@@ -26,26 +27,26 @@ spec:
         value: europe-west4
 
   schoolbenches:
-    - project: teacherz
+    - project: teacherz-ng
       desk-type: teacher
       seats:
       - ricc@google.com
       - palladiusbonton@gmail.com
 
     # schoolbench 2
-    - project: project-leo
+    - project: project-leo-ng
       seats:
       - leoy@google.com
 
-    - project: daniel
+    - project: daniel-ng
       seats:
       - stamer@google.com
 
-    - project: babenko
+    - project: babenko-ng
       seats:
       - babenko@google.com
 
-    - project: ricc-personal
+    - project: ricc-personal-ng
       seats:
       - palladiusbonton@gmail.com
 
