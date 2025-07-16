@@ -1,0 +1,37 @@
+
+apiVersion: sandmold.dev/v1alpha1
+kind: Blueprint
+metadata:
+  name: foobar
+spec:
+  description: |
+    A sample blueprint for the Google Cloud which basically does nothing, except logging a virtual application start and succesful end.
+
+  dependsOn:
+  - sandmold.dev/v1alpha1/Folder
+  - sandmold.dev/v1alpha1/Project
+  install:
+    - name: start-virtual-app
+      type: ShellScript
+      script: |
+        echo "Starting virtual application..."
+        sleep 2
+        echo "Virtual application started successfully."
+        # TODO log to Cloud Logging
+  uninstall:
+    - name: end-virtual-app
+      type: ShellScript
+      script: |
+        echo "Ending virtual application..."
+        sleep 2
+        echo "Virtual application ended successfully."
+
+  #repo: https://github.com/GoogleCloudPlatform/microservices-demo
+  variables:
+    - name: PROJECT_ID
+      description: "The Google Cloud Project ID to deploy Online Boutique to."
+    - name: REGION
+      description: "The Google Cloud region to deploy Online Boutique to."
+    - name: SLEEP_TIME
+      description: "Time to sleep in seconds during the virtual application start and end."
+      default: "5"

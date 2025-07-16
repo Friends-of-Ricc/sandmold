@@ -68,3 +68,13 @@ classroom-down-all:
         echo "--- Tearing down classroom from $yaml_file ---"; \
         just classroom-down $yaml_file; \
     done
+
+tfplan WORKSPACE_NAME="ng2teachers-4realstudents":
+    echo "Using workspace: {{WORKSPACE_NAME}}"
+    cd {{CLASSROOM_TF_DIR}} && \
+    terraform init && \
+    terraform workspace select -or-create {{WORKSPACE_NAME}} && \
+    terraform plan -var-file "workspaces/{{WORKSPACE_NAME}}/terraform.tfvars.json"
+
+    @echo "👍 IT WORKS!"
+#terraform workspace select -or-create ng2teachers-4realstudents && terraform plan -var-file

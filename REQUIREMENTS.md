@@ -1,7 +1,7 @@
 
 ## Code structure
 
-I expect all the IAC code to be under `iac/terraform/`.
+I expect all the IaC code to be under `iac/terraform/`.
 
 The system allows some pluggable applications. Every app should have some standard blueprint k8s-like yaml.
 
@@ -9,7 +9,10 @@ The system allows some pluggable applications. Every app should have some standa
 
 * a Lab has metadata and multiple seats. A lab maps to a Cloud Folder.
 * a Seat has multiple Principals (users) and Applications.
-* An applicaion can participate in a seat in max cardinality of 1.
+* An application can participate in a seat in max cardinality of 1. So seat 1 can have:
+  * 2 users
+  * 2 applications
+  * But each application "cardinality" can be at most 1 (no multiple installations of same app in one project/seat).
 
 For instance,
 

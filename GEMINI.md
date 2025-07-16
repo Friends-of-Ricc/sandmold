@@ -15,7 +15,7 @@ The architecture is incredibly modular, allowing for more people to add more scr
 
 ## Other readings
 
-* Use `REQUIREMENTS.md` for this repo
+* Use `REQUIREMENTS.md` for this repo.
 * **plan before executing**. Write your plan in `PLAN.md` and make sure user reviews, edits, before executing.
   * Plan should have a short steps list which we can mark as done as we proceed.
 * before coding anything. We need to ensure our solution respects 100% `REQUIREMENTS.md` and `PLAN.md`.
@@ -37,3 +37,4 @@ Two people are maintaining this project. Read additiona user constants as follow
 ## GCP and Terraform
 
 GCP and Terraform have some limitation. These are described in `doc/billing/CRM_LIMITS.md`.
+
