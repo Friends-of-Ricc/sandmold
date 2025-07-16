@@ -15,13 +15,13 @@
 
 ```bash
 # To tear down this specific classroom:
-just teardown-classroom etc/samples/class_2teachers_4realstudents.yaml
+just classroom-down etc/samples/class_2teachers_4realstudents.yaml
 
 # To re-provision this specific classroom:
-just setup-classroom etc/samples/class_2teachers_4realstudents.yaml
+just classroom-up etc/samples/class_2teachers_4realstudents.yaml
 
 # To run a preflight check on this classroom:
-just preflight-check etc/samples/class_2teachers_4realstudents.yaml
+just classroom-inspect etc/samples/class_2teachers_4realstudents.yaml
 ```
 
 ## 🧑‍🎓 Student & Project Assignments

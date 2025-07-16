@@ -2,7 +2,7 @@
 apiVersion: sandmold.io/v1alpha1
 kind: Classroom
 metadata:
-  name: class-2teachers-4realstudents
+  name: ng2teachers-4realstudents
   labels:
     classroom: 2teachers_4realstudents
     author: ricc

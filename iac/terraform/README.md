@@ -4,7 +4,7 @@ This directory contains all the Terraform code for provisioning Google Cloud res
 
 ## How it Works: From YAML to Report
 
-The entire classroom provisioning process is orchestrated by a single command: `just setup-classroom <path_to_yaml>`. This command automates a series of steps that transform your high-level YAML definition into live cloud resources and a final summary report.
+The entire classroom provisioning process is orchestrated by a single command: `just classroom-up <path_to_yaml>`. This command automates a series of steps that transform your high-level YAML definition into live cloud resources and a final summary report.
 
 ### Data Flow Diagram
 
@@ -16,7 +16,7 @@ graph TD
         A[classroom.yaml]
     end
 
-    subgraph "2. Orchestration (just setup-classroom)"
+    subgraph "2. Orchestration (just classroom-up)"
         B(prepare_tf_vars.py)
         C(terraform apply)
         D(terraform output)

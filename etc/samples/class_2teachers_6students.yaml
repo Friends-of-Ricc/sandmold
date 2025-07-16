@@ -2,9 +2,9 @@
 apiVersion: sandmold.io/v1alpha1
 kind: Classroom
 metadata:
-  name: class-2teachers-6students
+  name: 2teachers-3x2students
   labels:
-    classroom: 2teachers_6students
+    classroom: 2teachers_3x2students
     author: ricc
     env: development
 spec:

@@ -1,7 +1,7 @@
 ## FR001 - Make TFSTATE multi-tenant
 
-Now, if I call `just setup-classroom CLASSROOM1.YAML` it all works.
-But when I then call `just setup-classroom CLASSROOM2.YAML` , terraform sees a different states and probably tries to destroy the old and create the new, like I've edited the existing yaml.
+Now, if I call `just classroom-up CLASSROOM1.YAML` it all works.
+But when I then call `just classroom-up CLASSROOM2.YAML` , terraform sees a different states and probably tries to destroy the old and create the new, like I've edited the existing yaml.
 
 We need to have some sort of naming convention, so that every time I call the script with a dfifferent YAML file it should have a different tfstate.
 * As long as tfstate is in LOCAL FILE , the best idea seems to create a folder with a field which is unique in the yaml (eg `folder/name`).

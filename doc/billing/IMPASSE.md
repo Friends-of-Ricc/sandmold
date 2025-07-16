@@ -2,7 +2,7 @@
 
 ## 1. The Goal
 
-The primary goal was to successfully provision a sample classroom using the `just setup-sample-class` command, which orchestrates a `terraform apply`.
+The primary goal was to successfully provision a sample classroom using the `just classroom-up-sampleclass` command, which orchestrates a `terraform apply`.
 
 ## 2. The Problem
 
