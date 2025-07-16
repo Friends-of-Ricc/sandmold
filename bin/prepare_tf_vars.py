@@ -43,7 +43,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
 
     # Prepare the student_projects variable
     student_projects = []
-    project_tags = project_config.get('projects', {}).get('tags', {})
+    project_labels = project_config.get('projects', {}).get('labels', {})
     for bench in spec.get('schoolbenches', []):
         project_id_prefix = bench.get('project')
         users = bench.get('seats', [])
@@ -55,7 +55,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
             project_id_prefix = f"std-{project_id_prefix}"
 
         # Merge project-specific labels with the common labels
-        labels = project_tags.copy()
+        labels = project_labels.copy()
         labels['desk-type'] = desk_type
 
         if project_id_prefix and users:

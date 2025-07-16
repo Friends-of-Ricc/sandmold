@@ -3,8 +3,8 @@
 ## Class Details
 
 - **Workspace Name:** `ng2teachers-3x2students`
-- **Folder Name:** [ng2teachers-3x2students](https://console.cloud.google.com/cloud-resource-manager?folder=23702781076)
-- **Folder ID:** `23702781076`
+- **Folder Name:** [ng2teachers-3x2students](https://console.cloud.google.com/cloud-resource-manager?folder=115314039773)
+- **Folder ID:** `115314039773`
 - **Description:** Class with 2 teachers and 6 students,
 2 students per bench (in team).
 
@@ -40,10 +40,10 @@ just preflight-check etc/samples/class_2teachers_6students.yaml
 
 | Project Name | Project ID | Users | Applications (Planned) |
 |--------------|------------|-------|------------------------|
-| std-heapster01 | [`std-heapster01-ijui`](https://console.cloud.google.com/iam-admin/iam?project=std-heapster01-ijui) | N/A | - |
-| std-heapster02 | [`std-heapster02-0lb3`](https://console.cloud.google.com/iam-admin/iam?project=std-heapster02-0lb3) | N/A | - |
-| std-heapster03 | [`std-heapster03-8adw`](https://console.cloud.google.com/iam-admin/iam?project=std-heapster03-8adw) | N/A | - |
-| tch-teacherz | [`tch-teacherz-ptki`](https://console.cloud.google.com/iam-admin/iam?project=tch-teacherz-ptki) | N/A | - |
+| std-heapster01 | [`std-heapster01-nw4m`](https://console.cloud.google.com/iam-admin/iam?project=std-heapster01-nw4m) | N/A | - |
+| std-heapster02 | [`std-heapster02-322n`](https://console.cloud.google.com/iam-admin/iam?project=std-heapster02-322n) | N/A | - |
+| std-heapster03 | [`std-heapster03-l0mo`](https://console.cloud.google.com/iam-admin/iam?project=std-heapster03-l0mo) | N/A | - |
+| tch-teacherz | [`tch-teacherz-lqij`](https://console.cloud.google.com/iam-admin/iam?project=tch-teacherz-lqij) | N/A | - |
 
 ---
 

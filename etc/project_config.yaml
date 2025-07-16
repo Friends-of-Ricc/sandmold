@@ -52,8 +52,8 @@ folders:
     createdby: sandmold
 
 projects:
-  tags:
-    # Labels to apply to the projects created by sandmold.
+  labels:
+    # Tags to apply to the projects created by sandmold.
     environment: development
     #team: data-science
     createdby: sandmold

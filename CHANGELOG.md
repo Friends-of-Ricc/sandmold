@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.11
+
+- **Fix: Correct variable name in `prepare_tf_vars.py`.**
+  - Fixed a `NameError` by correcting a typo in a variable name.
+- **Chore: Update sample YAML to prevent folder name collisions.**
+  - The `displayName` in `class_2teachers_4realstudents.yaml` is now unique.
+
+## 0.3.10
+
+- **Fix: Correctly use `labels` in `project_config.yaml`.**
+  - Changed the `projects.tags` stanza back to `projects.labels` to correctly reflect the terminology used by the Google Cloud provider for project metadata.
+  - The `prepare_tf_vars.py` script was updated to read from the corrected `projects.labels` section.
+
 ## 0.3.9
 
 - **Feat: Standardize project tags from `project_config.yaml`.**
