@@ -6,13 +6,14 @@ list:
 
 start:
     ./start.sh
+stop:
+    ./stop.sh
+status:
+    ./status.sh
 
-
-
-
-
-test-start:
-    GOOGLE_CLOUD_PROJECT="your-gcp-project" \
+test-verb VERB:
+    GOOGLE_CLOUD_PROJECT="ricc-genai" \
     GOOGLE_CLOUD_REGION="your-gcp-region" \
     SLEEP_TIME="1" \
-    ./start.sh
+    AUTO_FAIL="No, thanks I'm just a justfile" \
+    just {{VERB}}

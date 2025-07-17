@@ -1,11 +1,21 @@
 # applications/foobar/blueprint.yaml
 apiVersion: sandmold.dev/v1alpha1
-kind: Blueprint
+kind: ApplicationBlueprint
 metadata:
   name: foobar
 spec:
   description: |
-    A sample blueprint for the Google Cloud which basically does nothing, except logging a virtual application start and succesful end.
+    A sample blueprint for the Google Cloud which basically does nothing, except logging a virtual application start
+    and successful end.
+    This is a sample application which does basically NOTHING except sleeping
+    a configurable number of seconds to simulate the installation complexity and test
+    eventual consistency. Eg, if you have an app which tells you how many apps have been correctly installed, it
+    can be nice for a demo to set this to 5 minutes. Otherwise, you can set it to 0/1 seconds for
+    a very fast installation.
+
+    Note: this installation will FAIL every time you "activate the Omega 13" via AUTO_FAIL='omega13'. This way you can
+    force this to fail on certain machines.
+
 
   # dependsOn:
   # - sandmold.dev/v1alpha1/Folder
@@ -32,6 +42,11 @@ spec:
       description: "The Google Cloud Project ID to deploy Online Boutique to."
     - name: GOOGLE_CLOUD_REGION
       description: "The Google Cloud region to deploy Online Boutique to."
+      default: "us-central1"
     - name: SLEEP_TIME
       description: "Time to sleep in seconds during the virtual application start and end."
+      # Note: default is not implemented yet.
       default: "5"
+    - name: AUTO_FAIL
+      description: "If set to 'omega13' it will fail the application start."
+      default: "Nope"

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.4
+
+- **Fix: Correct `foobar` environment variable handling.**
+  - Fixed a bug in `_common.sh` that was causing an error when checking for required environment variables.
+  - The script now correctly parses the `blueprint.yaml` file and validates the environment.
+
+## 0.4.3
+
+- **Feat: Enhance `foobar` logging.**
+  - The `_common.sh` script now includes an `ENV` object in the JSON payload, containing all required environment variables for better debugging.
+  - The `gcloud logging write` command now uses the explicit `--project` flag for more robust logging.
+
 ## 0.4.2
 
 - **Chore: Refine `foobar` application.**

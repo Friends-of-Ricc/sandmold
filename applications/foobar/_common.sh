@@ -10,7 +10,7 @@ check_env_vars() {
     # Get the directory of the calling script to find the blueprint.
     local SCRIPT_DIR
     SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-    
+
     local BLUEPRINT_FILE="${SCRIPT_DIR}/blueprint.yaml"
 
     if [ ! -f "$BLUEPRINT_FILE" ]; then
@@ -42,13 +42,25 @@ check_env_vars() {
 log_to_gcp() {
     local SCRIPT_DIR
     SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-    
+
     local BLUEPRINT_FILE="${SCRIPT_DIR}/blueprint.yaml"
     local APP_NAME
     APP_NAME=$(yq -r '.metadata.name' "$BLUEPRINT_FILE")
     local LOG_NAME="${APP_NAME}-log"
     local VERB="$1"
     local MESSAGE="$2"
+    local CALLER_IDENTITY
+    CALLER_IDENTITY=$(gcloud config get-value account)
+
+    # Construct the ENV JSON object
+    local ENV_JSON=""
+    local REQUIRED_VARS
+    REQUIRED_VARS=$(yq -r '.spec.variables[].name' "$BLUEPRINT_FILE")
+    for var in $REQUIRED_VARS; do
+        ENV_JSON="${ENV_JSON}\"${var}\":\"${!var}\","
+    done
+    # Remove trailing comma
+    ENV_JSON="{${ENV_JSON%,}}"
 
     # Construct the JSON payload
     JSON_PAYLOAD=$(cat <<EOF
@@ -56,11 +68,14 @@ log_to_gcp() {
   "framework": "sandmold/v1.0",
   "appname": "${APP_NAME}",
   "appverb": "${VERB}",
-  "message": "${MESSAGE}"
+  "caller_identity": "${CALLER_IDENTITY}",
+  "message": "${MESSAGE}",
+  "note_for_googlers": "For more info, check go/sandmold or ping ricc@ . Code currently in: https://github.com/Friends-of-Ricc/sandmold",
+  "ENV": ${ENV_JSON}
 }
 EOF
 )
 
     echo "Logging to GCP: ${JSON_PAYLOAD}"
-    gcloud logging write "${LOG_NAME}" "${JSON_PAYLOAD}" --payload-type=json
+    gcloud logging write "${LOG_NAME}" "${JSON_PAYLOAD}" --payload-type=json --project="${GOOGLE_CLOUD_PROJECT}"
 }

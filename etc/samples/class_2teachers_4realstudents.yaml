@@ -58,6 +58,7 @@ spec:
         # adds this apps to all student apps.
         apps:
         - online-boutique
+        - foobar
         # adds this person to all students
         seats:
         - ricc@google.com
