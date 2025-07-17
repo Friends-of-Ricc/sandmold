@@ -23,8 +23,9 @@ spec:
     - leoy@google.com
     - ricc@google.com
     env:
-      - name: TF_VAR_GOOGLE_CLOUD_REGION
-        value: us-central1
+      - name: GOOGLE_CLOUD_REGION
+        value: europe-west1
+    prefix: fb1 # TODO not implemented yet
   schoolbenches:
     # schoolbench 1
     - project: teacherz  # will be padded by some random hex/numb
@@ -36,18 +37,24 @@ spec:
       - leoy@google.com
       - ricc@google.com
     # schoolbench 2
-    - project: heapster01  # will be padded by some random hex/numb, -> "boa01-123abc"
+    - project: foobar01  # will be padded by some random hex/numb, -> "boa01-123abc"
       seats:
       - student01@gmail.com
       - student02@gmail.com
-    - project: heapster02
+    - project: foobar02
       seats:
       - student03@gmail.com
       - student04@gmail.com
-    - project: heapster03
+    - project: foobar03
       seats:
       - student06@gmail.com
       - palladiusbonton@gmail.com
+    - project: failing-foobar
+      seats:
+      - admin@sredemo.dev
+      env:
+      - name: AUTO_FAIL
+        value: omega13
   common:
     schoolbenches:
       foreach_project:
