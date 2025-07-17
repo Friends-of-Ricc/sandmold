@@ -1,0 +1,67 @@
+# This is the SAMPLE YAML from justfile
+apiVersion: sandmold.io/v1alpha1
+kind: Classroom
+metadata:
+  name: ng2teachers-3x2students
+  labels:
+    classroom: 2teachers_3x2students
+    author: ricc
+    env: development
+spec:
+  folder:
+    org_id: 791852209422
+    parent_folder_id: '194703823593' # test-sandmold-1
+    billing_account_id: "010405-23D342-257054"
+    #OBSOLETE displayName: ng2teachers-3x2students
+    domain: sredemo.dev
+    description: |
+      Class with 2 teachers and 6 students,
+      2 students per bench (in team).
+      This is also the SAMPLE classroom YAML
+      used by the justfile targets.
+    teachers:
+    - leoy@google.com
+    - ricc@google.com
+    env:
+      - name: GOOGLE_CLOUD_REGION
+        value: europe-west1
+    prefix: fb1 # TODO not implemented yet
+  schoolbenches:
+    # schoolbench 1
+    - project: teacherz  # will be padded by some random hex/numb
+      desk-type: teacher
+      apps:
+      - bank-of-anthos
+      - sandmold-web
+      seats:
+      - leoy@google.com
+      - ricc@google.com
+    # schoolbench 2
+    - project: foobar01  # will be padded by some random hex/numb, -> "boa01-123abc"
+      seats:
+      - student01@gmail.com
+      - student02@gmail.com
+    - project: foobar02
+      seats:
+      - student03@gmail.com
+      - student04@gmail.com
+    - project: "p3"
+      seats:
+        - student5@acme.com
+        - student6@acme.com
+      apps:
+        - name: foobar
+        - name: non_existent_app
+        - name: online-boutique
+    - project: failing-foobar
+      seats:
+      - admin@sredemo.dev
+      env:
+      - name: AUTO_FAIL
+        value: omega13
+  common:
+    schoolbenches:
+      foreach_project:
+        applies_to: ALL_STUDENTS
+        apps:
+        - online-boutique

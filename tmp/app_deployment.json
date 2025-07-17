@@ -1,0 +1,41 @@
+{
+  "projects": [
+    {
+      "project_id": "teacherz",
+      "desk_type": "teacher",
+      "apps": [
+        {
+          "name": "bank-of-anthos",
+          "path": "./applications/bank-of-anthos",
+          "malformed": true
+        },
+        {
+          "name": "sandmold-web",
+          "path": "./applications/sandmold-web",
+          "malformed": true
+        }
+      ]
+    },
+    {
+      "project_id": "p3",
+      "desk_type": "student",
+      "apps": [
+        {
+          "name": "foobar",
+          "path": "./applications/foobar",
+          "malformed": false
+        },
+        {
+          "name": "non_existent_app",
+          "path": "./applications/non_existent_app",
+          "malformed": true
+        },
+        {
+          "name": "online-boutique",
+          "path": "./applications/online-boutique",
+          "malformed": true
+        }
+      ]
+    }
+  ]
+}
