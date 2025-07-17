@@ -5,10 +5,11 @@ metadata:
   name: online-boutique
 spec:
   description: "A sample blueprint for the Google Cloud Online Boutique microservices demo, inspired by K8s/KCC objects."
-  dependsOn:
-  - sandmold.dev/v1alpha1/Folder
-  - sandmold.dev/v1alpha1/Project
-  install: TODO
+  # dependsOn:
+  # - sandmold.dev/v1alpha1/Folder
+  # - sandmold.dev/v1alpha1/Project
+  #install: TODO
+  emoji: "🛍️"
   repo: https://github.com/GoogleCloudPlatform/microservices-demo
   variables:
     - name: PROJECT_ID

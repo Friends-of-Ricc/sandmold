@@ -1,0 +1,9 @@
+# applications/sandmold-web/blueprint.yaml
+apiVersion: sandmold.dev/v1alpha1
+kind: ApplicationBlueprint
+metadata:
+  name: sandmold-web
+spec:
+  description: "A web interface for Sandmold."
+  variables: []
+  emoji: "🏖"

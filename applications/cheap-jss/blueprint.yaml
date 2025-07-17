@@ -1,0 +1,40 @@
+
+apiVersion: sandmold.dev/v1alpha1
+kind: Blueprint
+metadata:
+  name: cheap-jss
+spec:
+  description: "A blueprint for a cost-effective three-tier web application on Google Cloud. It uses Cloud Run for the web and application tiers, and Cloud SQL for the database tier."
+  emoji: "🕸️"
+  repo: https://github.com/GoogleCloudPlatform/terraform-google-three-tier-web-app/tree/sic-jss-3
+  variables:
+    - name: PROJECT_ID
+      description: "The Google Cloud Project ID to deploy the application to."
+    - name: REGION
+      description: "The Google Cloud region to deploy the application to."
+      default: "us-central1"
+    - name: ZONE
+      description: "The Google Cloud zone to deploy the application to."
+      default: "us-central1-a"
+    # - name: DEPLOYMENT_NAME
+    #   description: "The name of this particular deployment, will get added as a prefix to most resources."
+    #   default: "three-tier-app"
+    # - name: DATABASE_TYPE
+    #   description: "Cloud SQL Database flavor, mysql or postgresql"
+    #   default: "postgresql"
+    # - name: ENABLE_APIS
+    #   description: "Whether or not to enable underlying apis in this solution."
+    #   default: "true"
+    # - name: RUN_ROLES_LIST
+    #   description: "The list of roles that run needs"
+    #   default: "roles/cloudsql.instanceUser,roles/cloudsql.client"
+  gcp_prerequisites:
+    APIs:
+      - name: run.googleapis.com
+        description: "Cloud Run API"
+      - name: sqladmin.googleapis.com
+        description: "Cloud SQL Admin API"
+      - name: cloudresourcemanager.googleapis.com
+        description: "Cloud Resource Manager API"
+      - name: iam.googleapis.com
+        description: "Identity and Access Management API"
