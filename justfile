@@ -2,6 +2,7 @@
 RAILS_ROOT := justfile_directory()
 SAMPLE_CLASSROOM_YAML := "etc/samples/class_2teachers_6students.yaml"
 CLASSROOM_TF_DIR := 'iac/terraform/1a_classroom_setup'
+SANDMOLD_TF_DIR := 'iac/terraform/sandmold'
 
 # list all targets. This should be the first target in the file and DEFAULT
 list:
@@ -49,6 +50,19 @@ classroom-inspect-sampleclass:
 classroom-inspect CLASSROOM_YAML:
     @bin/classroom-inspect.py {{CLASSROOM_YAML}}
 
+# Deploy applications to a classroom
+classroom-deploy-apps CLASSROOM_YAML:
+    @WORKSPACE_NAME=`python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])`" && \
+    echo "==> Using workspace: $WORKSPACE_NAME" && \
+    bin/prepare_app_deployment.py --classroom-yaml {{CLASSROOM_YAML}} --output-file tmp/app_deployment.json --project-root {{RAILS_ROOT}} && \
+    cd {{SANDMOLD_TF_DIR}} && \
+    terraform init && \
+    terraform workspace select -or-create $WORKSPACE_NAME && \
+    terraform apply \
+      -var-file="{{RAILS_ROOT}}/iac/terraform/1a_classroom_setup/workspaces/$WORKSPACE_NAME/terraform.tfvars.json" \
+      -var="app_deployments=$(cat {{RAILS_ROOT}}/tmp/app_deployment.json)" \
+      -auto-approve
+
 # Find open, non-Google billing accounts
 open-baids:
     @bin/list-billing-accounts.py
@@ -69,12 +83,13 @@ classroom-down-all:
         just classroom-down $yaml_file; \
     done
 
-tfplan WORKSPACE_NAME="ng2teachers-4realstudents":
-    echo "Using workspace: {{WORKSPACE_NAME}}"
+tfplan CLASSROOM_YAML:
+    @WORKSPACE_NAME=`python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])`" && \
+    echo "Using workspace: $WORKSPACE_NAME" && \
     cd {{CLASSROOM_TF_DIR}} && \
     terraform init && \
-    terraform workspace select -or-create {{WORKSPACE_NAME}} && \
-    terraform plan -var-file "workspaces/{{WORKSPACE_NAME}}/terraform.tfvars.json"
+    terraform workspace select -or-create $WORKSPACE_NAME && \
+    terraform plan -var-file "workspaces/$WORKSPACE_NAME/terraform.tfvars.json"
 
     @echo "👍 IT WORKS!"
 #terraform workspace select -or-create ng2teachers-4realstudents && terraform plan -var-file
