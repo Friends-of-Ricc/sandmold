@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.7
+
+- **Feat(gh): Remove feature request document.**
+  - Removed `doc/feature-requests/P2-preflights-check.md` as the feature is now tracked in issue #4.
+
 ## 0.4.6
 
 - **Feat(gh): Remove feature request document.**
