@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.8
+
+- **Feat(gh): Remove feature request document.**
+  - Removed `doc/feature-requests/P3-app-enablement.md` as the feature is now tracked in issue #5.
+
 ## 0.4.7
 
 - **Feat(gh): Remove feature request document.**
