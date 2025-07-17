@@ -23,3 +23,6 @@ __pycache__/
 uv.lock
 
 etc/samples/image.png
+.terraform.lock.hcl
+tmp/
+iac/terraform/*/workspaces/

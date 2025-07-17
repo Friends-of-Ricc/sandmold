@@ -93,3 +93,11 @@ tfplan CLASSROOM_YAML:
 
     @echo "👍 IT WORKS!"
 #terraform workspace select -or-create ng2teachers-4realstudents && terraform plan -var-file
+
+
+test-report-for-apps:
+    @echo this is testing just the last part of just classroom-up etc/samples/class_with_apps.yaml
+    python3 bin/generate_report.py \
+        --tf-output-json tmp/terraform_output.json \
+        --classroom-yaml etc/samples/class_with_apps.yaml \
+        --report-path tmp/REPORT.md
