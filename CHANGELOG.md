@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.4.2
+
+- **Chore: Refine `foobar` application.**
+  - The `_common.sh` script now prints the values of the required environment variables for easier debugging.
+  - Removed the unnecessary `GOOGLE_APPLICATION_CREDENTIALS` from the `foobar` blueprint, relying on Application Default Credentials instead.
+
+## 0.4.1
+
+- **Chore: Update `foobar` blueprint.**
+  - The `blueprint.yaml` for the `foobar` application has been updated to a richer, more descriptive version.
+
+## 0.4.0
+
+- **Feat: Add `foobar` template application.**
+  - Created a new `foobar` application in `applications/foobar` to serve as a template for future applications.
+  - The application includes a `blueprint.yaml` for defining metadata and required environment variables.
+  - A shared `_common.sh` script provides functions for environment variable validation and structured logging to Google Cloud Logging.
+  - `start.sh`, `stop.sh`, and `status.sh` scripts demonstrate how to use the common script.
+  - A comprehensive `README.md` explains the purpose and usage of the template.
+
 ## 0.3.12
 
 - **Feat: Add teardown report generation.**

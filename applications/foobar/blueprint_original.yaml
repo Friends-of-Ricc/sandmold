@@ -1,6 +1,7 @@
+
 # applications/foobar/blueprint.yaml
 apiVersion: sandmold.dev/v1alpha1
-kind: Blueprint
+kind: ApplicationBlueprint
 metadata:
   name: foobar
 spec:

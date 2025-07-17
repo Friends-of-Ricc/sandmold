@@ -1,0 +1,18 @@
+
+# Lists foobar app verbs
+list:
+    echo "Application in foobar:"
+    just -l
+
+start:
+    ./start.sh
+
+
+
+
+
+test-start:
+    GOOGLE_CLOUD_PROJECT="your-gcp-project" \
+    GOOGLE_CLOUD_REGION="your-gcp-region" \
+    SLEEP_TIME="1" \
+    ./start.sh
