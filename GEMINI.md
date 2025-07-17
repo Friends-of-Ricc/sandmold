@@ -38,3 +38,10 @@ Two people are maintaining this project. Read additiona user constants as follow
 
 GCP and Terraform have some limitation. These are described in `doc/billing/CRM_LIMITS.md`.
 
+## Github interaction
+
+Use `gh` to interact with issues.
+* ensure there are 5 priority labels: `P0`,.., `P4`.
+* FRs need "type": "Feature".
+* Bugs need "Type": 'bug'.
+* Mark each of them with a priority. If unsure, use "P3".

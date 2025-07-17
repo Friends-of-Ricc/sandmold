@@ -2,10 +2,22 @@
   "checkpointing": {
     "enabled": true
   },
-  "coreTools": [
-    "ShellTool(ls)",
-    "ShellTool(echo)",
-    "ShellTool(pwd)"
-]
-//  "excludeTools": ["run_shell_command(rm)"]
+  "mcpServers": {
+    "github": {
+        "url": "https://api.githubcopilot.com/mcp/"
+      }
+  }
+    // vetted by Jerop
+  // "coreTools": [
+  //               "run_shell_command(gh label list)",
+  //               "run_shell_command(gh issue create)",
+  //               "run_shell_command(gh issue edit)",
+  //               "run_shell_command(gh issue list)",
+  //               "run_shell_command(ls)",
+  //               "run_shell_command(pwd)",
+  //               "run_shell_command(echo)",
+  //               "run_shell_command(just)",
+  //               "run_shell_command(cat)"
+  //             ],
+  // "sandbox": false
 }
