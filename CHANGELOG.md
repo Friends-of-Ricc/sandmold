@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0
+
+- **Chore: Move all FRs and bugs to GitHub issues.**
+  - All feature requests and bug reports from `doc/feature-requests` and `doc/bugs` have been moved to GitHub issues.
+  - This centralizes all work items and improves tracking.
+
+## 0.4.9
+
+- **Feat(gh): Remove feature request document.**
+  - Removed `doc/feature-requests/P3-project-prefix-by-type.md` as it is now tracked in issue #6.
+
 ## 0.4.8
 
 - **Feat(gh): Remove feature request document.**
