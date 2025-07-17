@@ -87,8 +87,8 @@ def generate_markdown_report(tf_data, classroom_data, classroom_yaml_path):
     report_lines.extend([
         "## 🧑‍🎓 Student & Project Assignments",
         "",
-        "| Student Email | Project ID | Assigned Apps |",
-        "|---------------|------------|---------------|",
+        "| Student Email | Project ID |",
+        "|---------------|------------|",
     ])
 
     student_benches = [
@@ -102,13 +102,8 @@ def generate_markdown_report(tf_data, classroom_data, classroom_yaml_path):
         project_id = project_info.get('project_id', 'N/A')
         project_url = f"https://console.cloud.google.com/home/dashboard?project={project_id}"
         
-        apps = bench.get('apps', [])
-        if 'app' in bench:
-            apps.append(bench['app'])
-        apps_str = ", ".join(apps) if apps else "-"
-
         for user in bench.get('seats', []):
-            report_lines.append(f"| {user} | [`{project_id}`]({project_url}) | {apps_str} |")
+            report_lines.append(f"| {user} | [`{project_id}`]({project_url}) |")
 
     # --- Project-Centric Table ---
     report_lines.extend([
@@ -124,22 +119,36 @@ def generate_markdown_report(tf_data, classroom_data, classroom_yaml_path):
     for bench in classroom_data.get('spec', {}).get('schoolbenches', []):
         project_name = bench.get('project')
         if project_name:
-            apps = bench.get('apps', [])
-            if 'app' in bench:
-                apps.append(bench['app'])
+            raw_apps = bench.get('apps', [])
+            # Process apps, which can be strings or dicts with a 'name' key
+            processed_apps = []
+            for app in raw_apps:
+                if isinstance(app, dict):
+                    processed_apps.append(app.get('name', 'N/A'))
+                else:
+                    processed_apps.append(str(app))
+
+            # Determine the prefix based on desk-type
+            desk_type = bench.get('desk-type', 'student')
+            prefix = "tch-" if desk_type == 'teacher' else "std-"
+            full_project_name = f"{prefix}{project_name}"
             
-            project_details_map[project_name] = {
+            project_details_map[full_project_name] = {
                 'users': ", ".join(bench.get('seats', [])),
-                'apps': ", ".join(apps) if apps else "-"
+                'apps': ", ".join(processed_apps) if processed_apps else "-",
+                'original_name': project_name
             }
 
     for name, details in projects_output.items():
+        # Find the corresponding classroom details by the full prefixed name
         classroom_details = project_details_map.get(name, {})
+        
         users = classroom_details.get('users', 'N/A')
         apps = classroom_details.get('apps', '-')
+        original_name = classroom_details.get('original_name', name) # Fallback to the full name
         project_id = details.get('project_id')
         iam_link = f"https://console.cloud.google.com/iam-admin/iam?project={project_id}"
-        report_lines.append(f"| {name} | [`{project_id}`]({iam_link}) | {users} | {apps} |")
+        report_lines.append(f"| {original_name} | [`{project_id}`]({iam_link}) | {users} | {apps} |")
 
     # --- TODO Section ---
     report_lines.extend([
