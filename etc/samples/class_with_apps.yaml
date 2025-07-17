@@ -6,12 +6,13 @@ metadata:
   labels:
     classroom: class-with-apps
     author: ricc
-    env: testing
+    env: test
 spec:
   folder:
     org_id: 791852209422
     parent_folder_id: '194703823593' # shud be 194703823593
     billing_account_id: "010405-23D342-257054"
+    resource_prefix: "ng1"
     #OBSOLETE displayName: ng2teachers-3x2students
     domain: sredemo.dev
     description: |
@@ -24,7 +25,6 @@ spec:
         value: europe-west1
       - name: SLEEP_TIME
         value: 10
-    prefix: fb1 # TODO not implemented yet
   schoolbenches:
     - project: teacherz  # will be padded by some random hex/numb
       desk-type: teacher
@@ -48,7 +48,7 @@ spec:
       env:
       - name: AUTO_FAIL
         value: "false"
-    - project: failing-foobar
+    - project: fail-foobar
       seats:
       - admin@sredemo.dev
       env:

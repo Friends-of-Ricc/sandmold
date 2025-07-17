@@ -8,7 +8,7 @@ The entire classroom provisioning process is orchestrated by a single command: `
 
 ### Data Flow Diagram
 
-This diagram illustrates how the files are processed and what artifacts are created at each step.
+This diagram illustrates the orchestrated workflow, including application deployment.
 
 ```mermaid
 graph TD
@@ -16,23 +16,43 @@ graph TD
         A[classroom.yaml]
     end
 
-    subgraph "2. Orchestration (just classroom-up)"
-        B(prepare_tf_vars.py)
-        C(terraform apply)
-        D(terraform output)
-        E(generate_report.py)
+    subgraph "2. Preparation Scripts"
+        B(bin/prepare_tf_vars.py)
+        B2(bin/prepare_app_deployment.py)
     end
 
-    subgraph "3. Artifacts"
+    subgraph "3. Orchestration (just ...)"
+        C(terraform apply @ sandmold)
+        D(terraform output @ sandmold)
+        E(bin/generate_report.py)
+    end
+
+    subgraph "4. Terraform Modules"
+        M1[1a_classroom_setup]
+        M2[2_apps_deployment]
+    end
+
+    subgraph "5. Artifacts"
         F[terraform.tfvars.json]
+        F2[app_deployment.json]
         G[terraform.tfstate]
         H[terraform_output.json]
         I[REPORT.md]
     end
 
     A -- feeds --> B
+    A -- feeds --> B2
     B -- creates --> F
+    B2 -- creates --> F2
+
     F -- is read by --> C
+    F2 -- is read by --> C
+
+    C -- calls --> M1
+    C -- calls --> M2
+    M1 -- output --> C
+    M2 -- output --> C
+
     C -- creates/updates --> G
     C -- enables --> D
     D -- creates --> H

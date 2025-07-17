@@ -41,6 +41,10 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     metadata = classroom_config.get('metadata', {})
     folder_spec = spec.get('folder', {})
 
+    # Get the environment prefix
+    env_prefix = folder_spec.get('resource_prefix')
+    prefix = f"{env_prefix}-" if env_prefix else ""
+
     # Prepare the student_projects variable
     student_projects = []
     project_labels = project_config.get('projects', {}).get('labels', {})
@@ -53,6 +57,9 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
             project_id_prefix = f"tch-{project_id_prefix}"
         else: # For 'student' or any other type
             project_id_prefix = f"std-{project_id_prefix}"
+
+        # Prepend the environment prefix
+        project_id_prefix = f"{prefix}{project_id_prefix}"
 
         # Merge project-specific labels with the common labels
         labels = project_labels.copy()
@@ -74,6 +81,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
 
     # Default folder display name to metadata name if not provided
     folder_display_name = folder_spec.get('displayName', metadata.get('name'))
+    folder_display_name = f"{prefix}{folder_display_name}"
 
     tf_vars = {
         'folder_display_name': folder_display_name,

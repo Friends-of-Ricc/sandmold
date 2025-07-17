@@ -62,6 +62,12 @@ erDiagram
     SEAT ||--|{ USER : assigned_to
 ```
 
+## Data Flow
+
+This diagram shows the data flow from the initial YAML configuration to the final report.
+
+![Data Flow Diagram](doc/data_flow_diagram.png)
+
 ## Implementation
 
 Check `IMPLEMENTATION.md` for current state of implementation.
