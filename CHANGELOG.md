@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.5
+
+- **Feat(gh): Remove feature request document.**
+  - Removed `doc/feature-requests/P1-app-creation.md` as the feature is now tracked in issue #2.
+
 ## 0.4.4
 
 - **Fix: Correct `foobar` environment variable handling.**
