@@ -52,7 +52,7 @@ classroom-inspect CLASSROOM_YAML:
 
 # Deploy applications to a classroom
 classroom-deploy-apps CLASSROOM_YAML:
-    @WORKSPACE_NAME=`python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])`" && \
+    @WORKSPACE_NAME=$(python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])") && \
     echo "==> Using workspace: $WORKSPACE_NAME" && \
     bin/prepare_app_deployment.py --classroom-yaml {{CLASSROOM_YAML}} --output-file tmp/app_deployment.json --project-root {{RAILS_ROOT}} && \
     cd {{SANDMOLD_TF_DIR}} && \

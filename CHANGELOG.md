@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.2
+
+- **Fix(terraform): Remove random suffix from folder names.**
+  - The 4-character random suffix is no longer appended to folder display names in `iac/terraform/1a_classroom_setup/main.tf`.
+  - This ensures folder names are predictable and match the `displayName` specified in the classroom configuration.
+  - Removed the now-unused `random_string` resource and `random` provider.
+
 ## 0.5.1
 
 - **Feat(gh): Remove feature request document.**

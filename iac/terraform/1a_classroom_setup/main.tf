@@ -6,22 +6,15 @@ terraform {
       source  = "hashicorp/google"
       version = ">= 4.50.0"
     }
-    random = {
-      source = "hashicorp/random"
-      version = ">= 3.0.0"
-    }
+    
   }
 }
 
-resource "random_string" "folder_suffix" {
-  length  = 4
-  special = false
-  upper   = false
-}
+
 
 # Create the main folder for the classroom
 resource "google_folder" "classroom" {
-    display_name = "${var.folder_display_name}-${random_string.folder_suffix.result}"
+    display_name = var.folder_display_name
   parent       = var.parent_folder
   deletion_protection = false
 }

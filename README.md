@@ -17,6 +17,20 @@ Taxonomy:
 * Every app has a `blueprint.yaml` which defines relationships/dependencies and how to install it (skaffold-like).
     * For instance,
 
+Sample app:
+
+
+```
+$ just classroom-inspect-sampleclass
+[...]
+🌳 Exploring parent folder (1000371719973) in Org: 791852209422 (sredemo.dev)
+├── 📁 test-sandmold-1 (194703823593)
+│   └── 📁 ng1-class-with-apps-rgf8 (114577106522)
+│       ├── 🧩 ng1-std-failing-foobar-ro5m (ng1-std-failing-foobar-ro5m)
+│       ├── 🧩 ng1-std-foobar01-vsb5 (ng1-std-foobar01-vsb5)
+│       ├── 🧩 ng1-std-p3-v7km (ng1-std-p3-v7km)
+│       └── 🧩 ng1-tch-teacherz-lvs6 (ng1-tch-teacherz-lvs6)
+```
 ## Supported apps
 
 We intend to support the most popular solutions like:

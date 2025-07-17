@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 4.0.0"
-    }
-    null = {
-      source = "hashicorp/null"
-      version = ">= 2.1"
-    }
-  }
-}
-
 resource "null_resource" "app_deployment" {
   for_each = { for i, app in var.app_deployments : i => app if app.status == "OK" }
 
@@ -21,7 +8,7 @@ resource "null_resource" "app_deployment" {
 
   provisioner "local-exec" {
     command     = "./start.sh"
-    working_dir = abspath("${path.root}/../../applications/${each.value.app_name}")
+    working_dir = abspath("${path.module}/../../../applications/${each.value.app_name}")
     environment = each.value.environment
   }
 }

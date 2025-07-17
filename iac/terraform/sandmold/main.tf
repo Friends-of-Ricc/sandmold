@@ -15,5 +15,6 @@ module "apps_deployment" {
   source = "../2_apps_deployment"
 
   app_deployments = var.app_deployments
+  projects = module.classroom_setup.projects
   depends_on = [module.classroom_setup]
 }
