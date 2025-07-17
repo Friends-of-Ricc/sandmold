@@ -1,4 +1,4 @@
-# yaml dammit YAML support!!!!!
+# This is the SAMPLE YAML from justfile
 apiVersion: sandmold.io/v1alpha1
 kind: Classroom
 metadata:
@@ -17,6 +17,8 @@ spec:
     description: |
       Class with 2 teachers and 6 students,
       2 students per bench (in team).
+      This is also the SAMPLE classroom YAML
+      used by the justfile targets.
     teachers:
     - leoy@google.com
     - ricc@google.com

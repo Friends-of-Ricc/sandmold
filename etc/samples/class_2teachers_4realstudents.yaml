@@ -14,7 +14,7 @@ spec:
     org_id: 791852209422 # sredemo.dev
     parent_folder_id: "194703823593" # sredemo.dev / test-sandmold / sandmold-1
     billing_account_id: "01C588-4823BC-27F650"
-    #OBSOLETE displayName: 2 Teachers 4 Real Students NG
+    #OBSOLETE displayName: Two teachers 4 real students NG
     domain: sredemo.dev
     description: |
       Class with 3 teachers and 4 real students
