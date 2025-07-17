@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.6
+
+- **Feat(gh): Remove feature request document.**
+  - Removed `doc/feature-requests/p4_cute_labels.md` as the feature is now tracked in issue #3.
+
 ## 0.4.5
 
 - **Feat(gh): Remove feature request document.**
