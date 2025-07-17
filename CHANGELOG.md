@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1
+
+- **Feat(gh): Remove feature request document.**
+  - Removed `doc/schemas/future_extensions.md` as the feature is now tracked in issue #12.
+
 ## 0.5.0
 
 - **Chore: Move all FRs and bugs to GitHub issues.**
