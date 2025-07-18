@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.5
+
+- **Fix(gcloud): Ensure `get_folder_id.sh` uses project for asset search.**
+  - The `tools/get_folder_id.sh` script was failing on the `gcloud asset search-all-resources` command because it requires a project to be specified for billing and API enablement.
+  - The script now reads the `GCP_PROJECT_ID` from the `.env` file and uses it with the `--project` flag.
+  - Added a check to ensure `GCP_PROJECT_ID` is set in the `.env` file, with a clear error message if it is not.
+
 ## 0.5.4
 
 - **Fix(yaml): Corrected invalid project ID and removed non-existent application.**
