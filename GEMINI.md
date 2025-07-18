@@ -38,6 +38,10 @@ Two people are maintaining this project. Read additiona user constants as follow
 
 GCP and Terraform have some limitation. These are described in `doc/billing/CRM_LIMITS.md`.
 
+* Use "Project Factory" to create projects!
+* https://github.com/GoogleCloudPlatform/genai-factory/blob/master/cloud-run-single/0-projects/main.tf has an example with `source = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/project-factory"`
+* This terraform setup is intrinsically ephemeral - so disable any Deletion Protection. Destroying resources created hereby should be EASY.
+
 ## Github interaction
 
 Use `gh` to interact with issues.

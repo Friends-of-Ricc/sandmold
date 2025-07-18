@@ -82,6 +82,10 @@ This diagram shows the data flow from the initial YAML configuration to the fina
 
 ![Data Flow Diagram](doc/data_flow_diagram.png)
 
+## Terraform Structure
+
+The core logic of Sandmold is built upon a modular Terraform structure. This design separates infrastructure provisioning from application deployment, providing flexibility for different use cases. For a detailed explanation of the Terraform modules and their interactions, please see the [Terraform Modules Overview](doc/TERRAFORM_MODULES.md).
+
 ## Implementation
 
 Check `IMPLEMENTATION.md` for current state of implementation.
