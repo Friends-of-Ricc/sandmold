@@ -87,6 +87,17 @@ This diagram shows the data flow from the initial YAML configuration to the fina
 Check `IMPLEMENTATION.md` for current state of implementation.
 _[X] Creation of folder-based
 
+## Single User Setup
+
+For a more lightweight, cost-effective setup for a single user, you can use the `just user-up` command. This will create a single project with the necessary APIs and permissions for the labs.
+
+1.  **Create a YAML configuration file.** You can use `etc/samples/single_user/light.yaml` as a starting point.
+2.  **Run the `just` command:**
+    ```bash
+    just user-up [path/to/your/user.yaml]
+    ```
+    If you don't provide a path to a YAML file, it will default to `etc/samples/single_user/light.yaml`.
+
 ## Testing
 
 You can test the YAML quality with `just test-yaml YOUR_CONFIG.yaml`.

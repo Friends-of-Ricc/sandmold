@@ -45,3 +45,14 @@ Use `gh` to interact with issues.
 * FRs need "type": "Feature".
 * Bugs need "Type": 'bug'.
 * Mark each of them with a priority. If unsure, use "P3".
+
+### Github issue fixing
+
+If users asks you to review https://github.com/Friends-of-Ricc/sandmold/issues/XXX, please do the following:
+
+1. propose a plan to solve the issue.
+2. When user agrees on it, please write this "## Plan" on the issue itself. Since with `gh` you'll look as the human user, sign yourself with " -- Your Saint Gemini-CLI no-saga little helper" in the end. Do this for any interaction inside the issue, so people know you're a "bot". Use emojis both in signature and in your speaking, particularly the Gemini emoji at the very beginning.
+3. GO and implement it on a Feature Branch.
+4. Commit and add to the commit message the issue "https://github.com/Friends-of-Ricc/sandmold/issues/XXX".
+5. Open a Pull Request.
+6. Wait for user et al. to review it. When done, close the Merge request and add a final comment to the issue. We close it if we're done, otherwise we point out the next steps.

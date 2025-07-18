@@ -1,6 +1,6 @@
 # This is more meaningful to Riccardo as a Rails dev.
 RAILS_ROOT := justfile_directory()
-SAMPLE_CLASSROOM_YAML := "etc/samples/class_with_apps.yaml"
+SAMPLE_CLASSROOM_YAML := "etc/samples/classroom/with_apps.yaml"
 CLASSROOM_TF_DIR := 'iac/terraform/1a_classroom_setup'
 SANDMOLD_TF_DIR := 'iac/terraform/sandmold'
 
@@ -38,6 +38,10 @@ classroom-up-sampleclass:
 # Teardown a classroom environment
 classroom-down CLASSROOM_YAML:
     time bin/classroom-down.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
+
+# Setup a single-user environment
+user-up USER_YAML='etc/samples/single_user/light.yaml':
+    time bin/user-up.sh {{USER_YAML}}
 
 # teardown a classroom from default SAMPLE_CLASSROOM_YAML
 classroom-down-sampleclass:

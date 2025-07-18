@@ -25,6 +25,5 @@ variable "user_email" {
 variable "parent" {
   description = "The parent resource for the project, e.g., 'folders/12345' or 'organizations/67890'. You can often find this in the GCP console."
   type        = string
-  optional    = true
   default     = ""
 }

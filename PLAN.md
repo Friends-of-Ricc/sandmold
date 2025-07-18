@@ -1,33 +1,32 @@
-### Plan: A Modular, DRY, and Scalable Terraform Setup (v2)
+# Plan for CUJ02: Cost-Effective Single User Setup
 
-This revised plan incorporates feedback from `doc/POTENTIAL_GAPS.md` to ensure a more robust and user-friendly implementation.
+This plan outlines the steps to create a new, cost-effective single-user setup as described in issue #22.
 
-- [ ] **Phase 1: Foundational Modules and Interfaces**
-    - [ ] Create `doc/TF_INTERFACES.md` to formally document the Input/Output contract for all modules, including a Mermaid diagram.
-    - [ ] Create the core reusable module: `iac/terraform/modules/project/`. This will be the single source of truth for creating/sourcing a GCP project, enabling APIs, and setting IAM.
-    - [ ] Create the directory structure: `iac/terraform/1a_classroom_setup/`, `iac/terraform/1b_single_user_setup/`, and `iac/terraform/2_apps_deployment/`.
+## 1. Use Existing Terraform Module
 
-- [ ] **Phase 2: Scripts and Configuration**
-    - [ ] Create a `project_config.yaml` in `etc/` to define the standard set of APIs and IAM roles for any project.
-    - [ ] Create a Python script `bin/prepare_tf_vars.py` that parses the classroom YAML and `project_config.yaml` to generate the `terraform.tfvars.json` for the classroom setup.
-    - [ ] Create a second Python script `bin/generate_report.py` responsible for creating the final `REPORT.md` from Terraform's output.
+Instead of creating a new Terraform module, we will use the existing `iac/terraform/1b_single_user_setup` module. This module will be enhanced to support the new "light" configuration.
 
-- [ ] **Phase 3: Classroom Configuration (`1a_classroom_setup` - CUJ001)**
-    - [ ] This configuration will create the `google_folder`, grant `teachers` folder-level roles, and use a `for_each` loop to call the `modules/project` for each student.
-    - [ ] Its `outputs.tf` will produce a `projects` map compatible with the `2_apps_deployment` stage.
+## 2. Create a New Sample YAML Configuration
 
-- [ ] **Phase 4: Single User Configuration (`1b_single_user_setup` - CUJ002)**
-    - [ ] This will be a lean wrapper around the `modules/project` module.
-    - [ ] Its `README.md` will provide clear instructions for users, including how to use an **existing project** by setting `create_project = false`.
-    - [ ] Its `outputs.tf` will produce a `projects` map structurally identical to the classroom output.
+A new sample YAML file, `etc/samples/single_user/light.yaml`, will be created. This file will serve as the configuration for the new single-user setup. It will be a simplified version of the existing `class_with_apps.yaml` file, with only the necessary fields for a single user.
 
-- [ ] **Phase 5: Application Deployment Placeholder (`2_apps_deployment`)**
-    - [ ] This configuration will be designed to be agnostic of the preceding stage.
-    - [ ] Its placeholder `README.md` will be updated to include a **sub-plan**, outlining the future strategy for parsing `blueprint.yaml` files and translating them into deployment actions (e.g., using a Helm or Kubernetes provider).
+## 3. Create a New `just` Command
 
-- [ ] **Phase 6: Orchestration and Documentation**
-    - [ ] Create a master **wrapper script** (e.g., in `justfile` or `setup.sh`) that orchestrates the entire workflow.
-    - [ ] **Multi-Tenant Artifacts:** For each classroom setup, a dedicated directory will be created at `iac/terraform/1a_classroom_setup/workspaces/<classroom_name>/`. All artifacts for that run—including `terraform.tfvars.json`, `terraform_output.json`, `REPORT.md`, and `terraform_apply.log`—will be stored in this isolated directory to ensure true multi-tenancy.
-    - [ ] Update the main `README.md` in `iac/terraform/` to explain the new modular architecture and the workflows.
-    - [ ] The `doc/TF_INTERFACES.md` will serve as the detailed technical documentation for the module contracts.
-    - [ ] The `generate_report.py` script will create the final `REPORT.md`.
+A new command, `just user-up [yaml_file]`, will be added to the `justfile`. This command will:
+
+*   **Accept an optional YAML file as input.** If no file is provided, it will default to `etc/samples/single_user/light.yaml`.
+*   **Call a new `bin/user-up.sh` script.**
+
+## 4. Create a New `user-up.sh` Script
+
+A new Bash script, `bin/user-up.sh`, will be created to orchestrate the single-user setup. This script will be similar to the existing `classroom-up.sh` script and will:
+
+*   **Create a Terraform workspace** based on the name in the YAML file.
+*   **Parse the input YAML file.**
+*   **Generate a `terraform.tfvars.json` file.**
+*   **Run `terraform apply` in the `iac/terraform/1b_single_user_setup` directory.**
+*   **Generate a report similar to the classroom setup.**
+
+## 5. Update Documentation
+
+The `README.md` file will be updated to include instructions on how to use the new `just user-up` command.

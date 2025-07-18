@@ -1,0 +1,10 @@
+# etc/samples/single_user/light.yaml
+apiVersion: sandmold.io/v1alpha1
+kind: UserSetup
+metadata:
+  name: ricc-light-setup
+spec:
+  user_email: ricc@google.com
+  project_id_prefix: ricc-light
+  billing_account_id: "018C68-C51FDE-8581DE" # Val
+  parent_folder_id: '194703823593'
