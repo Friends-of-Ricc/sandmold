@@ -16,7 +16,6 @@ module "project" {
   create_project     = var.create_project
   project_id         = var.project_id
   billing_account_id = var.billing_account_id
-  parent             = var.parent
   services_to_enable = [
     "serviceusage.googleapis.com",
     "cloudresourcemanager.googleapis.com",

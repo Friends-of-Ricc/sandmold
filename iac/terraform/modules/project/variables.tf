@@ -20,6 +20,7 @@ variable "billing_account_id" {
 variable "parent" {
   description = "The resource to create the project under (e.g., 'folders/12345')."
   type        = string
+  default     = null
 }
 
 variable "services_to_enable" {

@@ -21,9 +21,3 @@ variable "user_email" {
   description = "Your Google Cloud email address (e.g., 'your-name@gmail.com')."
   type        = string
 }
-
-variable "parent" {
-  description = "The parent resource for the project, e.g., 'folders/12345' or 'organizations/67890'. You can often find this in the GCP console."
-  type        = string
-  default     = ""
-}

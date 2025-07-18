@@ -17,10 +17,11 @@ init:
 
 # Run tests (currently a placeholder)
 test:
-    @for yaml_file in $(find etc/samples -name '*.yaml'); do \
+    @for yaml_file in $(find etc/samples/classroom/ -name '*.yaml'); do \
         echo "--- running test on classroom from $yaml_file ---"; \
         just test-yaml $yaml_file; \
     done
+    @echo Unfortunately we dont support tests for Single User yet.
 
 # Test a classroom YAML file for common errors
 test-yaml CLASSROOM_YAML:
@@ -84,14 +85,15 @@ open-baids:
 
 # Setup all classroom environments from etc/samples/
 classroom-up-all:
-    @for yaml_file in $(find etc/samples -name '*.yaml'); do \
+    @for yaml_file in $(find etc/samples/classroom/ -name '*.yaml'); do \
         echo "--- [justfile] Setting up classroom from $yaml_file ---"; \
         just classroom-up $yaml_file; \
+
     done
 
 # Teardown all classroom environments from etc/samples/
 classroom-down-all:
-    @for yaml_file in $(find etc/samples -name '*.yaml'); do \
+    @for yaml_file in $(find etc/samples/classroom/ -name '*.yaml'); do \
         echo "--- Tearing down classroom from $yaml_file ---"; \
         just classroom-down $yaml_file; \
     done
@@ -109,10 +111,10 @@ tfplan CLASSROOM_YAML:
 
 
 test-report-for-apps:
-    @echo this is testing just the last part of just classroom-up etc/samples/class_with_apps.yaml
+    @echo this is testing just the last part of just classroom-up etc/samples/classroom/with_apps.yaml
     python3 bin/generate_report.py \
         --tf-output-json tmp/terraform_output.json \
-        --classroom-yaml etc/samples/class_with_apps.yaml \
+        --classroom-yaml etc/samples/classroom/with_apps.yaml \
         --report-path tmp/REPORT.md
 
 

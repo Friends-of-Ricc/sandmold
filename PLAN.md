@@ -1,32 +1,35 @@
-# Plan for CUJ02: Cost-Effective Single User Setup
+# Updated Plan for CUJ02: Cost-Effective Single User Setup
 
-This plan outlines the steps to create a new, cost-effective single-user setup as described in issue #22.
+This plan outlines the steps to create a new, cost-effective single-user setup as described in issue #22, with a focus on supporting org-less projects.
 
-## 1. Use Existing Terraform Module
+## 1. Enhance the Terraform Module for Org-less Projects
 
-Instead of creating a new Terraform module, we will use the existing `iac/terraform/1b_single_user_setup` module. This module will be enhanced to support the new "light" configuration.
+The existing `iac/terraform/1b_single_user_setup` module will be modified to support the creation of org-less projects.
 
-## 2. Create a New Sample YAML Configuration
+*   **`variables.tf`:**
+    *   The `parent` variable will be removed.
+    *   The `project_id` variable will be used for both creating a new project (as a prefix) and for specifying an existing project.
+*   **`main.tf`:**
+    *   The `parent` argument will be removed from the `module "project"` call. The underlying project module should handle this gracefully, creating an org-less project when no parent is specified.
 
-A new sample YAML file, `etc/samples/single_user/light.yaml`, will be created. This file will serve as the configuration for the new single-user setup. It will be a simplified version of the existing `class_with_apps.yaml` file, with only the necessary fields for a single user.
+## 2. Update the Sample YAML Configuration
 
-## 3. Create a New `just` Command
+The `etc/samples/single_user/light.yaml` file will be updated to reflect the new org-less approach.
 
-A new command, `just user-up [yaml_file]`, will be added to the `justfile`. This command will:
+*   The `parent_folder_id` field will be removed.
+*   The `project_id_prefix` will be renamed to `project_id` for consistency with the Terraform variables. An optional `existing_project_id` will be added to allow users to bring their own project.
 
-*   **Accept an optional YAML file as input.** If no file is provided, it will default to `etc/samples/single_user/light.yaml`.
-*   **Call a new `bin/user-up.sh` script.**
+## 3. Update the `prepare_user_tf_vars.py` Script
 
-## 4. Create a New `user-up.sh` Script
+The `bin/prepare_user_tf_vars.py` script will be updated to:
 
-A new Bash script, `bin/user-up.sh`, will be created to orchestrate the single-user setup. This script will be similar to the existing `classroom-up.sh` script and will:
+*   **Handle both new and existing projects.** It will check for the presence of `existing_project_id` in the YAML. If it exists, it will set `create_project = false` in the `tfvars` file. Otherwise, it will set `create_project = true`.
+*   **Remove the `parent` variable** from the generated `tfvars` file.
 
-*   **Create a Terraform workspace** based on the name in the YAML file.
-*   **Parse the input YAML file.**
-*   **Generate a `terraform.tfvars.json` file.**
-*   **Run `terraform apply` in the `iac/terraform/1b_single_user_setup` directory.**
-*   **Generate a report similar to the classroom setup.**
+## 4. Update the `just` Command and `user-up.sh` Script
+
+The `just user-up` command and the `bin/user-up.sh` script will remain largely the same, but will now orchestrate the new org-less setup.
 
 ## 5. Update Documentation
 
-The `README.md` file will be updated to include instructions on how to use the new `just user-up` command.
+The `README.md` file will be updated to include instructions on how to use the new org-less single-user setup, with examples for both creating a new project and using an existing one.

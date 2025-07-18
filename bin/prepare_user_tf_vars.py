@@ -19,11 +19,17 @@ def main(user_yaml_path, output_file, project_root):
 
     spec = user_config.get('spec', {})
 
+    create_project = True
+    project_id = spec.get('project_id')
+    if 'existing_project_id' in spec:
+        create_project = False
+        project_id = spec.get('existing_project_id')
+
     tf_vars = {
-        'project_id': spec.get('project_id_prefix'),
+        'create_project': create_project,
+        'project_id': project_id,
         'user_email': spec.get('user_email'),
         'billing_account_id': spec.get('billing_account_id'),
-        'parent': f"folders/{spec.get('parent_folder_id')}",
     }
 
     if output_file:

@@ -58,11 +58,10 @@ echo "--> Getting Terraform output..."
 
 # --- Step 5: Generate the final report ---
 echo "--> Generating final report..."
-# TODO: Create a generate_user_report.py script
-# uv run ./bin/generate_user_report.py \
-#     --tf-output-json "${TF_OUTPUT_FILE}" \
-#     --user-yaml "${USER_YAML}" \
-#     --report-path "${REPORT_FILE}"
+uv run ./bin/generate_user_report.py \
+    --tf-output-json "${TF_OUTPUT_FILE}" \
+    --user-yaml "${USER_YAML}" \
+    --report-path "${REPORT_FILE}"
 
 echo "--- User Setup Complete ---"
 echo "See ${REPORT_FILE} for details."
