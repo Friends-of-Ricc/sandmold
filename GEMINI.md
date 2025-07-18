@@ -4,7 +4,7 @@ This Google Cloud project is about setting up an Operator-focused Sandbox with t
 2. Allow easy "terraforming" of Lab environemnts which are adapt for Hackathons, workshops, et all. Both customers (with
    billing enabled) and free (low cost, onramp-enabled) are foreseen.
 3. Every Lab corresponds to a Google Cloud Folder
-4. Let's start building incrementally, leveraging `IaC`.
+
 
 ## In other words
 
@@ -12,6 +12,8 @@ A Sandboxed, OSS Playground which anyone can use (Googlers and customers!), whic
 Can be configured for expensive long-running workshops (weeks, months) or short-lived, cheap onramp-compliant mini-demos.
 We will use this to demonstrate Google Cloud Assist within these sandboxes.
 The architecture is incredibly modular, allowing for more people to add more scripts/modus operandi for this.
+
+**IMPORTANT!**. The high level Terraform vision is maintained in `doc/TERRAFORM_MODULES.md`.
 
 ## Other readings
 
@@ -31,8 +33,9 @@ Technically, every lab setup consists in a `classroom` will need two inputs:
 
 Two people are maintaining this project. Read additiona user constants as follows:
 
-* If the username (`$USER`) is "ricc", then read further instructions in "RICCARDO.md"
-* If the username is "leoy", then read further instructions in "LEONID.md"
+* At startup, check username with `whoami`.
+* If the username (`$USER`) is `ricc`, then read further instructions in "RICCARDO.md".
+* If the username is `leoy`, then read further instructions in "LEONID.md".
 
 ## GCP and Terraform
 
