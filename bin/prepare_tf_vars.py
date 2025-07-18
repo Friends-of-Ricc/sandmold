@@ -66,11 +66,23 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
         labels['desk-type'] = desk_type
 
         if project_id_prefix and users:
+            apps = []
+            for app in bench.get('apps', []):
+                app_name = app.get('name')
+                app_env = {}
+                if 'env' in bench:
+                    for env_var in bench.get('env', []):
+                        app_env[env_var.get('name')] = env_var.get('value')
+                apps.append({
+                    'name': app_name,
+                    'env': app_env
+                })
+
             student_projects.append({
                 'project_id_prefix': project_id_prefix,
                 'users': [f"user:{user}" for user in users],
                 'labels': labels,
-                'apps': bench.get('apps', [])
+                'apps': apps
             })
 
     # Prepare the iam_permissions map
