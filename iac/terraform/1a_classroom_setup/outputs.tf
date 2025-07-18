@@ -6,6 +6,7 @@ output "projects" {
     for key, proj in module.project : key => {
       project_id     = proj.project_id
       project_number = proj.project_number
+      apps           = local.student_projects_map[key].apps
     }
   }
 }

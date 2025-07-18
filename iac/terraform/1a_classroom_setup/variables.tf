@@ -28,6 +28,10 @@ variable "student_projects" {
     project_id_prefix = string
     users             = list(string)
     labels            = map(string)
+    apps = optional(list(object({
+      name = string
+      env  = optional(map(string))
+    })), [])
   }))
   default = []
 }
