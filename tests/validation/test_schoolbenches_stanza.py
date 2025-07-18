@@ -68,8 +68,17 @@ def validate_schoolbenches(benches_spec, legal_apps):
         if 'app' in bench:
             all_apps_to_check.append(bench['app'])
 
-        for app_name in all_apps_to_check:
-            if app_name not in legal_apps:
+        for app_item in all_apps_to_check:
+            app_name = None
+            if isinstance(app_item, str):
+                app_name = app_item
+            elif isinstance(app_item, dict) and 'name' in app_item:
+                app_name = app_item['name']
+            else:
+                errors.append(f"Bench {i}: Invalid item in 'apps' list. Must be a string or a dictionary with a 'name' key.")
+                continue
+
+            if app_name and app_name not in legal_apps:
                 errors.append(f"Bench {i}: Application '{app_name}' is not a valid application. It must correspond to a directory in the 'applications/' folder.")
 
     return errors

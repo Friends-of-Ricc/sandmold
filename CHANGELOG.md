@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.3
+
+- **Fix(terraform): Decouple app deployment from `terraform apply`.**
+  - The `just classroom-deploy-apps` command was failing due to a race condition where `gcloud` commands would execute before a new project was fully ready for API calls.
+  - Removed the `local-exec` provisioner from the `2_apps_deployment` Terraform module.
+  - Created a new Python script `bin/execute_app_deployment.py` to handle the application deployment logic.
+  - The `justfile` recipe for `classroom-deploy-apps` is now a two-step process:
+    1. `terraform apply` creates the resources and outputs deployment information.
+    2. The new Python script reads the output and executes the application `start.sh` scripts.
+  - This change makes the deployment process more robust by ensuring infrastructure is fully provisioned before attempting to deploy applications.
+
 ## 0.5.2
 
 - **Fix(terraform): Remove random suffix from folder names.**

@@ -17,9 +17,10 @@ init:
 
 # Run tests (currently a placeholder)
 test:
-    #echo "No tests defined yet."
-    just test-yaml etc/samples/class_2teachers_6students.yaml
-    just test-yaml etc/samples/class_2teachers_4realstudents.yaml
+    @for yaml_file in $(find etc/samples -name '*.yaml'); do \
+        echo "--- running test on classroom from $yaml_file ---"; \
+        just test-yaml $yaml_file; \
+    done
 
 # Test a classroom YAML file for common errors
 test-yaml CLASSROOM_YAML:
@@ -54,14 +55,22 @@ classroom-inspect CLASSROOM_YAML:
 classroom-deploy-apps CLASSROOM_YAML:
     @WORKSPACE_NAME=$(python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])") && \
     echo "==> Using workspace: $WORKSPACE_NAME" && \
+    echo "==> Preparing app deployment variables..." && \
     bin/prepare_app_deployment.py --classroom-yaml {{CLASSROOM_YAML}} --output-file tmp/app_deployment.json --project-root {{RAILS_ROOT}} && \
     cd {{SANDMOLD_TF_DIR}} && \
     terraform init && \
     terraform workspace select -or-create $WORKSPACE_NAME && \
+    echo "==> Applying Terraform configuration to create resources..." && \
     terraform apply \
       -var-file="{{RAILS_ROOT}}/iac/terraform/1a_classroom_setup/workspaces/$WORKSPACE_NAME/terraform.tfvars.json" \
       -var="app_deployments=$(cat {{RAILS_ROOT}}/tmp/app_deployment.json)" \
-      -auto-approve
+      -auto-approve && \
+    echo "==> Extracting deployment details from Terraform output..." && \
+    terraform output -json > {{RAILS_ROOT}}/tmp/terraform_output_apps.json && \
+    echo "==> Executing application deployment scripts..." && \
+    cd {{RAILS_ROOT}} && \
+    python3 bin/execute_app_deployment.py --json-file tmp/terraform_output_apps.json
+
 
 # Find open, non-Google billing accounts
 open-baids:
