@@ -34,20 +34,29 @@ folder:
   parent_folder_id: "123456789012"
   billing_account_id: "012345-67890A-BCDEF0"
 schoolbenches:
-  - name: "student-project"
-    owners: ["student1@example.com"]
-    apps: ["app1", "app2"]
-  - name: "research-project"
-    owners: ["student2@example.com", "prof@example.com"]
-    apps: ["app3"]
+  - name: "student-project-01"
+    owners:
+    - student1@example.com
+    - prof@example.com
+    apps:
+    - app1
+    - app2
+  - name: student-project-01
+    owners:
+    - student2@example.com
+    - prof@example.com
+    apps:
+    - app3
 </code></pre>
     </td>
     <td valign="top">A simple <code>terraform.tfvars</code> file or equivalent YAML defining a single project.
-      <pre><code># INPUT for 1b (user.yaml)
+      <pre><code># Sample INPUT for module 1b (single-user.yaml)
 billing_account_id: "012345-67890A-BCDEF0"
 project_id_suffix: "my-single-project"
 user_email: "workshop-single-user@example.com"
-applications: ["app1", "app4"]
+applications:
+- app1
+- app4
 </code></pre>
     </td>
   </tr>
@@ -97,3 +106,9 @@ deployment_status:
 ```
 
 This modular design allows for a clear separation of concerns between infrastructure provisioning and application deployment. The consistent interface between the setup and deployment stages ensures that application deployment logic can be reused regardless of the initial setup method.
+
+## Open points
+
+* [Riccardo] I'm considering adding a step 0 to set up Terraformm properly. See https://github.com/Friends-of-Ricc/sandmold/issues/22 CUJ01
+* [Riccardo] I'm still unsure if step 2 should be TF, bash, or a mix of the 2 (`local-exec`).
+* [Riccardo] The 1 -> 2 is not mirroring the FAST approach described and auspicated in https://github.com/Friends-of-Ricc/sandmold/issues/22 CUJ02
