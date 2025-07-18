@@ -69,7 +69,8 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
             student_projects.append({
                 'project_id_prefix': project_id_prefix,
                 'users': [f"user:{user}" for user in users],
-                'labels': labels
+                'labels': labels,
+                'apps': bench.get('apps', [])
             })
 
     # Prepare the iam_permissions map

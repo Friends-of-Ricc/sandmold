@@ -28,3 +28,5 @@ tmp/
 iac/terraform/*/workspaces/
 FUTURE_QUESTIONS_FOR_GEMINI.md
 .git-privatize
+.env.yaml
+t

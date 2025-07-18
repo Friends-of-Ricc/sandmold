@@ -47,7 +47,7 @@ echo "Searching for folder with display name '${FOLDER_NAME}' under organization
 FOLDER_ID=$(gcloud resource-manager folders list \
   --organization="${ORGANIZATION_ID}" \
   --filter="displayName=${FOLDER_NAME}" \
-  --format="value(name)" 2>/dev/null)
+  --format="value(name)")
 
 if [ -z "${FOLDER_ID}" ]; then
   echo "Folder not found at the top level. Searching recursively..." >&2
@@ -59,7 +59,7 @@ if [ -z "${FOLDER_ID}" ]; then
     --scope="organizations/${ORGANIZATION_ID}" \
     --asset-types="cloudresourcemanager.googleapis.com/Folder" \
     --query="displayName=${FOLDER_NAME}" \
-    --format="value(name)" 2>/dev/null | head -n 1)
+    --format="value(name)" | head -n 1)
 fi
 
 

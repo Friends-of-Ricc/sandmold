@@ -10,7 +10,7 @@ metadata:
 spec:
   folder:
     org_id: 791852209422
-    parent_folder_id: '1000371719973'
+    parent_folder_id: '194703823593'
     billing_account_id: "010405-23D342-257054"
     #OBSOLETE displayName: ng2teachers-3x2students
     domain: sredemo.dev
