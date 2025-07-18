@@ -1,6 +1,6 @@
 # This is more meaningful to Riccardo as a Rails dev.
 RAILS_ROOT := justfile_directory()
-SAMPLE_CLASSROOM_YAML := "etc/samples/class_2teachers_6students.yaml"
+SAMPLE_CLASSROOM_YAML := "etc/samples/class_with_apps.yaml"
 CLASSROOM_TF_DIR := 'iac/terraform/1a_classroom_setup'
 SANDMOLD_TF_DIR := 'iac/terraform/sandmold'
 
@@ -101,3 +101,16 @@ test-report-for-apps:
         --tf-output-json tmp/terraform_output.json \
         --classroom-yaml etc/samples/class_with_apps.yaml \
         --report-path tmp/REPORT.md
+
+
+auth:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "This script will authenticate with Google Cloud using the GCLOUD_IDENTITY specified in .env or set up by you"
+    if [ -f .env ]; then
+        source .env
+    else
+        echo ".env file not found. I hope you set up GCLOUD_IDENTITY manually."
+    fi
+    echo "Authenticating with Google Cloud as $GCLOUD_IDENTITY"
+    gcloud auth login "$GCLOUD_IDENTITY" # --no-launch-browser
