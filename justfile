@@ -122,4 +122,4 @@ auth:
         echo ".env file not found. I hope you set up GCLOUD_IDENTITY manually."
     fi
     echo "Authenticating with Google Cloud as $GCLOUD_IDENTITY"
-    gcloud auth login "$GCLOUD_IDENTITY" # --no-launch-browser
+    gcloud auth login "$GCLOUD_IDENTITY" --force # --no-launch-browser

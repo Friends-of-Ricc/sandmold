@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.4
+
+- **Fix(yaml): Corrected invalid project ID and removed non-existent application.**
+  - In `etc/samples/class_with_apps.yaml`, the project ID `p3` was renamed to `project-three` to meet the 6-30 character length requirement.
+  - The non-existent application `non_existent_app` was removed from the same file.
+  - These changes resolve the validation errors that were causing the `just test` command to fail.
+
 ## 0.5.3
 
 - **Fix(terraform): Decouple app deployment from `terraform apply`.**
@@ -222,7 +229,7 @@
 ## 0.0.5
 
 - Implemented a modular and robust Terraform infrastructure for provisioning Google Cloud resources.
-- Supports two distinct workflows: multi-project classroom setup (CUJ001) and single-user setup (CUJ002).
+- Supports two distinct workflows: a multi-project classroom setup (CUJ001) and a single-user setup (CUJ002).
 - Created a reusable `project` module as the single source of truth for project configuration.
 - Added a `just setup-classroom` command to orchestrate the entire classroom provisioning workflow.
 

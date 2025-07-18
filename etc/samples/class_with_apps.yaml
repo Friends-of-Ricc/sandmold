@@ -26,29 +26,28 @@ spec:
       - name: SLEEP_TIME
         value: 10
   schoolbenches:
-    - project: teacherz  # will be padded by some random hex/numb
+    - project: cattedra
       desk-type: teacher
       apps:
       - name: bank-of-anthos
       - name: sandmold-web
       seats:
       - ricc@google.com
-    - project: foobar01  # will be padded by some random hex/numb, -> "boa01-123abc"
+    - project: foobar01-good
       seats:
       - student01@gmail.com
       - student02@gmail.com
-    - project: "p3"
+    - project: "foobar02-good"
       seats:
         - ricc@google.com
         - leoy@google.com
       apps:
         - name: foobar
-        - name: non_existent_app
         - name: online-boutique
       env:
       - name: AUTO_FAIL
         value: "false"
-    - project: fail-foobar
+    - project: foobar03-fail
       seats:
       - admin@sredemo.dev
       env:
