@@ -38,13 +38,9 @@ spec:
       seats:
       - student01@gmail.com
       - student02@gmail.com
-    - project: "foobar02-good"
-      seats:
-        - ricc@google.com
-        - leoy@google.com
       apps:
-        - name: foobar
-        - name: online-boutique
+      - name: foobar
+      - name: online-boutique
       env:
       - name: AUTO_FAIL
         value: "false"
