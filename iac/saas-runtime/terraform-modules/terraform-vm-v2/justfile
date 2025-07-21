@@ -1,0 +1,10 @@
+
+# Justfile for managing Terraform files
+list:
+    just -l
+
+# Zup the Terraform files as per https://cloud.google.com/saas-runtime/docs/deploy-vm
+zip:
+    zip terraform-files.zip main.tf outputs.tf variables.tf versions.tf
+
+# https://console.cloud.google.com/artifacts/docker/arche-275907/europe-west1/ricc-saas-prova2?inv=1&invt=Ab3Vdw&project=arche-275907

@@ -6,6 +6,12 @@ For all this effort, consider CWD to be `iac/saas-runtime` relatively to the git
 
 I want to create 3 SaaS offerings.
 
+## Rules of the game
+
+* DRY variables and constants in `.env`
+* do NOT write `.env` but ask user to do it as needed.
+* Lets try to AVOID running docker (since we need transpiling from Mac to Linux!) unless strongly needed.
+
 ## Zero SaaS - The "Hello World"
 
 *   **Purpose**: A simple, known-good starting point to verify the SaaS Runtime is functioning correctly.
@@ -41,46 +47,14 @@ I want to create 3 SaaS offerings.
 
 For v0, we will create the full stack for each SaaS offering. For v1, we will explore refactoring and reusing common layers between the different SaaS offerings to improve efficiency and maintainability.
 
+## Plan of action
+
+1. Try to reproduce the ENTIRE hellow world in  https://cloud.google.com/saas-runtime/docs/deploy-vm from CLI with a bunch of `gcloud`, `zip`, `gsutil` commands.
+2. Show me an end to end where I change 1 line of Terraform code in `terraform-modules/terraform-vm`
+   propagates the update to a deployed Unit itself
+
 ## Docs
 
 *   End to end tutorial: https://cloud.google.com/saas-runtime/docs/deploy-vm . Check here for order of actions to do:
-
-### SaaS Runtime Entity Creation Order
-
-1.  **Prerequisites**
-    *   Enable required APIs: SaaS Runtime, Artifact Registry, Infrastructure Manager, Developer Connect, Cloud Build, Cloud Storage.
-    *   Create a Service Account with "Owner" role.
-    *   Grant permissions to the SaaS runner service account (`service-PROJECT-NUMBER@gcp-sa-saasservicemgmt.iam.gserviceaccount.com`).
-
-2.  **SaaS Workflow**
-    1.  **Create Artifact Registry Repository**: This will store your Terraform blueprints.
-        ```bash
-        gcloud artifacts repositories create REPO_NAME --repository-format=docker --location=REGION
-        ```
-    2.  **Create SaaS Offering**: This is the top-level resource for your service.
-        ```bash
-        gcloud beta saas-runtime offerings create OFFERING_NAME --display-name="My SaaS Offering" --publisher-id=PUBLISHER_ID
-        ```
-    3.  **Create Unit Kind**: This defines the type of resource you want to provision (e.g., a VM, a GKE cluster).
-        ```bash
-        gcloud beta saas-runtime unit-kinds create UNIT_KIND_NAME --offering=OFFERING_NAME --display-name="My Unit Kind" --blueprint-repo=AR_REPO_URL
-        ```
-    4.  **Create a Release**: This is a specific version of your Unit Kind, tied to a specific Terraform blueprint.
-        ```bash
-        gcloud beta saas-runtime releases create RELEASE_NAME --unit-kind=UNIT_KIND_NAME --offering=OFFERING_NAME --blueprint-version=BLUEPRINT_VERSION
-        ```
-    5.  **Provision a Unit**: This creates an actual instance of your service.
-        ```bash
-        gcloud beta saas-runtime units create UNIT_NAME --release=RELEASE_NAME --unit-kind=UNIT_KIND_NAME --offering=OFFERING_NAME --parameters=KEY=VALUE,...
-        ```
-
-*   Test project: `arche-275907`
-
-## Permissions
-
-Comands i needed tun run:
-
-```bash
-gcloud projects add-iam-policy-binding arche-275907 --member="user:admin@sredemo.dev" --role="roles/serviceusage.serviceUsageAdmin" --condition none
-
-```
+* I've documented how SaaS Runtime work in `ABOUT_SAAS_RUNTIME.md`. Ensure you read that at startup.
+* Test project: `arche-275907`.
