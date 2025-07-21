@@ -30,3 +30,4 @@ FUTURE_QUESTIONS_FOR_GEMINI.md
 .git-privatize
 .env.yaml
 t
+.DS_Store
