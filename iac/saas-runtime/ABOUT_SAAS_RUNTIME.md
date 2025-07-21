@@ -88,3 +88,7 @@ Here's a summary of how Unit Kinds are modeled and packaged:
 *   **Dependencies and Variable Mapping**: When creating unit kinds, you can define dependencies between them and map input and output variables to facilitate communication between different unit kinds within a SaaS offering.
 
 The document does not provide specific `gcloud` commands for these operations. It guides users through the console interface for creating and configuring unit kinds, including steps for uploading zip archives, linking Git repositories, or selecting existing OCI images from Artifact Registry.
+
+## Audit logs
+
+SaaS Service Management audit logs use the service name `saasservicemgmt.googleapis.com`. Filter for this service:
