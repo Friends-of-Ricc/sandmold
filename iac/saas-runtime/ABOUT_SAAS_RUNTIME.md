@@ -89,6 +89,67 @@ Here's a summary of how Unit Kinds are modeled and packaged:
 
 The document does not provide specific `gcloud` commands for these operations. It guides users through the console interface for creating and configuring unit kinds, including steps for uploading zip archives, linking Git repositories, or selecting existing OCI images from Artifact Registry.
 
-## Audit logs
+## Updating SaaS Offerings (Rollouts)
 
-SaaS Service Management audit logs use the service name `saasservicemgmt.googleapis.com`. Filter for this service:
+To update a SaaS offering, you need to follow these steps: create a release, create a rollout kind, and then create a rollout.
+
+**Operational Information:**
+*   SaaS Runtime uses **rollouts** to update multiple provisioned units.
+*   Rollouts target units based on their `UnitKind` and can use filters to target specific subsets of units.
+*   A **rollback** can be performed by upgrading units to a previous release.
+*   The **error budget** feature (`ErrorBudget` in `RolloutKind`) can automatically pause a rollout if the number or percentage of unit update failures exceeds a configured threshold.
+
+**`gcloud` Commands:**
+
+1.  **Create a Release:**
+    A release represents a specific version of your SaaS application, defined by a blueprint package and its configurations.
+    ```bash
+    gcloud beta saas-runtime releases create RELEASE_NAME \
+        --blueprint-package=BLUEPRINT_PACKAGE_URI \
+        --unit-kind=UNIT_KIND \
+        [--location=LOCATION] \
+        [--labels=[KEY=VALUE,...]] \
+        [--upgradeable-from-releases=[RELEASE_NAME,...]] \
+        [--input-variable-defaults=[variable=VARIABLE,value=VALUE,type=TYPE,...]]
+    ```
+    *   `RELEASE_NAME`: The ID of the release.
+    *   `BLUEPRINT_PACKAGE_URI`: The URI of the blueprint package (OCI image).
+    *   `UNIT_KIND`: The ID or fully qualified identifier for the unit kind.
+    *   `LOCATION`: (Optional) The location where you want to create the release.
+    *   `LABELS`: (Optional) Labels to apply to the release.
+    *   `UPGRADEABLE_FROM_RELEASES`: (Optional) A comma-separated list of release names that specifies which existing releases can be updated with the new release.
+    *   `INPUT_VARIABLE_DEFAULTS`: (Optional) Default values for input variables.
+
+2.  **Create a Rollout Kind:**
+    A rollout kind serves as a template for how your release is deployed to your units, defining the rollout strategy and potentially an error budget.
+    ```bash
+    gcloud beta saas-runtime rollout-kinds create ROLLOUT_KIND_NAME \
+        --unit-kind=UNIT_KIND \
+        --location=LOCATION \
+        --rollout_strategy=ROLLOUT_STRATEGY \
+        [--error_budget=ERROR_BUDGET] \
+        [--unit_filter=UNIT_FILTER] \
+        [--update_unit_kind_default=UPDATE_UNIT_KIND_DEFAULT]
+    ```
+    *   `ROLLOUT_KIND_NAME`: The name of the rollout kind.
+    *   `UNIT_KIND`: Defines which units you want to apply releases to.
+    *   `LOCATION`: The location where you want to create your rollout kind.
+    *   `ROLLOUT_STRATEGY`: Defines the rollout strategy (e.g., `Google.Cloud.Simple.AllAtOnce`, `Google.Cloud.Simple.OneLocationAtATime`).
+    *   `ERROR_BUDGET`: (Optional) Configuration for error budget.
+    *   `UNIT_FILTER`: (Optional) CEL formatted filter string used against units.
+    *   `UPDATE_UNIT_KIND_DEFAULT`: (Optional) Configuration for updating the unit kind.
+
+3.  **Create a Rollout:**
+    A rollout specifies the release you want to update your units with, using a defined rollout kind.
+    ```bash
+    gcloud beta saas-runtime rollouts create ROLLOUT_NAME \
+        --rollout-kind=ROLLOUT_KIND_NAME \
+        --release=RELEASE_NAME \
+        --location=LOCATION
+    ```
+    *   `ROLLOUT_NAME`: The name of the rollout.
+    *   `ROLLOUT_KIND_NAME`: Defines which rollout kind to use.
+    *   `RELEASE_NAME`: Defines the release binary to deploy.
+    *   `LOCATION`: The location where you want to create your rollout.
+
+```
