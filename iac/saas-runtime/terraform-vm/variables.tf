@@ -13,7 +13,7 @@ variable "zone" {
 variable "instance_name" {
   description = "Name for the Compute Engine instance"
   type        = string
-  default = "saas-runtime-vm-instance"
+  default = "sandmold-test-vm-instance"
 }
 
 variable "machine_type" {
