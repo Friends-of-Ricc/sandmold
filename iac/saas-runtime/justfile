@@ -1,0 +1,28 @@
+
+
+# list targets
+list:
+    just -l
+
+# create SaaS Runtime instance
+create-saas:
+    #!/bin/bash
+    source .env
+    bin/01-create-saas.sh
+
+check:
+    #!/bin/bash
+    bin/02-check-saas.sh
+
+create-classroom-folder-unit-kind:
+    #!/bin/bash
+    source .env
+    bin/03-create-unit-kind.sh classroom-folder terraform-classroom-folder
+
+build-and-push-blueprint:
+    #!/bin/bash
+    source .env
+    bin/05-build-and-push-blueprint.sh terraform-classroom-folder
+
+docker check:
+    docker ps
