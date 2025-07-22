@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Creates the SaaS Offering (using the 'saas' command).
+# Creates the SaaS Offering.
 #
 
 set -euo pipefail
