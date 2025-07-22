@@ -1,0 +1,11 @@
+
+list:
+  just --list
+
+update:
+	./generate_readme.sh
+
+show:
+  glow README.md
+
+update-and-show: update show

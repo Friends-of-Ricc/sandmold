@@ -19,82 +19,81 @@ for app_dir in */; do
     if [ -d "$app_dir" ]; then
         app_name=$(basename "$app_dir")
 
-        # Ignore private directories
-        if [[ "$app_name" == .* ]]; then
+        # Ignore private directories and files
+        if [[ "$app_name" == .* ]] || [[ ! -d "$app_dir" ]]; then
             continue
         fi
 
-        # Skip the script's own directory and special directories
-        if [[ "$app_name" == "t" ]] || [[ "$app_name" == "templates" ]] || [[ "$app_name" == "generate_readme.sh" ]]; then
+        # Skip special directories
+        if [[ "$app_name" == "t" ]] || [[ "$app_name" == "templates" ]] || [[ "$app_name" == "generate_readme.sh" ]] || [[ "$app_name" == "_README.before.md" ]] || [[ "$app_name" == "_README.after.md" ]]; then
             continue
         fi
 
-        # Extract description and emoji from blueprint.yaml
+        blueprint_path="$app_dir/blueprint.yaml"
+        errors_list=()
+        script_emojis=()
         description=""
         emoji="📦"
-        blueprint_path="$app_dir/blueprint.yaml"
 
+        # First, check for all potential errors
+        if ! [ -f "$blueprint_path" ]; then
+            errors_list+=("blueprint.yaml")
+        fi
+        if ! [ -f "$app_dir/start.sh" ]; then
+            errors_list+=("start.sh")
+        fi
+        if ! [ -f "$app_dir/stop.sh" ]; then
+            errors_list+=("stop.sh")
+        fi
+        if ! [ -f "$app_dir/status.sh" ]; then
+            errors_list+=("status.sh")
+        fi
+
+        # Now, get details if files exist
         if [ -f "$blueprint_path" ]; then
-            # Get description
             if grep -q "description: *|" "$blueprint_path"; then
-                # Multi-line description
-                description=$(awk '/description: *\|/ {getline; print; exit}' "$blueprint_path" | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
+                description=$(awk '/description: *\|/ {f=1; next} f==1 && NF {print; exit}' "$blueprint_path" | sed -e 's/^[ 	]*//' -e 's/[ 	]*$//')
             else
-                # Single-line description
-                description=$(grep -m 1 "description:" "$blueprint_path" | cut -d: -f2- | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//' -e 's/^"//' -e 's/"$//')
+                description=$(grep -m 1 "description:" "$blueprint_path" | cut -d: -f2- | sed -e 's/^[ 	]*//' -e 's/[ 	]*$//' -e 's/^"//' -e 's/"$//')
             fi
 
-            # Get emoji
-            emoji_line=$(grep "emoji:" "$blueprint_path" || true)
+            emoji_line=$(grep "emoji:" "$blueprint_path" | grep -v '^ *#' || true)
             if [ -n "$emoji_line" ]; then
-                emoji_val=$(echo "$emoji_line" | cut -d: -f2- | tr -d " \'\"")
+                emoji_val=$(echo "$emoji_line" | cut -d: -f2- | sed -e 's/^[ 	]*//' -e 's/[ 	]*$//' -e 's/^"//' -e 's/"$//' -e "s/'//g")
                 if [ -n "$emoji_val" ]; then
                     emoji=$emoji_val
                 fi
             fi
         fi
 
-        # Check for scripts
-        start_script="-"
-        stop_script="-"
-        status_script="-"
-        errors=""
-
         if [ -f "$app_dir/start.sh" ]; then
-            start_script="✅"
-        else
-            errors+=" start.sh"
+            script_emojis+=("🚀")
         fi
-
         if [ -f "$app_dir/stop.sh" ]; then
-            stop_script="✅"
-        else
-            errors+=" stop.sh"
+            script_emojis+=("💥")
         fi
-
         if [ -f "$app_dir/status.sh" ]; then
-            status_script="✅"
-        else
-            errors+=" status.sh"
+            script_emojis+=("ℹ️")
         fi
 
-        # App Name and link
+        # Build the line
         app_line="* $emoji **$app_name**"
         if [ -f "$blueprint_path" ]; then
             app_line+=" ([blueprint]($app_name/blueprint.yaml))"
         fi
 
-        # Description
         if [ -n "$description" ]; then
-            app_line+=": $description"
+            app_line+=": \"*$description*\""
         fi
 
-        # Scripts
-        app_line+=" | Create: $start_script, Destroy: $stop_script, Status: $status_script"
+        if [ ${#script_emojis[@]} -gt 0 ]; then
+            emojis_str=$(IFS=' '; echo "${script_emojis[*]}")
+            app_line+=" | $emojis_str"
+        fi
 
-        # Errors
-        if [ -n "$errors" ]; then
-            app_line+=" | Errors: missing$errors"
+        if [ ${#errors_list[@]} -gt 0 ]; then
+            errors_str=$(IFS=' '; echo "${errors_list[*]}")
+            app_line+=" | Errors: missing $errors_str"
         fi
 
         echo "$app_line" >> "$README"
