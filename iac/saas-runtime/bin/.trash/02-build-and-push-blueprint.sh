@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .env
+source .envrc
 
 # The directory containing the Terraform module and cloudbuild.yaml
 TERRAFORM_DIR="terraform-modules/terraform-vm"

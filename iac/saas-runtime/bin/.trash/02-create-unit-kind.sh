@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .env
+source .envrc
 
 # --- Delete existing Unit Kind (if it exists) ---
 echo "Attempting to delete existing Unit Kind '${UNIT_KIND_NAME}' (if it exists)..."
