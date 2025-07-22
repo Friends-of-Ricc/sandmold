@@ -162,3 +162,29 @@ To update a SaaS offering, you need to follow these steps: create a release, cre
 *   **Rollout kind**: A rollout kind functions as a description of how to deploy new releases to units. For example, you can set the rollout to progress by specific increments in the regions where the units are available.
 *   **Tenant**: A tenant represents a dedicated instance of the SaaS offering. It acts as a container for all the units (containing applications, databases, and infrastructure components) that you provision and manage.
 *   **Feature flag**: Feature flags toggle the state or other binary behaviors of a feature. Feature flags allow you to change feature availability or feature behavior without redeploying or restarting the application.
+
+## API enablement
+
+Enable required APIs
+
+You need to enable the following APIs to use SaaS runtime.
+* SaaS Runtime API
+* Artifact Registry API
+* Infrastructure Manager API
+* Developer Connect API
+* Cloud Build API
+* Cloud Storage API
+
+Also you need to enable the SA enablement:
+* I've added the SA name to `.env.post` (so you just need to source it AFTER .env if available, since it depends on ProjNumb).
+* Docs are here https://cloud.google.com/saas-runtime/docs/overview
+
+### SA Required Permissions
+
+SaaS Runtime requires specific IAM roles to be granted to this service account:
+
+* `roles/artifactregistry.admin`: Grants full control of Artifact Registry
+* `roles/storage.admin`: Grants full control of Cloud Storage.
+* `roles/config.admin`: Grants full control of Infrastructure Manager.
+* `roles/iam.serviceAccountShortTermTokenMinter`: Grants Infrastructure Manager permission to start Cloud Build jobs.
+* `roles/iam.serviceAccountUser`: Grants SaaS Runtime usage of Infrastructure Manager. Allows Infrastructure Manager to create Terraform resources.

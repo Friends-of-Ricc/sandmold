@@ -16,7 +16,7 @@ check:
     source .env
 
     echo -e "\n\033[0;36m🗂️ Listing Project config:\033[0m"
-    gcloud config list
+    gcloud config list 2>/dev/null | egrep "account =|project ="
 
     echo -e "\n\033[0;36m🚀 Listing SaaS instances (filtered by 'sandmold'):\033[0m"
     gcloud beta saas-runtime saas list --filter="name~sandmold" --format="table(name,createTime,updateTime)" --location=global

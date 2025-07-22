@@ -61,4 +61,4 @@ For v0, we will create the full stack for each SaaS offering. For v1, we will ex
 
 *   End to end tutorial: https://cloud.google.com/saas-runtime/docs/deploy-vm . Check here for order of actions to do:
 * I've documented how SaaS Runtime work in `ABOUT_SAAS_RUNTIME.md`. Ensure you read that at startup.
-* Test project: `arche-275907`.
+* Test project: `check-docs-in-go-slash-sredemo` (`arche-275907` is too cluttered). It's a test project so you can experiment as you wish on it.
