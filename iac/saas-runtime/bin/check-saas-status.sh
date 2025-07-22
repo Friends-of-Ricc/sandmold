@@ -22,3 +22,6 @@ gcloud artifacts docker images list "${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOO
 echo -e "\n\033[0;36m📦 Listing Units (filtered by 'sandmold'):\033[0m"
 gcloud beta saas-runtime units list --filter="name~sandmold" --format="value(name,unitKind,state)" --location="${GOOGLE_CLOUD_REGION}"
 
+echo -e "\n\033[0;36m🏷️  Listing Releases (filtered by 'v'):\033[0m"
+gcloud beta saas-runtime releases list --filter="name~v" --format="value(name,unitKind,blueprintPackage)" --location=global
+
