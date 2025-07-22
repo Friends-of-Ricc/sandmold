@@ -54,7 +54,7 @@ classroom-inspect-sampleclass:
 
 # Run a preflight check on a specific classroom YAML
 classroom-inspect CLASSROOM_YAML:
-    @bin/classroom-inspect.py {{CLASSROOM_YAML}}
+    @uv run python bin/classroom-inspect.py {{CLASSROOM_YAML}}
 
 # Deploy applications to a classroom
 classroom-deploy-apps CLASSROOM_YAML:
