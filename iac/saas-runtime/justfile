@@ -36,7 +36,7 @@ docker check:
 create-rollout:
     #!/bin/bash
     source .env
-    bin/06-create-rollout.sh
+    bin/07-create-rollout.sh
 
 create-sample-unit name:
     #!/bin/bash
