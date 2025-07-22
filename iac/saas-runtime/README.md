@@ -19,6 +19,8 @@ cp .env.dist .envrc
 direnv allow
 ```
 
+**Important:** The `.envrc` file should contain all the environment variables required by the scripts, including `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_REGION`, `GOOGLE_IDENTITY`, `ARTIFACT_REGISTRY_NAME`, `PROJECT_NUMBER`, `CLOUD_BUILD_SA`, `SAAS_OFFERING_NAME`, `UNIT_KIND_NAME_GLOBAL`, `UNIT_KIND_NAME_REGIONAL`, and `RELEASE_NAME`.
+
 ### 2. Initial Environment Setup
 
 This script enables necessary Google Cloud APIs and grants required IAM permissions.
