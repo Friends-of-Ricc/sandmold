@@ -1,4 +1,3 @@
-
 TERRAFORM_CLASSROOM_FOLDER_DIR := "terraform-modules/terraform-classroom-folder"
 
 # list targets
@@ -14,8 +13,6 @@ create-saas:
 check:
     #!/bin/bash
     bin/check-saas-status.sh
-
-
 
 create-classroom-folder-unit-kind:
     #!/bin/bash
@@ -34,3 +31,23 @@ build-and-push-blueprint:
 
 docker check:
     docker ps
+
+create-rollout:
+    #!/bin/bash
+    source .env
+    bin/06-create-rollout.sh
+
+create-sample-unit name:
+    #!/bin/bash
+    source .env
+    bin/05-create-unit.sh unit-{{name}} ${UNIT_KIND_NAME_GLOBAL}
+
+create-global-unit name:
+    #!/bin/bash
+    source .env
+    bin/05-create-unit.sh {{name}} ${UNIT_KIND_NAME_GLOBAL}
+
+create-regional-unit name:
+    #!/bin/bash
+    source .env
+    bin/05-create-unit.sh {{name}} ${UNIT_KIND_NAME_REGIONAL}
