@@ -18,7 +18,7 @@ I want to create 3 SaaS offerings.
 
 *   **Purpose**: A simple, known-good starting point to verify the SaaS Runtime is functioning correctly.
 *   **Implementation**: Based on the existing `terraform-vm` code.
-*   **Unit Kind**: `simple-vm`
+*   **Unit Kind**: `sandmold-sample-vm`
     *   **Inputs**: `project_id`, `instance_name`
     *   **Outputs**: `vm_ip_address`
 

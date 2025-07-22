@@ -1,4 +1,5 @@
 FROM alpine:latest
-LABEL dev.cloud.saas.engine.type="terraform"
+ARG ENGINE_TYPE
+LABEL dev.cloud.saas.engine.type=${ENGINE_TYPE}
 WORKDIR /app
 COPY . .

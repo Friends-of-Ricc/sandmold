@@ -12,7 +12,7 @@ __pycache__/
 **/.terraform/*
 *.tfstate
 *.tfstate.*
-iac/terraform/1a_classroom_setup/workspaces/*/*_apply.log
+workspaces/*/*_apply.log
 
 # Python
 .venv
@@ -25,9 +25,11 @@ uv.lock
 etc/samples/image.png
 .terraform.lock.hcl
 tmp/
-iac/terraform/*/workspaces/
 FUTURE_QUESTIONS_FOR_GEMINI.md
 .git-privatize
 .env.yaml
 t
 .DS_Store
+iac/terraform/1a_classroom_setup.tgz
+iac/terraform/1a_classroom_setup.zip
+2025*.log

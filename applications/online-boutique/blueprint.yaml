@@ -8,6 +8,8 @@ spec:
   # dependsOn:
   # - sandmold.dev/v1alpha1/Folder
   # - sandmold.dev/v1alpha1/Project
+  # - class: sandmold.dev/v1alpha1/Application
+  #   name: something-this-depends-on
   #install: TODO
   emoji: "🛍️"
   repo: https://github.com/GoogleCloudPlatform/microservices-demo
@@ -16,46 +18,3 @@ spec:
       description: "The Google Cloud Project ID to deploy Online Boutique to."
     - name: REGION
       description: "The Google Cloud region to deploy Online Boutique to."
-  # components:
-  #   - name: frontend
-  #     type: Deployment
-  #     dependsOn:
-  #       - productcatalogservice
-  #       - cartservice
-  #       - currencyservice
-  #       - paymentservice
-  #       - shippingservice
-  #       - emailservice
-  #       - adservice
-  #       - recommendationservice
-    # - name: productcatalogservice
-    #   type: Deployment
-    # - name: cartservice
-    #   type: Deployment
-    #   dependsOn:
-    #     - redis-cart
-    # - name: redis-cart
-    #   type: RedisInstance # Represents a managed Redis instance
-    # - name: currencyservice
-    #   type: Deployment
-    # - name: paymentservice
-    #   type: Deployment
-    # - name: shippingservice
-    #   type: Deployment
-    # - name: emailservice
-    #   type: Deployment
-    # - name: adservice
-    #   type: Deployment
-    # - name: recommendationservice
-    #   type: Deployment
-    #   dependsOn:
-    #     - productcatalogservice
-    # - name: checkoutservice
-    #   type: Deployment
-      # dependsOn:
-      #   - cartservice
-      #   - currencyservice
-      #   - paymentservice
-      #   - shippingservice
-      #   - emailservice
-      #   - productcatalogservice

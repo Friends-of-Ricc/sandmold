@@ -31,6 +31,11 @@ create-classroom-folder-unit-kind:
     source .env
     bin/03-create-unit-kind.sh classroom-folder {{TERRAFORM_CLASSROOM_FOLDER_DIR}}
 
+create-sample-vm-unit-kind:
+    #!/bin/bash
+    source .env
+    bin/03-create-unit-kind.sh sandmold-sample-vm terraform-modules/terraform-vm
+
 build-and-push-blueprint:
     #!/bin/bash
     source .env
