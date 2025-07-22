@@ -45,3 +45,6 @@ gcloud beta saas-runtime units list \
 echo -e "\n\033[0;36m🏷️  Listing Releases (filtered by 'v'):\033[0m"
 gcloud beta saas-runtime releases list --filter="name~v" --format="value(name,unitKind,blueprintPackage)" --location=global
 gcloud beta saas-runtime releases list --filter="name~v" --format="value(name,unitKind,blueprintPackage)" --location="${GOOGLE_CLOUD_REGION}"
+
+echo -e "\n\033[0;36m🖥️  Listing Compute Engine VMs (filtered by 'vm'):\033[0m"
+gcloud compute instances list --filter="name~vm" --format="value(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)" --project="${GOOGLE_CLOUD_PROJECT}"
