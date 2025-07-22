@@ -36,7 +36,7 @@ locals {
 module "project" {
   for_each = local.student_projects_map
 
-  source = "../modules/project"
+  source = "../../modules/project"
 
   project_id         = each.value.project_id_prefix
   billing_account_id = var.billing_account_id

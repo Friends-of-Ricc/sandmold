@@ -1,5 +1,5 @@
 module "classroom_setup" {
-  source = "../1a_classroom_setup"
+  source = "./1a_classroom_setup"
 
   folder_display_name = var.folder_display_name
   parent_folder       = var.parent_folder
@@ -12,7 +12,7 @@ module "classroom_setup" {
 }
 
 module "apps_deployment" {
-  source = "../2_apps_deployment"
+  source = "./2_apps_deployment"
 
   app_deployments = var.app_deployments
   projects = module.classroom_setup.projects

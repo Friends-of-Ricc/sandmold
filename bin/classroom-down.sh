@@ -6,7 +6,7 @@ set -o pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 CLASSROOM_YAML="$1"
-CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
+CLASSROOM_TF_DIR="iac/terraform/sandmold/1a_classroom_setup"
 
 echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 

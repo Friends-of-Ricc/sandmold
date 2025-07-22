@@ -1,7 +1,7 @@
 # This is more meaningful to Riccardo as a Rails dev.
 RAILS_ROOT := justfile_directory()
 SAMPLE_CLASSROOM_YAML := "etc/samples/classroom/with_apps.yaml"
-CLASSROOM_TF_DIR := 'iac/terraform/1a_classroom_setup'
+CLASSROOM_TF_DIR := 'iac/terraform/sandmold/1a_classroom_setup'
 SANDMOLD_TF_DIR := 'iac/terraform/sandmold'
 
 # list all targets. This should be the first target in the file and DEFAULT
