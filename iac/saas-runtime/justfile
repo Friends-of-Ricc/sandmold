@@ -22,7 +22,7 @@ check:
     gcloud beta saas-runtime saas list --filter="name~sandmold" --format="table(name,createTime,updateTime)" --location=global
 
     echo -e "\n\033[0;36m🧩 Listing Unit Kinds (filtered by 'sandmold'):\033[0m"
-    gcloud beta saas-runtime unit-kinds list --filter="name~sandmold" --format="table(name,saas,defaultRelease)" --location="${GOOGLE_CLOUD_REGION}"
+    gcloud beta saas-runtime unit-kinds list --filter="name~sandmold" --format="table(name,saas,defaultRelease)" --location=global
 
     echo -e "\n\033[0;36m📦 Listing Units (filtered by 'sandmold'):\033[0m"
     gcloud beta saas-runtime units list --filter="name~sandmold" --format="table(name,unitKind,state)" --location="${GOOGLE_CLOUD_REGION}"
