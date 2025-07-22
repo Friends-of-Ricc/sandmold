@@ -9,3 +9,7 @@ RICC_ROBERTO_CHAT.md
 # direnv
 .envrc
 
+
+# Logs
+/log/
+

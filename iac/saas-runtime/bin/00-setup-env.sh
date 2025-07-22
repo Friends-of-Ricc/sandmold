@@ -6,9 +6,9 @@
 set -euo pipefail
 
 # Source the environment variables
-source .envrc
+source .env
 if [ -f .env.post ]; then
-    source .envrc.post
+    source .env.post
 fi
 
 echo "Setting gcloud project and identity..."

@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source .envrc
+source .env
 
 echo "Creating Release..."
 

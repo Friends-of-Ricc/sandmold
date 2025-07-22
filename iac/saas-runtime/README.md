@@ -6,9 +6,11 @@ This directory contains scripts and configurations to set up and deploy a sample
 
 *   **Google Cloud CLI (gcloud)**: Authenticated and configured for your Google Cloud project.
 *   **just**: A command runner (similar to `make`).
-*   **direnv**: For managing environment variables.
+
+**Note**. Since APIs are still a bit clunky, we've experimented with both GLOBAL and REGIONAL endpoints (Unit Kinds, SaaS and so on) until we reach consensus that one approach is better than another.
 
 ## Setup
+
 
 ### 1. Configure Environment Variables
 
@@ -63,9 +65,41 @@ Follow these steps in order:
         just create-regional-unit my-first-regional-vm
         ```
 
-6.  **Trigger Rollout (Provisioning):**
+6. Provision unit
+
+    ```bash
+    bin/06-provision-unit.sh <unit-name>
+    ```
+
+    For example:
+
+    ```bash
+    bin/06-provision-unit.sh my-first-global-vm
+    ```
+
+7.  **Trigger Rollout (Provisioning):**
+
+7.  **Trigger Rollout (Provisioning):**
     ```bash
     bin/06-create-rollout.sh
+    ```
+
+## Ops
+
+### Updating the Default Release for a Unit Kind
+
+When you create a new release (e.g., `v1-0-1`), you need to update the corresponding Unit Kind to make that release the default for new unit provisioning.
+
+1.  **Update your `.env` file:** Change the `RELEASE_NAME` variable to your new release name (e.g., `RELEASE_NAME="sample-vm-v1-0-1"`).
+
+2.  **Run the update command:**
+
+    ```bash
+    source .env && \
+    gcloud beta saas-runtime unit-kinds update ${UNIT_KIND_NAME_BASE}-global \
+        --default-release=${RELEASE_NAME} \
+        --location=global \
+        --project=${GOOGLE_CLOUD_PROJECT}
     ```
 
 ## Verification
@@ -79,3 +113,5 @@ just check
 ## Cleanup (Optional)
 
 Refer to Google Cloud documentation for detailed cleanup procedures. For test projects, deleting the entire project is often the simplest approach.
+
+```

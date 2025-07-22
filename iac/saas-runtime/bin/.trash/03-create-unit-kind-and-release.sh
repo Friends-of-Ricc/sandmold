@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .envrc
+source .env
 
 IMAGE_URI="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${BLUEPRINT_IMAGE_NAME}:latest"
 

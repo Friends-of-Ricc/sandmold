@@ -188,3 +188,55 @@ SaaS Runtime requires specific IAM roles to be granted to this service account:
 * `roles/config.admin`: Grants full control of Infrastructure Manager.
 * `roles/iam.serviceAccountShortTermTokenMinter`: Grants Infrastructure Manager permission to start Cloud Build jobs.
 * `roles/iam.serviceAccountUser`: Grants SaaS Runtime usage of Infrastructure Manager. Allows Infrastructure Manager to create Terraform resources.
+
+
+## Provision unit permissions
+
+Actuation service account
+The actuation service account actuates the unit and is required for unit provisioning. Certain permissions must be enabled for this service account. What permissions are required?
+
+Service account
+Default compute service account
+
+Grant SaaS runtime permission to act on behalf of the actuation service account.
+
+Docs: https://cloud.google.com/saas-runtime/docs/overview?hl=en_GB&_gl=1*1102ybx*_ga*MTEyNTkwNjA4MS4xNzUzMDg1OTMz*_ga_WH2QY8WWF5*czE3NTMxODc3NDUkbzYkZzEkdDE3NTMxOTM0OTYkajYwJGwwJGgw#actuation-sa
+
+### Docs
+
+Actuation service account (User-managed)
+The actuation service account is a user-managed service account that you must create. SaaS Runtime (via Infra Manager) uses this service account to execute your Terraform configurations. It's the identity that creates, modifies, and deletes the resources defined in your Terraform.
+
+You are responsible for creating this service account within your project, or within your tenant project.
+
+Actuation service account input variables
+When you create a unit, you must provide the actuation service account as an key-value pair input variable for the Terraform configuration:
+
+Name: actuation_sa
+Variable type: String
+Variable value: Actuation service account email address:
+
+eg my-actuation-sa@my-identifier.iam.gserviceaccount.com
+
+### Required Permissions
+
+The actuation service account requires sufficient permissions to manage the resources defined in your Terraform configuration. At a minimum, it needs:
+
+* roles/iam.serviceAccountTokenCreator: Allows the service account to generate tokens for authentication.
+* roles/config.admin: Grants full control over Infra Manager resources.
+* roles/storage.admin: Grants full control of Cloud Storage.
+
+
+The actuation service account also needs permissions to create and manage the specific Google Cloud resources used by your application.
+
+For example:
+
+* If your Terraform creates Google Kubernetes Engine (GKE) clusters, the service account needs appropriate GKE roles (roles/container.admin, for example).
+* If your Terraform creates Compute Engine instances, the service account needs the roles/compute.admin role.
+* If your Terraform creates Cloud SQL instances, the service account needs the appropriate Cloud SQL roles (roles/cloudsql.admin, for example).
+
+### Example Variables for Riccardo
+
+1. `tenant_project_id` (String). Value: `PROJECT_ID`
+2. `tenant_project_number` (Integer). Value: `PROJECT_NUMBER`
+3. `actuation_sa` (String). Value: `PROJECT_NUMBER-compute@developer.gserviceaccount.com`

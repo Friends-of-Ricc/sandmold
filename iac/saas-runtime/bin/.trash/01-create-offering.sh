@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .envrc
+source .env
 
 echo "Checking for SaaS Offering..."
 if ! gcloud beta saas-runtime saas describe "${SAAS_OFFERING_NAME}" --location=global --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then

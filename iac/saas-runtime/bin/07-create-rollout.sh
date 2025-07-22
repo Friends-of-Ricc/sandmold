@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 # Creates a Rollout Kind and a Rollout to trigger Unit provisioning.
-#
+# TODO(ricc): This will probably fail as we've refactored UNIT_KIND_NAME_GLOBAL as "${UNIT_KIND_NAME_BASE}-global"
+# Please amend that!
 
 set -euo pipefail
 
@@ -11,6 +12,7 @@ source .env
 # --- Configuration ---
 ROLLOUT_KIND_NAME="default-rollout-kind"
 ROLLOUT_NAME="initial-rollout"
+#UNIT_KIND_GLOBAL="${UNIT_KIND_NAME_BASE}-global"
 
 # --- Create Rollout Kind ---
 echo "Checking for Rollout Kind '${ROLLOUT_KIND_NAME}'..."

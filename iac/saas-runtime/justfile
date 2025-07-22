@@ -38,7 +38,7 @@ create-rollout:
     source .env
     bin/07-create-rollout.sh
 
-check-audit-logs:
+check-logs:
     #!/bin/bash
     source .env
     bin/check-audit-logs.sh
@@ -52,7 +52,7 @@ create-global-unit name:
     #!/bin/bash
     source .env
     bin/05-create-unit.sh {{name}} ${UNIT_KIND_NAME_BASE}-global
-    bin/06-provision-unit.sh unit-{{name}}
+    bin/06-provision-unit.sh {{name}}
 
 create-regional-unit name:
     #!/bin/bash

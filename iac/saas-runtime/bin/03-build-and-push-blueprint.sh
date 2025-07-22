@@ -7,19 +7,20 @@ set -euo pipefail
 
 # Check for required argument
 if [ -z "$1" ]; then
-    echo "Usage: $0 <path-to-terraform-module>"
+    echo "Usage: $0 <path-to-terraform-module> [version]"
     exit 1
 fi
 
 TERRAFORM_MODULE_DIR=$1
+VERSION=${2:-latest}
 
 # Source the environment variables
-source .envrc
+source .env
 
 # --- Build Setup ---
 BUILD_DIR="build/$(basename "${TERRAFORM_MODULE_DIR}")"
 BLUEPRINT_IMAGE_NAME="$(basename "${TERRAFORM_MODULE_DIR}")-blueprint"
-IMAGE_URI="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${BLUEPRINT_IMAGE_NAME}:latest"
+IMAGE_URI="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${BLUEPRINT_IMAGE_NAME}:${VERSION}"
 
 echo "Preparing temporary build directory: ${BUILD_DIR}"
 mkdir -p "${BUILD_DIR}"
@@ -31,6 +32,9 @@ cat <<EOF > "${BUILD_DIR}/Dockerfile.Blueprint"
 # syntax=docker/dockerfile:1-labs
 FROM scratch
 COPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /
+
+CMD echo "DEBUG activated for sandmold."
+CMD find .
 EOF
 
 # --- Generate cloudbuild.yaml ---

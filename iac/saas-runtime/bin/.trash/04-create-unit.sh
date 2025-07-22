@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .envrc
+source .env
 
 # Create the Unit
 echo "Checking for Unit '${UNIT_NAME}'..."
