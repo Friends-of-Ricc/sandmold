@@ -14,7 +14,7 @@ fi
 TERRAFORM_MODULE_DIR=$1
 
 # Source the environment variables
-source .env
+source .envrc
 
 # --- Build Setup ---
 BUILD_DIR="build/$(basename "${TERRAFORM_MODULE_DIR}")"

@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .env
+source .envrc
 
 # --- Configuration ---
 ROLLOUT_KIND_NAME="default-rollout-kind"

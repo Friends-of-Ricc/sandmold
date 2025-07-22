@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .env
+source .envrc
 
 # --- Configuration ---
 BLUEPRINT_IMAGE_NAME="terraform-vm-blueprint" # This should match the output of the build script

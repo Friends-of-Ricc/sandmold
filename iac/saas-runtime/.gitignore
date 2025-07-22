@@ -5,3 +5,7 @@ RICC_ROBERTO_CHAT.md
 # Build artifacts
 /build/
 
+
+# direnv
+.envrc
+

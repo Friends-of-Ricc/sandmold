@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Source the environment variables
-source .env
+source .envrc
 
 # Define the full names for the global and regional SaaS offerings
 SAAS_OFFERING_GLOBAL="${SAAS_OFFERING_NAME}-global"
