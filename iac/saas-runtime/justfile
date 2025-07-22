@@ -12,7 +12,8 @@ create-saas:
 
 check:
     #!/bin/bash
-    bin/check-saas-status.sh
+    source .env
+    bin/check-overall-status.sh
 
 create-classroom-folder-unit-kind:
     #!/bin/bash
