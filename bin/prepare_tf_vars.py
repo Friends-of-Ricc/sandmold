@@ -68,7 +68,10 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
         if project_id_prefix and users:
             apps = []
             for app in bench.get('apps', []):
-                app_name = app.get('name')
+                if isinstance(app, dict):
+                    app_name = app.get('name')
+                else:
+                    app_name = app
                 app_env = {}
                 if 'env' in bench:
                     for env_var in bench.get('env', []):

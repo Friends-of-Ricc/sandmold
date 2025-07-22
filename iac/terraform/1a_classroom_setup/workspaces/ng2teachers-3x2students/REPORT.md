@@ -1,12 +1,12 @@
 # 🌪️ Classroom Destroyed 🌪️
 
-**Timestamp:** 2025-07-18 10:26:03
+**Timestamp:** 2025-07-22 08:46:38
 
 ## Class Details
 
 - **Workspace Name:** `ng2teachers-3x2students`
 - **Original Folder Name:** None
-- **Original Folder ID:** 1000371719973
+- **Original Folder ID:** 194703823593
 - **Description:** Class with 2 teachers and 6 students,
 2 students per bench (in team).
 This is also the SAMPLE classroom YAML
@@ -16,7 +16,7 @@ used by the justfile targets.
 
 ```bash
 # To re-provision this specific classroom:
-just classroom-up etc/samples/class_2teachers_6students.yaml
+just classroom-up etc/samples/classroom/2teachers_6students.yaml
 ```
 
 ## 🧑‍🎓 Student & Project Assignments

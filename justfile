@@ -38,7 +38,7 @@ classroom-up-sampleclass:
 
 # Teardown a classroom environment
 classroom-down CLASSROOM_YAML:
-    time bin/classroom-down.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
+    time bin/classroom-down.sh {{CLASSROOM_YAML}}
 
 # Setup a single-user environment
 user-up USER_YAML='etc/samples/single_user/light.yaml':
@@ -97,6 +97,7 @@ classroom-down-all:
         echo "--- Tearing down classroom from $yaml_file ---"; \
         just classroom-down $yaml_file; \
     done
+
 
 tfplan CLASSROOM_YAML:
     @WORKSPACE_NAME=`python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])`" && \

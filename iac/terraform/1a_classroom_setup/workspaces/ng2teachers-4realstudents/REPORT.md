@@ -1,6 +1,6 @@
 # 🌪️ Classroom Destroyed 🌪️
 
-**Timestamp:** 2025-07-18 10:26:01
+**Timestamp:** 2025-07-22 08:46:41
 
 ## Class Details
 
@@ -13,7 +13,7 @@
 
 ```bash
 # To re-provision this specific classroom:
-just classroom-up etc/samples/class_2teachers_4realstudents.yaml
+just classroom-up etc/samples/classroom/2teachers_4realstudents.yaml
 ```
 
 ## 🧑‍🎓 Student & Project Assignments

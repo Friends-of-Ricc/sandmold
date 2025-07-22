@@ -6,12 +6,7 @@ set -o pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 CLASSROOM_YAML="$1"
-CLASSROOM_TF_DIR="$2"
-
-if [ -z "$CLASSROOM_TF_DIR" ]; then
-    echo "Error: Terraform directory not provided. Usage: $0 <classroom_yaml> <terraform_dir>"
-    exit 1
-fi
+CLASSROOM_TF_DIR="iac/terraform/1a_classroom_setup"
 
 echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
@@ -35,7 +30,7 @@ uv run python ./bin/prepare_tf_vars.py \
 
 RELATIVE_TF_VARS_FILE="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
 
-(cd "${CLASSROOM_TF_DIR}" && terraform init && terraform workspace select "${WORKSPACE_NAME}" && terraform destroy -auto-approve -var-file="${RELATIVE_TF_VARS_FILE}")
+(cd "${CLASSROOM_TF_DIR}" && terraform init && terraform workspace select -or-create "${WORKSPACE_NAME}" && terraform destroy -auto-approve -var-file="${RELATIVE_TF_VARS_FILE}")
 
 # Re-create the workspace directory so we can write the report
 mkdir -p "${CLASSROOM_WORKSPACE_DIR}"
