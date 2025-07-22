@@ -1,0 +1,16 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '-t'
+  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_TAG}'
+  - '.'
+  env:
+  - 'ENGINE_TYPE=terraform'
+  - 'ENGINE_VERSION=1.5.7'
+images:
+- 'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY_NAME}/${_IMAGE_NAME}:${_TAG}'
+substitutions:
+  _REPOSITORY_NAME: 'sandmold-saas-blueprints'
+  _IMAGE_NAME: 'terraform-vm'
+  _TAG: 'v1'
