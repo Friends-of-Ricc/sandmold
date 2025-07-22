@@ -152,4 +152,13 @@ To update a SaaS offering, you need to follow these steps: create a release, cre
     *   `RELEASE_NAME`: Defines the release binary to deploy.
     *   `LOCATION`: The location where you want to create your rollout.
 
-```
+## Glossary
+
+*   **SaaS offering**: A SaaS offering represents a specific software as a service (SaaS) product offering, including details, configurations, and deployment regions that may be shared across multiple instances or deployments of that product within a company's larger SaaS portfolio.
+*   **Unit**: A unit is an instantiation of a unit kind. For example, if you have a unit kind for the infrastructure of your SaaS application, then the related unit is the infrastructure wherein the application runs.
+*   **Unit kind**: A unit kind defines a type of managed component within your service (for example, a Kubernetes cluster, or an application instance). All units of a given unit kind are typically updated together (via a rollout). Unit kinds enable you to define separate rollout content and cadences for distinct groupings within your SaaS offering.
+*   **Release**: A release represents a specific, deployable snapshot of a unit kind. Releases contain the artifacts and configurations to create or update a unit. Releases include a pointer to an artifact encapsulating the actual deployment details (including the Terraform configuration). When you want to update a unit, you target a specific release in a rollout.
+*   **Rollout**: A rollout is the process of updating units with a new release. A rollout process follows the rules defined in the rollout kind.
+*   **Rollout kind**: A rollout kind functions as a description of how to deploy new releases to units. For example, you can set the rollout to progress by specific increments in the regions where the units are available.
+*   **Tenant**: A tenant represents a dedicated instance of the SaaS offering. It acts as a container for all the units (containing applications, databases, and infrastructure components) that you provision and manage.
+*   **Feature flag**: Feature flags toggle the state or other binary behaviors of a feature. Feature flags allow you to change feature availability or feature behavior without redeploying or restarting the application.

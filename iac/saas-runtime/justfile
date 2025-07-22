@@ -1,4 +1,5 @@
 
+TERRAFORM_CLASSROOM_FOLDER_DIR := "terraform-modules/terraform-classroom-folder"
 
 # list targets
 list:
@@ -12,17 +13,28 @@ create-saas:
 
 check:
     #!/bin/bash
-    bin/02-check-saas.sh
+    source .env
+
+    echo -e "\n\033[0;36m🚀 Listing SaaS instances (filtered by 'sandmold'):\033[0m"
+    gcloud beta saas-runtime saas list --filter="name~sandmold" --format="table(name,createTime,updateTime)" --location="${GOOGLE_CLOUD_REGION}"
+
+    echo -e "\n\033[0;36m🧩 Listing Unit Kinds (filtered by 'sandmold'):\033[0m"
+    gcloud beta saas-runtime unit-kinds list --filter="name~sandmold" --format="table(name,saas,defaultRelease)" --location="${GOOGLE_CLOUD_REGION}"
+
+    echo -e "\n\033[0;36m📦 Listing Units (filtered by 'sandmold'):\033[0m"
+    gcloud beta saas-runtime units list --filter="name~sandmold" --format="table(name,unitKind,state)" --location="${GOOGLE_CLOUD_REGION}"
+
+
 
 create-classroom-folder-unit-kind:
     #!/bin/bash
     source .env
-    bin/03-create-unit-kind.sh classroom-folder terraform-classroom-folder
+    bin/03-create-unit-kind.sh classroom-folder {{TERRAFORM_CLASSROOM_FOLDER_DIR}}
 
 build-and-push-blueprint:
     #!/bin/bash
     source .env
-    bin/05-build-and-push-blueprint.sh terraform-classroom-folder
+    bin/05-build-and-push-blueprint.sh {{TERRAFORM_CLASSROOM_FOLDER_DIR}}
 
 docker check:
     docker ps

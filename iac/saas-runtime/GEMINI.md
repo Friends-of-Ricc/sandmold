@@ -2,6 +2,8 @@ I want to try to use SaaS runtime for sandmold project.
 
 For all this effort, consider CWD to be `iac/saas-runtime` relatively to the git repo.
 
+I've documented how SaaS Runtime work in `ABOUT_SAAS_RUNTIME.md`. Ensure you read that at startup.
+
 ## Vision
 
 I want to create 3 SaaS offerings.
