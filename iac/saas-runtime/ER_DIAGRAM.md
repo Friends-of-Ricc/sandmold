@@ -17,9 +17,12 @@ This diagram illustrates the relationships between the core components of the Sa
 erDiagram
     SAAS_OFFERING {
         string name "The name of the overall service"
+        string location "The primary location of the offering"
+        string supported_locations "List of locations for units"
     }
     UNIT_KIND {
         string name "e.g., 'sandmold-sample-vm'"
+        string default_release "The default release for new units"
     }
     RELEASE {
         string version "e.g., 'v1.0.0'"
@@ -42,7 +45,7 @@ erDiagram
     UNIT }|..|| RELEASE : "Is provisioned from"
 ```
 
-## Dependencies
+## Dependencies and Caveats
 
 The relationships imply the following dependencies:
 
@@ -50,3 +53,20 @@ The relationships imply the following dependencies:
 *   A **Release** depends on a **Unit Kind** (it's a release *of* that kind) and a **Blueprint** (which contains the configuration).
 *   A **Blueprint** depends on a **Terraform Module** (the source code).
 *   A **Unit Kind** depends on a **SaaS Offering** (its parent container).
+
+### ⚠️ Circular Dependency between Unit Kind and Release
+
+There is a potential for a confusing circular relationship:
+
+*   A **Unit Kind** can have a `default_release`.
+*   A **Release** must belong to a **Unit Kind**.
+
+This can create a "chicken-and-egg" problem during initial setup. You can't create a Release without a Unit Kind, and you can't set the default release on a Unit Kind until the Release exists.
+
+```mermaid
+graph TD
+    A[Unit Kind] -- has a default --> B(Release);
+    B -- belongs to --> A;
+```
+
+The solution is to first create the Unit Kind *without* a default release, then create the Release, and finally, update the Unit Kind to set the newly created release as the default.
