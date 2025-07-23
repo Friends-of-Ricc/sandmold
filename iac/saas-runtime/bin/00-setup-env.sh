@@ -15,6 +15,7 @@ fi
 # --- Create and configure GCS bucket for Terraform blueprints ---
 TF_BLUEPRINT_BUCKET="sandmold-tf-blueprints-${GOOGLE_CLOUD_PROJECT}"
 export TF_BLUEPRINT_BUCKET
+echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.post
 
 echo "SAAS_SERVICE_ACCOUNT: ${SAAS_SERVICE_ACCOUNT}"
 
@@ -96,5 +97,7 @@ gsutil iam ch "serviceAccount:${TF_ACTUATOR_SA_EMAIL}:objectAdmin" "gs://${TF_BL
 
 # Export the new service account email and bucket name for other scripts to use
 export TF_ACTUATOR_SA_EMAIL
+echo "TF_ACTUATOR_SA_EMAIL=${TF_ACTUATOR_SA_EMAIL}" >> .env.post
+echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.post
 
 echo "Environment setup complete."

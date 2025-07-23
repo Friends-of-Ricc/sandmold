@@ -1,0 +1,8 @@
+{
+  "createTime": "2025-07-22T12:03:43.412954792Z",
+  "defaultRelease": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sample-vm-v1-0-1",
+  "etag": "aHE-DcG-23WyFbqTQwHdZiaZvmQE6R_vSplcH58toz0",
+  "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm-regional",
+  "saas": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sandmold-hello-world-regional",
+  "updateTime": "2025-07-22T15:17:29.204686180Z"
+}

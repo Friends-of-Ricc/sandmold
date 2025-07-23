@@ -40,7 +40,7 @@ if ! gcloud beta saas-runtime releases describe "${RELEASE_NAME}" \
     --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
 
     echo "Creating Release '${RELEASE_NAME}'..."
-    gcloud --log-http beta saas-runtime releases create "${RELEASE_NAME}"         --unit-kind="${UNIT_KIND_TO_USE}"         --blueprint-package="${RELEASE_LOCATION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${BLUEPRINT_IMAGE_NAME}@sha256:8506c2f9154ae67bb5eeca56183d0f6aff0f29a10a39e2d93ce2bbccda88692d"         --location=${RELEASE_LOCATION}         --input-variable-defaults="variable=instance_name,value=default-instance,type=string"         --input-variable-defaults="variable=tenant_project_id,value=${GOOGLE_CLOUD_PROJECT},type=string"         --input-variable-defaults="variable=tenant_project_number,value=${PROJECT_NUMBER},type=string"         --project="${GOOGLE_CLOUD_PROJECT}"
+    gcloud --log-http beta saas-runtime releases create "${RELEASE_NAME}"         --unit-kind="${UNIT_KIND_TO_USE}"         --blueprint-package="gs://${TF_BLUEPRINT_BUCKET}/${TERRAFORM_MODULE_BASENAME}/${TERRAFORM_MODULE_BASENAME}.zip"         --location=${RELEASE_LOCATION}         --input-variable-defaults="variable=instance_name,value=default-instance,type=string"         --input-variable-defaults="variable=tenant_project_id,value=${GOOGLE_CLOUD_PROJECT},type=string"         --input-variable-defaults="variable=tenant_project_number,value=${PROJECT_NUMBER},type=string"         --project="${GOOGLE_CLOUD_PROJECT}"
 else
     echo "Release '${RELEASE_NAME}' already exists."
 fi

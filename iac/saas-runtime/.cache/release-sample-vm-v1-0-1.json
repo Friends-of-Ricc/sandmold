@@ -1,0 +1,29 @@
+{
+  "blueprint": {
+    "engine": "inframanager",
+    "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry/terraform-vm-blueprint@sha256:98cbc3b4f49a4104f2efc6d5460c706e798f6c988e5b24e54238ec2cf093f712",
+    "version": "1.5.7"
+  },
+  "createTime": "2025-07-22T15:16:19.675541099Z",
+  "etag": "ZERBHw-mKMwmaSGiPvopaZRQPvdSld-Ar4B26Wm0rbE",
+  "inputVariableDefaults": [
+    {
+      "type": "STRING",
+      "value": "default-instance",
+      "variable": "instance_name"
+    },
+    {
+      "type": "STRING",
+      "value": "check-docs-in-go-slash-sredemo",
+      "variable": "tenant_project_id"
+    },
+    {
+      "type": "STRING",
+      "value": "467916597830",
+      "variable": "tenant_project_number"
+    }
+  ],
+  "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sample-vm-v1-0-1",
+  "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm-global",
+  "updateTime": "2025-07-22T15:16:20.141183578Z"
+}

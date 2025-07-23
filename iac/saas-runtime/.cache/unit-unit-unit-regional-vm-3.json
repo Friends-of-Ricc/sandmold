@@ -1,0 +1,30 @@
+{
+  "conditions": [
+    {
+      "lastTransitionTime": "2025-07-22T15:17:35Z",
+      "status": "STATUS_FALSE",
+      "type": "TYPE_UPDATING"
+    },
+    {
+      "lastTransitionTime": "2025-07-22T15:17:35Z",
+      "status": "STATUS_FALSE",
+      "type": "TYPE_PROVISIONED"
+    },
+    {
+      "lastTransitionTime": "2025-07-22T15:17:35Z",
+      "status": "STATUS_UNKNOWN",
+      "type": "TYPE_OPERATION_ERROR"
+    },
+    {
+      "lastTransitionTime": "2025-07-22T15:17:35Z",
+      "status": "STATUS_FALSE",
+      "type": "TYPE_READY"
+    }
+  ],
+  "createTime": "2025-07-22T15:17:35.827468564Z",
+  "etag": "kuTSZ8bLY2JaVVR4EbqfH2iQyY5KbHcvP8jdLx8L1gc",
+  "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/units/unit-unit-regional-vm-3",
+  "state": "UNIT_STATE_NOT_PROVISIONED",
+  "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm-regional",
+  "updateTime": "2025-07-22T15:17:35.903001049Z"
+}

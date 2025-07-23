@@ -25,3 +25,11 @@ google_reauth.errors.ReauthUnattendedError: Reauthentication challenge could not
 
 **Analysis:**
 This indicates that `gsutil` is unable to use the existing application default credentials in a non-interactive script environment, or that the credentials are expiring too quickly for the script's duration. The user also noted `gsutil` prompting for a password, which is unusual for `application-default` credentials and suggests a deeper configuration or environment issue with `gsutil`'s credential handling. This is currently blocking the setup of the GCS bucket for the new blueprint workflow.
+
+### Transition to GCS-based Blueprints (2025-07-23 06:05:00 UTC)
+
+**Context:**
+Due to persistent "manifest digest mismatch" errors with Artifact Registry-based blueprints, the workflow is being transitioned to use GCS-based ZIP files for Terraform blueprints. This involves modifying `bin/03-build-and-push-blueprint.sh` to create and upload ZIP archives to a dedicated GCS bucket, and `bin/04-create-release.sh` to reference these GCS paths.
+
+**Impact:**
+This change is expected to resolve the blueprint resolution issues and allow for successful release creation and unit provisioning.

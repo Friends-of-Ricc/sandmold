@@ -3,8 +3,6 @@
 # Checks if the environment is set up correctly.
 #
 
-set -euo pipefail
-
 # Source the environment variables
 if [ -f .env ]; then
     source .env
@@ -49,13 +47,23 @@ fi
 
 # --- Check Application Default Login ---
 echo -n "Verifying Application Default Login project... "
-ADC_PROJECT=$(gcloud auth application-default login --project=${GOOGLE_CLOUD_PROJECT} --dry-run 2>&1 | grep "project" | awk '{print $2}')
-if [ "${ADC_PROJECT}" == "${GOOGLE_CLOUD_PROJECT}" ]; then
-    echo "✅ Application Default Login is configured for project '${GOOGLE_CLOUD_PROJECT}'."
+ADC_FILE_PATH=$(gcloud info --format="value(config.paths.application_default_credentials)")
+if [ -f "${ADC_FILE_PATH}" ]; then
+    if grep -q '"quota_project_id"' "${ADC_FILE_PATH}"; then
+        ADC_PROJECT=$(grep '"quota_project_id"' "${ADC_FILE_PATH}" | cut -d '"' -f 4)
+        if [ "${ADC_PROJECT}" == "${GOOGLE_CLOUD_PROJECT}" ]; then
+            echo "✅ Application Default Login is configured for project '${GOOGLE_CLOUD_PROJECT}'."
+        else
+            echo "⚠️  Application Default Login is configured for project '${ADC_PROJECT}', but this script expects '${GOOGLE_CLOUD_PROJECT}'."
+            echo "   If you experience issues, please run 'gcloud auth application-default login'."
+        fi
+    else
+        echo "❌ 'quota_project_id' not found in ADC file: ${ADC_FILE_PATH}."
+        echo "   The file might be misconfigured. Please run 'gcloud auth application-default login'."
+    fi
 else
-    echo "⚠️  Application Default Login might not be configured for project '${GOOGLE_CLOUD_PROJECT}'. The current ADC project is '${ADC_PROJECT}'"
-    echo "   If you experience issues, please run 'gcloud auth application-default login'."
+    echo "❌ Application Default Credentials file not found at '${ADC_FILE_PATH}'."
+    echo "   Please run 'gcloud auth application-default login' to create it."
 fi
-
 
 echo "🎉 Setup check complete!"

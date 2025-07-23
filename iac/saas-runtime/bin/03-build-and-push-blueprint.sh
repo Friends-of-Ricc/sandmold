@@ -1,67 +1,75 @@
 #!/bin/bash
 #
-# Builds a generic Terraform blueprint and pushes it to Artifact Registry.
+# Builds a generic Terraform blueprint and pushes it to a GCS bucket.
 #
 
 set -euo pipefail
 
 # Check for required argument
 if [ -z "$1" ]; then
-    echo "Usage: $0 <path-to-terraform-module> [version]"
+    echo "Usage: $0 <path-to-terraform-module>"
     exit 1
 fi
 
 TERRAFORM_MODULE_DIR=$1
-VERSION=${2:-latest}
+TERRAFORM_MODULE_BASENAME=$(basename "${TERRAFORM_MODULE_DIR}")
 
 # Source the environment variables
 source .env
+if [ -f .env.post ]; then
+    source .env.post
+fi
 
 # --- Build Setup ---
-BUILD_DIR="build/$(basename "${TERRAFORM_MODULE_DIR}")"
-BLUEPRINT_IMAGE_NAME="$(basename "${TERRAFORM_MODULE_DIR}")-blueprint"
-IMAGE_URI="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${BLUEPRINT_IMAGE_NAME}:${VERSION}"
+BUILD_DIR="build/${TERRAFORM_MODULE_BASENAME}"
 
 echo "Preparing temporary build directory: ${BUILD_DIR}"
 mkdir -p "${BUILD_DIR}"
 cp -r "${TERRAFORM_MODULE_DIR}/." "${BUILD_DIR}/"
 
-# --- Generate Dockerfile.Blueprint ---
-echo "Generating Dockerfile.Blueprint in ${BUILD_DIR}..."
-cat <<EOF > "${BUILD_DIR}/Dockerfile.Blueprint"
-# syntax=docker/dockerfile:1-labs
-FROM scratch
-COPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /
+# --- Create ZIP archive ---
+ZIP_FILE="${BUILD_DIR}.zip"
+echo "Creating ZIP archive: ${ZIP_FILE}"
+(cd "${BUILD_DIR}" && zip -r "../${TERRAFORM_MODULE_BASENAME}.zip" .)
 
-CMD echo "DEBUG activated for sandmold."
-CMD find .
-EOF
+# --- Upload ZIP to GCS ---
+GCS_PATH="gs://${TF_BLUEPRINT_BUCKET}/${TERRAFORM_MODULE_BASENAME}/${TERRAFORM_MODULE_BASENAME}.zip"
+echo "Uploading ZIP archive to GCS: ${GCS_PATH}"
+gsutil cp "${ZIP_FILE}" "${GCS_PATH}"
 
 # --- Generate cloudbuild.yaml ---
-echo "Generating cloudbuild.yaml in ${BUILD_DIR}..."
+echo "Generating cloudbuild.yaml in ${BUILD_DIR}"
 cat <<EOF > "${BUILD_DIR}/cloudbuild.yaml"
 steps:
-- id: 'Create Dockerfile'
-  name: 'bash'
-  args: ['-c', 'echo -e "# syntax=docker/dockerfile:1-labs\\nFROM scratch\\nCOPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /" > Dockerfile.Blueprint']
-- id: 'Create docker-container driver'
-  name: 'docker'
-  args: ['buildx', 'create', '--name', 'container', '--driver=docker-container']
-- id: 'Build and Push docker image'
-  name: 'docker'
-  args: ['buildx', 'build', '-t', '\${_IMAGE_NAME}', '--builder=container', '--push', '--annotation', 'com.easysaas.engine.type=\${_ENGINE_TYPE}','--annotation', 'com.easysaas.engine.version=\${_ENGINE_VERSION}', '--provenance=false','-f', 'Dockerfile.Blueprint', '.']
-substitutions:
-  _IMAGE_NAME: "${IMAGE_URI}"
-  _ENGINE_TYPE: 'inframanager'
-  _ENGINE_VERSION: '1.5.7' # Using a known stable version
+- id: 'Echo Debug'
+  name: 'ubuntu/cloud-sdk:latest'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - 'echo "DEBUG activated for sandmold."'
+- id: 'Find Files'
+  name: 'ubuntu/cloud-sdk:latest'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - 'find .'
+- id: 'Deploy Blueprint'
+  name: 'gcr.io/cloud-foundation-toolkit/infra-manager:latest'
+  args:
+  - 'apply'
+  - '--blueprint-path=${GCS_PATH}'
+  - '--project=${GOOGLE_CLOUD_PROJECT}'
+  - '--location=${GOOGLE_CLOUD_REGION}'
+  - '--service-account=${TF_ACTUATOR_SA_EMAIL}'
 options:
   logging: CLOUD_LOGGING_ONLY
 EOF
 
 # --- Submit Build ---
-echo "Submitting Cloud Build job for blueprint: ${BLUEPRINT_IMAGE_NAME}"
+echo "Submitting Cloud Build job for blueprint: ${TERRAFM_MODULE_BASENAME}"
 gcloud builds submit "${BUILD_DIR}" \
     --config="${BUILD_DIR}/cloudbuild.yaml" \
-    --project="${GOOGLE_CLOUD_PROJECT}"
+    --project="${GOOGLE_CLOUD_PROJECT}" \
+    --substitutions=_ENGINE_TYPE='inframanager',_ENGINE_VERSION='1.5.7'
 
-echo "Blueprint build and push complete for ${BLUEPRINT_IMAGE_NAME}."
+echo "Blueprint build and push complete for ${TERRAFORM_MODULE_BASENAME}."
