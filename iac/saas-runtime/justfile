@@ -1,13 +1,14 @@
-check-setup:
-    #!/bin/bash
-    source .env
-    bin/check-setup.sh
-
 TERRAFORM_CLASSROOM_FOLDER_DIR := "terraform-modules/terraform-classroom-folder"
 
 # list targets
 list:
     just -l
+
+check-setup:
+    #!/bin/bash
+    source .env
+    bin/check-setup.sh
+
 
 # create SaaS Runtime instance
 create-saas:

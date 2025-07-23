@@ -58,7 +58,7 @@ The relationships imply the following dependencies:
 
 There is a potential for a confusing circular relationship:
 
-*   A **Unit Kind** can have a `default_release`.
+*   A **Unit Kind** can have a `default_release` (and often does).
 *   A **Release** must belong to a **Unit Kind**.
 
 This can create a "chicken-and-egg" problem during initial setup. You can't create a Release without a Unit Kind, and you can't set the default release on a Unit Kind until the Release exists.

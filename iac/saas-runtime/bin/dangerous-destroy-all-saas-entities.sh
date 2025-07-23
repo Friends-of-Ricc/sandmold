@@ -2,8 +2,16 @@
 
 # This script is the "Nuclear Option". It will destroy all SaaS Runtime entities in a given project.
 # Use with extreme caution.
+# From https://github.com/Friends-of-Ricc/sandmold/issues/26 in order it should do this:
+# 1. Delete Units
+# 2. Update UK to clear default release
+# 3. delete Releases
+# 4. delete UKs
+# 5. delete SaaS Runtimes
+# 6. Check its actually cleaned up with some gcloud getters.
 
 set -e
+set -x # Enable debugging
 
 # --- Configuration ---
 PROJECT_ID=""
@@ -20,7 +28,7 @@ usage() {
   echo "Arguments:"
   echo "  --project_id      The GCP project ID."
   echo "  --match           A string to match against the names of the entities to delete. Defaults to all entities if not provided."
-  echo "  --confirm         To proceed, you must pass the exact string \"Nuclear launch detected\"."
+  echo "  --confirm         To proceed, you must pass the exact string 'Nuclear launch detected'."
   exit 1
 }
 
@@ -54,7 +62,8 @@ if [[ -z "$PROJECT_ID" || -z "$CONFIRMATION" ]]; then
 fi
 
 if [[ -z "$MATCH" ]]; then
-  MATCH="."
+  echo "No --match string provided. Defaulting to match ALL resources."
+  MATCH=".*"
 fi
 
 if [[ "$CONFIRMATION" != "Nuclear launch detected" ]]; then
@@ -62,10 +71,11 @@ if [[ "$CONFIRMATION" != "Nuclear launch detected" ]]; then
   exit 1
 fi
 
+echo "TODO: This script does not yet delete tenants, rollouts, or rollout-kinds."
 echo "The following SaaS Runtime entities will be DELETED in project '$PROJECT_ID' for match string '$MATCH':"
 echo "---"
-echo "Rollouts:"
-gcloud beta saas-runtime rollouts list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "SaaS Instances:"
+gcloud beta saas-runtime saas list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
 echo "---"
 echo "Units:"
 gcloud beta saas-runtime units list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
@@ -76,44 +86,50 @@ echo "---"
 echo "Unit Kinds:"
 gcloud beta saas-runtime unit-kinds list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
 echo "---"
-echo "Offerings:"
-gcloud beta saas-runtime offerings list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
-echo "---"
-echo "Entitlements:"
-gcloud beta saas-runtime entitlements list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
-echo "---"
 
-read -p "Are you sure you want to proceed with the deletion? (y/n) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    exit 1
-fi
+
+
 
 echo "Proceeding with deletion..."
 
-# 1. Delete all Rollouts
-echo "Deleting Rollouts..."
-gcloud beta saas-runtime rollouts list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime rollouts delete --project "$PROJECT_ID"
+# Deletion Order:
+# 1. Delete Units
+# 2. Update UK to clear default release
+# 3. delete Releases
+# 4. delete UKs
+# 5. delete SaaS Runtimes
 
-# 2. Delete all Units
 echo "Deleting Units..."
-gcloud beta saas-runtime units list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime units delete --project "$PROJECT_ID"
+gcloud beta saas-runtime units list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime units delete --project "$PROJECT_ID" --quiet
 
-# 3. Delete all Releases
+echo "Updating Unit Kinds to clear default release..."
+for uk in $(gcloud beta saas-runtime unit-kinds list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"); do
+  gcloud beta saas-runtime unit-kinds update $uk --project "$PROJECT_ID" --clear-default-release --quiet
+done
+
 echo "Deleting Releases..."
-gcloud beta saas-runtime releases list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime releases delete --project "$PROJECT_ID"
+gcloud beta saas-runtime releases list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime releases delete --project "$PROJECT_ID" --quiet
 
-# 4. Delete all Unit Kinds
 echo "Deleting Unit Kinds..."
-gcloud beta saas-runtime unit-kinds list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime unit-kinds delete --project "$PROJECT_ID"
+gcloud beta saas-runtime unit-kinds list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime unit-kinds delete --project "$PROJECT_ID" --quiet
 
-# 5. Delete all Offerings
-echo "Deleting Offerings..."
-gcloud beta saas-runtime offerings list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime offerings delete --project "$PROJECT_ID"
+echo "Deleting SaaS Instances..."
+gcloud beta saas-runtime saas list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime saas delete --project "$PROJECT_ID" --quiet
 
-# 6. Delete all Entitlements
-echo "Deleting Entitlements..."
-gcloud beta saas-runtime entitlements list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)" | xargs -r -n 1 gcloud beta saas-runtime entitlements delete --project "$PROJECT_ID"
+echo "All targeted SaaS Runtime entities matching '$MATCH' in project '$PROJECT_ID' have been deleted."
 
-echo "All SaaS Runtime entities matching '$MATCH' in project '$PROJECT_ID' have been deleted."
+echo "Verifying cleanup..."
+echo "---"
+echo "SaaS Instances:"
+gcloud beta saas-runtime saas list --project "$PROJECT_ID" --format="value(name)"
+echo "---"
+echo "Units:"
+gcloud beta saas-runtime units list --project "$PROJECT_ID" --format="value(name)"
+echo "---"
+echo "Releases:"
+gcloud beta saas-runtime releases list --project "$PROJECT_ID" --format="value(name)"
+echo "---"
+echo "Unit Kinds:"
+gcloud beta saas-runtime unit-kinds list --project "$PROJECT_ID" --format="value(name)"
+echo "---"
+echo "Cleanup verification complete."
