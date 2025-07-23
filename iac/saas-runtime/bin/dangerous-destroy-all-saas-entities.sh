@@ -60,7 +60,7 @@ fi
 if [[ "$CONFIRMATION" != "Nuclear launch detected" ]]; then
   echo "Incorrect confirmation string. Aborting."
   exit 1
-}
+fi
 
 echo "The following SaaS Runtime entities will be DELETED in project '$PROJECT_ID' for match string '$MATCH':"
 echo "---"
