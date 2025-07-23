@@ -1,0 +1,90 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+  pool: {}
+projectId: drebes-saas-5c21
+queueTtl: 3600s
+results:
+  buildStepImages:
+  - sha256:440dcf6a5640b2ae5c77724e68787a906afb8ddee98bf86db94eea8528c2c076
+  - sha256:0a2ee60851e1b61a54707476526c4ed48cc55641a17a5cba8a77fb78e7a4742c
+  - sha256:0a2ee60851e1b61a54707476526c4ed48cc55641a17a5cba8a77fb78e7a4742c
+  buildStepOutputs:
+  - ''
+  - ''
+  - ''
+serviceAccount: projects/drebes-saas-5c21/serviceAccounts/saas-quickstart@drebes-saas-5c21.iam.gserviceaccount.com
+sourceProvenance:
+  fileHashes:
+    ? gs://easysaas-blueprints-bcccc87d-6f3b-4189-8fd1-3a7eb3245cbc/ee488ab1-e6e1-43e4-bd39-a9faab02a34c/terraform-files.zip#1751636002587522
+    : fileHash:
+      - type: MD5
+        value: S4FsUtcL6XFmS5m8jCe7Xw==
+  resolvedStorageSource:
+    bucket: easysaas-blueprints-bcccc87d-6f3b-4189-8fd1-3a7eb3245cbc
+    generation: '1751636002587522'
+    object: ee488ab1-e6e1-43e4-bd39-a9faab02a34c/terraform-files.zip
+startTime: '2025-07-04T13:33:24.133819784Z'
+steps:
+- args:
+  - -c
+  - echo -e "# syntax=docker/dockerfile:1-labs\nFROM scratch\nCOPY --exclude=Dockerfile.Blueprint
+    --exclude=.git --exclude=.gitignore . /" > /workspace/Dockerfile.Blueprint
+  entrypoint: bash
+  id: Create Dockerfile
+  name: ubuntu
+  pullTiming:
+    endTime: '2025-07-04T13:33:33.445070Z'
+    startTime: '2025-07-04T13:33:29.222985454Z'
+  status: SUCCESS
+  timing:
+    endTime: '2025-07-04T13:33:34.211037114Z'
+    startTime: '2025-07-04T13:33:29.222985454Z'
+- args:
+  - buildx
+  - create
+  - --name
+  - container
+  - --driver=docker-container
+  id: Create docker-container driver
+  name: docker
+  pullTiming:
+    endTime: '2025-07-04T13:33:44.904357352Z'
+    startTime: '2025-07-04T13:33:34.211134832Z'
+  status: SUCCESS
+  timing:
+    endTime: '2025-07-04T13:33:45.817806065Z'
+    startTime: '2025-07-04T13:33:34.211134832Z'
+- args:
+  - buildx
+  - build
+  - --builder=container
+  - --push
+  - --annotation
+  - com.easysaas.engine.type=inframanager
+  - --annotation
+  - com.easysaas.engine.version=1.5.7
+  - --provenance=false
+  - -f
+  - /workspace/Dockerfile.Blueprint
+  - .
+  - -t
+  - us-central1-docker.pkg.dev/drebes-saas-5c21/vm-quickstart-repo/fabric-project-000
+  - -t
+  - us-central1-docker.pkg.dev/drebes-saas-5c21/vm-quickstart-repo/fabric-project-000:drebes-saas-5c21-fabric-project-000
+  id: Build and Push Blueprint image
+  name: docker
+  pullTiming:
+    endTime: '2025-07-04T13:33:45.819794837Z'
+    startTime: '2025-07-04T13:33:45.817893193Z'
+  status: SUCCESS
+  timing:
+    endTime: '2025-07-04T13:33:55.974041212Z'
+    startTime: '2025-07-04T13:33:45.817893193Z'
+timeout: 3600s
+timing:
+  BUILD:
+    endTime: '2025-07-04T13:33:55.974100388Z'
+    startTime: '2025-07-04T13:33:28.586643056Z'
+  FETCHSOURCE:
+    endTime: '2025-07-04T13:33:28.586561583Z'
+    startTime: '2025-07-04T13:33:25.550255462Z'
