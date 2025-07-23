@@ -12,13 +12,14 @@ CONFIRMATION=""
 
 # --- Functions ---
 usage() {
-  echo "Usage: $0 --project_id <PROJECT_ID> --match <MATCH_STRING> --confirm <CONFIRMATION>"
+  echo "Usage: $0 --project_id <PROJECT_ID> [--match <MATCH_STRING>] --confirm <CONFIRMATION>"
   echo ""
   echo "This script deletes all SaaS Runtime entities in a project that match a given string."
+  echo "If --match is not provided, it will delete ALL entities."
   echo ""
   echo "Arguments:"
   echo "  --project_id      The GCP project ID."
-  echo "  --match           A string to match against the names of the entities to delete."
+  echo "  --match           A string to match against the names of the entities to delete. Defaults to all entities if not provided."
   echo "  --confirm         To proceed, you must pass the exact string \"Nuclear launch detected\"."
   exit 1
 }
@@ -48,16 +49,48 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$PROJECT_ID" || -z "$MATCH" || -z "$CONFIRMATION" ]]; then
+if [[ -z "$PROJECT_ID" || -z "$CONFIRMATION" ]]; then
   usage
+fi
+
+if [[ -z "$MATCH" ]]; then
+  MATCH="."
 fi
 
 if [[ "$CONFIRMATION" != "Nuclear launch detected" ]]; then
   echo "Incorrect confirmation string. Aborting."
   exit 1
+}
+
+echo "The following SaaS Runtime entities will be DELETED in project '$PROJECT_ID' for match string '$MATCH':"
+echo "---"
+echo "Rollouts:"
+gcloud saas-runtime rollouts list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "---"
+echo "Units:"
+gcloud saas-runtime units list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "---"
+echo "Releases:"
+gcloud saas-runtime releases list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "---"
+echo "Unit Kinds:"
+gcloud saas-runtime unit-kinds list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "---"
+echo "Offerings:"
+gcloud saas-runtime offerings list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "---"
+echo "Entitlements:"
+gcloud saas-runtime entitlements list --project "$PROJECT_ID" --filter="name~$MATCH" --format="value(name)"
+echo "---"
+
+read -p "Are you sure you want to proceed with the deletion? (y/n) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
 fi
 
-echo "Proceeding with deletion of all SaaS Runtime entities in project '$PROJECT_ID' matching '$MATCH'."
+echo "Proceeding with deletion..."
 
 # 1. Delete all Rollouts
 echo "Deleting Rollouts..."
