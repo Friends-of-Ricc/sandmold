@@ -1,35 +1,28 @@
 #!/bin/bash
 #
-# Creates the Global and Regional SaaS Offerings.
+# Creates a regional SaaS Offering.
 #
 
 set -euo pipefail
+set -x
 
 # Source the environment variables
 source .env
 
-# Define the full names for the global and regional SaaS offerings
-SAAS_OFFERING_GLOBAL="${SAAS_OFFERING_NAME}-global"
-SAAS_OFFERING_REGIONAL="${SAAS_OFFERING_NAME}-regional"
-
 # --- Delete existing SaaS Offering (if it exists) ---
-echo "Attempting to delete old SaaS Offering '${SAAS_OFFERING_NAME}' (if it exists)..."
+# Note: We attempt deletion from the new regional location.
+# The old global one will be orphaned if it exists, but new deployments will be clean.
+echo "Attempting to delete old SaaS Offering '${SAAS_OFFERING_NAME}' from region '${GOOGLE_CLOUD_REGION}' (if it exists)..."
 gcloud beta saas-runtime saas delete "${SAAS_OFFERING_NAME}" \
-    --location=global \
+    --location="${GOOGLE_CLOUD_REGION}" \
     --project="${GOOGLE_CLOUD_PROJECT}" \
     --quiet || true # Continue if it doesn't exist or deletion fails
 
-# --- Create Global SaaS Offering ---
-echo "Creating Global SaaS Offering '${SAAS_OFFERING_GLOBAL}'..."
-gcloud beta saas-runtime saas create "${SAAS_OFFERING_GLOBAL}" \
-    --location=global \
-    --locations="name=${GOOGLE_CLOUD_REGION}" \
-    --project="${GOOGLE_CLOUD_PROJECT}" || true
-
-echo "Creating Regional SaaS Offering '${SAAS_OFFERING_REGIONAL}'..."
-gcloud beta saas-runtime saas create "${SAAS_OFFERING_REGIONAL}" \
+# --- Create Regional SaaS Offering ---
+echo "Creating Regional SaaS Offering '${SAAS_OFFERING_NAME}' in '${GOOGLE_CLOUD_REGION}'..."
+gcloud beta saas-runtime saas create "${SAAS_OFFERING_NAME}" \
     --location="${GOOGLE_CLOUD_REGION}" \
     --locations="name=${GOOGLE_CLOUD_REGION}" \
-    --project="${GOOGLE_CLOUD_PROJECT}" || true
+    --project="${GOOGLE_CLOUD_PROJECT}"
 
 echo "SaaS Offering setup complete."

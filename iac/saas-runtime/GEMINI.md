@@ -76,3 +76,12 @@ A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect 
 
 * `ls -al log/` to find your fav log and see their date / recency.
 * `cat log/my-fav-log` to see what's inside.
+
+## Github interaction
+
+* use `gh` to interact with issues. When you do, use Feature branches to push pull reuqests.
+* Comment on GH with your plan. Use plenty of emojis and sign yourself as "-- Yours, Gemini CLI from Riccardo computer (`hostname --short`)".
+* **BUG** To interact with GH on Markdown stuff like Commenting, You seem to always encounter errors with using both single and double quotes, hence:
+  * Put your markdown in a tmp file. Note it will probably need to be local, like `tmp/gh_comment.md`
+  * Call `gh` with content in that file.
+  * delete file afterwards.
