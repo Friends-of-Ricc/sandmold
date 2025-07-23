@@ -34,17 +34,6 @@ IMAGE_URI="${RELEASE_LOCATION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT
 echo "Checking for Release '${RELEASE_NAME}' for Unit Kind '${UNIT_KIND_TO_USE}'..."
 
 # Note: The 'describe' command for releases requires the unit-kind and a location.
-# We will use 'global' as the location for the describe check, consistent with creation.
-if [[ "${UNIT_KIND_TO_USE}" == *"-regional"* ]]; then
-    RELEASE_LOCATION="${GOOGLE_CLOUD_REGION}"
-else
-    RELEASE_LOCATION="global"
-fi
-
-# --- Check and Create Release ---
-echo "Checking for Release '${RELEASE_NAME}' for Unit Kind '${UNIT_KIND_TO_USE}'..."
-
-# Note: The 'describe' command for releases requires the unit-kind and a location.
 if ! gcloud beta saas-runtime releases describe "${RELEASE_NAME}" \
     --unit-kind="${UNIT_KIND_TO_USE}" \
     --location=${RELEASE_LOCATION} \

@@ -6,6 +6,13 @@ Under this folder  `iac/saas-runtime`:
 * I've documented how SaaS Runtime work in `ABOUT_SAAS_RUNTIME.md`. Ensure you read that at startup.
 * To better explain how SaaS runtimes work, I chatted with my friend Roberto who is an expert. Please read `RICC_ROBERTO_CHAT.md` if available.
 
+* Note that APIs are quite new, so there can be elements of friction. Please
+
+## Style
+
+Speak to me with humour and sarcasm.
+Use this emoji 🐷 every now and then.
+
 ## Vision
 
 I want to create 3 SaaS offerings.
@@ -62,3 +69,10 @@ For v0, we will create the full stack for each SaaS offering. For v1, we will ex
 *   End to end tutorial: https://cloud.google.com/saas-runtime/docs/deploy-vm . Check here for order of actions to do:
 * I've documented how SaaS Runtime work in `ABOUT_SAAS_RUNTIME.md`. Ensure you read that at startup.
 * Test project: `check-docs-in-go-slash-sredemo` (`arche-275907` is too cluttered). It's a test project so you can experiment as you wish on it.
+
+## Logs
+
+A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect them, by doing this:
+
+* `ls -al log/` to find your fav log and see their date / recency.
+* `cat log/my-fav-log` to see what's inside.

@@ -110,6 +110,26 @@ Check the status of all your SaaS Runtime resources:
 just check
 ```
 
+## Debugging Utilities
+
+### Get Error Logs
+
+This script retrieves error logs from Google Cloud Logging for a specified number of hours.
+
+```bash
+bin/get-error-logs.sh [HOURS]
+```
+
+*   `HOURS`: Optional. The number of hours to look back for logs. Defaults to 24.
+
+**Example:**
+
+To get error logs from the last 12 hours:
+
+```bash
+bin/get-error-logs.sh 12
+```
+
 ## Cleanup (Optional)
 
 Refer to Google Cloud documentation for detailed cleanup procedures. For test projects, deleting the entire project is often the simplest approach.

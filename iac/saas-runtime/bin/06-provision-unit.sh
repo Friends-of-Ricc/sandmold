@@ -23,7 +23,7 @@ ACTUATION_SA="${TENANT_PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
 
 # Determine the Unit Kind and location based on the unit name
 UNIT_KIND_TO_USE="${UNIT_KIND_NAME_BASE}-global"
-UNIT_LOCATION="global"
+UNIT_LOCATION="${GOOGLE_CLOUD_REGION}"
 if [[ "${UNIT_NAME}" == *"regional"* ]]; then
     UNIT_KIND_TO_USE="${UNIT_KIND_NAME_BASE}-regional"
     UNIT_LOCATION="${GOOGLE_CLOUD_REGION}"
