@@ -66,10 +66,25 @@ create-regional-unit name:
     bin/05-create-unit.sh {{name}} ${UNIT_KIND_NAME_BASE}-regional
     bin/06-provision-unit.sh unit-{{name}}
 
-retrieve-cloudbuild-log BUILD_ID:
+cloudbuild-retrieve-log-global BUILD_ID:
     #!/bin/bash
     source .env
-    gcloud builds log {{BUILD_ID}} --project="${GOOGLE_CLOUD_PROJECT}"
+    echo "1. Testing global first.. then regional on ${GOOGLE_CLOUD_REGION}.."
+    gcloud builds log {{BUILD_ID}} --project="${GOOGLE_CLOUD_PROJECT}" | tee log/cb-global-{{BUILD_ID}}.log
+    echo "✅ Successfully retrieved log for global build: log/cb-global-{{BUILD_ID}}.log"
+
+cloudbuild-retrieve-log-regional BUILD_ID:
+    #!/bin/bash
+    source .env
+    gcloud builds log {{BUILD_ID}} --project="${GOOGLE_CLOUD_PROJECT}" --region=${GOOGLE_CLOUD_REGION} |
+        tee log/cb-regional-{{BUILD_ID}}.${GOOGLE_CLOUD_REGION}.log
+    echo "✅ Successfully retrieved log for regional build ${GOOGLE_CLOUD_REGION}: log/cb-regional-{{BUILD_ID}}.${GOOGLE_CLOUD_REGION}.log"
+
+cloudbuild-retrieve-all-logs:
+    #!/bin/bash
+    source .env
+    echo "1. Global Builds - max 5:"
+    gcloud builds list --project="${GOOGLE_CLOUD_PROJECT}" --limit 5 # --sort-by="createTime"
 
 clean:
     #!/bin/bash

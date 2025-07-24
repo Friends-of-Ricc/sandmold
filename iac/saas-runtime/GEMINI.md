@@ -85,3 +85,9 @@ A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect 
   * Put your markdown in a tmp file. Note it will probably need to be local, like `tmp/gh_comment.md`
   * Call `gh` with content in that file.
   * delete file afterwards.
+
+## Terraform
+
+* Do not add GCS bucket in TF configuration - Infra MAnager does it for us.
+* Max version we can use is `1.5.17` (last from Hashicorp).
+

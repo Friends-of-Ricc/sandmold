@@ -7,8 +7,5 @@ terraform {
     }
   }
 
-  backend "gcs" {
-    bucket = "${TF_BLUEPRINT_BUCKET}"
-    prefix = "terraform/state/terraform-vm"
-  }
+  # Do NOT add a backend GCS! This gets added by Infra Manager!
 }

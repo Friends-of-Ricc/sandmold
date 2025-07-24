@@ -13,9 +13,10 @@ if [ -f .env.post ]; then
 fi
 
 # --- Create and configure GCS bucket for Terraform blueprints ---
-TF_BLUEPRINT_BUCKET="sandmold-tf-blueprints-${GOOGLE_CLOUD_PROJECT}"
+#TF_BLUEPRINT_BUCKET="sandmold-tf-blueprints-${GOOGLE_CLOUD_PROJECT}"
+
 export TF_BLUEPRINT_BUCKET
-echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.post
+#echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.auto
 
 echo "SAAS_SERVICE_ACCOUNT: ${SAAS_SERVICE_ACCOUNT}"
 
@@ -73,7 +74,10 @@ echo "Granting permissions to Terraform Actuator Service Account..."
 TF_ACTUATOR_ROLES=(
     "roles/editor"
     "roles/storage.admin"
+    "roles/config.agent"
 )
+
+# roles/config.agent comews from duckie
 
 for ROLE in "${TF_ACTUATOR_ROLES[@]}"; do
     echo "Ensuring role [${ROLE}] for SA [${TF_ACTUATOR_SA_EMAIL}]..."
@@ -87,7 +91,7 @@ echo "Creating GCS bucket for Terraform blueprints: gs://${TF_BLUEPRINT_BUCKET}"
 echo "GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}"
 echo "GOOGLE_IDENTITY: ${GOOGLE_IDENTITY}"
 if ! gsutil ls "gs://${TF_BLUEPRINT_BUCKET}" &> /dev/null; then
-    gsutil mb -p "${GOOGLE_CLOUD_PROJECT}" -l "${GOOGLE_CLOUD_REGION}" "gs://${TF_BLUEPRINT_BUCKET}"
+    gsutil mb -p "${GOOGLE_CLOUD_PROJECT}" -l "${GOOGLE_CLOUD_REGION}" --versioning-enabled "gs://${TF_BLUEPRINT_BUCKET}"
 else
     echo "GCS bucket gs://${TF_BLUEPRINT_BUCKET} already exists."
 fi
@@ -109,7 +113,8 @@ fi
 
 # Export the new service account email and bucket name for other scripts to use
 export TF_ACTUATOR_SA_EMAIL
-echo "TF_ACTUATOR_SA_EMAIL=${TF_ACTUATOR_SA_EMAIL}" >> .env.post
-echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.post
+# TODO Gemini CLI: Make this smarter - if it doesnt exist, add it
+echo "TF_ACTUATOR_SA_EMAIL=${TF_ACTUATOR_SA_EMAIL}" >> .env.auto
+echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.auto
 
 echo "Environment setup complete."

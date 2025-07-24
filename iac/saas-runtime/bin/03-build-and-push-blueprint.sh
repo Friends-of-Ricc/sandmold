@@ -81,12 +81,15 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 serviceAccount: projects/${GOOGLE_CLOUD_PROJECT}/serviceAccounts/${TF_ACTUATOR_SA_EMAIL}
+substitutions:
+  _TF_BLUEPRINT_BUCKET: ${TF_BLUEPRINT_BUCKET}
 EOF
 
 # --- Submit Build ---
 echo "Submitting Cloud Build job for blueprint: ${TERRAFORM_MODULE_BASENAME}"
 gcloud builds submit "${BUILD_DIR}" \
     --config="${CLOUDBUILD_CONFIG_FILE}" \
-    --project="${GOOGLE_CLOUD_PROJECT}"
+    --project="${GOOGLE_CLOUD_PROJECT}" \
+    --substitutions=_TF_BLUEPRINT_BUCKET="${TF_BLUEPRINT_BUCKET}"
 
 echo "Blueprint build and push complete for ${TERRAFORM_MODULE_BASENAME}."
