@@ -3,8 +3,9 @@
 # Creates a regional SaaS Offering.
 #
 
-set -euo pipefail
-set -x
+if [ "${SAAS_DEBUG:-false}" == "true" ]; then
+    set -x
+fi
 
 # Source the environment variables
 source .env

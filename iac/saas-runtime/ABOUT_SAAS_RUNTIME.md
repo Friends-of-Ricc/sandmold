@@ -163,80 +163,128 @@ To update a SaaS offering, you need to follow these steps: create a release, cre
 *   **Tenant**: A tenant represents a dedicated instance of the SaaS offering. It acts as a container for all the units (containing applications, databases, and infrastructure components) that you provision and manage.
 *   **Feature flag**: Feature flags toggle the state or other binary behaviors of a feature. Feature flags allow you to change feature availability or feature behavior without redeploying or restarting the application.
 
-## API enablement
+## Project Vision and SaaS Offerings
 
-Enable required APIs
+This project aims to create 3 SaaS offerings within the SaaS Runtime framework:
 
-You need to enable the following APIs to use SaaS runtime.
-* SaaS Runtime API
-* Artifact Registry API
-* Infrastructure Manager API
-* Developer Connect API
-* Cloud Build API
-* Cloud Storage API
+*   **Zero SaaS - The "Hello World"**:
+    *   **Purpose**: A simple, known-good starting point to verify the SaaS Runtime is functioning correctly.
+    *   **Implementation**: Based on the existing `terraform-vm` code.
+    *   **Unit Kind**: `simple-vm`
+        *   **Inputs**: `project_id`, `instance_name`
+        *   **Outputs**: `vm_ip_address`
 
-Also you need to enable the SA enablement:
-* I've added the SA name to `.env.post` (so you just need to source it AFTER .env if available, since it depends on ProjNumb).
-* Docs are here https://cloud.google.com/saas-runtime/docs/overview
+*   **First SaaS - Bank of Anthos (BoA) as a Service**:
+    *   **Purpose**: Provide a complete, self-contained Bank of Anthos environment for a single user or student.
+    *   **Unit Kind**: `boa-stack`
+        *   **Inputs**: `billing_account_id`, `parent_folder`, `user_email`
+        *   **Outputs**: `project_id`, `boa_url`
 
-### SA Required Permissions
+*   **Second SaaS - Hipster Shop as a Service**:
+    *   **Purpose**: Provide a complete, self-contained Hipster Shop environment for a single user or student.
+    *   **Unit Kind**: `hipster-shop-stack`
+        *   **Inputs**: `billing_account_id`, `parent_folder`, `user_email`
+        *   **Outputs**: `project_id`, `hipster_shop_url`
 
-SaaS Runtime requires specific IAM roles to be granted to this service account:
+*   **Third SaaS - Classroom as a Service**:
+    *   **Purpose**: A meta-offering that allows a "teacher" to create a "classroom" (a Google Cloud Folder) and then provision multiple instances of other SaaS offerings (like `boa-stack` or `hipster-shop-stack`) for their "students".
+    *   **Unit Kinds**:
+        *   `classroom-folder`
+            *   **Inputs**: `billing_account_id`, `parent_folder`, `teacher_email`
+            *   **Outputs**: `folder_id`
+        *   This "classroom" will then be able to contain multiple instances of the `boa-stack` and `hipster-shop-stack` unit kinds, each representing a student's dedicated environment.
 
-* `roles/artifactregistry.admin`: Grants full control of Artifact Registry
-* `roles/storage.admin`: Grants full control of Cloud Storage.
-* `roles/config.admin`: Grants full control of Infrastructure Manager.
-* `roles/iam.serviceAccountShortTermTokenMinter`: Grants Infrastructure Manager permission to start Cloud Build jobs.
-* `roles/iam.serviceAccountUser`: Grants SaaS Runtime usage of Infrastructure Manager. Allows Infrastructure Manager to create Terraform resources.
+## SaaS Runtime Architecture and Relationships
 
+The SaaS Runtime is built around several core components that interact to provision and manage SaaS offerings. Understanding these relationships is crucial for effective use of the platform.
 
-## Provision unit permissions
+**Key Entities and Their Relationships:**
 
-Actuation service account
-The actuation service account actuates the unit and is required for unit provisioning. Certain permissions must be enabled for this service account. What permissions are required?
+*   **SaaS Offering**: The overarching service product. It *defines* and contains various Unit Kinds.
+*   **Unit Kind (UK)**: A template or type of managed component (e.g., a VM, a database, an application stack). A SaaS Offering *has* multiple Unit Kinds.
+*   **Release**: A specific, versioned snapshot of a Unit Kind's configuration (its Blueprint). A Unit Kind *has* multiple Releases.
+*   **Blueprint**: The Infrastructure-as-Code (IaC) package (typically a Terraform module packaged as an OCI image) that defines how to create a resource. A Release *is created from* a Blueprint.
+*   **Unit**: An actual, running instance of a Unit Kind. A Unit Kind *instantiates* Units, and a Unit *is provisioned from* a specific Release.
+*   **Terraform Module**: The raw Terraform code that a Blueprint *is built from*.
 
-Service account
-Default compute service account
+**Dependencies and Caveats:**
 
-Grant SaaS runtime permission to act on behalf of the actuation service account.
+The relationships imply a clear dependency flow:
+*   A **Unit** depends on a **Unit Kind** (for its type) and a **Release** (for its versioned configuration).
+*   A **Release** depends on a **Unit Kind** (it's a release *of* that kind) and a **Blueprint** (which contains the configuration).
+*   A **Blueprint** depends on a **Terraform Module** (the source code).
+*   A **Unit Kind** depends on a **SaaS Offering** (its parent container).
 
-Docs: https://cloud.google.com/saas-runtime/docs/overview?hl=en_GB&_gl=1*1102ybx*_ga*MTEyNTkwNjA4MS4xNzUzMDg1OTMz*_ga_WH2QY8WWF5*czE3NTMxODc3NDUkbzYkZzEkdDE3NTMxOTM0OTYkajYwJGwwJGgw#actuation-sa
+**⚠️ Circular Dependency between Unit Kind and Release:**
 
-### Docs
+A common point of confusion arises from a potential circular dependency:
+*   A **Unit Kind** can have a `default_release`.
+*   A **Release** must belong to a **Unit Kind**.
 
-Actuation service account (User-managed)
-The actuation service account is a user-managed service account that you must create. SaaS Runtime (via Infra Manager) uses this service account to execute your Terraform configurations. It's the identity that creates, modifies, and deletes the resources defined in your Terraform.
+This means you cannot set a `default_release` on a Unit Kind until the Release exists, and you cannot create a Release without a Unit Kind. The solution is to first create the Unit Kind *without* a default release, then create the Release, and finally, update the Unit Kind to set the newly created release as the default.
 
-You are responsible for creating this service account within your project, or within your tenant project.
+For a visual representation of these relationships, please refer to `ER_DIAGRAM.md`.
 
-Actuation service account input variables
-When you create a unit, you must provide the actuation service account as an key-value pair input variable for the Terraform configuration:
+## Known Issues and Workarounds
 
-Name: actuation_sa
-Variable type: String
-Variable value: Actuation service account email address:
+This section outlines some common friction points encountered when working with SaaS Runtime and their current resolutions or workarounds.
 
-eg my-actuation-sa@my-identifier.iam.gserviceaccount.com
+### Manifest Digest Mismatch Error with Artifact Registry Blueprints
 
-### Required Permissions
+**Problem:** Persistent `INVALID_ARGUMENT: invalid argument unable to read annotations from OCI image, error: manifest digest: "sha256:..." does not match requested digest: "sha256:..."` errors when attempting to create SaaS Runtime Releases from blueprints stored in Artifact Registry. This suggests issues with how the SaaS Runtime service resolves or caches blueprint image references.
 
-The actuation service account requires sufficient permissions to manage the resources defined in your Terraform configuration. At a minimum, it needs:
+**Workaround:** Transition to using GCS-based ZIP files for Terraform blueprints. This involves:
+*   Modifying the blueprint build process to create and upload ZIP archives to a dedicated GCS bucket.
+*   Updating release creation commands to reference these GCS paths instead of Artifact Registry image URIs.
 
-* roles/iam.serviceAccountTokenCreator: Allows the service account to generate tokens for authentication.
-* roles/config.admin: Grants full control over Infra Manager resources.
-* roles/storage.admin: Grants full control of Cloud Storage.
+### `gsutil` Reauthentication Issue
 
+**Problem:** `gsutil` commands failing with `google_reauth.errors.ReauthUnattendedError: Reauthentication challenge could not be answered because you are not in an interactive session.` during script execution, even after successful interactive `gcloud auth login` and `gcloud auth application-default login`. This indicates `gsutil` is unable to use existing application default credentials in a non-interactive script environment, or credentials are expiring too quickly.
 
-The actuation service account also needs permissions to create and manage the specific Google Cloud resources used by your application.
+**Workaround:** (Implicit from context, but not explicitly stated as a workaround in the log) Ensure that the environment where `gsutil` is run has valid and non-expiring credentials, or consider using service account keys directly for `gsutil` operations in automated scripts if application default credentials prove unreliable.
 
-For example:
+## Operational Tasks
 
-* If your Terraform creates Google Kubernetes Engine (GKE) clusters, the service account needs appropriate GKE roles (roles/container.admin, for example).
-* If your Terraform creates Compute Engine instances, the service account needs the roles/compute.admin role.
-* If your Terraform creates Cloud SQL instances, the service account needs the appropriate Cloud SQL roles (roles/cloudsql.admin, for example).
+### Updating the Default Release for a Unit Kind
 
-### Example Variables for Riccardo
+When you create a new release (e.g., `v1-0-1`), you need to update the corresponding Unit Kind to make that release the default for new unit provisioning.
 
-1. `tenant_project_id` (String). Value: `PROJECT_ID`
-2. `tenant_project_number` (Integer). Value: `PROJECT_NUMBER`
-3. `actuation_sa` (String). Value: `PROJECT_NUMBER-compute@developer.gserviceaccount.com`
+1.  **Update your `.env` file:** Change the `RELEASE_NAME` variable to your new release name (e.g., `RELEASE_NAME="sample-vm-v1-0-1"`).
+
+2.  **Run the update command:**
+
+    ```bash
+    source .env && \
+    gcloud beta saas-runtime unit-kinds update ${UNIT_KIND_NAME_BASE}-global \
+        --default-release=${RELEASE_NAME} \
+        --location=global \
+        --project=${GOOGLE_CLOUD_PROJECT}
+    ```
+
+### Verification
+
+Check the status of all your SaaS Runtime resources:
+
+```bash
+just check
+```
+
+### Debugging Utilities
+
+#### Get Error Logs
+
+This script retrieves error logs from Google Cloud Logging for a specified number of hours.
+
+```bash
+bin/get-error-logs.sh [HOURS]
+```
+
+*   `HOURS`: Optional. The number of hours to look back for logs. Defaults to 24.
+
+**Example:**
+
+To get error logs from the last 12 hours:
+
+```bash
+bin/get-error-logs.sh 12
+```

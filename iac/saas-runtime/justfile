@@ -65,3 +65,8 @@ create-regional-unit name:
     source .env
     bin/05-create-unit.sh {{name}} ${UNIT_KIND_NAME_BASE}-regional
     bin/06-provision-unit.sh unit-{{name}}
+
+retrieve-cloudbuild-log BUILD_ID:
+    #!/bin/bash
+    source .env
+    gcloud builds log {{BUILD_ID}} --project="${GOOGLE_CLOUD_PROJECT}"

@@ -11,7 +11,9 @@
 # 6. Check its actually cleaned up with some gcloud getters.
 
 set -e
-set -x # Enable debugging
+if [ "${SAAS_DEBUG:-false}" == "true" ]; then
+    set -x
+fi
 
 # --- Configuration ---
 PROJECT_ID=""

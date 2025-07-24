@@ -4,7 +4,9 @@
 #
 
 set -euo pipefail
-set -x
+if [ "${SAAS_DEBUG:-false}" == "true" ]; then
+    set -x
+fi
 
 # --- Argument Check ---
 if [ -z "$1" ]; then
