@@ -26,8 +26,7 @@ source .env
 # --- Check and Create Unit ---
 echo "Checking for Unit '${SAAS_UNIT_NAME}' in location '${GOOGLE_CLOUD_REGION}'..."
 
-gcloud beta saas-runtime units create "${SAAS_UNIT_NAME}" \
-    --unit-kind="${UNIT_KIND_NAME_BASE}" \
+gcloud beta saas-runtime units create "${SAAS_UNIT_NAME}"     --unit-kind="${2:-$UNIT_KIND_NAME_BASE}" \
     --location="${GOOGLE_CLOUD_REGION}" \
     --project="${GOOGLE_CLOUD_PROJECT}" || echo "Unit '${SAAS_UNIT_NAME}' may already exist. Continuing..."
 

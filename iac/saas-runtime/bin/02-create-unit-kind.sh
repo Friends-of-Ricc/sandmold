@@ -10,8 +10,8 @@ fi
 # Source the environment variables
 source .env
 
-UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
-SAAS_OFFERING_NAME="${SAAS_OFFERING_NAME}"
+UNIT_KIND_NAME=${1:-$UNIT_KIND_NAME_BASE}
+SAAS_OFFERING_NAME=${2:-$SAAS_OFFERING_NAME}
 
 # --- Create Regional Unit Kind ---
 echo "Checking for Unit Kind '${UNIT_KIND_NAME}'..."

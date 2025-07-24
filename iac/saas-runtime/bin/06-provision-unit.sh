@@ -35,7 +35,7 @@ echo "Triggering provisioning for Unit '${UNIT_NAME}'..."
 gcloud --log-http beta saas-runtime unit-operations create "provision-${UNIT_NAME}-$(date +%s)" \
     --unit="${UNIT_RESOURCE_NAME}" \
     --provision \
-    --provision-release="${RELEASE_NAME_BASE}" \
+    --provision-release="${2:-$RELEASE_NAME_BASE}" \
     --provision-input-variables="variable=instance_name,value=${UNIT_NAME},type=string"    \
     --provision-input-variables="variable=tenant_project_id,value=${TENANT_PROJECT_ID},type=string"     \
     --provision-input-variables="variable=tenant_project_number,value=${TENANT_PROJECT_NUMBER},type=int"     \

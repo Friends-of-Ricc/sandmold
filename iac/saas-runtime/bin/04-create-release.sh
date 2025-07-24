@@ -15,7 +15,7 @@ if [ -f .env.post ]; then
 fi
 
 # --- Configuration ---
-RELEASE_NAME="${RELEASE_NAME_BASE}"
+RELEASE_NAME=${1:-$RELEASE_NAME_BASE}
 UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
 TERRAFORM_MODULE_BASENAME="terraform-vm"
 

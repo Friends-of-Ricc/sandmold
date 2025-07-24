@@ -12,8 +12,8 @@ if [ -f .env.post ]; then
 fi
 
 # --- Configuration ---
-UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
-RELEASE_NAME="${RELEASE_NAME_BASE}"
+UNIT_KIND_NAME=${1:-$UNIT_KIND_NAME_BASE}
+RELEASE_NAME=${2:-$RELEASE_NAME_BASE}
 
 echo "Repositioning Unit Kind '${UNIT_KIND_NAME}' default release to '${RELEASE_NAME}'..."
 
