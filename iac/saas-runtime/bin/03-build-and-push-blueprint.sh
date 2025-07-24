@@ -24,16 +24,18 @@ fi
 BUILD_DIR="build/${TERRAFORM_MODULE_BASENAME}"
 
 echo "Preparing temporary build directory: ${BUILD_DIR}"
+rm -rf "${BUILD_DIR}"
 mkdir -p "${BUILD_DIR}"
 cp -r "${TERRAFORM_MODULE_DIR}/." "${BUILD_DIR}/"
 
 # --- Create Dockerfile.Blueprint ---
-echo "Generating Dockerfile.Blueprint in ${BUILD_DIR}"
-cat <<EOF > "${BUILD_DIR}/Dockerfile.Blueprint"
-# syntax=docker/dockerfile:1-labs
-FROM scratch
-COPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /
-EOF
+# Ricc: USELESS since CB creates it!
+# echo "Generating Dockerfile.Blueprint in ${BUILD_DIR}"
+# cat <<EOF > "${BUILD_DIR}/Dockerfile.Blueprint"
+# # syntax=docker/dockerfile:1-labs
+# FROM scratch
+# COPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /
+# EOF
 
 # --- Define Image Tags ---
 BLUEPRINT_IMAGE_BASE_TAG="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${TERRAFORM_MODULE_BASENAME}"
@@ -81,15 +83,17 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 serviceAccount: projects/${GOOGLE_CLOUD_PROJECT}/serviceAccounts/${TF_ACTUATOR_SA_EMAIL}
-substitutions:
-  _TF_BLUEPRINT_BUCKET: ${TF_BLUEPRINT_BUCKET}
 EOF
+
 
 # --- Submit Build ---
 echo "Submitting Cloud Build job for blueprint: ${TERRAFORM_MODULE_BASENAME}"
-gcloud builds submit "${BUILD_DIR}" \
-    --config="${CLOUDBUILD_CONFIG_FILE}" \
-    --project="${GOOGLE_CLOUD_PROJECT}" \
-    --substitutions=_TF_BLUEPRINT_BUCKET="${TF_BLUEPRINT_BUCKET}"
+(
+    cd "${BUILD_DIR}" || exit
+    zip -r blueprint.zip .
+)
+gcloud storage cp "${BUILD_DIR}/blueprint.zip" "gs://${TF_BLUEPRINT_BUCKET}/"
+
+gcloud builds submit "gs://${TF_BLUEPRINT_BUCKET}/blueprint.zip"     --config="${CLOUDBUILD_CONFIG_FILE}"     --project="${GOOGLE_CLOUD_PROJECT}"
 
 echo "Blueprint build and push complete for ${TERRAFORM_MODULE_BASENAME}."
