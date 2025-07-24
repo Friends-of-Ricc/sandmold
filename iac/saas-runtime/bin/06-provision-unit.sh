@@ -26,11 +26,7 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-# --- Environment and Config ---
-source .env
-if [ -f .env.post ]; then
-    source .env.post
-fi
+source "$(dirname "$0")/common-setup.sh"
 
 TENANT_PROJECT_ID="${GOOGLE_CLOUD_PROJECT}"
 TENANT_PROJECT_NUMBER=$(gcloud projects describe "${TENANT_PROJECT_ID}" --format="value(projectNumber)")

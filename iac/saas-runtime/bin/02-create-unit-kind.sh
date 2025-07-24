@@ -3,12 +3,13 @@
 # Creates a regional Unit Kind for the SaaS Offering.
 #
 
+set -euo pipefail
+
+source "$(dirname "$0")/common-setup.sh"
+
 if [ "${SAAS_DEBUG:-false}" == "true" ]; then
     set -x
 fi
-
-# Source the environment variables
-source .env
 
 while [[ "$#" -gt 0 ]]; do
     case "$1" in

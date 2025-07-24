@@ -8,11 +8,7 @@ if [ "${SAAS_DEBUG:-false}" == "true" ]; then
     set -x
 fi
 
-# Source the environment variables
-source .env
-if [ -f .env.post ]; then
-    source .env.post
-fi
+source "$(dirname "$0")/common-setup.sh"
 
 # --- Configuration ---
 while [[ "$#" -gt 0 ]]; do

@@ -6,11 +6,7 @@
 set -euo pipefail
 set -x
 
-# Source the environment variables
-source .env
-if [ -f .env.post ]; then
-    source .env.post
-fi
+source "$(dirname "$0")/common-setup.sh"
 
 # --- Create and configure GCS bucket for Terraform blueprints ---
 #TF_BLUEPRINT_BUCKET="sandmold-tf-blueprints-${GOOGLE_CLOUD_PROJECT}"
@@ -111,10 +107,6 @@ else
     echo "Artifact Registry ${ARTIFACT_REGISTRY_NAME} already exists."
 fi
 
-# Export the new service account email and bucket name for other scripts to use
-export TF_ACTUATOR_SA_EMAIL
-# TODO Gemini CLI: Make this smarter - if it doesnt exist, add it
-echo "TF_ACTUATOR_SA_EMAIL=${TF_ACTUATOR_SA_EMAIL}" >> .env.auto
-echo "TF_BLUEPRINT_BUCKET=${TF_BLUEPRINT_BUCKET}" >> .env.auto
+
 
 echo "Environment setup complete."

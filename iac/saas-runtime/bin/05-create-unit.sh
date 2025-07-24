@@ -29,8 +29,7 @@ done
 # Create a unique name for the SaaS Unit resource itself
 SAAS_UNIT_NAME="unit-${INSTANCE_NAME}"
 
-# --- Environment and Config ---
-source .env
+source "$(dirname "$0")/common-setup.sh"
 
 # --- Check and Create Unit ---
 echo "Checking for Unit '${SAAS_UNIT_NAME}' in location '${GOOGLE_CLOUD_REGION}'..."

@@ -20,10 +20,10 @@ while [[ "$#" -gt 0 ]]; do
 done
 TERRAFORM_MODULE_BASENAME=$(basename "${TERRAFORM_MODULE_DIR}")
 
-# Source the environment variables
-source .env
-if [ -f .env.post ]; then
-    source .env.post
+source "$(dirname "$0")/common-setup.sh"
+
+if [ "${SAAS_DEBUG:-false}" == "true" ]; then
+    set -x
 fi
 
 # --- Build Setup ---

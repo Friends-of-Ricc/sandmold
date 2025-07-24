@@ -3,6 +3,10 @@
 # Creates a regional SaaS Offering.
 #
 
+set -euo pipefail
+
+source "$(dirname "$0")/common-setup.sh"
+
 if [ "${SAAS_DEBUG:-false}" == "true" ]; then
     set -x
 fi

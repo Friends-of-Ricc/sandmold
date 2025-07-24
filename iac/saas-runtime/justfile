@@ -6,8 +6,7 @@ list:
 
 check-setup:
     #!/bin/bash
-    source .env
-    bin/check-setup.sh
+    bin/00-setup-env.sh
 
 
 # create SaaS Runtime instance
@@ -90,6 +89,7 @@ clean:
     #!/bin/bash
     rm -rf build/
 
+# v2 - Deploy SaaS end to end E2E
 deploy-saas-end2end:
     #!/bin/bash
     set -euo pipefail
