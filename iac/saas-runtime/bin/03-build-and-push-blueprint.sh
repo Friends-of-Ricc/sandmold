@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Builds a generic Terraform blueprint and pushes it to a GCS bucket.
+# Builds a generic Terraform blueprint and pushes it to Artifact Registry.
 #
 
 set -euo pipefail
@@ -27,49 +27,66 @@ echo "Preparing temporary build directory: ${BUILD_DIR}"
 mkdir -p "${BUILD_DIR}"
 cp -r "${TERRAFORM_MODULE_DIR}/." "${BUILD_DIR}/"
 
-# --- Create ZIP archive ---
-ZIP_FILE="${BUILD_DIR}.zip"
-echo "Creating ZIP archive: ${ZIP_FILE}"
-(cd "${BUILD_DIR}" && zip -r "../${TERRAFORM_MODULE_BASENAME}.zip" .)
+# --- Create Dockerfile.Blueprint ---
+echo "Generating Dockerfile.Blueprint in ${BUILD_DIR}"
+cat <<EOF > "${BUILD_DIR}/Dockerfile.Blueprint"
+# syntax=docker/dockerfile:1-labs
+FROM scratch
+COPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /
+EOF
 
-# --- Upload ZIP to GCS ---
-GCS_PATH="gs://${TF_BLUEPRINT_BUCKET}/${TERRAFORM_MODULE_BASENAME}/${TERRAFORM_MODULE_BASENAME}.zip"
-echo "Uploading ZIP archive to GCS: ${GCS_PATH}"
-gsutil cp "${ZIP_FILE}" "${GCS_PATH}"
+# --- Define Image Tags ---
+BLUEPRINT_IMAGE_BASE_TAG="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${TERRAFORM_MODULE_BASENAME}"
+TIMESTAMP_TAG="autotag-$(date +%Y%m%d-%H%M)"
+BLUEPRINT_IMAGE_TIMESTAMP_TAG="${BLUEPRINT_IMAGE_BASE_TAG}:${TIMESTAMP_TAG}"
 
 # --- Generate cloudbuild.yaml ---
+CLOUDBUILD_CONFIG_FILE="${BUILD_DIR}/cloudbuild.yaml"
+
 echo "Generating cloudbuild.yaml in ${BUILD_DIR}"
-cat <<EOF > "${BUILD_DIR}/cloudbuild.yaml"
+cat <<EOF > "${CLOUDBUILD_CONFIG_FILE}"
 steps:
-- id: 'Echo Debug'
-  name: 'ubuntu/cloud-sdk:latest'
+- id: 'Create Dockerfile'
+  name: 'ubuntu'
   entrypoint: 'bash'
   args:
   - '-c'
-  - 'echo "DEBUG activated for sandmold."'
-- id: 'Find Files'
-  name: 'ubuntu/cloud-sdk:latest'
-  entrypoint: 'bash'
+  - 'echo -e "# syntax=docker/dockerfile:1-labs\nFROM scratch\nCOPY --exclude=Dockerfile.Blueprint --exclude=.git --exclude=.gitignore . /" > /workspace/Dockerfile.Blueprint'
+- id: 'Create docker-container driver'
+  name: 'docker'
   args:
-  - '-c'
-  - 'find .'
-- id: 'Deploy Blueprint'
-  name: 'gcr.io/cloud-foundation-toolkit/infra-manager:latest'
+  - 'buildx'
+  - 'create'
+  - '--name'
+  - 'container'
+  - '--driver=docker-container'
+- id: 'Build and Push Blueprint image'
+  name: 'docker'
   args:
-  - 'apply'
-  - '--blueprint-path=${GCS_PATH}'
-  - '--project=${GOOGLE_CLOUD_PROJECT}'
-  - '--location=${GOOGLE_CLOUD_REGION}'
-  - '--service-account=${TF_ACTUATOR_SA_EMAIL}'
+  - 'buildx'
+  - 'build'
+  - '--builder=container'
+  - '--push'
+  - '--annotation'
+  - 'com.easysaas.engine.type=inframanager'
+  - '--annotation'
+  - 'com.easysaas.engine.version=1.5.7'
+  - '-f'
+  - '/workspace/Dockerfile.Blueprint'
+  - '.'
+  - '-t'
+  - '${BLUEPRINT_IMAGE_BASE_TAG}'
+  - '-t'
+  - '${BLUEPRINT_IMAGE_TIMESTAMP_TAG}'
 options:
   logging: CLOUD_LOGGING_ONLY
+serviceAccount: projects/${GOOGLE_CLOUD_PROJECT}/serviceAccounts/${TF_ACTUATOR_SA_EMAIL}
 EOF
 
 # --- Submit Build ---
-echo "Submitting Cloud Build job for blueprint: ${TERRAFM_MODULE_BASENAME}"
+echo "Submitting Cloud Build job for blueprint: ${TERRAFORM_MODULE_BASENAME}"
 gcloud builds submit "${BUILD_DIR}" \
-    --config="${BUILD_DIR}/cloudbuild.yaml" \
-    --project="${GOOGLE_CLOUD_PROJECT}" \
-    --substitutions=_ENGINE_TYPE='inframanager',_ENGINE_VERSION='1.5.7'
+    --config="${CLOUDBUILD_CONFIG_FILE}" \
+    --project="${GOOGLE_CLOUD_PROJECT}"
 
 echo "Blueprint build and push complete for ${TERRAFORM_MODULE_BASENAME}."

@@ -4,45 +4,34 @@
 #
 
 set -euo pipefail
-
-# Check for required argument
-if [ -z "$1" ]; then
-    echo "Usage: $0 <unit-kind-name>"
-    exit 1
+if [ "${SAAS_DEBUG:-false}" == "true" ]; then
+    set -x
 fi
-
-UNIT_KIND_TO_USE=$1
 
 # Source the environment variables
 source .env
-
-# Determine the Release Name based on the Unit Kind's location
-if [[ "${UNIT_KIND_TO_USE}" == *"-regional"* ]]; then
-    RELEASE_NAME_SUFFIX="-regional"
-    RELEASE_LOCATION="${GOOGLE_CLOUD_REGION}"
-else
-    RELEASE_NAME_SUFFIX="-global"
-    RELEASE_LOCATION="global"
+if [ -f .env.post ]; then
+    source .env.post
 fi
-RELEASE_NAME="${RELEASE_NAME_BASE}${RELEASE_NAME_SUFFIX}"
 
 # --- Configuration ---
-BLUEPRINT_IMAGE_NAME="terraform-vm-blueprint" # This should match the output of the build script
-IMAGE_URI="${RELEASE_LOCATION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${BLUEPRINT_IMAGE_NAME}:${RELEASE_NAME}"
+RELEASE_NAME="${RELEASE_NAME_BASE}"
+UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
+TERRAFORM_MODULE_BASENAME="terraform-vm"
 
 # --- Check and Create Release ---
-echo "Checking for Release '${RELEASE_NAME}' for Unit Kind '${UNIT_KIND_TO_USE}'..."
+echo "Checking for Release '${RELEASE_NAME}' for Unit Kind '${UNIT_KIND_NAME}'..."
 
-# Note: The 'describe' command for releases requires the unit-kind and a location.
-if ! gcloud beta saas-runtime releases describe "${RELEASE_NAME}" \
-    --unit-kind="${UNIT_KIND_TO_USE}" \
-    --location=${RELEASE_LOCATION} \
-    --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+# The blueprint package path now points to the Artifact Registry image.
+BLUEPRINT_IMAGE_BASE_TAG="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${TERRAFORM_MODULE_BASENAME}"
 
-    echo "Creating Release '${RELEASE_NAME}'..."
-    gcloud --log-http beta saas-runtime releases create "${RELEASE_NAME}"         --unit-kind="${UNIT_KIND_TO_USE}"         --blueprint-package="gs://${TF_BLUEPRINT_BUCKET}/${TERRAFORM_MODULE_BASENAME}/${TERRAFORM_MODULE_BASENAME}.zip"         --location=${RELEASE_LOCATION}         --input-variable-defaults="variable=instance_name,value=default-instance,type=string"         --input-variable-defaults="variable=tenant_project_id,value=${GOOGLE_CLOUD_PROJECT},type=string"         --input-variable-defaults="variable=tenant_project_number,value=${PROJECT_NUMBER},type=string"         --project="${GOOGLE_CLOUD_PROJECT}"
-else
-    echo "Release '${RELEASE_NAME}' already exists."
-fi
+gcloud beta saas-runtime releases create "${RELEASE_NAME}" \
+    --unit-kind="${UNIT_KIND_NAME}" \
+    --blueprint-package="${BLUEPRINT_IMAGE_BASE_TAG}" \
+    --location="${GOOGLE_CLOUD_REGION}" \
+    --input-variable-defaults="variable=instance_name,value=default-instance,type=string" \
+    --input-variable-defaults="variable=tenant_project_id,value=${GOOGLE_CLOUD_PROJECT},type=string" \
+    --input-variable-defaults="variable=tenant_project_number,value=${PROJECT_NUMBER},type=int" \
+    --project="${GOOGLE_CLOUD_PROJECT}"
 
 echo "Release setup complete."
