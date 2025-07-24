@@ -1,0 +1,22 @@
+# etc/samples/unit-kind-sample.yaml
+
+# Defines the "contract" for a unit kind.
+# This would be used by 02-create-unit-kind.sh and 04-create-release.sh
+
+unit_kind_name: sandmold-sample-vm
+
+# Input variables that the user of this unit kind will provide.
+input_variables:
+  - name: instance_name
+    type: string
+    default: "default-instance-name"
+  - name: machine_type
+    type: string
+    default: "e2-medium"
+
+# Output variables that the unit kind will produce after provisioning.
+output_variables:
+  - name: instance_id
+    type: string
+  - name: instance_ip
+    type: string

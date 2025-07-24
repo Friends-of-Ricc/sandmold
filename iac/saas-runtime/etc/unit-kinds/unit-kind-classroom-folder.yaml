@@ -2,9 +2,9 @@ name: classroom-folder
 deployment_template:
   type: terraform
   source: "./terraform-classroom-folder"
-  actuation_sa_role: "roles/owner"
+  #actuation_sa_role: "roles/owner"
   input_parameters:
-    - name: parent_folder
+    - name: parent_folder_id
       type: string
     - name: teacher_email
       type: string

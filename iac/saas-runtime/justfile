@@ -92,14 +92,17 @@ clean:
 
 deploy-saas-end2end:
     #!/bin/bash
-    set -e
-    echo "Running end-to-end SaaS deployment for 'sandmold-test-cli-e2e'"
-    export RELEASE_NAME_BASE="e2e-test-$(date +%Y%m%d-%H%M)"
-    bin/01-create-saas.sh
-    bin/02-create-unit-kind.sh sandmold-sample-vm terraform-modules/terraform-vm
-    bin/03-build-and-push-blueprint.sh terraform-modules/terraform-vm
-    bin/04-create-release.sh
-    bin/04a-reposition-uk-default.sh
-    bin/05-create-unit.sh sandmold-test-cli-e2e
-    bin/06-provision-unit.sh unit-sandmold-test-cli-e2e
+    set -euo pipefail
+    SAAS_NAME="sandmold-test-cli-e2e"
+    RELEASE_NAME="e2e-test-$(date +%Y%m%d-%H%M)"
+    TERRAFORM_MODULE_DIR="terraform-modules/terraform-vm"
+
+    echo "Running end-to-end SaaS deployment for '${SAAS_NAME}'"
+    bin/01-create-saas.sh --saas-name "${SAAS_NAME}"
+    bin/02-create-unit-kind.sh --unit-kind-name "${SAAS_NAME}" --saas-name "${SAAS_NAME}"
+    bin/03-build-and-push-blueprint.sh --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
+    bin/04-create-release.sh --release-name "${RELEASE_NAME}" --unit-kind-name "${SAAS_NAME}" --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
+    bin/04a-reposition-uk-default.sh --unit-kind-name "${SAAS_NAME}" --release-name "${RELEASE_NAME}"
+    bin/05-create-unit.sh --instance-name "${SAAS_NAME}" --unit-kind-name "${SAAS_NAME}"
+    bin/06-provision-unit.sh --unit-name "unit-${SAAS_NAME}" --release-name "${RELEASE_NAME}"
     echo "✅ End-to-end deployment complete!"

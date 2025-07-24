@@ -9,13 +9,22 @@ if [ "${SAAS_DEBUG:-false}" == "true" ]; then
 fi
 
 # --- Argument Check ---
-if [ -z "$1" ]; then
-    echo "Usage: $0 <instance-name>"
-    echo "  <instance-name>: The desired name for the new Compute Engine VM."
-    exit 1
-fi
-
-INSTANCE_NAME=$1
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --instance-name)
+            INSTANCE_NAME="$2"
+            shift 2
+            ;;
+        --unit-kind-name)
+            UNIT_KIND_NAME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 
 # Create a unique name for the SaaS Unit resource itself
 SAAS_UNIT_NAME="unit-${INSTANCE_NAME}"
@@ -26,8 +35,7 @@ source .env
 # --- Check and Create Unit ---
 echo "Checking for Unit '${SAAS_UNIT_NAME}' in location '${GOOGLE_CLOUD_REGION}'..."
 
-gcloud beta saas-runtime units create "${SAAS_UNIT_NAME}" \
-    --unit-kind="${UNIT_KIND_NAME_BASE}" \
+gcloud beta saas-runtime units create "${SAAS_UNIT_NAME}"     --unit-kind="${UNIT_KIND_NAME}" \
     --location="${GOOGLE_CLOUD_REGION}" \
     --project="${GOOGLE_CLOUD_PROJECT}" || echo "Unit '${SAAS_UNIT_NAME}' may already exist. Continuing..."
 

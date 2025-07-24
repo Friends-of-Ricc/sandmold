@@ -12,8 +12,22 @@ if [ -f .env.post ]; then
 fi
 
 # --- Configuration ---
-UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
-RELEASE_NAME="${RELEASE_NAME_BASE}"
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --unit-kind-name)
+            UNIT_KIND_NAME="$2"
+            shift 2
+            ;;
+        --release-name)
+            RELEASE_NAME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 
 echo "Repositioning Unit Kind '${UNIT_KIND_NAME}' default release to '${RELEASE_NAME}'..."
 

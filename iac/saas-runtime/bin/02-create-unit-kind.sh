@@ -10,8 +10,22 @@ fi
 # Source the environment variables
 source .env
 
-UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
-SAAS_OFFERING_NAME="${SAAS_OFFERING_NAME}"
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --unit-kind-name)
+            UNIT_KIND_NAME="$2"
+            shift 2
+            ;;
+        --saas-name)
+            SAAS_OFFERING_NAME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 
 # --- Create Regional Unit Kind ---
 echo "Checking for Unit Kind '${UNIT_KIND_NAME}'..."

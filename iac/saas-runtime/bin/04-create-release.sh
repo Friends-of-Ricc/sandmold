@@ -15,9 +15,27 @@ if [ -f .env.post ]; then
 fi
 
 # --- Configuration ---
-RELEASE_NAME="${RELEASE_NAME_BASE}"
-UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
-TERRAFORM_MODULE_BASENAME="terraform-vm"
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --release-name)
+            RELEASE_NAME="$2"
+            shift 2
+            ;;
+        --unit-kind-name)
+            UNIT_KIND_NAME="$2"
+            shift 2
+            ;;
+        --terraform-module-dir)
+            TERRAFORM_MODULE_DIR="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
+TERRAFORM_MODULE_BASENAME=$(basename "${TERRAFORM_MODULE_DIR}")
 
 # --- Check and Create Release ---
 echo "Checking for Release '${RELEASE_NAME}' for Unit Kind '${UNIT_KIND_NAME}'..."

@@ -9,13 +9,22 @@ if [ "${SAAS_DEBUG:-false}" == "true" ]; then
 fi
 
 # --- Argument Check ---
-if [ -z "$1" ]; then
-    echo "Usage: $0 <unit-name>"
-    echo "  <unit-name>: The name of the SaaS Unit to provision (e.g., unit-my-vm)."
-    exit 1
-fi
-
-UNIT_NAME=$1
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --unit-name)
+            UNIT_NAME="$2"
+            shift 2
+            ;;
+        --release-name)
+            RELEASE_NAME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 
 # --- Environment and Config ---
 source .env
@@ -35,7 +44,7 @@ echo "Triggering provisioning for Unit '${UNIT_NAME}'..."
 gcloud --log-http beta saas-runtime unit-operations create "provision-${UNIT_NAME}-$(date +%s)" \
     --unit="${UNIT_RESOURCE_NAME}" \
     --provision \
-    --provision-release="${RELEASE_NAME_BASE}" \
+    --provision-release="${RELEASE_NAME}" \
     --provision-input-variables="variable=instance_name,value=${UNIT_NAME},type=string"    \
     --provision-input-variables="variable=tenant_project_id,value=${TENANT_PROJECT_ID},type=string"     \
     --provision-input-variables="variable=tenant_project_number,value=${TENANT_PROJECT_NUMBER},type=int"     \

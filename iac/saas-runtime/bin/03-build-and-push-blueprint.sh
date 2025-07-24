@@ -6,12 +6,18 @@
 set -euo pipefail
 
 # Check for required argument
-if [ -z "$1" ]; then
-    echo "Usage: $0 <path-to-terraform-module>"
-    exit 1
-fi
-
-TERRAFORM_MODULE_DIR=$1
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --terraform-module-dir)
+            TERRAFORM_MODULE_DIR="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 TERRAFORM_MODULE_BASENAME=$(basename "${TERRAFORM_MODULE_DIR}")
 
 # Source the environment variables
@@ -92,8 +98,8 @@ echo "Submitting Cloud Build job for blueprint: ${TERRAFORM_MODULE_BASENAME}"
     cd "${BUILD_DIR}" || exit
     zip -r blueprint.zip .
 )
-gcloud storage cp "${BUILD_DIR}/blueprint.zip" "gs://${TF_BLUEPRINT_BUCKET}/"
+gcloud storage cp "${BUILD_DIR}/blueprint.zip" "gs://${TF_BLUEPRINT_BUCKET}/${TERRAFORM_MODULE_BASENAME}/blueprint.zip"
 
-gcloud builds submit "gs://${TF_BLUEPRINT_BUCKET}/blueprint.zip"     --config="${CLOUDBUILD_CONFIG_FILE}"     --project="${GOOGLE_CLOUD_PROJECT}"
+gcloud builds submit "gs://${TF_BLUEPRINT_BUCKET}/${TERRAFORM_MODULE_BASENAME}/blueprint.zip"     --config="${CLOUDBUILD_CONFIG_FILE}"     --project="${GOOGLE_CLOUD_PROJECT}"
 
 echo "Blueprint build and push complete for ${TERRAFORM_MODULE_BASENAME}."
