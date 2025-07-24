@@ -70,3 +70,7 @@ retrieve-cloudbuild-log BUILD_ID:
     #!/bin/bash
     source .env
     gcloud builds log {{BUILD_ID}} --project="${GOOGLE_CLOUD_PROJECT}"
+
+clean:
+    #!/bin/bash
+    rm -rf build/

@@ -19,10 +19,13 @@ UNIT_NAME=$1
 
 # --- Environment and Config ---
 source .env
+if [ -f .env.post ]; then
+    source .env.post
+fi
 
 TENANT_PROJECT_ID="${GOOGLE_CLOUD_PROJECT}"
 TENANT_PROJECT_NUMBER=$(gcloud projects describe "${TENANT_PROJECT_ID}" --format="value(projectNumber)")
-ACTUATION_SA="${TENANT_PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
+ACTUATION_SA="${TF_ACTUATOR_SA_EMAIL}"
 
 # Construct the full Unit resource name
 UNIT_RESOURCE_NAME="projects/${GOOGLE_CLOUD_PROJECT}/locations/${GOOGLE_CLOUD_REGION}/units/${UNIT_NAME}"

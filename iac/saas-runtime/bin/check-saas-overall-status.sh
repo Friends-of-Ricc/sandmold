@@ -15,8 +15,7 @@ gcloud beta saas-runtime unit-kinds list --format="value(name,saas,defaultReleas
 
 echo -e "\n\033[0;36m🖼️  Listing Blueprints in Artifact Registry (filtered by 'blueprint'):\033[0m"
 if gcloud artifacts repositories describe "${ARTIFACT_REGISTRY_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
-    gcloud artifacts docker images list "${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}" --filter="IMAGE~blueprint" --format="value(IMAGE,DIGEST,CREATE_TIME,SIZE)" 2>/dev/null |
-        grep "sha256"
+    gcloud artifacts docker images list "${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}" --filter="IMAGE~blueprint" --format="value(IMAGE,DIGEST,CREATE_TIME,SIZE)" 2>/dev/null
 else
     echo "Artifact Registry '${ARTIFACT_REGISTRY_NAME}' not found."
 fi

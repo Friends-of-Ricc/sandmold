@@ -80,6 +80,7 @@ steps:
   - '${BLUEPRINT_IMAGE_TIMESTAMP_TAG}'
 options:
   logging: CLOUD_LOGGING_ONLY
+serviceAccount: projects/${GOOGLE_CLOUD_PROJECT}/serviceAccounts/${TF_ACTUATOR_SA_EMAIL}
 EOF
 
 # --- Submit Build ---
