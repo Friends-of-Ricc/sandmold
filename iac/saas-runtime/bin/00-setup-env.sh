@@ -95,6 +95,18 @@ fi
 echo "Granting storage.objectAdmin to ${TF_ACTUATOR_SA_EMAIL} on gs://${TF_BLUEPRINT_BUCKET}"
 gsutil iam ch "serviceAccount:${TF_ACTUATOR_SA_EMAIL}:objectAdmin" "gs://${TF_BLUEPRINT_BUCKET}"
 
+# --- Create Artifact Registry ---
+echo "Creating Artifact Registry: ${ARTIFACT_REGISTRY_NAME} in ${GOOGLE_CLOUD_REGION}"
+if ! gcloud artifacts repositories describe "${ARTIFACT_REGISTRY_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+    gcloud artifacts repositories create "${ARTIFACT_REGISTRY_NAME}" \
+        --repository-format=docker \
+        --location="${GOOGLE_CLOUD_REGION}" \
+        --description="Docker repository for SaaS Runtime blueprints" \
+        --project="${GOOGLE_CLOUD_PROJECT}"
+else
+    echo "Artifact Registry ${ARTIFACT_REGISTRY_NAME} already exists."
+fi
+
 # Export the new service account email and bucket name for other scripts to use
 export TF_ACTUATOR_SA_EMAIL
 echo "TF_ACTUATOR_SA_EMAIL=${TF_ACTUATOR_SA_EMAIL}" >> .env.post
