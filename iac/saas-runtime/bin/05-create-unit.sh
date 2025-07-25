@@ -27,7 +27,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Create a unique name for the SaaS Unit resource itself
-SAAS_UNIT_NAME="unit-${INSTANCE_NAME}"
+SAAS_UNIT_NAME="${INSTANCE_NAME}"
 
 source "$(dirname "$0")/common-setup.sh"
 

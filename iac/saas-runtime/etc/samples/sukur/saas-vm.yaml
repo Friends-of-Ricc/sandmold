@@ -1,0 +1,6 @@
+apiVersion: "sandmold.dev/v1alpha1"
+kind: "SUkUR"
+metadata:
+  name: "vm-sukur"
+spec:
+  saas_name: "vm-saas-offering"

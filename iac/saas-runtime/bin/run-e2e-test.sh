@@ -11,7 +11,7 @@ fi
 # --- Test Parameters ---
 SAAS_NAME="issue30-test"
 UNIT_KIND_NAME="issue30-test-uk"
-RELEASE_NAME="v0-1-0-$(date +%Y%m%d-%H%M)"
+RELEASE_NAME="v0-1-0-e2e"
 TERRAFORM_MODULE_DIR="terraform-modules/terraform-vm"
 INSTANCE_NAME="unit-issue30-test"
 
@@ -27,8 +27,23 @@ echo "
 STEP -1: Cleaning up previous test runs (if any)...
 ---
 "
-gcloud beta saas-runtime unit-kinds delete "${UNIT_KIND_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --quiet || true
-gcloud beta saas-runtime saas delete "${SAAS_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --quiet || true
+if gcloud beta saas-runtime units describe "${INSTANCE_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+    bin/08-deprovision-unit.sh --unit-name "${INSTANCE_NAME}"
+    sleep 30
+    gcloud beta saas-runtime units delete "${INSTANCE_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --quiet
+fi
+if gcloud beta saas-runtime saas describe "${SAAS_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+    if gcloud beta saas-runtime unit-kinds describe "${UNIT_KIND_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+        FULL_RELEASE_NAME=$(cat /tmp/full_release_name.txt)
+        gcloud beta saas-runtime unit-kinds update "${UNIT_KIND_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --default-release="" --quiet
+        sleep 10 # Give the API time to process the update
+        if gcloud beta saas-runtime releases describe "${FULL_RELEASE_NAME##*/}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+            gcloud beta saas-runtime releases delete "${FULL_RELEASE_NAME##*/}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --quiet
+        fi
+        gcloud beta saas-runtime unit-kinds delete "${UNIT_KIND_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --quiet
+    fi
+    gcloud beta saas-runtime saas delete "${SAAS_NAME}" --location="${GOOGLE_CLOUD_REGION}" --project="${GOOGLE_CLOUD_PROJECT}" --quiet
+fi
 
 echo "🚀 Starting End-to-End SaaS Deployment Test..."
 
@@ -58,14 +73,15 @@ echo "
 STEP 4: Creating Release '${RELEASE_NAME}'...
 ---
 "
-bin/04-create-release.sh --release-name "${RELEASE_NAME}" --unit-kind-name "${UNIT_KIND_NAME}" --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
+FULL_RELEASE_NAME=$(bin/04-create-release.sh --release-name "${RELEASE_NAME}" --unit-kind-name "${UNIT_KIND_NAME}" --terraform-module-dir "${TERRAFORM_MODULE_DIR}")
+echo "${FULL_RELEASE_NAME}" > /tmp/full_release_name.txt
 
 echo "
 ---
 STEP 5: Repositioning Unit Kind Default to '${RELEASE_NAME}'...
 ---
 "
-bin/04a-reposition-uk-default.sh --unit-kind-name "${UNIT_KIND_NAME}" --release-name "${RELEASE_NAME}"
+bin/04a-reposition-uk-default.sh --unit-kind-name "${UNIT_KIND_NAME}" --release-name "${FULL_RELEASE_NAME##*/}"
 
 echo "
 ---
@@ -79,7 +95,7 @@ echo "
 STEP 7: Provisioning Unit '${INSTANCE_NAME}'...
 ---
 "
-bin/06-provision-unit.sh --unit-name "unit-${INSTANCE_NAME}" --release-name "${RELEASE_NAME}"
+bin/06-provision-unit.sh --unit-name "${INSTANCE_NAME}" --release-name "${FULL_RELEASE_NAME##*/}"
 
 echo "
 ✅ End-to-End SaaS Deployment Test Complete!"

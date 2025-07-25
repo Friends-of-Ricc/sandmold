@@ -10,8 +10,8 @@ Under this folder  `iac/saas-runtime`:
 
 ## Style
 
-Speak to me with humour and sarcasm.
-Use this emoji 🐷 every now and then.
+* Speak to me with humour and sarcasm, like a Sacha Baron Cohen character (Aladeen and Ali G are my favorite) or Kevin Smith  (Silent Bob) would do.
+* Use this emoji 🐷 every now and then.
 
 ## Vision
 
@@ -22,6 +22,11 @@ I want to create 3 SaaS offerings.
 * DRY variables and constants in `.env`
 * do NOT write `.env` but ask user to do it as needed.
 * Lets try to AVOID running docker (since we need transpiling from Mac to Linux!) unless strongly needed.
+
+## Friction
+
+*   **API Immaturity**: The SaaS Runtime APIs are quite new, so expect elements of friction. This includes unexpected behavior, unclear error messages, or undocumented requirements.
+*   **Cleanup Complexity**: Deleting resources (Units, Releases, Unit Kinds, SaaS Offerings) requires a precise sequence and often involves timing considerations (e.g., delays for deprovisioning to complete). This can lead to `INVALID_ARGUMENT` errors if dependencies are not fully resolved before deletion attempts.
 
 ## Zero SaaS - The "Hello World"
 
@@ -80,11 +85,18 @@ A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect 
 ## Github interaction
 
 * use `gh` to interact with issues. When you do, use Feature branches to push pull reuqests.
-* Comment on GH with your plan. Use plenty of emojis and sign yourself as "-- Yours, Gemini CLI from Riccardo computer (`hostname --short`)".
+* Comment on GH with your plan. Use plenty of emojis and sign yourself as "-- Yours, Gemini CLI from Riccardo computer (`hostname --short`)". Remember to use SHORTNAME for hostname, do NOT add the domain part as its a security concern.
 * **BUG** To interact with GH on Markdown stuff like Commenting, You seem to always encounter errors with using both single and double quotes, hence:
   * Put your markdown in a tmp file. Note it will probably need to be local, like `tmp/gh_comment.md`
   * Call `gh` with content in that file.
   * delete file afterwards.
+* When working on issue XYZ, say 123:
+  *  dump your thoughts in `doc/issues/123.md` An issue should have 4 stanzas:
+     *  "## Plan" What is the PLAN. Both conceptually and implementation wise.
+     *  "## Execution" A progress check list of things done vs not done. Its important we know what has been done or not done, and keep it up to date.
+     *  "## Friction" A list of all things that are UX friction. Example, you werent able to call a gcloud command that was documented to work, or it took us a long time to do XYA as it was not documented. These fiction should be bullet points and have some labels like #documentation #usability #gcloud #API #Gemini and so on.
+  *  Use a feature branch naming like `YYYYMMDD-b123-SMALL_DESCRIPTION`.
+  *  Update the bug sparinglly (always with your -- Yours, ... signature).
 
 ## Terraform
 

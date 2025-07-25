@@ -106,3 +106,6 @@ deploy-saas-end2end:
     bin/05-create-unit.sh --instance-name "${SAAS_NAME}" --unit-kind-name "${SAAS_NAME}"
     bin/06-provision-unit.sh --unit-name "unit-${SAAS_NAME}" --release-name "${RELEASE_NAME}"
     echo "✅ End-to-end deployment complete!"
+
+gcloud-auth-login:
+    gcloud auth login --no-launch-browser --update-adc

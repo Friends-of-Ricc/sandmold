@@ -1,0 +1,6 @@
+apiVersion: "sandmold.dev/v1alpha1"
+kind: "SUkUR"
+metadata:
+  name: "classroom-sukur"
+spec:
+  saas_name: "classroom-saas-offering"

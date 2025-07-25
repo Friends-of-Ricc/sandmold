@@ -39,13 +39,13 @@ echo "Checking for Release '${RELEASE_NAME}' for Unit Kind '${UNIT_KIND_NAME}'..
 # The blueprint package path now points to the Artifact Registry image.
 BLUEPRINT_IMAGE_BASE_TAG="${GOOGLE_CLOUD_REGION}-docker.pkg.dev/${GOOGLE_CLOUD_PROJECT}/${ARTIFACT_REGISTRY_NAME}/${TERRAFORM_MODULE_BASENAME}"
 
-gcloud beta saas-runtime releases create "${RELEASE_NAME}" \
+RELEASE_NAME_WITH_TIMESTAMP="${RELEASE_NAME}-$(date +%Y%m%d-%H%M)"
+
+gcloud beta saas-runtime releases create "${RELEASE_NAME_WITH_TIMESTAMP}" \
     --unit-kind="${UNIT_KIND_NAME}" \
     --blueprint-package="${BLUEPRINT_IMAGE_BASE_TAG}" \
     --location="${GOOGLE_CLOUD_REGION}" \
     --input-variable-defaults="variable=instance_name,value=default-instance,type=string" \
     --input-variable-defaults="variable=tenant_project_id,value=${GOOGLE_CLOUD_PROJECT},type=string" \
     --input-variable-defaults="variable=tenant_project_number,value=${PROJECT_NUMBER},type=int" \
-    --project="${GOOGLE_CLOUD_PROJECT}"
-
-echo "Release setup complete."
+    --project="${GOOGLE_CLOUD_PROJECT}" --format="value(name)"

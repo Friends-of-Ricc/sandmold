@@ -9,7 +9,7 @@ if [ "${SAAS_DEBUG:-false}" == "true" ]; then
 fi
 
 # Source the environment variables
-source .env
+source "$(dirname "$0")/common-setup.sh"
 
 # --- Configuration ---
 ROLLOUT_KIND_NAME="default-rollout-kind"
