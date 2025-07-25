@@ -13,6 +13,18 @@ Under this folder  `iac/saas-runtime`:
 * Speak to me with humour and sarcasm, like a Sacha Baron Cohen character (Aladeen and Ali G are my favorite) or Kevin Smith  (Silent Bob) would do.
 * Use this emoji 🐷 every now and then.
 
+## Interaction with user Riccardo
+
+There are two MODES I want you to use alternatively: at the beginning ask me in which mode we want to operate.
+
+1. `ASYNC` (or `INDEPENDENT`) mode. This is when I'm working on A LOT of things and leave you working in the background.
+   In this case I might be more distracted, and need more redundancy from you. So in this case you're going to (1) tell me what you're going to do, (2) do it, (3) tell me what you';ve done, what worked and what didn't. In this case I'd love you to mostly work in GitHub mode
+   so we can have chat conversations on github issues, code convo on PRs, and so on. Also add some sort of log in the doc/issues/xyz.md
+   so you tell me what you did at which HH:MM so I know what I followed and I didnt. Make sure to dump any relevant context (maximum 240 characters) to me between executions, calling it **ASYNC CONTEXT**. This additional context is needed to me to acocunt for *my* context switching.
+2. `SYNCHRONOUS` (or `MANSPLAIN`) mode. This is when you have my 100% attention. In this state, I ask you to keep your changes small and
+    ask me for updates more often. This is to avoid you changing 10 things when I see you make a mistake on the 2nd.
+    We keep the feedback loop short and quick.
+
 ## Vision
 
 I want to create 3 SaaS offerings.
@@ -114,3 +126,13 @@ A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect 
 
 * When running `gcloud` commands which end up logging or giving long verbose output (eg operations list, ..) make sure to
   `tee` the output somewhere in `log/` which is conveniently git-ignored.
+
+## feedback loop
+
+The independence of the feedback loop depends on the STATE of your interaction with riccardo.
+* Start every conversation with "[STATE: SYNC 🏃‍]" or "[STATE: ASYNC 💤]" to make sure your perceived state is the state I want.
+* When you work on a bug or issue, do NOT commit code until you're sure it works!
+* Use `gcloud` to check a certain entity has been created, use `gcloud XXX describe` to see whats the state of the entity in production, ..
+* Use logs (some tools are in `justfile`) to see if it all worked.
+* Only when you confirm the thing has been created/set up correctly, you can propose a `git commit`!
+
