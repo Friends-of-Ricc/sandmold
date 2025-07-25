@@ -45,7 +45,10 @@ SAAS_NAME = sukur_config['spec']['saas_name']
 UNIT_KIND_NAME = sukur_config['spec']['unit_kind_name']
 RELEASE_NAME = sukur_config['spec']['release_name']
 TERRAFORM_MODULE_DIR = sukur_config['spec']['terraform_module_dir']
-INSTANCE_NAME = sukur_config['spec']['instance_name']
+
+# Extract instance_name from input_variables or set a default
+instance_name_var = sukur_config['spec']['input_variables'].find { |var| var['name'] == 'instance_name' }
+INSTANCE_NAME = instance_name_var ? instance_name_var['value'] : "default-instance-#{SAAS_NAME}"
 
 # Extract input variables as a JSON string
 INPUT_VARIABLES_JSON = sukur_config['spec']['input_variables'].to_json
@@ -71,7 +74,8 @@ generated_script_content = <<EOF
 
 set -euo pipefail
 
-source "$(dirname "$(readlink -f "$0")")"/../../bin/common-setup.sh"
+PROJECT_ROOT="#{Dir.pwd}"
+source "${PROJECT_ROOT}/bin/common-setup.sh"
 
 if [ "${SAAS_DEBUG:-false}" == "true" ]; then
     set -x
@@ -89,7 +93,7 @@ bin/02-create-unit-kind.sh --unit-kind-name "#{UNIT_KIND_NAME}" --saas-name "#{S
 bin/03-build-and-push-blueprint.sh --terraform-module-dir "#{TERRAFORM_MODULE_DIR}"
 
 # STEP 4: Create Release
-FULL_RELEASE_NAME=\$(bin/04-create-release.sh --release-name "#{RELEASE_NAME}" --unit-kind-name "#{UNIT_KIND_NAME}" --terraform-module-dir "#{TERRAFORM_MODULE_DIR}" --input-variables-json "#{INPUT_VARIABLES_JSON}")
+FULL_RELEASE_NAME=\$(bin/04-create-release.sh --release-name "#{RELEASE_NAME}" --unit-kind-name "#{UNIT_KIND_NAME}" --terraform-module-dir "#{TERRAFORM_MODULE_DIR}" --input-variables-json '#{INPUT_VARIABLES_JSON}')
 
 # STEP 5: Reposition Unit Kind Default
 bin/04a-reposition-uk-default.sh --unit-kind-name "#{UNIT_KIND_NAME}" --release-name "\${FULL_RELEASE_NAME##*/}"
@@ -98,7 +102,7 @@ bin/04a-reposition-uk-default.sh --unit-kind-name "#{UNIT_KIND_NAME}" --release-
 bin/05-create-unit.sh --instance-name "#{INSTANCE_NAME}" --unit-kind-name "#{UNIT_KIND_NAME}"
 
 # STEP 7: Provision Unit
-bin/06-provision-unit.sh --unit-name "#{INSTANCE_NAME}" --release-name "\${FULL_RELEASE_NAME##*/}" --input-variables-json "#{INPUT_VARIABLES_JSON}"
+bin/06-provision-unit.sh --unit-name "#{INSTANCE_NAME}" --release-name "\${FULL_RELEASE_NAME##*/}" --input-variables-json '#{INPUT_VARIABLES_JSON}'
 
 echo "✅ SUkUR deployment for #{SAAS_NAME} complete."
 EOF

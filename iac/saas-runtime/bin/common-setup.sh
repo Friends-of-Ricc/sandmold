@@ -3,12 +3,16 @@
 # Common setup script to be sourced by other scripts.
 # It loads environment variables and defines derived constants.
 
+# Determine the absolute path of the project root
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_ROOT="$(dirname "${SCRIPT_DIR}")"
+
 # Source the core project constants
-source "$(dirname "$0")/../.env"
+source "${PROJECT_ROOT}/.env"
 
 # Source the default SaaS values
-if [ -f "$(dirname "$0")/../.env.saas_defaults" ]; then
-    source "$(dirname "$0")/../.env.saas_defaults"
+if [ -f "${PROJECT_ROOT}/.env.saas_defaults" ]; then
+    source "${PROJECT_ROOT}/.env.saas_defaults"
 fi
 
 # Define and export derived variables
