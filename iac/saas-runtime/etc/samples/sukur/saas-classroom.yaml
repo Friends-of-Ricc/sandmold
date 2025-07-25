@@ -4,10 +4,9 @@ metadata:
   name: "classroom-sukur"
 spec:
   saas_name: "sukur-classroom-sample"
-  unit_kind_ref: "sukur-classroom-uk"
+  unit_kind_name: "sukur-classroom-uk"
   release_name: "sukur-classroom-release"
   terraform_module_dir: "terraform-modules/terraform-classroom-folder"
-  instance_name: "sukur-classroom-instance"
   input_variables:
     - name: "parent_folder"
       value: "folders/804182051929"
@@ -15,9 +14,3 @@ spec:
     - name: "teacher_email"
       value: "ricc@google.com"
       type: "string"
-
-
-
-    # output_parameters:
-    # - name: folder_id
-    #   type: string

@@ -38,11 +38,11 @@ done
 TERRAFORM_MODULE_BASENAME=$(basename "${TERRAFORM_MODULE_DIR}")
 
 # Convert JSON input variables to gcloud format
-INPUT_VARIABLE_DEFAULTS=""
+INPUT_VARIABLE_DEFAULTS_ARGS=()
 if [ -n "${INPUT_VARIABLES_JSON}" ]; then
-    # Parse JSON and format for gcloud
-    # Example: {"instance_name":"my-vm"} -> variable=instance_name,value=my-vm,type=string
-    INPUT_VARIABLE_DEFAULTS=$(echo "${INPUT_VARIABLES_JSON}" | jq -r '.[] | "variable=\(.name),value=\(.value),type=\(.type)"' | paste -sd " " -)
+    while IFS= read -r line; do
+        INPUT_VARIABLE_DEFAULTS_ARGS+=(--input-variable-defaults="${line}")
+    done < <(echo "${INPUT_VARIABLES_JSON}" | jq -r '.[] | "variable=\(.name),value=\(.value),type=\(.type)"')
 fi
 
 # Add constant variables
@@ -53,11 +53,7 @@ CONSTANT_VARIABLES=(
 )
 
 for VAR in "${CONSTANT_VARIABLES[@]}"; do
-    if [ -n "${INPUT_VARIABLE_DEFAULTS}" ]; then
-        INPUT_VARIABLE_DEFAULTS="${INPUT_VARIABLE_DEFAULTS} ${VAR}"
-    else
-        INPUT_VARIABLE_DEFAULTS="${VAR}"
-    fi
+    INPUT_VARIABLE_DEFAULTS_ARGS+=(--input-variable-defaults="${VAR}")
 done
 
 # --- Check and Create Release ---
@@ -72,5 +68,5 @@ gcloud beta saas-runtime releases create "${RELEASE_NAME_WITH_TIMESTAMP}" \
     --unit-kind="${UNIT_KIND_NAME}" \
     --blueprint-package="${BLUEPRINT_IMAGE_BASE_TAG}" \
     --location="${GOOGLE_CLOUD_REGION}" \
-    --input-variable-defaults="${INPUT_VARIABLE_DEFAULTS}" \
+    "${INPUT_VARIABLE_DEFAULTS_ARGS[@]}" \
     --project="${GOOGLE_CLOUD_PROJECT}" --format="value(name)"

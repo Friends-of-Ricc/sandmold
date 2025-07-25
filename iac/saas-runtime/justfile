@@ -109,3 +109,7 @@ deploy-saas-end2end:
 
 gcloud-auth-login:
     gcloud auth login --no-launch-browser --update-adc
+
+# Smart grepping to ensure we only check for specific keywords in the output or "Titles"
+check-sukur:
+    just check | egrep 'sukur|Listing'

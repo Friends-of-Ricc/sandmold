@@ -37,11 +37,11 @@ TENANT_PROJECT_NUMBER=$(gcloud projects describe "${TENANT_PROJECT_ID}" --format
 ACTUATION_SA="${TF_ACTUATOR_SA_EMAIL}"
 
 # Convert JSON input variables to gcloud format
-PROVISION_INPUT_VARIABLES=""
+PROVISION_INPUT_VARIABLES_ARGS=()
 if [ -n "${INPUT_VARIABLES_JSON}" ]; then
-    # Parse JSON and format for gcloud
-    # Example: {"instance_name":"my-vm"} -> variable=instance_name,value=my-vm,type=string
-    PROVISION_INPUT_VARIABLES=$(echo "${INPUT_VARIABLES_JSON}" | jq -r '.[] | "variable=\(.name),value=\(.value),type=\(.type)"' | paste -sd " " -)
+    while IFS= read -r line; do
+        PROVISION_INPUT_VARIABLES_ARGS+=(--provision-input-variables="${line}")
+    done < <(echo "${INPUT_VARIABLES_JSON}" | jq -r '.[] | "variable=\(.name),value=\(.value),type=\(.type)"')
 fi
 
 # Add constant variables
@@ -52,11 +52,7 @@ CONSTANT_VARIABLES=(
 )
 
 for VAR in "${CONSTANT_VARIABLES[@]}"; do
-    if [ -n "${PROVISION_INPUT_VARIABLES}" ]; then
-        PROVISION_INPUT_VARIABLES="${PROVISION_INPUT_VARIABLES} ${VAR}"
-    else
-        PROVISION_INPUT_VARIABLES="${VAR}"
-    fi
+    PROVISION_INPUT_VARIABLES_ARGS+=(--provision-input-variables="${VAR}")
 done
 
 # Construct the full Unit resource name
@@ -68,6 +64,6 @@ gcloud --log-http beta saas-runtime unit-operations create "provision-${UNIT_NAM
     --unit="${UNIT_RESOURCE_NAME}" \
     --provision \
     --provision-release="${RELEASE_NAME}" \
-    --provision-input-variables="${PROVISION_INPUT_VARIABLES}" \
+    "${PROVISION_INPUT_VARIABLES_ARGS[@]}" \
     --location="${GOOGLE_CLOUD_REGION}"   \
     --project="${GOOGLE_CLOUD_PROJECT}"

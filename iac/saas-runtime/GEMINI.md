@@ -110,3 +110,7 @@ A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect 
 * Max version we can use is `1.5.17` (last from Hashicorp).
 * Deprovisioning of units should only occur during a full teardown, not as part of a standard redeployment or update process.
 
+## Gcloud
+
+* When running `gcloud` commands which end up logging or giving long verbose output (eg operations list, ..) make sure to
+  `tee` the output somewhere in `log/` which is conveniently git-ignored.

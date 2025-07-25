@@ -4,18 +4,10 @@ metadata:
   name: "vm-sukur"
 spec:
   saas_name: "sukur-vm-sample"
-  unit_kind_ref: "sukur-vm-uk"
+  unit_kind_name: "sukur-vm-uk"
   release_name: "sukur-vm-release"
   terraform_module_dir: "terraform-modules/terraform-vm"
-  instance_name: "sukur-vm-instance"
   input_variables:
     - name: "instance_name"
       value: "sukur-vm-instance-01"
       type: "string"
-
-# # Output variables that the unit kind will produce after provisioning.
-# output_variables:
-#   - name: instance_id
-#     type: string
-#   - name: instance_ip
-#     type: string
