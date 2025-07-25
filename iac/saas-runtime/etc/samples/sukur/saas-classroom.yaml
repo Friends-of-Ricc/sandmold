@@ -15,3 +15,9 @@ spec:
     - name: "teacher_email"
       value: "ricc@google.com"
       type: "string"
+
+
+
+    # output_parameters:
+    # - name: folder_id
+    #   type: string
