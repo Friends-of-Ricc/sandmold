@@ -15,12 +15,28 @@ if [ "${SAAS_DEBUG:-false}" == "true" ]; then
 fi
 
 # --- Argument Check ---
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <SUKUR_YAML_FILE>"
+OUTPUT_SCRIPT_PATH="tmp/generated_deployment_script.sh"
+SUKUR_YAML_FILE=""
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --output-script-path)
+            OUTPUT_SCRIPT_PATH="$2"
+            shift 2
+            ;;
+        *)
+            SUKUR_YAML_FILE="$1"
+            shift
+            ;;
+    esac
+done
+
+if [ -z "${SUKUR_YAML_FILE}" ]; then
+    echo "Usage: $0 <SUKUR_YAML_FILE> [--output-script-path <PATH>]"
     exit 1
 fi
 
-SUKUR_YAML_FILE="$1"
+GENERATED_SCRIPT="${OUTPUT_SCRIPT_PATH}"
+mkdir -p "$(dirname "${GENERATED_SCRIPT}")"
 
 # --- Extract parameters from SUkUR YAML ---
 SAAS_NAME=$(yq '.spec.saas_name' "${SUKUR_YAML_FILE}")
@@ -30,13 +46,10 @@ TERRAFORM_MODULE_DIR=$(yq '.spec.terraform_module_dir' "${SUKUR_YAML_FILE}")
 INSTANCE_NAME=$(yq '.spec.instance_name' "${SUKUR_YAML_FILE}")
 
 # Extract input variables as a JSON string
-INPUT_VARIABLES_JSON=$(yq '.spec.input_variables | to_json' "${SUKUR_YAML_FILE}")
+INPUT_VARIABLES_JSON=$(yq -o=json '.spec.input_variables' "${SUKUR_YAML_FILE}")
 
-GENERATED_SCRIPT="tmp/generated_deployment_script.sh"
-mkdir -p tmp
 
-# Start best-effort cleanup subshell
-(
+( # Start best-effort cleanup subshell
 # --- Cleanup Steps (best effort) ---
 echo "🧹 Attempting best-effort cleanup for ${SAAS_NAME} (if any)..."
 

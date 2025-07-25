@@ -1,13 +1,15 @@
 variable "region" {
   description = "The Google Cloud region"
   type        = string
-  default     = "us-central1"
+  #default     = "us-central1"
+  default     = "europe-west3"
 }
 
 variable "zone" {
   description = "The Google Cloud zone"
   type        = string
-  default     = "us-central1-a"
+  #default     = "us-central1-a"
+  default     = "europe-west3-a"
 }
 
 variable "instance_name" {
