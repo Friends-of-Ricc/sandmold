@@ -3,4 +3,10 @@ kind: "SUkUR"
 metadata:
   name: "classroom-sukur"
 spec:
-  saas_name: "classroom-saas-offering"
+  saas_name: "sukur-classroom-sample"
+  unit_kind_name: "sukur-classroom-uk"
+  release_name: "sukur-classroom-release"
+  terraform_module_dir: "terraform-modules/terraform-classroom-folder"
+  instance_name: "sukur-classroom-instance"
+  rollout_kind_name: "sukur-classroom-rollout-kind"
+  rollout_name: "sukur-classroom-rollout"

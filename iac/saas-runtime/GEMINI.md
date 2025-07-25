@@ -23,11 +23,6 @@ I want to create 3 SaaS offerings.
 * do NOT write `.env` but ask user to do it as needed.
 * Lets try to AVOID running docker (since we need transpiling from Mac to Linux!) unless strongly needed.
 
-## Friction
-
-*   **API Immaturity**: The SaaS Runtime APIs are quite new, so expect elements of friction. This includes unexpected behavior, unclear error messages, or undocumented requirements.
-*   **Cleanup Complexity**: Deleting resources (Units, Releases, Unit Kinds, SaaS Offerings) requires a precise sequence and often involves timing considerations (e.g., delays for deprovisioning to complete). This can lead to `INVALID_ARGUMENT` errors if dependencies are not fully resolved before deletion attempts.
-
 ## Zero SaaS - The "Hello World"
 
 *   **Purpose**: A simple, known-good starting point to verify the SaaS Runtime is functioning correctly.
@@ -36,19 +31,21 @@ I want to create 3 SaaS offerings.
     *   **Inputs**: `project_id`, `instance_name`
     *   **Outputs**: `vm_ip_address`
 
-## First SaaS - Bank of Anthos (BoA) as a Service
+
+## First SaaS - Hipster Shop as a Service
+
+*   **Purpose**: Provide a complete, self-contained Hipster Shop environment for a single user or student.
+*   **Unit Kind**: `hipster-shop-stack`
+    *   **Inputs**: `billing_account_id`, `parent_folder`, `user_email`
+    *   **Outputs**: `project_id`, `hipster_shop_url`
+
+## Second SaaS - Bank of Anthos (BoA) as a Service
 
 *   **Purpose**: Provide a complete, self-contained Bank of Anthos environment for a single user or student.
 *   **Unit Kind**: `boa-stack`
     *   **Inputs**: `billing_account_id`, `parent_folder`, `user_email`
     *   **Outputs**: `project_id`, `boa_url`
 
-## Second SaaS - Hipster Shop as a Service
-
-*   **Purpose**: Provide a complete, self-contained Hipster Shop environment for a single user or student.
-*   **Unit Kind**: `hipster-shop-stack`
-    *   **Inputs**: `billing_account_id`, `parent_folder`, `user_email`
-    *   **Outputs**: `project_id`, `hipster_shop_url`
 
 ## Third SaaS - Classroom as a Service
 

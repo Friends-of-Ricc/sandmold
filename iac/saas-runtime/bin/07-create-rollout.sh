@@ -11,11 +11,31 @@ fi
 # Source the environment variables
 source "$(dirname "$0")/common-setup.sh"
 
-# --- Configuration ---
-ROLLOUT_KIND_NAME="default-rollout-kind"
-ROLLOUT_NAME="initial-rollout"
-UNIT_KIND_NAME="${UNIT_KIND_NAME_BASE}"
-RELEASE_NAME="${RELEASE_NAME_BASE}"
+# --- Argument Check ---
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --unit-kind-name)
+            UNIT_KIND_NAME="$2"
+            shift 2
+            ;;
+        --release-name)
+            RELEASE_NAME="$2"
+            shift 2
+            ;;
+        --rollout-kind-name)
+            ROLLOUT_KIND_NAME="$2"
+            shift 2
+            ;;
+        --rollout-name)
+            ROLLOUT_NAME="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
 
 # --- Create Rollout Kind ---
 echo "Checking for Rollout Kind '${ROLLOUT_KIND_NAME}'..."

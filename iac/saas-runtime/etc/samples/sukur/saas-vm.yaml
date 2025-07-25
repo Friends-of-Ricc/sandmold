@@ -3,4 +3,10 @@ kind: "SUkUR"
 metadata:
   name: "vm-sukur"
 spec:
-  saas_name: "vm-saas-offering"
+  saas_name: "sukur-vm-sample"
+  unit_kind_name: "sukur-vm-uk"
+  release_name: "sukur-vm-release"
+  terraform_module_dir: "terraform-modules/terraform-vm"
+  instance_name: "sukur-vm-instance"
+  rollout_kind_name: "sukur-vm-rollout-kind"
+  rollout_name: "sukur-vm-rollout"

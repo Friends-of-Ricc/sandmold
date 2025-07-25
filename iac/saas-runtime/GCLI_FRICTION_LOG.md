@@ -1,5 +1,10 @@
 ## GCLI Friction Log
 
+## Friction
+
+*   **API Immaturity**: The SaaS Runtime APIs are quite new, so expect elements of friction. This includes unexpected behavior, unclear error messages, or undocumented requirements.
+*   **Cleanup Complexity**: Deleting resources (Units, Releases, Unit Kinds, SaaS Offerings) requires a precise sequence and often involves timing considerations (e.g., delays for deprovisioning to complete). This can lead to `INVALID_ARGUMENT` errors if dependencies are not fully resolved before deletion attempts.
+
 ### Manifest Digest Mismatch Error (2025-07-22 15:33:00 UTC)
 
 **Context:**
