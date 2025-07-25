@@ -23,6 +23,15 @@ I want to create 3 SaaS offerings.
 * do NOT write `.env` but ask user to do it as needed.
 * Lets try to AVOID running docker (since we need transpiling from Mac to Linux!) unless strongly needed.
 
+### Variable Handling Strategy
+
+For Terraform blueprints, input variables will be sourced from two places:
+
+1.  **SUkUR YAMLs**: These will contain blueprint-specific variables (e.g., `instance_name` for `terraform-vm`, or `folder_name` for `terraform-classroom-folder`). These variables will be defined within the `spec.input_variables` section of the SUkUR YAML.
+2.  **Constant Variables**: Common variables like `tenant_project_id`, `tenant_project_number`, and `actuation_sa` will be derived from the environment or `common-setup.sh` and passed to the individual scripts.
+
+`deploy-sukur.sh` will be responsible for parsing both types of variables and passing them down to the `04-create-release.sh` and `06-provision-unit.sh` scripts.
+
 ## Zero SaaS - The "Hello World"
 
 *   **Purpose**: A simple, known-good starting point to verify the SaaS Runtime is functioning correctly.
@@ -99,4 +108,5 @@ A lot of convenient logs are under `log/` but git-ignored. Feel free to inspect 
 
 * Do not add GCS bucket in TF configuration - Infra MAnager does it for us.
 * Max version we can use is `1.5.17` (last from Hashicorp).
+* Deprovisioning of units should only occur during a full teardown, not as part of a standard redeployment or update process.
 

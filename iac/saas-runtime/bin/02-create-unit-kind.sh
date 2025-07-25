@@ -21,12 +21,21 @@ while [[ "$#" -gt 0 ]]; do
             SAAS_OFFERING_NAME="$2"
             shift 2
             ;;
+        --unit-kind-definition-json)
+            UNIT_KIND_DEFINITION_JSON="$2"
+            shift 2
+            ;;
         *)
             echo "Unknown option: $1"
             exit 1
             ;;
     esac
 done
+
+if [ -n "${UNIT_KIND_DEFINITION_JSON}" ]; then
+    UNIT_KIND_NAME=$(echo "${UNIT_KIND_DEFINITION_JSON}" | jq -r '.name')
+    SAAS_OFFERING_NAME=$(echo "${UNIT_KIND_DEFINITION_JSON}" | jq -r '.saas_name')
+fi
 
 # --- Create Regional Unit Kind ---
 echo "Checking for Unit Kind '${UNIT_KIND_NAME}'..."

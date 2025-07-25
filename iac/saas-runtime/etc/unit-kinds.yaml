@@ -1,0 +1,7 @@
+unit_kinds:
+  sukur-vm-uk:
+    name: "sukur-vm-uk"
+    saas_name: "sukur-vm-sample"
+  sukur-classroom-uk:
+    name: "sukur-classroom-uk"
+    saas_name: "sukur-classroom-sample"
