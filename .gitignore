@@ -35,3 +35,4 @@ iac/terraform/1a_classroom_setup.zip
 2025*.log
 blah/
 drebes*
+.ruby-version
