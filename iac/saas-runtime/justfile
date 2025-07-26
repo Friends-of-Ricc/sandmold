@@ -112,4 +112,4 @@ gcloud-auth-login:
 
 # Smart grepping to ensure we only check for specific keywords in the output or "Titles"
 check-sukur:
-    just check | egrep 'sukur|Listing'
+    just check | egrep -i 'sukur|Listing'

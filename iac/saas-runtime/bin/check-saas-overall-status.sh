@@ -31,3 +31,7 @@ gcloud beta saas-runtime releases list --format="value(name,unitKind,blueprintPa
 
 echo -e "\n\033[0;36m🖥️  Listing Compute Engine VMs (no filter applied):\033[0m"
 gcloud compute instances list --format="value(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)" --project="${GOOGLE_CLOUD_PROJECT}"
+
+echo -e "\n\033[0;36m🖥️  Listing Folders children of Sukur folder (no filter applied):\033[0m"
+gcloud resource-manager folders list --folder 804182051929
+
