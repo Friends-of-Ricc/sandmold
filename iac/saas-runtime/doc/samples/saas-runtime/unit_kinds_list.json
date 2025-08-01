@@ -1,0 +1,42 @@
+[
+  {
+    "createTime": "2025-07-24T07:35:03.439244989Z",
+    "defaultRelease": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sample-vm-v2-0-4",
+    "etag": "ut6sJ-JR8Y7bTPE8-jeOG99RWmyb90YzqLApp90MoP4",
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm",
+    "saas": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sandmold-hello-world",
+    "updateTime": "2025-08-01T07:20:44.305567408Z"
+  },
+  {
+    "createTime": "2025-07-25T08:47:30.661888684Z",
+    "defaultRelease": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-vm-release-20250725-1423",
+    "etag": "26NA0doTASc-pwl9f0K0bJRp2hvXi_tkyETiI71TEr8",
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-vm-uk",
+    "saas": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sukur-vm-sample",
+    "updateTime": "2025-08-01T07:20:44.417077102Z"
+  },
+  {
+    "createTime": "2025-07-25T08:21:16.157790399Z",
+    "defaultRelease": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/test-release-20250725-1022",
+    "etag": "laN1faDrmrJlytZKv1xOMVlSzPl8s72zVv7mOXrDuNo",
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/test-unit-kind",
+    "saas": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/test-saas-offering",
+    "updateTime": "2025-08-01T07:20:44.443030094Z"
+  },
+  {
+    "createTime": "2025-07-25T08:48:51.192450187Z",
+    "defaultRelease": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1612",
+    "etag": "_mIXtpMfpNCvzqweMsAW728pLFsII6HMhHX71_cRVZw",
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "saas": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sukur-classroom-sample",
+    "updateTime": "2025-08-01T07:20:44.493232123Z"
+  },
+  {
+    "createTime": "2025-07-24T13:23:42.627681575Z",
+    "defaultRelease": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/v0-1-0-20250724-1522",
+    "etag": "wUWd18WIO2ggf7_dTq6dbtm-tnTN73gNjd27GmyuJlY",
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/issue30-test-uk",
+    "saas": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/issue30-test",
+    "updateTime": "2025-08-01T07:20:44.517623774Z"
+  }
+]

@@ -1,0 +1,20 @@
+conditions:
+- lastTransitionTime: '2025-07-25T08:38:26Z'
+  status: STATUS_FALSE
+  type: TYPE_UPDATING
+- lastTransitionTime: '2025-07-25T08:38:26Z'
+  status: STATUS_FALSE
+  type: TYPE_PROVISIONED
+- lastTransitionTime: '2025-07-25T08:38:26Z'
+  status: STATUS_UNKNOWN
+  type: TYPE_OPERATION_ERROR
+- lastTransitionTime: '2025-07-25T08:38:26Z'
+  status: STATUS_FALSE
+  type: TYPE_READY
+createTime: '2025-07-25T08:22:43.779273277Z'
+etag: 9vBVgoLiOOzAGLyNUHDvSCugOVyy6_HLECrqZx60wsA
+name: projects/check-docs-in-go-slash-sredemo/locations/europe-west1/units/test-instance
+release: projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/test-release-20250725-1022
+state: UNIT_STATE_NOT_PROVISIONED
+unitKind: projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/test-unit-kind
+updateTime: '2025-08-01T07:20:45.233617229Z'

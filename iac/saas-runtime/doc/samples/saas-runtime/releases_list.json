@@ -1,0 +1,653 @@
+[
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:fd328e8964babcc0d336742a6010f0625aaa2fad924437fe87831f929c4db0c3",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T13:49:24.388553681Z",
+    "etag": "1B86Bj_LVvAQCp8gJdJjDlKm6GEdm_vWEc7oIVWp4AE",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1549",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:42.895664858Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:97f6f7996623e84c5ed3fcc0e4d87b6a9a966aa84be110fbcd1a2084b9cbf49b",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T13:43:21.218269657Z",
+    "etag": "SkUJjGd-dufIBlEXfZK58p95e03FgSXwzX3FaX8eVU4",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1543",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.030171126Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:5149318e65056a5960bac7f0e56657f0dbf2a87c83462010afb1d9bd18abf30d",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T13:58:47.661433200Z",
+    "etag": "AJQJDbWyaUN_2cXmCno3bpoTUeQZoNz-GtNZYdDc8eo",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1558",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.057980226Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:5149318e65056a5960bac7f0e56657f0dbf2a87c83462010afb1d9bd18abf30d",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T13:54:19.409069414Z",
+    "etag": "vVQX9gvZnLf5LS_FBrWe6Vi-t6sck7YsAZ7ZA13bBwo",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1554",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.084758952Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:6c52f6329a98dc8300594a84e66bfee627a2fc7ad2a68216888b3b5de682a90c",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T13:34:22.344115889Z",
+    "etag": "_Y3JdiVt1DEeLcq6TzIaiW768U3UOtm-QwxoXixhwEY",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1534",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.114969213Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:8665957f2560d2473c2b9ae55dc95d4f3523b46daba6a8ae966f170cb08a9597",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T12:27:18.110876697Z",
+    "etag": "U1bWQPL5jnulRhdkJLjLirPa6cl-OSRvqNw-MqPJYkk",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1427",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.133359600Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:5149318e65056a5960bac7f0e56657f0dbf2a87c83462010afb1d9bd18abf30d",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T14:12:33.979658790Z",
+    "etag": "7K859Abb7BHYAe-SOaaTJda1MjlobztY1tlB3zYcowU",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1612",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.158025083Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:5149318e65056a5960bac7f0e56657f0dbf2a87c83462010afb1d9bd18abf30d",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T14:09:11.740927139Z",
+    "etag": "QX-iTnnvmooI2KyUB_d3B3OpdQURa3ReleuS6oCfdD4",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1609",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.183623169Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-classroom-folder@sha256:ccc6903097b0801e655c171b46634ec125b48c88630aee8b303c089944d1eba9",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T14:23:49.400644607Z",
+    "etag": "wdT2lAO0wNdKf2yhlfd3DGskcgaigmszVCbuFoCqSJA",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "folders/804182051929",
+        "variable": "parent_folder"
+      },
+      {
+        "type": "STRING",
+        "value": "ricc@google.com",
+        "variable": "teacher_email"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-classroom-release-20250725-1623",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-classroom-uk",
+    "updateTime": "2025-08-01T07:20:43.210275244Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:bfe0b7685e8f3c208fe552b85064673c9328c5ce9bd6811247ea84b95b3adf16",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T12:23:19.983326490Z",
+    "etag": "kGjgkDqpnu5961HeGHJi_DE3yD-zoDjoZlA9cNWbLhw",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "sukur-vm-instance-01",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-vm-release-20250725-1423",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-vm-uk",
+    "updateTime": "2025-08-01T07:20:43.235486835Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:90ce5182a4184477bc6d20c9e84ee01536077b5b228b3014e927eb3a9dc4a01a",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T10:35:05.810254181Z",
+    "etag": "DBVKqNCOu4e6rQuh3ckjy73S96AxMYhY6s3XHzowb-w",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-vm-release-20250725-1235",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-vm-uk",
+    "updateTime": "2025-08-01T07:20:43.281018175Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:90ce5182a4184477bc6d20c9e84ee01536077b5b228b3014e927eb3a9dc4a01a",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T10:37:21.067076695Z",
+    "etag": "0bCGAgda4rLMetsrVt74ftpC5UhSfTlrjKe9Rkqxuw4",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "sukur-vm-instance-01",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      },
+      {
+        "type": "STRING",
+        "value": "sandmold-tf-actuator@check-docs-in-go-slash-sredemo.iam.gserviceaccount.com",
+        "variable": "actuation_sa"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-vm-release-20250725-1237",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-vm-uk",
+    "updateTime": "2025-08-01T07:20:43.308839483Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:df0c6002974082e6ff0af49770fe5bfe440bfb78569150a5cf2ccf4122ad1657",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T08:48:27.221596785Z",
+    "etag": "l-SeUu_KpC-Nv1uI4LO7HjIruiiPG1MZbNQX7rSG3Ds",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sukur-vm-release-20250725-1048",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sukur-vm-uk",
+    "updateTime": "2025-08-01T07:20:43.341031177Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:4fc66c0749af2a7b4e43bda131882c1631451780a5808e8662c196d6f23c955a",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-24T13:24:33.709101202Z",
+    "etag": "VywE-YXrIS9AN56YTZkxVH7nnlPE1ltcbVExMph2f54",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/v0-1-0-20250724-1522",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/issue30-test-uk",
+    "updateTime": "2025-08-01T07:20:43.376219110Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:d9ee2b65a26353a1993873e954f894cf3a222d47dfa707d7006887a071abf647",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-24T07:38:32.149655996Z",
+    "etag": "-RCTD1XrkWgdleIQPcNx8A27SnRCRFCaADhQ3LZTY48",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sample-vm-v2-0-3",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm",
+    "updateTime": "2025-08-01T07:20:43.411566562Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:6df625953a89d33d17c060cf0b281e661fcf8aa9b0b861ce52b510638e8a89b0",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-24T09:41:23.283073107Z",
+    "etag": "6Y-cPX6UwlqcQ2u1n81JO7ceW3MXUMslwpApDWj-8xE",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/sample-vm-v2-0-4",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm",
+    "updateTime": "2025-08-01T07:20:43.439280081Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:9b41ca7d9b097a6f1cac79f83d4a9b2b26dbd76666b0d591bb6cb2e5e95b5d5f",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-24T12:03:41.996325813Z",
+    "etag": "W96iJZdLAMG2MLtxy4KHgbKZW_D1x1hsDPmpzKKLbtg",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/e2e-test-20250724-1402",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-sample-vm",
+    "updateTime": "2025-08-01T07:20:43.467864423Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:856ca9afb0a1cd4627b86642264d2f85a7d8dc02a52768e5f455876068359b47",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-24T12:34:54.198415732Z",
+    "etag": "md3UaLR-FuWeMHorreo8PAeNC2iw50s1ghV_n3i2Kkg",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/e2e-test-20250724-1433",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/sandmold-test-cli-e2e",
+    "updateTime": "2025-08-01T07:20:43.498022977Z"
+  },
+  {
+    "blueprint": {
+      "engine": "inframanager",
+      "package": "europe-west1-docker.pkg.dev/check-docs-in-go-slash-sredemo/sandmold-saas-registry-v2/terraform-vm@sha256:9a3dc936614141e976e216df2cd84905bde72f3684348849c94f5970ccc439ce",
+      "version": "1.5.7"
+    },
+    "createTime": "2025-07-25T08:22:19.799576543Z",
+    "etag": "gaO6w4W-JH6F6QuwPK5495gEhXpThseo6RlyCemb7Ho",
+    "inputVariableDefaults": [
+      {
+        "type": "STRING",
+        "value": "default-instance",
+        "variable": "instance_name"
+      },
+      {
+        "type": "STRING",
+        "value": "check-docs-in-go-slash-sredemo",
+        "variable": "tenant_project_id"
+      },
+      {
+        "type": "INT",
+        "value": "467916597830",
+        "variable": "tenant_project_number"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/releases/test-release-20250725-1022",
+    "unitKind": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/unitKinds/test-unit-kind",
+    "updateTime": "2025-08-01T07:20:43.523051292Z"
+  }
+]

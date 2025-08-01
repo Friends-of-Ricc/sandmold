@@ -1,0 +1,218 @@
+[
+  {
+    "createTime": "2025-07-25T10:09:48.816335105Z",
+    "etag": "I6YCzWPKW9s5F9AxsIRW6O-qI6-2HiiNi3r39TOlbIw",
+    "locations": [
+      {
+        "name": "africa-south1"
+      },
+      {
+        "name": "northamerica-northeast1"
+      },
+      {
+        "name": "northamerica-northeast2"
+      },
+      {
+        "name": "southamerica-east1"
+      },
+      {
+        "name": "southamerica-west1"
+      },
+      {
+        "name": "us-central1"
+      },
+      {
+        "name": "us-east1"
+      },
+      {
+        "name": "us-east4"
+      },
+      {
+        "name": "us-east5"
+      },
+      {
+        "name": "us-south1"
+      },
+      {
+        "name": "us-west1"
+      },
+      {
+        "name": "us-west2"
+      },
+      {
+        "name": "us-west3"
+      },
+      {
+        "name": "us-west4"
+      },
+      {
+        "name": "asia-east1"
+      },
+      {
+        "name": "asia-east2"
+      },
+      {
+        "name": "asia-northeast1"
+      },
+      {
+        "name": "asia-northeast2"
+      },
+      {
+        "name": "asia-northeast3"
+      },
+      {
+        "name": "asia-south1"
+      },
+      {
+        "name": "asia-south2"
+      },
+      {
+        "name": "asia-southeast1"
+      },
+      {
+        "name": "asia-southeast2"
+      },
+      {
+        "name": "australia-southeast1"
+      },
+      {
+        "name": "australia-southeast2"
+      },
+      {
+        "name": "europe-central2"
+      },
+      {
+        "name": "europe-north1"
+      },
+      {
+        "name": "europe-north2"
+      },
+      {
+        "name": "europe-southwest1"
+      },
+      {
+        "name": "europe-west1"
+      },
+      {
+        "name": "europe-west2"
+      },
+      {
+        "name": "europe-west3"
+      },
+      {
+        "name": "europe-west4"
+      },
+      {
+        "name": "europe-west6"
+      },
+      {
+        "name": "europe-west8"
+      },
+      {
+        "name": "europe-west9"
+      },
+      {
+        "name": "europe-west10"
+      },
+      {
+        "name": "europe-west12"
+      },
+      {
+        "name": "me-central1"
+      },
+      {
+        "name": "me-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/asia-southeast2/saas/test-globsal-with-global-ui",
+    "updateTime": "2025-08-01T07:20:42.890354478Z"
+  },
+  {
+    "createTime": "2025-07-25T08:21:04.114779888Z",
+    "etag": "DlIO_MOi2LqSavPwUUenzghGISqbGL4eHSDMPMYJpzM",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/test-saas-offering",
+    "updateTime": "2025-08-01T07:20:44.032706051Z"
+  },
+  {
+    "createTime": "2025-07-24T07:34:54.352677345Z",
+    "etag": "b1Sj3ZRQbAuom5Q-RFrRwlptmDJWM-2SuHGnc3Mx-cs",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sandmold-hello-world",
+    "updateTime": "2025-08-01T07:20:44.092994050Z"
+  },
+  {
+    "createTime": "2025-07-25T08:47:29.589220402Z",
+    "etag": "fnV-Ya7OBIuxzF8TSaIqadYyaiWTTaJePWx1KZ0F7cs",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sukur-vm-sample",
+    "updateTime": "2025-08-01T07:20:44.119702870Z"
+  },
+  {
+    "createTime": "2025-07-25T08:48:49.765059134Z",
+    "etag": "VlTd_RF76hpvWjRl9OUNFuDlI4TGPrEZ2OgD84lNfa8",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/sukur-classroom-sample",
+    "updateTime": "2025-08-01T07:20:44.148857777Z"
+  },
+  {
+    "createTime": "2025-07-24T13:23:41.004380075Z",
+    "etag": "91aQMguGpZizQ9sbPrXhs_Smcy-3BmDXgTGDBrLYEIY",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/issue30-test",
+    "updateTime": "2025-08-01T07:20:44.173142576Z"
+  },
+  {
+    "createTime": "2025-07-25T08:39:24.746046562Z",
+    "etag": "wjDXeQd2KLs5pZ6o-HuyELc5kBYdoWH431329wQHyK4",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/null",
+    "updateTime": "2025-08-01T07:20:44.200953355Z"
+  },
+  {
+    "createTime": "2025-07-25T08:26:24.885730759Z",
+    "etag": "or1y_6P5ikmNH3xH7NSlJ67P0T75hzi_XdRK5yHNggk",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/classroom-saas-offering",
+    "updateTime": "2025-08-01T07:20:44.248776247Z"
+  },
+  {
+    "createTime": "2025-07-25T08:26:17.105278840Z",
+    "etag": "InKVW3PqgxtNF34gAWHRbXikW0DOIkdJr50T8M_1YnQ",
+    "locations": [
+      {
+        "name": "europe-west1"
+      }
+    ],
+    "name": "projects/check-docs-in-go-slash-sredemo/locations/europe-west1/saas/vm-saas-offering",
+    "updateTime": "2025-08-01T07:20:44.275965315Z"
+  }
+]
