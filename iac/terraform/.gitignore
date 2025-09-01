@@ -1,0 +1,3 @@
+terraform.tfvars.json
+terraform_output.json
+terraform_apply.log
