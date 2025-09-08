@@ -38,6 +38,10 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     if not billing_account_id:
         raise ValueError("BILLING_ACCOUNT_ID not found in .env file")
 
+    organization_id = os.getenv('ORGANIZATION_ID')
+    if not organization_id:
+        raise ValueError("ORGANIZATION_ID not found in .env file")
+
     # Construct absolute path to classroom YAML
     absolute_classroom_yaml_path = os.path.join(project_root, classroom_yaml_path)
 
@@ -107,9 +111,9 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     sanitized_gcloud_user = gcloud_user.replace('@', '-').replace('.', '-')
     folder_display_name = f"{prefix}{base_folder_display_name}-{sanitized_gcloud_user}" if sanitized_gcloud_user else f"{prefix}{base_folder_display_name}"
 
-    parent_folder_id = folder_spec.get('parent_folder_id')
+    parent_folder_id = os.getenv('PARENT_FOLDER_ID')
     if not parent_folder_id:
-        raise ValueError("parent_folder_id not found in classroom YAML")
+        raise ValueError("PARENT_FOLDER_ID not found in .env file")
     tf_vars = {
         'folder_display_name': folder_display_name,
         'parent_folder': f"folders/{parent_folder_id}",
