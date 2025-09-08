@@ -1,0 +1,15 @@
+# This is the SAMPLE YAML from justfile
+apiVersion: sandmold.io/v1alpha1
+kind: Classroom
+metadata:
+  name: class-from-trix-test
+  labels:
+    classroom: class-from-trix
+    author: ricc
+    env: test
+spec:
+  trix_id: todo
+  service_account_email: todo
+  service_account_path: private/key.json
+  prefix: sep25
+  # This doesnt work yet, but this is the vision.
