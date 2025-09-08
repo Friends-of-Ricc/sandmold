@@ -129,7 +129,9 @@ auth:
         echo ".env file not found. I hope you set up GCLOUD_IDENTITY manually."
     fi
     echo "Authenticating with Google Cloud as $GCLOUD_IDENTITY"
+    # TODO(ricc): consider using --update-adc to avoid opening a browser TWICE.
     gcloud auth login "$GCLOUD_IDENTITY" --force # --no-launch-browser
+    gcloud auth application-default login
     gcloud config set project "$GOOGLE_CLOUD_PROJECT"
     gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
 
