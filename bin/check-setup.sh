@@ -50,7 +50,7 @@ fi
 echo "🔎 Checking gcloud identity..."
 gcloud_user=$(gcloud config get-value account --quiet)
 if [ "$gcloud_user" != "$GCLOUD_IDENTITY" ]; then
-  log_fatal "gcloud is not authenticated as $GCLOUD_IDENTITY (currently $gcloud_user). Please run 'just setup-gcloud' to authenticate."
+  log_fatal "gcloud is not authenticated as $GCLOUD_IDENTITY (currently $gcloud_user). Please run 'just auth' to authenticate."
 fi
 log_info "gcloud user is correct ($GCLOUD_IDENTITY)"
 echo

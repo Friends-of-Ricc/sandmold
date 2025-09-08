@@ -18,6 +18,7 @@ import argparse
 import json
 import yaml
 import os
+from dotenv import load_dotenv
 
 import sys
 
@@ -31,6 +32,12 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
     """
+    # Load environment variables from .env file
+    load_dotenv()
+    billing_account_id = os.getenv('BILLING_ACCOUNT_ID')
+    if not billing_account_id:
+        raise ValueError("BILLING_ACCOUNT_ID not found in .env file")
+
     # Construct absolute path to classroom YAML
     absolute_classroom_yaml_path = os.path.join(project_root, classroom_yaml_path)
 
@@ -102,7 +109,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     tf_vars = {
         'folder_display_name': folder_display_name,
         'parent_folder': f"folders/{folder_spec.get('parent_folder_id')}",
-        'billing_account_id': folder_spec.get('billing_account_id'),
+        'billing_account_id': billing_account_id,
         'teachers': [f"user:{teacher}" for teacher in folder_spec.get('teachers', [])],
         'student_projects': student_projects,
         'services_to_enable': project_config.get('services_to_enable', []),

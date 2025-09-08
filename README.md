@@ -52,23 +52,27 @@ Also nice to haves:
 
 * A working Billing Account ID.
 * An existing Cloud Organization and a Folder inside it.
-* The `gcloud` CLI installed and authenticated.
+* The `gcloud` CLI installed.
 
 Simple actions:
 
-* 1\. `git clone git@github.com:Friends-of-Ricc/sandmold.git`
-* 2\. Set up environment variables:
+* 1\. **Clone the repository:**
+  * `git clone git@github.com:Friends-of-Ricc/sandmold.git`
+  * `cd sandmold`
+* 2\. **Configure your environment:**
   * `cp .env.dist .env`
   * Edit the `.env` file and fill in the required values for `BILLING_ACCOUNT_ID`, `ORGANIZATION_ID`, `PARENT_FOLDER_ID`, and `GCLOUD_IDENTITY`.
-  * Run `just check-setup` to verify that your environment is configured correctly.
-* 3\. Try `just classroom-up etc/samples/classroom/2teachers_4realstudents.yaml`
-  * If you're not already authenticated with Google Cloud, run `just auth` to log in with the identity you specified in your .env file.
+* 3\. **Authenticate with Google Cloud:**
+  * Run `just auth`. This will authenticate both you (as a user) and the application (via Application Default Credentials).
+* 4\. **Verify your setup:**
+  * Run `just check-setup` to ensure all your configurations are correct.
+  * For a more thorough check, run `just check-setup-with-project-creation`. This will create and delete a test project to verify your permissions.
+* 5\. **Deploy a classroom:**
+  * `just classroom-up etc/samples/classroom/2teachers_4realstudents.yaml`
 
 To troubleshoot:
 
-* `just check-setup`. It will check that your Account, auth, and billing information is working.
-* `just check-setup-with-project-creation`. This will do all the above, plus generate/delete the project.
-* For a complete list of available commands, see the [`justfile`](./justfile).
+* For a complete list of available commands and their descriptions, see the [`justfile`](./justfile).
 
 ## Goals
 

@@ -36,3 +36,5 @@ iac/terraform/1a_classroom_setup.zip
 blah/
 drebes*
 .ruby-version
+.env.*@*
+.env.yaml

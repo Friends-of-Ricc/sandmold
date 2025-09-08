@@ -11,7 +11,7 @@ spec:
   folder:
     org_id: 791852209422
     parent_folder_id: '194703823593'
-    billing_account_id: "010405-23D342-257054"
+    #billing_account_id: "010405-23D342-257054" OBSOLETE NOW!, now taking it from ENV.
     #OBSOLETE displayName: ng2teachers-3x2students
     domain: sredemo.dev
     description: |
