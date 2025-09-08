@@ -46,6 +46,29 @@ Also nice to haves:
   * AI/ML image processing on Cloud Functions [TF@GH](https://github.com/GoogleCloudPlatform/terraform-ml-image-annotation-gcf/tree/sic-jss/infra) - [delete](https://cloud.google.com/architecture/ai-ml/image-processing-cloud-functions?_gl=1*18ivjg4*_ga*MTU4NDM3ODU4My4xNzUxMzU5MDE2*_ga_WH2QY8WWF5*czE3NTEzNjQ0NzAkbzIkZzEkdDE3NTEzNjQ0NzMkajU3JGwwJGgw) seems deprecated.
   * Three-tier web application [GH](https://github.com/GoogleCloudPlatform/terraform-google-three-tier-web-app/tree/sic-jss-3) - [Guide](https://cloud.google.com/architecture/application-development/three-tier-web-app?_gl=1*1vwq5ks*_ga*MTU4NDM3ODU4My4xNzUxMzU5MDE2*_ga_WH2QY8WWF5*czE3NTEzNjQ0NzAkbzIkZzEkdDE3NTEzNjQ2MTgkajEyJGwwJGgw)
 
+## Getting started
+
+**Prerequisites**. To get started, you need:
+
+* A working Billing Account ID.
+* An existing Cloud Organization and a Folder inside it.
+* The `gcloud` CLI installed and authenticated.
+
+Simple actions:
+
+* 1\. `git clone git@github.com:Friends-of-Ricc/sandmold.git`
+* 2\. Set up environment variables:
+  * `cp .env.dist .env`
+  * Edit the `.env` file and fill in the required values for `BILLING_ACCOUNT_ID`, `ORGANIZATION_ID`, `PARENT_FOLDER_ID`, and `GCLOUD_IDENTITY`.
+  * Run `just check-setup` to verify that your environment is configured correctly.
+* 3\. Try `just classroom-up etc/samples/classroom/2teachers_4realstudents.yaml`
+  * If you're not already authenticated with Google Cloud, run `just auth` to log in with the identity you specified in your .env file.
+
+To troubleshoot:
+
+* `just check-setup`. It will check that your Account, auth, and billing information is working.
+* For a complete list of available commands, see the [`justfile`](./justfile).
+
 
 ## Goals
 
