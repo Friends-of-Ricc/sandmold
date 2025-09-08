@@ -130,3 +130,9 @@ auth:
     fi
     echo "Authenticating with Google Cloud as $GCLOUD_IDENTITY"
     gcloud auth login "$GCLOUD_IDENTITY" --force # --no-launch-browser
+    gcloud config set project "$GOOGLE_CLOUD_PROJECT"
+    gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
+
+# Checks if your gcloud is set up correctly...
+check-setup:
+    bin/check-setup.sh
