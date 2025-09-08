@@ -67,8 +67,8 @@ Simple actions:
 To troubleshoot:
 
 * `just check-setup`. It will check that your Account, auth, and billing information is working.
+* `just check-setup-with-project-creation`. This will do all the above, plus generate/delete the project.
 * For a complete list of available commands, see the [`justfile`](./justfile).
-
 
 ## Goals
 

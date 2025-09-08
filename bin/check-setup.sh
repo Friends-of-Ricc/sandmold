@@ -84,4 +84,34 @@ rm -f "$error_output"
 log_info "Parent folder '$PARENT_FOLDER_ID' found: $folder_name"
 echo
 
+# Check project creation and deletion
+if [ "${CREATE_AND_DELETE_TEST_PROJECT:-false}" = "true" ] || [ "${CREATE_AND_DELETE_TEST_PROJECT:-false}" = "TRUE" ]; then
+    echo "🔎 Performing project creation and deletion test..."
+    random_id=$(date +%s)
+    project_id="tmp-deleteme-$random_id"
+
+    # Create the project
+    if ! gcloud projects create "$project_id" --folder="$PARENT_FOLDER_ID" --quiet; then
+        log_fatal "Failed to create temporary project '$project_id'. Please check your permissions."
+    fi
+    log_info "Successfully created temporary project '$project_id'."
+
+    # Verify the project exists
+    if ! gcloud projects list --filter="project_id=$project_id" --format="value(project_id)" --quiet | grep -q "$project_id"; then
+        log_warning "Could not verify the existence of temporary project '$project_id' immediately after creation. This might be due to propagation delays."
+    else
+        log_info "Successfully verified the existence of temporary project '$project_id'."
+    fi
+
+    # Delete the project
+    if ! gcloud projects delete "$project_id" --quiet; then
+        log_fatal "Failed to delete temporary project '$project_id'. Please delete it manually."
+    fi
+    log_info "Successfully deleted temporary project '$project_id'."
+    echo
+else
+    log_warning "Skipping project creation test. To enable it, set CREATE_AND_DELETE_TEST_PROJECT=true in your .env file."
+    echo
+fi
+
 echo "🎉 All checks passed! Your setup seems correct."

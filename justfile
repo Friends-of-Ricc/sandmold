@@ -136,3 +136,6 @@ auth:
 # Checks if your gcloud is set up correctly...
 check-setup:
     bin/check-setup.sh
+
+check-setup-with-project-creation:
+    CREATE_AND_DELETE_TEST_PROJECT=true bin/check-setup.sh
