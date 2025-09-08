@@ -57,6 +57,13 @@ echo
 
 # Check billing account
 echo "🔎 Checking billing account..."
+if [ -z "${BILLING_ACCOUNT_ID:-}" ]; then
+    log_error "BILLING_ACCOUNT_ID is not set in your .env file."
+    echo "Here is a list of your available billing accounts:"
+    bin/list-billing-accounts.py
+    log_fatal "Please add the correct BILLING_ACCOUNT_ID to your .env file and run this script again."
+fi
+
 is_open=$(gcloud billing accounts describe "$BILLING_ACCOUNT_ID" --format="value(open)" --quiet 2>/dev/null)
 if [ "$is_open" != "True" ]; then
   log_fatal "Billing account '$BILLING_ACCOUNT_ID' is not open or you don't have permissions. Please check BILLING_ACCOUNT_ID in your .env file."
@@ -66,6 +73,13 @@ echo
 
 # Check organization
 echo "🔎 Checking organization..."
+if [ -z "${ORGANIZATION_ID:-}" ]; then
+    log_error "ORGANIZATION_ID is not set in your .env file."
+    echo "Here is a list of your available organizations:"
+    gcloud organizations list
+    log_fatal "Please add the correct ORGANIZATION_ID to your .env file and run this script again."
+fi
+
 org_name=$(gcloud organizations describe "$ORGANIZATION_ID" --format="value(displayName)" --quiet 2>/dev/null)
 if [ -z "$org_name" ]; then
     log_fatal "Organization '$ORGANIZATION_ID' not found or you don't have permission to access it. Please check ORGANIZATION_ID in your .env file."
@@ -75,6 +89,16 @@ echo
 
 # Check parent folder
 echo "🔎 Checking parent folder..."
+if [ -z "${PARENT_FOLDER_ID:-}" ]; then
+    log_error "PARENT_FOLDER_ID is not set in your .env file."
+    echo "Here is a list of your available folders:"
+    gcloud resource-manager folders list --organization="$ORGANIZATION_ID"
+    echo
+    log_warning "If you don't have a folder, you can create one with the following command:"
+    echo "gcloud resource-manager folders create --display-name=\"sandmold-tests\" --organization=\"$ORGANIZATION_ID\""
+    log_fatal "Please add the correct PARENT_FOLDER_ID to your .env file and run this script again."
+fi
+
 error_output=$(mktemp)
 if ! folder_name=$(gcloud resource-manager folders describe "$PARENT_FOLDER_ID" --format="value(displayName)" --quiet 2> "$error_output"); then
     log_fatal "Folder '$PARENT_FOLDER_ID' not found or you don't have permission to access it. Please check PARENT_FOLDER_ID in your .env file. Error: $(cat "$error_output")"
@@ -83,6 +107,7 @@ fi
 rm -f "$error_output"
 log_info "Parent folder '$PARENT_FOLDER_ID' found: $folder_name"
 echo
+
 
 # Check project creation and deletion
 if [ "${CREATE_AND_DELETE_TEST_PROJECT:-false}" = "true" ] || [ "${CREATE_AND_DELETE_TEST_PROJECT:-false}" = "TRUE" ]; then

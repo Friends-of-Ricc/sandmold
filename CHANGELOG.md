@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.7
+
+- **Feat(check-setup): Add interactive setup for env vars.**
+  - The `check-setup.sh` script now interactively guides the user if `BILLING_ACCOUNT_ID`, `ORGANIZATION_ID`, or `PARENT_FOLDER_ID` are missing from the `.env` file.
+  - It lists available resources and provides commands to create them if necessary, significantly improving the user onboarding experience.
+
 ## 0.5.6
 
 - **Feat(check-setup): Add project creation and deletion test.**
