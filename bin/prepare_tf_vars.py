@@ -28,7 +28,7 @@ def parse_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
-def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root):
+def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root, gcloud_user):
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
     """
@@ -103,12 +103,16 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
         iam_permissions[role] = [] # Placeholder, will be populated in TF
 
     # Default folder display name to metadata name if not provided
-    folder_display_name = folder_spec.get('displayName', metadata.get('name'))
-    folder_display_name = f"{prefix}{folder_display_name}"
+    base_folder_display_name = folder_spec.get('displayName', metadata.get('name'))
+    sanitized_gcloud_user = gcloud_user.replace('@', '-').replace('.', '-')
+    folder_display_name = f"{prefix}{base_folder_display_name}-{sanitized_gcloud_user}" if sanitized_gcloud_user else f"{prefix}{base_folder_display_name}"
 
+    parent_folder_id = folder_spec.get('parent_folder_id')
+    if not parent_folder_id:
+        raise ValueError("parent_folder_id not found in classroom YAML")
     tf_vars = {
         'folder_display_name': folder_display_name,
-        'parent_folder': f"folders/{folder_spec.get('parent_folder_id')}",
+        'parent_folder': f"folders/{parent_folder_id}",
         'billing_account_id': billing_account_id,
         'teachers': [f"user:{teacher}" for teacher in folder_spec.get('teachers', [])],
         'student_projects': student_projects,
@@ -128,6 +132,7 @@ if __name__ == '__main__':
     parser.add_argument('--project-config-yaml', required=True, help='Path to the project config YAML file.')
     parser.add_argument('--output-file', required=True, help='Path to the output terraform.tfvars.json file.')
     parser.add_argument('--project-root', required=True, help='The absolute path to the project root directory.')
+    parser.add_argument('--gcloud-user', required=True, help='The gcloud user running the script.')
     args = parser.parse_args()
 
-    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root)
+    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root, args.gcloud_user)

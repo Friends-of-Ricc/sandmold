@@ -32,6 +32,9 @@ log_warning() {
 log_error() {
     echo "${red:-}🛑 ${1}${normal:-}"
 }
+log_action() {
+    echo "${blue:-}🚀 ${1}${normal:-}"
+}
 log_fatal() {
     log_error "$1"
     exit 1
@@ -95,7 +98,7 @@ if [ -z "${PARENT_FOLDER_ID:-}" ]; then
     gcloud resource-manager folders list --organization="$ORGANIZATION_ID"
     echo
     log_warning "If you don't have a folder, you can create one with the following command:"
-    echo "gcloud resource-manager folders create --display-name=\"sandmold-tests\" --organization=\"$ORGANIZATION_ID\""
+    echo "gcloud resource-manager folders create --display-name=\"sandmold-tests\" --organization=\""$ORGANIZATION_ID"\""
     log_fatal "Please add the correct PARENT_FOLDER_ID to your .env file and run this script again."
 fi
 
@@ -138,5 +141,37 @@ else
     log_warning "Skipping project creation test. To enable it, set CREATE_AND_DELETE_TEST_PROJECT=true in your .env file."
     echo
 fi
+
+# Check for GOOGLE_CLOUD_PROJECT
+echo "🔎 Checking for GOOGLE_CLOUD_PROJECT..."
+if [ -z "${GOOGLE_CLOUD_PROJECT:-}" ]; then
+    log_warning "GOOGLE_CLOUD_PROJECT is not set in your .env file."
+    log_action "I will now generate the commands to create a new project for you."
+
+    random_suffix="$(date +%s | tail -c 5)"
+    new_project_id="sandmold-base-project-$random_suffix"
+
+    echo
+    log_action "Please run the following commands manually:"
+    echo
+    echo "gcloud projects create \"$new_project_id\" --organization=\"$ORGANIZATION_ID\""
+    echo "gcloud billing projects link \"$new_project_id\" --billing-account=\"$BILLING_ACCOUNT_ID\""
+    echo "gcloud config set project \"$new_project_id\""
+    echo
+    log_action "Then, add the following line to your .env file:"
+    echo
+    echo "GOOGLE_CLOUD_PROJECT=$new_project_id"
+    echo
+    log_fatal "Once you have updated the .env file, please run 'just check-setup' again."
+else
+    if gcloud projects describe "${GOOGLE_CLOUD_PROJECT}" &> /dev/null; then
+        log_info "GOOGLE_CLOUD_PROJECT '${GOOGLE_CLOUD_PROJECT}' exists and is accessible."
+    else
+        log_fatal "GOOGLE_CLOUD_PROJECT '${GOOGLE_CLOUD_PROJECT}' not found or you don't have permission to access it."
+    fi
+fi
+
+
+echo
 
 echo "🎉 All checks passed! Your setup seems correct."
