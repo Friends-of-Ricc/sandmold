@@ -112,12 +112,12 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     folder_display_name = f"{prefix}{base_folder_display_name}-{sanitized_gcloud_user}" if sanitized_gcloud_user else f"{prefix}{base_folder_display_name}"
 
     parent_folder_id = os.getenv('PARENT_FOLDER_ID')
-    if not parent_folder_id:
-        raise ValueError("PARENT_FOLDER_ID not found in .env file")
+    parent = f"folders/{parent_folder_id}" if parent_folder_id else f"organizations/{organization_id}"
     tf_vars = {
         'folder_display_name': folder_display_name,
-        'parent_folder': f"folders/{parent_folder_id}",
+        'parent_folder': parent,
         'billing_account_id': billing_account_id,
+        'organization_id': organization_id,
         'teachers': [f"user:{teacher}" for teacher in folder_spec.get('teachers', [])],
         'student_projects': student_projects,
         'services_to_enable': project_config.get('services_to_enable', []),
