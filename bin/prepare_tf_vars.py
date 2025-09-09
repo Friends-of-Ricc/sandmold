@@ -28,16 +28,10 @@ def parse_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
-def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root, gcloud_user):
+def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root, gcloud_user, billing_account_id):
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
     """
-    # Load environment variables from .env file
-    load_dotenv()
-    billing_account_id = os.getenv('BILLING_ACCOUNT_ID')
-    if not billing_account_id:
-        raise ValueError("BILLING_ACCOUNT_ID not found in .env file")
-
     organization_id = os.getenv('ORGANIZATION_ID')
     if not organization_id:
         raise ValueError("ORGANIZATION_ID not found in .env file")
@@ -137,6 +131,7 @@ if __name__ == '__main__':
     parser.add_argument('--output-file', required=True, help='Path to the output terraform.tfvars.json file.')
     parser.add_argument('--project-root', required=True, help='The absolute path to the project root directory.')
     parser.add_argument('--gcloud-user', required=True, help='The gcloud user running the script.')
+    parser.add_argument('--billing-account-id', required=True, help='The billing account ID to use.')
     args = parser.parse_args()
 
-    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root, args.gcloud_user)
+    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root, args.gcloud_user, args.billing_account_id)

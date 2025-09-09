@@ -53,8 +53,9 @@ Also nice to haves:
 * A working Billing Account ID.
 * An existing Cloud Organization and a Folder inside it.
 * The `gcloud` CLI installed.
+* [Optional] The `just` CLI installed ([download](https://github.com/casey/just)). Alternatively, you can just read the recipes in `justfile`, they mostly are convenience wrappers around commands in `bin/`.
 
-Simple actions:
+Needed actions:
 
 * 1\. **Clone the repository:**
   * `git clone git@github.com:Friends-of-Ricc/sandmold.git`

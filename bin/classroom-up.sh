@@ -6,10 +6,11 @@ set -o pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 CLASSROOM_YAML="$1"
-CLASSROOM_TF_DIR="$2" # New argument
+CLASSROOM_TF_DIR="$2"
+BILLING_ACCOUNT_ID="$3"
 
-if [ -z "$CLASSROOM_TF_DIR" ]; then
-    echo "Error: Terraform directory not provided. Usage: $0 <classroom_yaml> <terraform_dir>"
+if [ -z "$BILLING_ACCOUNT_ID" ]; then
+    echo "Error: Billing account ID not provided. Usage: $0 <classroom_yaml> <terraform_dir> <billing_account_id>"
     exit 1
 fi
 
@@ -42,7 +43,8 @@ uv run python ./bin/prepare_tf_vars.py \
     --project-config-yaml etc/project_config.yaml \
     --output-file "${TF_VARS_FILE}" \
     --project-root "$(pwd)" \
-    --gcloud-user "${GCLOUD_USER}"
+    --gcloud-user "${GCLOUD_USER}" \
+    --billing-account-id "${BILLING_ACCOUNT_ID}"
 
 # --- Step 3: Run Terraform, teeing output to a log file ---
 echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"

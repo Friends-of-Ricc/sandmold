@@ -1,8 +1,11 @@
+set dotenv-load := true
+
 # This is more meaningful to Riccardo as a Rails dev.
 RAILS_ROOT := justfile_directory()
 SAMPLE_CLASSROOM_YAML := "etc/samples/classroom/with_apps.yaml"
 CLASSROOM_TF_DIR := 'iac/terraform/sandmold/1a_classroom_setup'
 SANDMOLD_TF_DIR := 'iac/terraform/sandmold'
+BILLING_ACCOUNT_ID := env('BILLING_ACCOUNT_ID')
 
 # list all targets. This should be the first target in the file and DEFAULT
 list:
@@ -30,7 +33,7 @@ test-yaml CLASSROOM_YAML:
 # Setup a classroom environment based on a YAML configuration
 # Usage: just classroom-up etc/samples/class_2teachers_6students.yaml
 classroom-up CLASSROOM_YAML:
-    time bin/classroom-up.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}}
+    time bin/classroom-up.sh {{CLASSROOM_YAML}} {{CLASSROOM_TF_DIR}} {{BILLING_ACCOUNT_ID}}
 
 # Setup a classroom environment based on a YAML configuration
 classroom-up-sampleclass:
@@ -141,3 +144,7 @@ check-setup:
 
 check-setup-with-project-creation:
     CREATE_AND_DELETE_TEST_PROJECT=true bin/check-setup.sh
+
+
+gemini:
+    gemini -c --approval-mode auto_edit
