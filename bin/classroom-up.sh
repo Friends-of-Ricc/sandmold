@@ -7,10 +7,13 @@ cd "$(git rev-parse --show-toplevel)"
 
 CLASSROOM_YAML="$1"
 CLASSROOM_TF_DIR="$2"
-BILLING_ACCOUNT_ID="$3"
+# Use command-line arg for billing account, fallback to ENV, then error out.
+BILLING_ACCOUNT_ID="${3:-$BILLING_ACCOUNT_ID}"
 
 if [ -z "$BILLING_ACCOUNT_ID" ]; then
-    echo "Error: Billing account ID not provided. Usage: $0 <classroom_yaml> <terraform_dir> <billing_account_id>"
+    echo "Error: Billing account ID not provided."
+    echo "Usage: $0 <classroom_yaml> <terraform_dir> [billing_account_id]"
+    echo "Alternatively, set the BILLING_ACCOUNT_ID environment variable."
     exit 1
 fi
 

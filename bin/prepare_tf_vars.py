@@ -28,6 +28,13 @@ def parse_yaml(file_path):
     with open(file_path, 'r') as f:
         return yaml.safe_load(f)
 
+import random
+import string
+
+def generate_random_suffix(length=4):
+    """Generates a random alphanumeric suffix."""
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
+
 def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root, gcloud_user, billing_account_id):
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
@@ -103,7 +110,8 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     # Default folder display name to metadata name if not provided
     base_folder_display_name = folder_spec.get('displayName', metadata.get('name'))
     sanitized_gcloud_user = gcloud_user.replace('@', '-').replace('.', '-')
-    folder_display_name = f"{prefix}{base_folder_display_name}-{sanitized_gcloud_user}" if sanitized_gcloud_user else f"{prefix}{base_folder_display_name}"
+    random_suffix = generate_random_suffix()
+    folder_display_name = f"{prefix}{base_folder_display_name}-{sanitized_gcloud_user}-{random_suffix}" if sanitized_gcloud_user else f"{prefix}{base_folder_display_name}-{random_suffix}"
 
     parent_folder_id = os.getenv('PARENT_FOLDER_ID')
     parent = f"folders/{parent_folder_id}" if parent_folder_id else f"organizations/{organization_id}"

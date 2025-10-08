@@ -41,7 +41,7 @@ classroom-up-sampleclass:
 
 # Teardown a classroom environment
 classroom-down CLASSROOM_YAML:
-    time bin/classroom-down.sh {{CLASSROOM_YAML}}
+    time bin/classroom-down.sh {{CLASSROOM_YAML}} {{BILLING_ACCOUNT_ID}}
 
 # Setup a single-user environment
 user-up USER_YAML='etc/samples/single_user/light.yaml':

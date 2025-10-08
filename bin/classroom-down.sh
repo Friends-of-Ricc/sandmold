@@ -6,7 +6,17 @@ set -o pipefail
 cd "$(git rev-parse --show-toplevel)"
 
 CLASSROOM_YAML="$1"
+# Use command-line arg for billing account, fallback to ENV, then error out.
+BILLING_ACCOUNT_ID="${2:-$BILLING_ACCOUNT_ID}"
+GCLOUD_USER=$(gcloud config get-value account --quiet)
 CLASSROOM_TF_DIR="iac/terraform/sandmold/1a_classroom_setup"
+
+if [ -z "$BILLING_ACCOUNT_ID" ]; then
+    echo "Error: Billing account ID not provided."
+    echo "Usage: $0 <classroom_yaml> [billing_account_id]"
+    echo "Alternatively, set the BILLING_ACCOUNT_ID environment variable."
+    exit 1
+fi
 
 echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
@@ -26,7 +36,9 @@ uv run python ./bin/prepare_tf_vars.py \
     --classroom-yaml "${CLASSROOM_YAML}" \
     --project-config-yaml etc/project_config.yaml \
     --output-file "${TF_VARS_FILE}" \
-    --project-root "$(pwd)"
+    --project-root "$(pwd)" \
+    --gcloud-user "${GCLOUD_USER}" \
+    --billing-account-id "${BILLING_ACCOUNT_ID}"
 
 RELATIVE_TF_VARS_FILE="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
 

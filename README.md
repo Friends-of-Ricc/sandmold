@@ -20,7 +20,7 @@ Taxonomy:
 Sample app:
 
 
-```
+```bash
 $ just classroom-inspect-sampleclass
 [...]
 🌳 Exploring parent folder (1000371719973) in Org: 791852209422 (sredemo.dev)
@@ -31,11 +31,12 @@ $ just classroom-inspect-sampleclass
 │       ├── 🧩 ng1-std-p3-v7km (ng1-std-p3-v7km)
 │       └── 🧩 ng1-tch-teacherz-lvs6 (ng1-tch-teacherz-lvs6)
 ```
+
 ## Supported apps
 
 We intend to support the most popular solutions like:
 * **Bank of Anthos** (aka BoA): https://github.com/GoogleCloudPlatform/bank-of-anthos
-* **Online Boutique** (aka Heapster Shop): https://github.com/GoogleCloudPlatform/microservices-demo
+* **Online Boutique** (aka Online Boutique): https://github.com/GoogleCloudPlatform/microservices-demo
 
 The idea is that a class teacher can easily build scenario on top of existing blueprints.
 
@@ -89,7 +90,6 @@ To troubleshoot:
 ## Owners
 
 * Riccardo `palladius`
-* Leonid `minherz`
 
 Contributing: see `CONTRIBUTING.md`
 
@@ -97,11 +97,11 @@ Contributing: see `CONTRIBUTING.md`
 
 ```mermaid
 erDiagram
-    USER ||--o{ LAB : has
-    LAB ||--o{ SEAT : contains
-    LAB ||--o{ APP : deploys
-    APP ||--o{ APP : depends_on
-    SEAT ||--|{ USER : assigned_to
+    User ||--o{ Class : has
+    Class ||--o{ Seat : contains
+    Class ||--o{ App : deploys
+    App ||--o{ App : depends_on
+    Seat ||--|{ User : assigned_to
 ```
 
 ## Data Flow
@@ -117,7 +117,10 @@ The core logic of Sandmold is built upon a modular Terraform structure. This des
 ## Implementation
 
 Check `IMPLEMENTATION.md` for current state of implementation.
-_[X] Creation of folder-based
+
+## Scripts
+
+For more on scripts functionality, check `doc/USER_MANUAL.md`
 
 ## Single User Setup
 
@@ -137,3 +140,12 @@ You can test the YAML quality with `just test-yaml YOUR_CONFIG.yaml`.
 You can also do more interesting preflight checks like:
 
 ![preflight checks](doc/preflight-check-screenshot.png)
+
+## Caveats
+
+*   **Resource Recreation Delay:** When you delete Google Cloud resources like projects and folders, they go into a "soft delete" or "inactive" state for a period of time before being permanently purged. If you attempt to run `classroom-up` to recreate a classroom with the same name immediately after running `classroom-down`, you may encounter errors like "Requested entity already exists" or "The folder operation violates display name uniqueness".
+
+    While the scripts attempt to mitigate this by adding a random suffix to folder names, the best practice to avoid these issues is to:
+    1.  Run `just classroom-down your-classroom.yaml` to delete the old environment.
+    2.  In your `your-classroom.yaml` file, change the `spec.folder.resource_prefix` to a new value.
+    3.  Run `just classroom-up your-classroom.yaml` to create the new environment. This ensures all generated resource names are completely new.
