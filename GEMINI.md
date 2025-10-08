@@ -31,11 +31,10 @@ Technically, every lab setup consists in a `classroom` will need two inputs:
 
 ## About the user
 
-Two people are maintaining this project. Read additiona user constants as follows:
+Two people are maintaining this project. Read additional user constants context as follows:
 
 * At startup, check username with `whoami`.
-* If the username (`$USER`) is `ricc`, then read further instructions in "RICCARDO.md".
-* If the username is `leoy`, then read further instructions in "LEONID.md".
+  * If the username (`$USER`) is `ricc`, then read further instructions in "doc/personas/RICCARDO.md".
 
 ## GCP and Terraform
 
