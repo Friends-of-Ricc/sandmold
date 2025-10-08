@@ -11,10 +11,10 @@ The Terraform workflow is divided into two main stages:
 
 The infrastructure setup can be done in two ways:
 
-*   **`1a_classroom_setup`**: For setting up a full classroom environment with multiple students.
-*   **`1b_single_user_setup`**: For a single user to set up a single project.
+*   **[`1a_classroom_setup`](../iac/terraform/1a_classroom_setup/)**: For setting up a full classroom environment with multiple students.
+*   **[`1b_single_user_setup`](../iac/terraform/1b_single_user_setup/)**: For a single user to set up a single project.
 
-The output of both `1a` and `1b` is a consistent data structure that is used as input for the `2_apps_deployment` stage.
+The output of both `1a` and `1b` is a consistent data structure that is used as input for the [`2_apps_deployment`](../iac/terraform/2_apps_deployment/) stage.
 
 ### Conceptual Execution Flow
 
@@ -65,22 +65,31 @@ applications:
 
 #### **Common Output (from Stage 1) / Input (for Stage 2)**
 
-Both `1a` and `1b` produce a structured map of the created projects. This serves as the common input for the next stage.
+Both `1a` and `1b` produce a structured JSON file containing the details of the created projects. This file is typically found at `iac/terraform/1a_classroom_setup/workspaces/YOUR_WORKSPACE_NAME/terraform_output.json` and serves as the common input for the next stage.
 
-```yaml
-# This is the common data structure passed to Stage 3
-projects:
-  student-project-a1b2:
-    project_id: "student-project-a1b2"
-    project_number: "112233445566"
-    user_emails: ["student1@example.com"]
-    applications: ["app1", "app2"]
-  research-project-c3d4:
-    project_id: "research-project-c3d4"
-    project_number: "778899001122"
-    user_emails: ["student2@example.com", "prof@example.com"]
-    applications: ["app3"]
+A simplified example of the `terraform_output.json` looks like this:
+
+```json
+{
+  "projects": {
+    "value": {
+      "student-project-a1b2": {
+        "project_id": "student-project-a1b2",
+        "project_number": "112233445566",
+        "user_emails": ["student1@example.com"],
+        "applications": ["online-boutique", "bank-of-anthos"]
+      },
+      "research-project-c3d4": {
+        "project_id": "research-project-c3d4",
+        "project_number": "778899001122",
+        "user_emails": ["student2@example.com", "prof@example.com"],
+        "applications": ["bank-of-anthos"]
+      }
+    }
+  }
+}
 ```
+
 ---
 
 #### **Stage 2: Application Deployment**

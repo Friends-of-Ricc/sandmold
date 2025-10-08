@@ -24,7 +24,6 @@ spec:
         value: europe-west1
     prefix: fb1 # TODO not implemented yet
   schoolbenches:
-    # schoolbench 1
     - project: teacherz  # will be padded by some random hex/numb
       desk-type: teacher
       apps:
@@ -33,7 +32,6 @@ spec:
       seats:
       - leoy@google.com
       - ricc@google.com
-    # schoolbench 2
     - project: foobar01  # will be padded by some random hex/numb, -> "boa01-123abc"
       seats:
       - student01@gmail.com
