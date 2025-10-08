@@ -70,7 +70,7 @@ classroom-deploy-apps CLASSROOM_YAML:
     terraform workspace select -or-create $WORKSPACE_NAME && \
     echo "==> Applying Terraform configuration to create resources..." && \
     terraform apply \
-      -var-file="{{RAILS_ROOT}}/iac/terraform/1a_classroom_setup/workspaces/$WORKSPACE_NAME/terraform.tfvars.json" \
+      -var-file="{{RAILS_ROOT}}/{{CLASSROOM_TF_DIR}}/workspaces/$WORKSPACE_NAME/terraform.tfvars.json" \
       -var="app_deployments=$(cat {{RAILS_ROOT}}/tmp/app_deployment.json)" \
       -auto-approve && \
     echo "==> Extracting deployment details from Terraform output..." && \
