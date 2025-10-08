@@ -62,3 +62,7 @@ If users asks you to review https://github.com/Friends-of-Ricc/sandmold/issues/X
 4. Commit and add to the commit message the issue "https://github.com/Friends-of-Ricc/sandmold/issues/XXX".
 5. Open a Pull Request.
 6. Wait for user et al. to review it. When done, close the Merge request and add a final comment to the issue. We close it if we're done, otherwise we point out the next steps.
+
+## Billing and ENV
+
+Check for BILLING_ACCOUNT_ID in `.env`.
