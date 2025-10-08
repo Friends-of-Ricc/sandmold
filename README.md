@@ -126,12 +126,27 @@ For more on scripts functionality, check `doc/USER_MANUAL.md`
 
 For a more lightweight, cost-effective setup for a single user, you can use the `just user-up` command. This will create a single project with the necessary APIs and permissions for the labs.
 
-1.  **Create a YAML configuration file.** You can use `etc/samples/single_user/light.yaml` as a starting point.
-2.  **Run the `just` command:**
-    ```bash
-    just user-up [path/to/your/user.yaml]
-    ```
-    If you don't provide a path to a YAML file, it will default to `etc/samples/single_user/light.yaml`.
+### Usage
+
+1.  **Create a YAML configuration file.** You can copy and modify the example at `etc/samples/single_user/light.yaml` to define your project ID and the user email.
+
+2.  **Run the `just` command.**
+    *   To use the default sample file (`etc/samples/single_user/light.yaml`):
+        ```bash
+        just user-up
+        ```
+    *   To use your own custom file:
+        ```bash
+        just user-up path/to/your/user.yaml
+        ```
+
+### Example Command
+
+If your `BILLING_ACCOUNT_ID` is not set in the `.env` file, you can provide it on the command line like this:
+
+```bash
+BILLING_ACCOUNT_ID="012345-6789AB-CDEF01" just user-up
+```
 
 ## Testing
 
