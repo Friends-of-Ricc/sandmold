@@ -31,7 +31,7 @@ def parse_yaml(file_path):
 import random
 import string
 
-def generate_random_suffix(length=4):
+def generate_random_suffix(length=2):
     """Generates a random alphanumeric suffix."""
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
 
@@ -65,13 +65,14 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
         users = bench.get('seats', [])
         desk_type = bench.get('desk-type', 'student') # Default to student
 
+        # Prepend the environment prefix first
+        project_id_prefix = f"{prefix}{project_id_prefix}"
+
+        # Then prepend the desk type to ensure the ID starts with a letter
         if desk_type == 'teacher':
             project_id_prefix = f"tch-{project_id_prefix}"
         else: # For 'student' or any other type
             project_id_prefix = f"std-{project_id_prefix}"
-
-        # Prepend the environment prefix
-        project_id_prefix = f"{prefix}{project_id_prefix}"
 
         # Merge project-specific labels with the common labels
         labels = project_labels.copy()
@@ -111,7 +112,7 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
     base_folder_display_name = folder_spec.get('displayName', metadata.get('name'))
     sanitized_gcloud_user = gcloud_user.replace('@', '-').replace('.', '-')
     random_suffix = generate_random_suffix()
-    folder_display_name = f"{prefix}{base_folder_display_name}-{sanitized_gcloud_user}-{random_suffix}" if sanitized_gcloud_user else f"{prefix}{base_folder_display_name}-{random_suffix}"
+    folder_display_name = f"{prefix}{base_folder_display_name}-{random_suffix}"
 
     parent_folder_id = os.getenv('PARENT_FOLDER_ID')
     parent = f"folders/{parent_folder_id}" if parent_folder_id else f"organizations/{organization_id}"
