@@ -118,10 +118,10 @@ classroom-down-all:
 # List all Terraform workspaces
 terraform-ls-workspaces:
     @echo "--- 🤖 Workspaces according to Terraform ---"
-    @terraform -chdir={{CLASSROOM_TF_DIR}} workspace list
+    terraform -chdir={{CLASSROOM_TF_DIR}} workspace list
     @echo
     @echo "--- 📁 Workspace directories on filesystem ---"
-    @ls -l {{CLASSROOM_TF_DIR}}/workspaces
+    ls -l {{CLASSROOM_TF_DIR}}/workspaces
 
 
 
