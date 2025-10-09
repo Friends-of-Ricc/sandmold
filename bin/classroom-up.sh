@@ -20,7 +20,9 @@ fi
 echo "--- Starting Classroom Setup for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
 # --- Step 1: Define all paths based on workspace ---
-WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
+PARENT_FOLDER_HASH=$(echo -n "${PARENT_FOLDER_ID}" | md5sum | cut -c1-8)
+BASE_WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
+WORKSPACE_NAME="${BASE_WORKSPACE_NAME}-${PARENT_FOLDER_HASH}"
 echo "Workspace name: ${WORKSPACE_NAME}"
 
 CLASSROOM_WORKSPACE_DIR="${CLASSROOM_TF_DIR}/workspaces/${WORKSPACE_NAME}"
@@ -43,8 +45,7 @@ uv run python ./bin/prepare_tf_vars.py \
     --classroom-yaml "${CLASSROOM_YAML}" \
     --project-config-yaml etc/project_config.yaml \
     --output-file "${TF_VARS_FILE}" \
-    --project-root "$(pwd)" \
-    --gcloud-user "${GCLOUD_USER}"
+    --project-root "$(pwd)"
 
 # --- Step 3: Run Terraform, teeing output to a log file ---
 echo "--> Initializing and applying Terraform in workspace: ${WORKSPACE_NAME}"

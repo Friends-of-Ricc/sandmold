@@ -21,7 +21,9 @@ fi
 echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
 # Get the workspace name from the new schema
-WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
+PARENT_FOLDER_HASH=$(echo -n "${PARENT_FOLDER_ID}" | md5sum | cut -c1-8)
+BASE_WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
+WORKSPACE_NAME="${BASE_WORKSPACE_NAME}-${PARENT_FOLDER_HASH}"
 
 # Define paths relative to the classroom's terraform directory
 CLASSROOM_WORKSPACE_DIR="${CLASSROOM_TF_DIR}/workspaces/${WORKSPACE_NAME}"
