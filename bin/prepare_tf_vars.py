@@ -31,91 +31,9 @@ def parse_yaml(file_path):
 import random
 import string
 
-def generate_random_suffix(length=2):
-    """Generates a random alphanumeric suffix."""
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
-
-def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root):
-    """
-    Parses classroom and project configs and generates terraform.tfvars.json.
-    """
-    organization_id = os.getenv('ORGANIZATION_ID')
-    if not organization_id:
-        raise ValueError("ORGANIZATION_ID not found in .env file")
-
-    billing_account_id = os.getenv('BILLING_ACCOUNT_ID')
-    if not billing_account_id:
-        raise ValueError("BILLING_ACCOUNT_ID not found in .env file")
-
-    # Construct absolute path to classroom YAML
-    absolute_classroom_yaml_path = os.path.join(project_root, classroom_yaml_path)
-
-    classroom_config = parse_yaml(absolute_classroom_yaml_path)
-    project_config = parse_yaml(project_config_yaml_path)
-
-    spec = classroom_config.get('spec', {})
-    metadata = classroom_config.get('metadata', {})
-    folder_spec = spec.get('folder', {})
-
-    # Get the environment prefix
-    env_prefix = folder_spec.get('resource_prefix')
-    prefix = f"{env_prefix}-" if env_prefix else ""
-
-    # Prepare the student_projects variable
-    student_projects = []
-    project_labels = project_config.get('projects', {}).get('labels', {})
-    for bench in spec.get('schoolbenches', []):
-        project_id_prefix = bench.get('project')
-        users = bench.get('seats', [])
-        desk_type = bench.get('desk-type', 'student') # Default to student
-
-        # Prepend the environment prefix first
-        project_id_prefix = f"{prefix}{project_id_prefix}"
-
-        # Then prepend the desk type to ensure the ID starts with a letter
-        if desk_type == 'teacher':
-            project_id_prefix = f"tch-{project_id_prefix}"
-        else: # For 'student' or any other type
-            project_id_prefix = f"std-{project_id_prefix}"
-
-        # Merge project-specific labels with the common labels
-        labels = project_labels.copy()
-        labels['desk-type'] = desk_type
-
-        if project_id_prefix and users:
-            apps = []
-            for app in bench.get('apps', []):
-                if isinstance(app, dict):
-                    app_name = app.get('name')
-                else:
-                    app_name = app
-                app_env = {}
-                if 'env' in bench:
-                    for env_var in bench.get('env', []):
-                        app_env[env_var.get('name')] = env_var.get('value')
-                apps.append({
-                    'name': app_name,
-                    'env': app_env
-                })
-
-            student_projects.append({
-                'project_id_prefix': project_id_prefix,
-                'users': [f"user:{user}" for user in users],
-                'labels': labels,
-                'apps': apps
-            })
-
-    # Prepare the iam_permissions map
-    iam_permissions = {}
-    user_roles = project_config.get('iam_permissions', {}).get('user_roles', [])
-    for role in user_roles:
-        # The actual users will be substituted by Terraform for each project
-        iam_permissions[role] = [] # Placeholder, will be populated in TF
-
     # Default folder display name to metadata name if not provided
     base_folder_display_name = folder_spec.get('displayName', metadata.get('name'))
-    random_suffix = generate_random_suffix()
-    folder_display_name = f"{prefix}{base_folder_display_name}-{random_suffix}"
+    folder_display_name = f"{prefix}{base_folder_display_name}".rstrip('-')
 
     parent_folder_id = os.getenv('PARENT_FOLDER_ID')
     parent = f"folders/{parent_folder_id}" if parent_folder_id else f"organizations/{organization_id}"
