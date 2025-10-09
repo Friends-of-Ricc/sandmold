@@ -21,9 +21,10 @@ fi
 echo "--- Starting Classroom Teardown for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
 # Get the workspace name from the new schema
-PARENT_FOLDER_HASH=$(echo -n "${PARENT_FOLDER_ID}" | md5sum | cut -c1-8)
+GCLOUD_USER=$(gcloud config get-value account --quiet)
+SANITIZED_GCLOUD_USER=$(echo -n "${GCLOUD_USER}" | tr '@.' '-')
 BASE_WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
-WORKSPACE_NAME="${BASE_WORKSPACE_NAME}-${PARENT_FOLDER_HASH}"
+WORKSPACE_NAME="${SANITIZED_GCLOUD_USER}--${BASE_WORKSPACE_NAME}"
 
 # Define paths relative to the classroom's terraform directory
 CLASSROOM_WORKSPACE_DIR="${CLASSROOM_TF_DIR}/workspaces/${WORKSPACE_NAME}"

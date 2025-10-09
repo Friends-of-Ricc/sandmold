@@ -20,9 +20,10 @@ fi
 echo "--- Starting Classroom Setup for ${CLASSROOM_YAML} in ${CLASSROOM_TF_DIR} ---"
 
 # --- Step 1: Define all paths based on workspace ---
-PARENT_FOLDER_HASH=$(echo -n "${PARENT_FOLDER_ID}" | md5sum | cut -c1-8)
+GCLOUD_USER=$(gcloud config get-value account --quiet)
+SANITIZED_GCLOUD_USER=$(echo -n "${GCLOUD_USER}" | tr '@.' '-')
 BASE_WORKSPACE_NAME=$(cat "${CLASSROOM_YAML}" | yq -r .metadata.name)
-WORKSPACE_NAME="${BASE_WORKSPACE_NAME}-${PARENT_FOLDER_HASH}"
+WORKSPACE_NAME="${SANITIZED_GCLOUD_USER}--${BASE_WORKSPACE_NAME}"
 echo "Workspace name: ${WORKSPACE_NAME}"
 
 CLASSROOM_WORKSPACE_DIR="${CLASSROOM_TF_DIR}/workspaces/${WORKSPACE_NAME}"
