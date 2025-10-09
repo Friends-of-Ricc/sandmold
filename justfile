@@ -30,6 +30,9 @@ test:
 test-yaml CLASSROOM_YAML:
     uv run python ./tests/test_yaml_validation.py --classroom-yaml {{CLASSROOM_YAML}} --root-dir "{{RAILS_ROOT}}"
 
+test-yaml-default:
+    just test-yaml {{SAMPLE_CLASSROOM_YAML}}
+
 # Setup a classroom environment based on a YAML configuration
 # Usage: just classroom-up etc/samples/class_2teachers_6students.yaml
 classroom-up CLASSROOM_YAML:
