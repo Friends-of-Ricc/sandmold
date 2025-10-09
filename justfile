@@ -113,6 +113,17 @@ classroom-down-all:
         just classroom-down $yaml_file; \
     done
 
+# --- Terraform Workspace Management ---
+
+# List all Terraform workspaces
+terraform-ls-workspaces:
+    @echo "--- 🤖 Workspaces according to Terraform ---"
+    @terraform -chdir={{CLASSROOM_TF_DIR}} workspace list
+    @echo
+    @echo "--- 📁 Workspace directories on filesystem ---"
+    @ls -l {{CLASSROOM_TF_DIR}}/workspaces
+
+
 
 tfplan CLASSROOM_YAML:
     @WORKSPACE_NAME=`python3 -c "import yaml, sys; print(yaml.safe_load(open('{{CLASSROOM_YAML}}'))['metadata']['name'])`" && \
