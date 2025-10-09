@@ -140,7 +140,10 @@ if __name__ == '__main__':
     parser.add_argument('--output-file', required=True, help='Path to the output terraform.tfvars.json file.')
     parser.add_argument('--project-root', required=True, help='The absolute path to the project root directory.')
     parser.add_argument('--gcloud-user', required=True, help='The gcloud user running the script.')
-    parser.add_argument('--billing-account-id', required=True, help='The billing account ID to use.')
     args = parser.parse_args()
 
-    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root, args.gcloud_user, args.billing_account_id)
+    billing_account_id = os.environ.get('BILLING_ACCOUNT_ID')
+    if not billing_account_id:
+        raise ValueError("BILLING_ACCOUNT_ID not found in environment variables")
+
+    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root, args.gcloud_user, billing_account_id)

@@ -37,6 +37,15 @@ classroom-up CLASSROOM_YAML:
 
 # Setup a classroom environment based on a YAML configuration
 classroom-up-sampleclass:
+    #!/bin/bash
+    set -euo pipefail
+    if [ ! -f .env ]; then
+      echo ".env file not found. Please create one based on .env.example"
+      exit 1
+    else
+        echo "Sourcing .env file.."
+    fi
+    . .env
     just classroom-up {{SAMPLE_CLASSROOM_YAML}}
 
 # Teardown a classroom environment
