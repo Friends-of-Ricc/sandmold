@@ -59,7 +59,16 @@ def check_billing_account(billing_id):
         print(f"   - {Colors.BOLD}Currency:{Colors.ENDC} {currency}")
         print(f"   - {Colors.BOLD}Link:{Colors.ENDC} {Colors.BLUE}{billing_url}{Colors.ENDC}")
 
-        if parent:
+        if parent and parent.startswith('organizations/'):
+            org_id = parent.split('/')[-1]
+            org_command = ["gcloud", "organizations", "describe", org_id, "--format=json"]
+            org_data = run_gcloud_command(org_command)
+            if org_data:
+                org_display_name = org_data.get('displayName', '')
+                print(f"   - {Colors.BOLD}Parent:{Colors.ENDC} {parent} ({org_display_name})")
+            else:
+                print(f"   - {Colors.BOLD}Parent:{Colors.ENDC} {parent} ({Colors.RED}permission denied{Colors.ENDC})")
+        elif parent:
             print(f"   - {Colors.BOLD}Parent:{Colors.ENDC} {parent}")
     else:
         print(f"   {Colors.RED}Could not retrieve details for this billing account.{Colors.ENDC}")
