@@ -42,6 +42,26 @@ def run_gcloud_command(command):
         return None
 
 
+# --- Cache for known organization domains ---
+ORG_CACHE = {
+    "299061907367": "ricc.rocks",
+    "426276118631": "palladius.joonix.net",
+    "44433984155": "palladius.it",
+    "615578690183": "goliardia.mygbiz.com",
+    "803957416449": "palladius.eu",
+    "824879804362": "palladi.us",
+    "911748599584": "carlessos.org",
+    "433637338589": "google.com",
+}
+
+def get_org_domain(org_id):
+    """Gets the organization domain from cache or gcloud."""
+    if org_id in ORG_CACHE:
+        return ORG_CACHE[org_id]
+    org_command = ["gcloud", "organizations", "describe", org_id, "--format=json"]
+    org_data = run_gcloud_command(org_command)
+    return org_data.get('displayName', 'N/A') if org_data else None
+
 def check_billing_account(billing_id):
     """Checks and displays information about the billing account."""
     print(f"\n{Colors.YELLOW}💰 Checking Billing Account: {billing_id}{Colors.ENDC}")
@@ -61,10 +81,8 @@ def check_billing_account(billing_id):
 
         if parent and parent.startswith('organizations/'):
             org_id = parent.split('/')[-1]
-            org_command = ["gcloud", "organizations", "describe", org_id, "--format=json"]
-            org_data = run_gcloud_command(org_command)
-            if org_data:
-                org_display_name = org_data.get('displayName', '')
+            org_display_name = get_org_domain(org_id)
+            if org_display_name:
                 print(f"   - {Colors.BOLD}Parent:{Colors.ENDC} {parent} ({org_display_name})")
             else:
                 print(f"   - {Colors.BOLD}Parent:{Colors.ENDC} {parent} ({Colors.RED}permission denied{Colors.ENDC})")
@@ -111,9 +129,7 @@ def check_identity(org_id):
     except subprocess.CalledProcessError:
         user_email = "N/A"
 
-    org_command = ["gcloud", "organizations", "describe", org_id, "--format=json"]
-    org_data = run_gcloud_command(org_command)
-    org_domain = org_data.get('displayName', 'N/A') if org_data else 'N/A'
+    org_domain = get_org_domain(org_id) or 'N/A'
 
     print(f"   - {Colors.BOLD}User:{Colors.ENDC} {user_email}")
     print(f"   - {Colors.BOLD}Target Org:{Colors.ENDC} {org_domain} ({org_id})")
