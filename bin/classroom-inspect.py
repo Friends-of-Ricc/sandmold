@@ -106,12 +106,14 @@ def main():
     spec = config.get('spec', {})
     folder_spec = spec.get('folder', {})
 
-    billing_id = folder_spec.get('billing_account_id')
-    parent_folder_id = folder_spec.get('parent_folder_id')
-    org_id = folder_spec.get('org_id')
+    # Get config from environment variables
+    billing_id = os.getenv('BILLING_ACCOUNT_ID')
+    parent_folder_id = os.getenv('PARENT_FOLDER_ID')
+    org_id = os.getenv('ORGANIZATION_ID')
 
     if not all([billing_id, parent_folder_id, org_id]):
-        print(f"{Colors.RED}❌ YAML must contain 'spec.folder.billing_account_id', 'spec.folder.parent_folder_id', and 'spec.folder.org_id'.{Colors.ENDC}", file=sys.stderr)
+        print(f"{Colors.RED}❌ The following environment variables must be set: BILLING_ACCOUNT_ID, PARENT_FOLDER_ID, ORGANIZATION_ID.{Colors.ENDC}", file=sys.stderr)
+        print(f"{Colors.YELLOW}   Please ensure your .env file is correct and sourced.{Colors.ENDC}", file=sys.stderr)
         sys.exit(1)
 
     check_billing_account(billing_id)
