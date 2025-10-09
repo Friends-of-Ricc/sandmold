@@ -35,13 +35,17 @@ def generate_random_suffix(length=2):
     """Generates a random alphanumeric suffix."""
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
 
-def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root, gcloud_user, billing_account_id):
+def main(classroom_yaml_path, project_config_yaml_path, output_file, project_root):
     """
     Parses classroom and project configs and generates terraform.tfvars.json.
     """
     organization_id = os.getenv('ORGANIZATION_ID')
     if not organization_id:
         raise ValueError("ORGANIZATION_ID not found in .env file")
+
+    billing_account_id = os.getenv('BILLING_ACCOUNT_ID')
+    if not billing_account_id:
+        raise ValueError("BILLING_ACCOUNT_ID not found in .env file")
 
     # Construct absolute path to classroom YAML
     absolute_classroom_yaml_path = os.path.join(project_root, classroom_yaml_path)
@@ -110,7 +114,6 @@ def main(classroom_yaml_path, project_config_yaml_path, output_file, project_roo
 
     # Default folder display name to metadata name if not provided
     base_folder_display_name = folder_spec.get('displayName', metadata.get('name'))
-    sanitized_gcloud_user = gcloud_user.replace('@', '-').replace('.', '-')
     random_suffix = generate_random_suffix()
     folder_display_name = f"{prefix}{base_folder_display_name}-{random_suffix}"
 
@@ -139,11 +142,6 @@ if __name__ == '__main__':
     parser.add_argument('--project-config-yaml', required=True, help='Path to the project config YAML file.')
     parser.add_argument('--output-file', required=True, help='Path to the output terraform.tfvars.json file.')
     parser.add_argument('--project-root', required=True, help='The absolute path to the project root directory.')
-    parser.add_argument('--gcloud-user', required=True, help='The gcloud user running the script.')
     args = parser.parse_args()
 
-    billing_account_id = os.environ.get('BILLING_ACCOUNT_ID')
-    if not billing_account_id:
-        raise ValueError("BILLING_ACCOUNT_ID not found in environment variables")
-
-    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root, args.gcloud_user, billing_account_id)
+    main(args.classroom_yaml, args.project_config_yaml, args.output_file, args.project_root)

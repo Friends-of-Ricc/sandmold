@@ -74,7 +74,11 @@ Check for BILLING_ACCOUNT_ID in `.env`. DO NOT EDIT .env!!!
 Until July 2025, Billing id and user info used to be all in the YAML.
 Having to test this in different orgs, I moved the Billing and Account info to `.env` and removed it from the YAMLs in `etc/`. However, some scripts still expect that. If you find this behaviour, this is a BUG and needs fixing.
 
-Example: `bin/classroom-inspect.py`.
+Examples:
+* `bin/classroom-inspect.py`.
+* `just test-yaml etc/samples/classroom/with_apps.yaml`, which still checks the OLD schema.
 
 the solution is to change the functionality so that the software doesn't get Billing/AccountEmail from YAML, but its gets it from .env instead.
 Also the **parent folder** has been moved out, to make the YAML more portable and user-independent.
+
+More info: https://github.com/Friends-of-Ricc/sandmold/issues/40

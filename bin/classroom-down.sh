@@ -36,8 +36,7 @@ uv run python ./bin/prepare_tf_vars.py \
     --classroom-yaml "${CLASSROOM_YAML}" \
     --project-config-yaml etc/project_config.yaml \
     --output-file "${TF_VARS_FILE}" \
-    --project-root "$(pwd)" \
-    --gcloud-user "${GCLOUD_USER}"
+    --project-root "$(pwd)"
 
 RELATIVE_TF_VARS_FILE="workspaces/${WORKSPACE_NAME}/terraform.tfvars.json"
 
