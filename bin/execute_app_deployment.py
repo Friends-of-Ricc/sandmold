@@ -23,15 +23,19 @@ def execute_app_deployment(json_file_path):
         print(f"Error: Could not decode JSON from the file '{json_file_path}'.", file=sys.stderr)
         sys.exit(1)
 
-    if not isinstance(app_deployments, dict) or "app_deployments_details" not in app_deployments:
-        print(f"Error: JSON file '{json_file_path}' does not have the expected structure.", file=sys.stderr)
-        sys.exit(1)
-        
-    app_details_map = app_deployments["app_deployments_details"]["value"]
+    # Extract the two main outputs from the Terraform JSON
+    app_details_map = app_deployments.get("app_deployments_details", {}).get("value", {})
+    online_boutique_deployments = app_deployments.get("online_boutique_deployments", {}).get("value", {})
 
     if not app_details_map:
-        print("No applications to deploy.")
+        print("No applications to deploy based on 'app_deployments_details'.")
         return
+
+    # Create a lookup for cluster details from the online_boutique output
+    cluster_details_lookup = {
+        deployment["project_id"]: deployment
+        for key, deployment in online_boutique_deployments.items()
+    }
 
     for i, details in app_details_map.items():
         app_name = details.get('app_name', 'N/A')
@@ -64,6 +68,13 @@ def execute_app_deployment(json_file_path):
             # Combine current environment with the one from Terraform
             process_env = os.environ.copy()
             process_env.update(environment)
+
+            # If this app is online-boutique and we have cluster details, add them to the environment
+            if app_name == "online-boutique" and project_id in cluster_details_lookup:
+                cluster_details = cluster_details_lookup[project_id]
+                process_env["PROJECT_ID"] = cluster_details.get("project_id")
+                process_env["CLUSTER_NAME"] = cluster_details.get("cluster_name")
+                process_env["CLUSTER_LOCATION"] = cluster_details.get("cluster_location")
 
             result = subprocess.run(
                 [start_script],

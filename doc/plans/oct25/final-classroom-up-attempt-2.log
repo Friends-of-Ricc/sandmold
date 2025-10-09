@@ -1,0 +1,823 @@
+--- Starting Classroom Setup for etc/samples/classroom/2teachers_4realstudents.yaml in iac/terraform/sandmold/1a_classroom_setup ---
+Workspace name: ng2teachers-4realstudents-40b2ead2
+DEBUG: All artifacts will be stored in: iac/terraform/sandmold/1a_classroom_setup/workspaces/ng2teachers-4realstudents-40b2ead2
+DEBUG: Terraform logs will be saved to: /usr/local/google/home/ricc/git/sandmold/iac/terraform/sandmold/1a_classroom_setup/workspaces/ng2teachers-4realstudents-40b2ead2/20251008-173845_apply.log
+--> Preparing Terraform variables...
+--> Initializing and applying Terraform in workspace: ng2teachers-4realstudents-40b2ead2
+
+[0m[1mInitializing the backend...[0m
+[0m[1mInitializing modules...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Reusing previous version of hashicorp/random from the dependency lock file
+- Reusing previous version of hashicorp/google from the dependency lock file
+- Using previously-installed hashicorp/random v3.7.2
+- Using previously-installed hashicorp/google v6.43.0
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+[0m[32mSwitched to workspace "ng2teachers-4realstudents-40b2ead2".[0m
+[0m[1mgoogle_folder.classroom: Refreshing state... [id=folders/541902103959][0m
+[0m[1mgoogle_folder_iam_member.teacher_permissions["user:stamer@google.com"]: Refreshing state... [id=folders/541902103959/roles/owner/user:stamer@google.com][0m
+[0m[1mgoogle_folder_iam_member.teacher_permissions["user:leoy@google.com"]: Refreshing state... [id=folders/541902103959/roles/owner/user:leoy@google.com][0m
+[0m[1mgoogle_folder_iam_member.teacher_permissions["user:ricc@google.com"]: Refreshing state... [id=folders/541902103959/roles/owner/user:ricc@google.com][0m
+[0m[1mmodule.project["std-ricc-personal-ng"].random_string.suffix: Refreshing state... [id=3dtc][0m
+[0m[1mmodule.project["tch-teacherz-ng"].random_string.suffix: Refreshing state... [id=ny6l][0m
+[0m[1mmodule.project["std-daniel-ng"].random_string.suffix: Refreshing state... [id=bb5r][0m
+[0m[1mmodule.project["std-project-leo-ng"].random_string.suffix: Refreshing state... [id=bqvx][0m
+[0m[1mmodule.project["std-babenko-ng"].random_string.suffix: Refreshing state... [id=9ajr][0m
+[0m[1mmodule.project["tch-teacherz-ng"].google_project.new[0]: Refreshing state... [id=projects/tch-teacherz-ng-ny6l][0m
+[0m[1mmodule.project["std-ricc-personal-ng"].google_project.new[0]: Refreshing state... [id=projects/std-ricc-personal-ng-3dtc][0m
+[0m[1mmodule.project["std-daniel-ng"].google_project.new[0]: Refreshing state... [id=projects/std-daniel-ng-bb5r][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+  [33m~[0m update in-place[0m
+
+Terraform will perform the following actions:
+
+[1m  # google_folder.classroom[0m will be updated in-place
+[0m  [33m~[0m[0m resource "google_folder" "classroom" {
+      [33m~[0m[0m display_name        = "ng2teachers-4realstudents-gqgz" [33m->[0m[0m "ng2teachers-4realstudents-e1tn"
+        id                  = "folders/541902103959"
+        name                = "folders/541902103959"
+        [90m# (5 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project.new[0][0m will be created
+[0m  [32m+[0m[0m resource "google_project" "new" {
+      [32m+[0m[0m auto_create_network = true
+      [32m+[0m[0m billing_account     = (sensitive value)
+      [32m+[0m[0m deletion_policy     = "DELETE"
+      [32m+[0m[0m effective_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+      [32m+[0m[0m folder_id           = "541902103959"
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m labels              = {
+          [32m+[0m[0m "createdby"   = "sandmold"
+          [32m+[0m[0m "desk-type"   = "student"
+          [32m+[0m[0m "environment" = "development"
+        }
+      [32m+[0m[0m name                = "std-babenko-ng-9ajr"
+      [32m+[0m[0m number              = (known after apply)
+      [32m+[0m[0m project_id          = "std-babenko-ng-9ajr"
+      [32m+[0m[0m terraform_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_iam_member.permissions["roles/aiplatform.user/user:babenko@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:babenko@google.com"
+      [32m+[0m[0m project = "std-babenko-ng-9ajr"
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_iam_member.permissions["roles/editor/user:babenko@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:babenko@google.com"
+      [32m+[0m[0m project = "std-babenko-ng-9ajr"
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:babenko@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:babenko@google.com"
+      [32m+[0m[0m project = "std-babenko-ng-9ajr"
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_iam_member.permissions["roles/run.admin/user:babenko@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:babenko@google.com"
+      [32m+[0m[0m project = "std-babenko-ng-9ajr"
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_iam_member.permissions["roles/storage.admin/user:babenko@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:babenko@google.com"
+      [32m+[0m[0m project = "std-babenko-ng-9ajr"
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-babenko-ng-9ajr"
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-babenko-ng-9ajr"
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-babenko-ng-9ajr"
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-babenko-ng-9ajr"
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-babenko-ng-9ajr"
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["std-babenko-ng"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-babenko-ng-9ajr"
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project.new[0][0m will be updated in-place
+[0m  [33m~[0m[0m resource "google_project" "new" {
+      [33m~[0m[0m billing_account     = (sensitive value)
+        id                  = "projects/std-daniel-ng-bb5r"
+        name                = "std-daniel-ng-bb5r"
+        [90m# (8 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_iam_member.permissions["roles/aiplatform.user/user:stamer@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:stamer@google.com"
+      [32m+[0m[0m project = "std-daniel-ng-bb5r"
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_iam_member.permissions["roles/editor/user:stamer@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:stamer@google.com"
+      [32m+[0m[0m project = "std-daniel-ng-bb5r"
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:stamer@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:stamer@google.com"
+      [32m+[0m[0m project = "std-daniel-ng-bb5r"
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_iam_member.permissions["roles/run.admin/user:stamer@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:stamer@google.com"
+      [32m+[0m[0m project = "std-daniel-ng-bb5r"
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_iam_member.permissions["roles/storage.admin/user:stamer@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:stamer@google.com"
+      [32m+[0m[0m project = "std-daniel-ng-bb5r"
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-daniel-ng-bb5r"
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-daniel-ng-bb5r"
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-daniel-ng-bb5r"
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-daniel-ng-bb5r"
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-daniel-ng-bb5r"
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["std-daniel-ng"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-daniel-ng-bb5r"
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project.new[0][0m will be created
+[0m  [32m+[0m[0m resource "google_project" "new" {
+      [32m+[0m[0m auto_create_network = true
+      [32m+[0m[0m billing_account     = (sensitive value)
+      [32m+[0m[0m deletion_policy     = "DELETE"
+      [32m+[0m[0m effective_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+      [32m+[0m[0m folder_id           = "541902103959"
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m labels              = {
+          [32m+[0m[0m "createdby"   = "sandmold"
+          [32m+[0m[0m "desk-type"   = "student"
+          [32m+[0m[0m "environment" = "development"
+        }
+      [32m+[0m[0m name                = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m number              = (known after apply)
+      [32m+[0m[0m project_id          = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m terraform_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_iam_member.permissions["roles/aiplatform.user/user:leoy@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:leoy@google.com"
+      [32m+[0m[0m project = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_iam_member.permissions["roles/editor/user:leoy@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:leoy@google.com"
+      [32m+[0m[0m project = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:leoy@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:leoy@google.com"
+      [32m+[0m[0m project = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_iam_member.permissions["roles/run.admin/user:leoy@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:leoy@google.com"
+      [32m+[0m[0m project = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_iam_member.permissions["roles/storage.admin/user:leoy@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:leoy@google.com"
+      [32m+[0m[0m project = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["std-project-leo-ng"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-project-leo-ng-bqvx"
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project.new[0][0m will be updated in-place
+[0m  [33m~[0m[0m resource "google_project" "new" {
+      [33m~[0m[0m billing_account     = (sensitive value)
+        id                  = "projects/std-ricc-personal-ng-3dtc"
+        name                = "std-ricc-personal-ng-3dtc"
+        [90m# (8 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_iam_member.permissions["roles/aiplatform.user/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_iam_member.permissions["roles/editor/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_iam_member.permissions["roles/run.admin/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_iam_member.permissions["roles/storage.admin/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["std-ricc-personal-ng"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "std-ricc-personal-ng-3dtc"
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project.new[0][0m will be updated in-place
+[0m  [33m~[0m[0m resource "google_project" "new" {
+      [33m~[0m[0m billing_account     = (sensitive value)
+        id                  = "projects/tch-teacherz-ng-ny6l"
+        name                = "tch-teacherz-ng-ny6l"
+        [90m# (8 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/aiplatform.user/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/aiplatform.user/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/editor/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/editor/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/run.admin/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/run.admin/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/storage.admin/user:palladiusbonton@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:palladiusbonton@gmail.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_iam_member.permissions["roles/storage.admin/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["tch-teacherz-ng"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = "tch-teacherz-ng-ny6l"
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1mPlan:[0m 62 to add, 4 to change, 0 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m projects  = {
+      [32m+[0m[0m std-babenko-ng       = {
+          [32m+[0m[0m apps           = []
+          [32m+[0m[0m project_id     = "std-babenko-ng-9ajr"
+          [32m+[0m[0m project_number = (known after apply)
+        }
+      [32m+[0m[0m std-daniel-ng        = {
+          [32m+[0m[0m apps           = []
+          [32m+[0m[0m project_id     = "std-daniel-ng-bb5r"
+          [32m+[0m[0m project_number = "799071774757"
+        }
+      [32m+[0m[0m std-project-leo-ng   = {
+          [32m+[0m[0m apps           = []
+          [32m+[0m[0m project_id     = "std-project-leo-ng-bqvx"
+          [32m+[0m[0m project_number = (known after apply)
+        }
+      [32m+[0m[0m std-ricc-personal-ng = {
+          [32m+[0m[0m apps           = []
+          [32m+[0m[0m project_id     = "std-ricc-personal-ng-3dtc"
+          [32m+[0m[0m project_number = "502834085021"
+        }
+      [32m+[0m[0m tch-teacherz-ng      = {
+          [32m+[0m[0m apps           = []
+          [32m+[0m[0m project_id     = "tch-teacherz-ng-ny6l"
+          [32m+[0m[0m project_number = "659435847619"
+        }
+    }
+[0m[1mgoogle_folder.classroom: Modifying... [id=folders/541902103959][0m[0m
+[0m[1mgoogle_folder.classroom: Modifications complete after 1s [id=folders/541902103959][0m
+[0m[1mmodule.project["std-babenko-ng"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["std-project-leo-ng"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["tch-teacherz-ng"].google_project.new[0]: Modifying... [id=projects/tch-teacherz-ng-ny6l][0m[0m
+[0m[1mmodule.project["std-ricc-personal-ng"].google_project.new[0]: Modifying... [id=projects/std-ricc-personal-ng-3dtc][0m[0m
+[0m[1mmodule.project["std-daniel-ng"].google_project.new[0]: Modifying... [id=projects/std-daniel-ng-bb5r][0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError setting billing account "01D25F-B9D075-CD7A61" for project "projects/std-daniel-ng-bb5r": googleapi: Error 400: Precondition check failed.
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.PreconditionFailure",
+[31m│[0m [0m    "violations": [
+[31m│[0m [0m      {
+[31m│[0m [0m        "description": "Constraint `constraints/billing.outsideGoogleBillingMdbWhitelist` violated for `projectNumber/std-daniel-ng-bb5r`. Associating internal billing account 'billingAccounts/01D25F-B9D075-CD7A61'  to a non-google project is prohibited.",
+[31m│[0m [0m        "subject": "orgpolicy:projects/std-daniel-ng-bb5r",
+[31m│[0m [0m        "type": "constraints/billing.outsideGoogleBillingMdbWhitelist"
+[31m│[0m [0m      }
+[31m│[0m [0m    ]
+[31m│[0m [0m  },
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::failed_precondition: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: Associating internal billing account 'billingAccounts/01D25F-B9D075-CD7A61' to a non-google resource projects/std-daniel-ng-bb5r is prohibited. Please see go/multi-org-billing for guidance. [google.rpc.error_details_ext] { details { [type.googleapis.com/google.rpc.PreconditionFailure] { violations { type: \"constraints/billing.outsideGoogleBillingMdbWhitelist\" subject: \"orgpolicy:projects/std-daniel-ng-bb5r\" description: \"Constraint `constraints/billing.outsideGoogleBillingMdbWhitelist` violated for `projectNumber/std-daniel-ng-bb5r`. Associating internal billing account \\'billingAccounts/01D25F-B9D075-CD7A61\\'  to a non-google project is prohibited.\" } } } }"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, failedPrecondition[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["std-daniel-ng"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1merror creating project std-project-leo-ng-bqvx (std-project-leo-ng-bqvx): googleapi: Error 409: Requested entity already exists
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::already_exists: com.google.apps.framework.request.StatusException: \u003ceye3 title='ALREADY_EXISTS'/\u003e generic::ALREADY_EXISTS: Project id: std-project-leo-ng-bqvx already exists!"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, alreadyExists. If you received a 403 error, make sure you have the `roles/resourcemanager.projectCreator` permission[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["std-project-leo-ng"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError setting billing account "01D25F-B9D075-CD7A61" for project "projects/tch-teacherz-ng-ny6l": googleapi: Error 400: Precondition check failed.
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.PreconditionFailure",
+[31m│[0m [0m    "violations": [
+[31m│[0m [0m      {
+[31m│[0m [0m        "description": "Constraint `constraints/billing.outsideGoogleBillingMdbWhitelist` violated for `projectNumber/tch-teacherz-ng-ny6l`. Associating internal billing account 'billingAccounts/01D25F-B9D075-CD7A61'  to a non-google project is prohibited.",
+[31m│[0m [0m        "subject": "orgpolicy:projects/tch-teacherz-ng-ny6l",
+[31m│[0m [0m        "type": "constraints/billing.outsideGoogleBillingMdbWhitelist"
+[31m│[0m [0m      }
+[31m│[0m [0m    ]
+[31m│[0m [0m  },
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::failed_precondition: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: Associating internal billing account 'billingAccounts/01D25F-B9D075-CD7A61' to a non-google resource projects/tch-teacherz-ng-ny6l is prohibited. Please see go/multi-org-billing for guidance. [google.rpc.error_details_ext] { details { [type.googleapis.com/google.rpc.PreconditionFailure] { violations { type: \"constraints/billing.outsideGoogleBillingMdbWhitelist\" subject: \"orgpolicy:projects/tch-teacherz-ng-ny6l\" description: \"Constraint `constraints/billing.outsideGoogleBillingMdbWhitelist` violated for `projectNumber/tch-teacherz-ng-ny6l`. Associating internal billing account \\'billingAccounts/01D25F-B9D075-CD7A61\\'  to a non-google project is prohibited.\" } } } }"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, failedPrecondition[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["tch-teacherz-ng"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1merror creating project std-babenko-ng-9ajr (std-babenko-ng-9ajr): googleapi: Error 409: Requested entity already exists
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::already_exists: com.google.apps.framework.request.StatusException: \u003ceye3 title='ALREADY_EXISTS'/\u003e generic::ALREADY_EXISTS: Project id: std-babenko-ng-9ajr already exists!"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, alreadyExists. If you received a 403 error, make sure you have the `roles/resourcemanager.projectCreator` permission[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["std-babenko-ng"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError setting billing account "01D25F-B9D075-CD7A61" for project "projects/std-ricc-personal-ng-3dtc": googleapi: Error 400: Precondition check failed.
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.PreconditionFailure",
+[31m│[0m [0m    "violations": [
+[31m│[0m [0m      {
+[31m│[0m [0m        "description": "Constraint `constraints/billing.outsideGoogleBillingMdbWhitelist` violated for `projectNumber/std-ricc-personal-ng-3dtc`. Associating internal billing account 'billingAccounts/01D25F-B9D075-CD7A61'  to a non-google project is prohibited.",
+[31m│[0m [0m        "subject": "orgpolicy:projects/std-ricc-personal-ng-3dtc",
+[31m│[0m [0m        "type": "constraints/billing.outsideGoogleBillingMdbWhitelist"
+[31m│[0m [0m      }
+[31m│[0m [0m    ]
+[31m│[0m [0m  },
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::failed_precondition: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: Associating internal billing account 'billingAccounts/01D25F-B9D075-CD7A61' to a non-google resource projects/std-ricc-personal-ng-3dtc is prohibited. Please see go/multi-org-billing for guidance. [google.rpc.error_details_ext] { details { [type.googleapis.com/google.rpc.PreconditionFailure] { violations { type: \"constraints/billing.outsideGoogleBillingMdbWhitelist\" subject: \"orgpolicy:projects/std-ricc-personal-ng-3dtc\" description: \"Constraint `constraints/billing.outsideGoogleBillingMdbWhitelist` violated for `projectNumber/std-ricc-personal-ng-3dtc`. Associating internal billing account \\'billingAccounts/01D25F-B9D075-CD7A61\\'  to a non-google project is prohibited.\" } } } }"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, failedPrecondition[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["std-ricc-personal-ng"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m

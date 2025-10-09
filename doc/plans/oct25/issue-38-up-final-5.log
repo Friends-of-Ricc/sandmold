@@ -1,0 +1,810 @@
+--- Starting Classroom Setup for etc/samples/classroom/with_apps.yaml in iac/terraform/sandmold/1a_classroom_setup ---
+Workspace name: class-with-apps-v2-40b2ead2
+DEBUG: All artifacts will be stored in: iac/terraform/sandmold/1a_classroom_setup/workspaces/class-with-apps-v2-40b2ead2
+DEBUG: Terraform logs will be saved to: /usr/local/google/home/ricc/git/sandmold/iac/terraform/sandmold/1a_classroom_setup/workspaces/class-with-apps-v2-40b2ead2/20251009-122935_apply.log
+--> Preparing Terraform variables...
+--> Initializing and applying Terraform in workspace: class-with-apps-v2-40b2ead2
+
+[0m[1mInitializing the backend...[0m
+[0m[1mInitializing modules...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Reusing previous version of hashicorp/google from the dependency lock file
+- Reusing previous version of hashicorp/random from the dependency lock file
+- Using previously-installed hashicorp/google v6.43.0
+- Using previously-installed hashicorp/random v3.7.2
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+[0m[32mSwitched to workspace "class-with-apps-v2-40b2ead2".[0m
+[0m[1mgoogle_folder.classroom: Refreshing state... [id=folders/388362520240][0m
+[0m[1mgoogle_folder_iam_member.teacher_permissions["user:ricc@google.com"]: Refreshing state... [id=folders/388362520240/roles/owner/user:ricc@google.com][0m
+[0m[1mgoogle_folder_iam_member.teacher_permissions["user:leoy@google.com"]: Refreshing state... [id=folders/388362520240/roles/owner/user:leoy@google.com][0m
+[0m[1mmodule.project["d9oct25-tch-cattedra"].random_string.suffix: Refreshing state... [id=59sa][0m
+[0m[1mmodule.project["d9oct25-std-foobar01-good"].random_string.suffix: Refreshing state... [id=tvvm][0m
+[0m[1mmodule.project["d9oct25-std-foobar03-fail"].random_string.suffix: Refreshing state... [id=5mxo][0m
+[0m[1mmodule.project["d9oct25-tch-cattedra"].google_project.new[0]: Refreshing state... [id=projects/d9oct25-tch-cattedra-59sa][0m
+[0m[1mmodule.project["d9oct25-std-foobar01-good"].google_project.new[0]: Refreshing state... [id=projects/d9oct25-std-foobar01-good-tvvm][0m
+[0m[1mmodule.project["d9oct25-std-foobar03-fail"].google_project.new[0]: Refreshing state... [id=projects/d9oct25-std-foobar03-fail-5mxo][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+  [33m~[0m update in-place[0m
+  [31m-[0m destroy[0m
+
+Terraform will perform the following actions:
+
+[1m  # google_folder.classroom[0m will be updated in-place
+[0m  [33m~[0m[0m resource "google_folder" "classroom" {
+      [33m~[0m[0m display_name        = "d9oct25-class-with-apps-v2-53" [33m->[0m[0m "d9oct25-class-with-apps-v2-d6"
+        id                  = "folders/388362520240"
+        name                = "folders/388362520240"
+        [90m# (5 unchanged attributes hidden)[0m[0m
+    }
+
+[1m  # module.project["d9oct25-std-foobar01-good"].google_project.new[0][0m will be [1m[31mdestroyed[0m
+  # (because module.project["d9oct25-std-foobar01-good"] is not in configuration)
+[0m  [31m-[0m[0m resource "google_project" "new" {
+      [31m-[0m[0m auto_create_network = true [90m-> null[0m[0m
+      [31m-[0m[0m deletion_policy     = "DELETE" [90m-> null[0m[0m
+      [31m-[0m[0m effective_labels    = {
+          [31m-[0m[0m "createdby"                  = "sandmold"
+          [31m-[0m[0m "desk-type"                  = "student"
+          [31m-[0m[0m "environment"                = "development"
+          [31m-[0m[0m "goog-terraform-provisioned" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m folder_id           = "388362520240" [90m-> null[0m[0m
+      [31m-[0m[0m id                  = "projects/d9oct25-std-foobar01-good-tvvm" [90m-> null[0m[0m
+      [31m-[0m[0m labels              = {
+          [31m-[0m[0m "createdby"   = "sandmold"
+          [31m-[0m[0m "desk-type"   = "student"
+          [31m-[0m[0m "environment" = "development"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m name                = "d9oct25-std-foobar01-good-tvvm" [90m-> null[0m[0m
+      [31m-[0m[0m number              = "5805393873" [90m-> null[0m[0m
+      [31m-[0m[0m project_id          = "d9oct25-std-foobar01-good-tvvm" [90m-> null[0m[0m
+      [31m-[0m[0m terraform_labels    = {
+          [31m-[0m[0m "createdby"                  = "sandmold"
+          [31m-[0m[0m "desk-type"                  = "student"
+          [31m-[0m[0m "environment"                = "development"
+          [31m-[0m[0m "goog-terraform-provisioned" = "true"
+        } [90m-> null[0m[0m
+    }
+
+[1m  # module.project["d9oct25-std-foobar01-good"].random_string.suffix[0m will be [1m[31mdestroyed[0m
+  # (because module.project["d9oct25-std-foobar01-good"] is not in configuration)
+[0m  [31m-[0m[0m resource "random_string" "suffix" {
+      [31m-[0m[0m id          = "tvvm" [90m-> null[0m[0m
+      [31m-[0m[0m length      = 4 [90m-> null[0m[0m
+      [31m-[0m[0m lower       = true [90m-> null[0m[0m
+      [31m-[0m[0m min_lower   = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_numeric = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_special = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_upper   = 0 [90m-> null[0m[0m
+      [31m-[0m[0m number      = true [90m-> null[0m[0m
+      [31m-[0m[0m numeric     = true [90m-> null[0m[0m
+      [31m-[0m[0m result      = "tvvm" [90m-> null[0m[0m
+      [31m-[0m[0m special     = false [90m-> null[0m[0m
+      [31m-[0m[0m upper       = false [90m-> null[0m[0m
+    }
+
+[1m  # module.project["d9oct25-std-foobar03-fail"].google_project.new[0][0m will be [1m[31mdestroyed[0m
+  # (because module.project["d9oct25-std-foobar03-fail"] is not in configuration)
+[0m  [31m-[0m[0m resource "google_project" "new" {
+      [31m-[0m[0m auto_create_network = true [90m-> null[0m[0m
+      [31m-[0m[0m deletion_policy     = "DELETE" [90m-> null[0m[0m
+      [31m-[0m[0m effective_labels    = {
+          [31m-[0m[0m "createdby"                  = "sandmold"
+          [31m-[0m[0m "desk-type"                  = "student"
+          [31m-[0m[0m "environment"                = "development"
+          [31m-[0m[0m "goog-terraform-provisioned" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m folder_id           = "388362520240" [90m-> null[0m[0m
+      [31m-[0m[0m id                  = "projects/d9oct25-std-foobar03-fail-5mxo" [90m-> null[0m[0m
+      [31m-[0m[0m labels              = {
+          [31m-[0m[0m "createdby"   = "sandmold"
+          [31m-[0m[0m "desk-type"   = "student"
+          [31m-[0m[0m "environment" = "development"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m name                = "d9oct25-std-foobar03-fail-5mxo" [90m-> null[0m[0m
+      [31m-[0m[0m number              = "365421653711" [90m-> null[0m[0m
+      [31m-[0m[0m project_id          = "d9oct25-std-foobar03-fail-5mxo" [90m-> null[0m[0m
+      [31m-[0m[0m terraform_labels    = {
+          [31m-[0m[0m "createdby"                  = "sandmold"
+          [31m-[0m[0m "desk-type"                  = "student"
+          [31m-[0m[0m "environment"                = "development"
+          [31m-[0m[0m "goog-terraform-provisioned" = "true"
+        } [90m-> null[0m[0m
+    }
+
+[1m  # module.project["d9oct25-std-foobar03-fail"].random_string.suffix[0m will be [1m[31mdestroyed[0m
+  # (because module.project["d9oct25-std-foobar03-fail"] is not in configuration)
+[0m  [31m-[0m[0m resource "random_string" "suffix" {
+      [31m-[0m[0m id          = "5mxo" [90m-> null[0m[0m
+      [31m-[0m[0m length      = 4 [90m-> null[0m[0m
+      [31m-[0m[0m lower       = true [90m-> null[0m[0m
+      [31m-[0m[0m min_lower   = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_numeric = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_special = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_upper   = 0 [90m-> null[0m[0m
+      [31m-[0m[0m number      = true [90m-> null[0m[0m
+      [31m-[0m[0m numeric     = true [90m-> null[0m[0m
+      [31m-[0m[0m result      = "5mxo" [90m-> null[0m[0m
+      [31m-[0m[0m special     = false [90m-> null[0m[0m
+      [31m-[0m[0m upper       = false [90m-> null[0m[0m
+    }
+
+[1m  # module.project["d9oct25-tch-cattedra"].google_project.new[0][0m will be [1m[31mdestroyed[0m
+  # (because module.project["d9oct25-tch-cattedra"] is not in configuration)
+[0m  [31m-[0m[0m resource "google_project" "new" {
+      [31m-[0m[0m auto_create_network = true [90m-> null[0m[0m
+      [31m-[0m[0m deletion_policy     = "DELETE" [90m-> null[0m[0m
+      [31m-[0m[0m effective_labels    = {
+          [31m-[0m[0m "createdby"                  = "sandmold"
+          [31m-[0m[0m "desk-type"                  = "teacher"
+          [31m-[0m[0m "environment"                = "development"
+          [31m-[0m[0m "goog-terraform-provisioned" = "true"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m folder_id           = "388362520240" [90m-> null[0m[0m
+      [31m-[0m[0m id                  = "projects/d9oct25-tch-cattedra-59sa" [90m-> null[0m[0m
+      [31m-[0m[0m labels              = {
+          [31m-[0m[0m "createdby"   = "sandmold"
+          [31m-[0m[0m "desk-type"   = "teacher"
+          [31m-[0m[0m "environment" = "development"
+        } [90m-> null[0m[0m
+      [31m-[0m[0m name                = "d9oct25-tch-cattedra-59sa" [90m-> null[0m[0m
+      [31m-[0m[0m number              = "1099458427111" [90m-> null[0m[0m
+      [31m-[0m[0m project_id          = "d9oct25-tch-cattedra-59sa" [90m-> null[0m[0m
+      [31m-[0m[0m terraform_labels    = {
+          [31m-[0m[0m "createdby"                  = "sandmold"
+          [31m-[0m[0m "desk-type"                  = "teacher"
+          [31m-[0m[0m "environment"                = "development"
+          [31m-[0m[0m "goog-terraform-provisioned" = "true"
+        } [90m-> null[0m[0m
+    }
+
+[1m  # module.project["d9oct25-tch-cattedra"].random_string.suffix[0m will be [1m[31mdestroyed[0m
+  # (because module.project["d9oct25-tch-cattedra"] is not in configuration)
+[0m  [31m-[0m[0m resource "random_string" "suffix" {
+      [31m-[0m[0m id          = "59sa" [90m-> null[0m[0m
+      [31m-[0m[0m length      = 4 [90m-> null[0m[0m
+      [31m-[0m[0m lower       = true [90m-> null[0m[0m
+      [31m-[0m[0m min_lower   = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_numeric = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_special = 0 [90m-> null[0m[0m
+      [31m-[0m[0m min_upper   = 0 [90m-> null[0m[0m
+      [31m-[0m[0m number      = true [90m-> null[0m[0m
+      [31m-[0m[0m numeric     = true [90m-> null[0m[0m
+      [31m-[0m[0m result      = "59sa" [90m-> null[0m[0m
+      [31m-[0m[0m special     = false [90m-> null[0m[0m
+      [31m-[0m[0m upper       = false [90m-> null[0m[0m
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project.new[0][0m will be created
+[0m  [32m+[0m[0m resource "google_project" "new" {
+      [32m+[0m[0m auto_create_network = true
+      [32m+[0m[0m billing_account     = (sensitive value)
+      [32m+[0m[0m deletion_policy     = "DELETE"
+      [32m+[0m[0m effective_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+      [32m+[0m[0m folder_id           = "388362520240"
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m labels              = {
+          [32m+[0m[0m "createdby"   = "sandmold"
+          [32m+[0m[0m "desk-type"   = "student"
+          [32m+[0m[0m "environment" = "development"
+        }
+      [32m+[0m[0m name                = (known after apply)
+      [32m+[0m[0m number              = (known after apply)
+      [32m+[0m[0m project_id          = (known after apply)
+      [32m+[0m[0m terraform_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/aiplatform.user/user:student01@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student01@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/aiplatform.user/user:student02@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student02@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/editor/user:student01@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student01@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/editor/user:student02@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student02@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student01@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student01@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:student02@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student02@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/run.admin/user:student01@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student01@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/run.admin/user:student02@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student02@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/storage.admin/user:student01@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student01@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_iam_member.permissions["roles/storage.admin/user:student02@gmail.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:student02@gmail.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar01-good"].random_string.suffix[0m will be created
+[0m  [32m+[0m[0m resource "random_string" "suffix" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m length      = 4
+      [32m+[0m[0m lower       = true
+      [32m+[0m[0m min_lower   = 0
+      [32m+[0m[0m min_numeric = 0
+      [32m+[0m[0m min_special = 0
+      [32m+[0m[0m min_upper   = 0
+      [32m+[0m[0m number      = true
+      [32m+[0m[0m numeric     = true
+      [32m+[0m[0m result      = (known after apply)
+      [32m+[0m[0m special     = false
+      [32m+[0m[0m upper       = false
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project.new[0][0m will be created
+[0m  [32m+[0m[0m resource "google_project" "new" {
+      [32m+[0m[0m auto_create_network = true
+      [32m+[0m[0m billing_account     = (sensitive value)
+      [32m+[0m[0m deletion_policy     = "DELETE"
+      [32m+[0m[0m effective_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+      [32m+[0m[0m folder_id           = "388362520240"
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m labels              = {
+          [32m+[0m[0m "createdby"   = "sandmold"
+          [32m+[0m[0m "desk-type"   = "student"
+          [32m+[0m[0m "environment" = "development"
+        }
+      [32m+[0m[0m name                = (known after apply)
+      [32m+[0m[0m number              = (known after apply)
+      [32m+[0m[0m project_id          = (known after apply)
+      [32m+[0m[0m terraform_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "student"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_iam_member.permissions["roles/aiplatform.user/user:admin@sredemo.dev"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:admin@sredemo.dev"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_iam_member.permissions["roles/editor/user:admin@sredemo.dev"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:admin@sredemo.dev"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:admin@sredemo.dev"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:admin@sredemo.dev"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_iam_member.permissions["roles/run.admin/user:admin@sredemo.dev"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:admin@sredemo.dev"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_iam_member.permissions["roles/storage.admin/user:admin@sredemo.dev"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:admin@sredemo.dev"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["std-d9oct25-foobar03-fail"].random_string.suffix[0m will be created
+[0m  [32m+[0m[0m resource "random_string" "suffix" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m length      = 4
+      [32m+[0m[0m lower       = true
+      [32m+[0m[0m min_lower   = 0
+      [32m+[0m[0m min_numeric = 0
+      [32m+[0m[0m min_special = 0
+      [32m+[0m[0m min_upper   = 0
+      [32m+[0m[0m number      = true
+      [32m+[0m[0m numeric     = true
+      [32m+[0m[0m result      = (known after apply)
+      [32m+[0m[0m special     = false
+      [32m+[0m[0m upper       = false
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project.new[0][0m will be created
+[0m  [32m+[0m[0m resource "google_project" "new" {
+      [32m+[0m[0m auto_create_network = true
+      [32m+[0m[0m billing_account     = (sensitive value)
+      [32m+[0m[0m deletion_policy     = "DELETE"
+      [32m+[0m[0m effective_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "teacher"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+      [32m+[0m[0m folder_id           = "388362520240"
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m labels              = {
+          [32m+[0m[0m "createdby"   = "sandmold"
+          [32m+[0m[0m "desk-type"   = "teacher"
+          [32m+[0m[0m "environment" = "development"
+        }
+      [32m+[0m[0m name                = (known after apply)
+      [32m+[0m[0m number              = (known after apply)
+      [32m+[0m[0m project_id          = (known after apply)
+      [32m+[0m[0m terraform_labels    = {
+          [32m+[0m[0m "createdby"                  = "sandmold"
+          [32m+[0m[0m "desk-type"                  = "teacher"
+          [32m+[0m[0m "environment"                = "development"
+          [32m+[0m[0m "goog-terraform-provisioned" = "true"
+        }
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_iam_member.permissions["roles/aiplatform.user/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/aiplatform.user"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_iam_member.permissions["roles/editor/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/editor"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_iam_member.permissions["roles/iam.serviceAccountUser/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/iam.serviceAccountUser"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_iam_member.permissions["roles/run.admin/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/run.admin"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_iam_member.permissions["roles/storage.admin/user:ricc@google.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_iam_member" "permissions" {
+      [32m+[0m[0m etag    = (known after apply)
+      [32m+[0m[0m id      = (known after apply)
+      [32m+[0m[0m member  = "user:ricc@google.com"
+      [32m+[0m[0m project = (known after apply)
+      [32m+[0m[0m role    = "roles/storage.admin"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_service.apis["apphub.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "apphub.googleapis.com"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_service.apis["cloudresourcemanager.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "cloudresourcemanager.googleapis.com"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_service.apis["iam.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "iam.googleapis.com"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_service.apis["logging.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "logging.googleapis.com"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_service.apis["monitoring.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "monitoring.googleapis.com"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].google_project_service.apis["serviceusage.googleapis.com"][0m will be created
+[0m  [32m+[0m[0m resource "google_project_service" "apis" {
+      [32m+[0m[0m disable_dependent_services = true
+      [32m+[0m[0m disable_on_destroy         = true
+      [32m+[0m[0m id                         = (known after apply)
+      [32m+[0m[0m project                    = (known after apply)
+      [32m+[0m[0m service                    = "serviceusage.googleapis.com"
+    }
+
+[1m  # module.project["tch-d9oct25-cattedra"].random_string.suffix[0m will be created
+[0m  [32m+[0m[0m resource "random_string" "suffix" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m length      = 4
+      [32m+[0m[0m lower       = true
+      [32m+[0m[0m min_lower   = 0
+      [32m+[0m[0m min_numeric = 0
+      [32m+[0m[0m min_special = 0
+      [32m+[0m[0m min_upper   = 0
+      [32m+[0m[0m number      = true
+      [32m+[0m[0m numeric     = true
+      [32m+[0m[0m result      = (known after apply)
+      [32m+[0m[0m special     = false
+      [32m+[0m[0m upper       = false
+    }
+
+[1mPlan:[0m 44 to add, 1 to change, 6 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m projects  = {
+      [32m+[0m[0m std-d9oct25-foobar01-good = {
+          [32m+[0m[0m apps           = [
+              [32m+[0m[0m {
+                  [32m+[0m[0m env  = {
+                      [32m+[0m[0m AUTO_FAIL = "false"
+                    }
+                  [32m+[0m[0m name = "foobar"
+                },
+              [32m+[0m[0m {
+                  [32m+[0m[0m env  = {
+                      [32m+[0m[0m AUTO_FAIL = "false"
+                    }
+                  [32m+[0m[0m name = "online-boutique"
+                },
+            ]
+          [32m+[0m[0m project_id     = (known after apply)
+          [32m+[0m[0m project_number = (known after apply)
+        }
+      [32m+[0m[0m std-d9oct25-foobar03-fail = {
+          [32m+[0m[0m apps           = []
+          [32m+[0m[0m project_id     = (known after apply)
+          [32m+[0m[0m project_number = (known after apply)
+        }
+      [32m+[0m[0m tch-d9oct25-cattedra      = {
+          [32m+[0m[0m apps           = [
+              [32m+[0m[0m {
+                  [32m+[0m[0m env  = {}
+                  [32m+[0m[0m name = "bank-of-anthos"
+                },
+              [32m+[0m[0m {
+                  [32m+[0m[0m env  = {}
+                  [32m+[0m[0m name = "sandmold-web"
+                },
+            ]
+          [32m+[0m[0m project_id     = (known after apply)
+          [32m+[0m[0m project_number = (known after apply)
+        }
+    }
+[0m[1mmodule.project["d9oct25-tch-cattedra"].google_project.new[0]: Destroying... [id=projects/d9oct25-tch-cattedra-59sa][0m[0m
+[0m[1mmodule.project["d9oct25-std-foobar01-good"].google_project.new[0]: Destroying... [id=projects/d9oct25-std-foobar01-good-tvvm][0m[0m
+[0m[1mmodule.project["d9oct25-std-foobar03-fail"].google_project.new[0]: Destroying... [id=projects/d9oct25-std-foobar03-fail-5mxo][0m[0m
+[0m[1mmodule.project["d9oct25-std-foobar03-fail"].google_project.new[0]: Destruction complete after 2s[0m
+[0m[1mmodule.project["d9oct25-std-foobar03-fail"].random_string.suffix: Destroying... [id=5mxo][0m[0m
+[0m[1mmodule.project["d9oct25-std-foobar03-fail"].random_string.suffix: Destruction complete after 0s[0m
+[0m[1mmodule.project["d9oct25-tch-cattedra"].google_project.new[0]: Destruction complete after 2s[0m
+[0m[1mmodule.project["d9oct25-tch-cattedra"].random_string.suffix: Destroying... [id=59sa][0m[0m
+[0m[1mmodule.project["d9oct25-tch-cattedra"].random_string.suffix: Destruction complete after 0s[0m
+[0m[1mmodule.project["d9oct25-std-foobar01-good"].google_project.new[0]: Destruction complete after 2s[0m
+[0m[1mmodule.project["d9oct25-std-foobar01-good"].random_string.suffix: Destroying... [id=tvvm][0m[0m
+[0m[1mmodule.project["d9oct25-std-foobar01-good"].random_string.suffix: Destruction complete after 0s[0m
+[0m[1mgoogle_folder.classroom: Modifying... [id=folders/388362520240][0m[0m
+[0m[1mgoogle_folder.classroom: Modifications complete after 2s [id=folders/388362520240][0m
+[0m[1mmodule.project["std-d9oct25-foobar03-fail"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["std-d9oct25-foobar01-good"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["tch-d9oct25-cattedra"].random_string.suffix: Creating...[0m[0m
+[0m[1mmodule.project["std-d9oct25-foobar03-fail"].random_string.suffix: Creation complete after 0s [id=ovoi][0m
+[0m[1mmodule.project["std-d9oct25-foobar01-good"].random_string.suffix: Creation complete after 0s [id=3srf][0m
+[0m[1mmodule.project["tch-d9oct25-cattedra"].random_string.suffix: Creation complete after 0s [id=sd9r][0m
+[0m[1mmodule.project["std-d9oct25-foobar01-good"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["std-d9oct25-foobar03-fail"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["tch-d9oct25-cattedra"].google_project.new[0]: Creating...[0m[0m
+[0m[1mmodule.project["tch-d9oct25-cattedra"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["std-d9oct25-foobar01-good"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[0m[1mmodule.project["std-d9oct25-foobar03-fail"].google_project.new[0]: Still creating... [10s elapsed][0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError setting billing account "01C588-4823BC-27F650" for project "projects/tch-d9oct25-cattedra-sd9r": googleapi: Error 400: Precondition check failed.
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+[31m│[0m [0m    "violations": [
+[31m│[0m [0m      {
+[31m│[0m [0m        "description": "Cloud billing quota exceeded: https://support.google.com/code/contact/billing_quota_increase",
+[31m│[0m [0m        "subject": "billingAccounts/01C588-4823BC-27F650"
+[31m│[0m [0m      }
+[31m│[0m [0m    ]
+[31m│[0m [0m  },
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::failed_precondition: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: Cloud billing quota exceeded [google.rpc.error_details_ext] { details { [type.googleapis.com/google.rpc.QuotaFailure] { violations { subject: \"billingAccounts/01C588-4823BC-27F650\" description: \"Cloud billing quota exceeded: https://support.google.com/code/contact/billing_quota_increase\" } } } }"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, failedPrecondition[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["tch-d9oct25-cattedra"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError setting billing account "01C588-4823BC-27F650" for project "projects/std-d9oct25-foobar03-fail-ovoi": googleapi: Error 400: Precondition check failed.
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+[31m│[0m [0m    "violations": [
+[31m│[0m [0m      {
+[31m│[0m [0m        "description": "Cloud billing quota exceeded: https://support.google.com/code/contact/billing_quota_increase",
+[31m│[0m [0m        "subject": "billingAccounts/01C588-4823BC-27F650"
+[31m│[0m [0m      }
+[31m│[0m [0m    ]
+[31m│[0m [0m  },
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::failed_precondition: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: Cloud billing quota exceeded [google.rpc.error_details_ext] { details { [type.googleapis.com/google.rpc.QuotaFailure] { violations { subject: \"billingAccounts/01C588-4823BC-27F650\" description: \"Cloud billing quota exceeded: https://support.google.com/code/contact/billing_quota_increase\" } } } }"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, failedPrecondition[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["std-d9oct25-foobar03-fail"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError setting billing account "01C588-4823BC-27F650" for project "projects/std-d9oct25-foobar01-good-3srf": googleapi: Error 400: Precondition check failed.
+[31m│[0m [0mDetails:
+[31m│[0m [0m[
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+[31m│[0m [0m    "violations": [
+[31m│[0m [0m      {
+[31m│[0m [0m        "description": "Cloud billing quota exceeded: https://support.google.com/code/contact/billing_quota_increase",
+[31m│[0m [0m        "subject": "billingAccounts/01C588-4823BC-27F650"
+[31m│[0m [0m      }
+[31m│[0m [0m    ]
+[31m│[0m [0m  },
+[31m│[0m [0m  {
+[31m│[0m [0m    "@type": "type.googleapis.com/google.rpc.DebugInfo",
+[31m│[0m [0m    "detail": "[ORIGINAL ERROR] generic::failed_precondition: com.google.apps.framework.request.StatusException: \u003ceye3 title='FAILED_PRECONDITION'/\u003e generic::FAILED_PRECONDITION: Cloud billing quota exceeded [google.rpc.error_details_ext] { details { [type.googleapis.com/google.rpc.QuotaFailure] { violations { subject: \"billingAccounts/01C588-4823BC-27F650\" description: \"Cloud billing quota exceeded: https://support.google.com/code/contact/billing_quota_increase\" } } } }"
+[31m│[0m [0m  }
+[31m│[0m [0m]
+[31m│[0m [0m, failedPrecondition[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.project["std-d9oct25-foobar01-good"].google_project.new[0],
+[31m│[0m [0m  on ../../modules/project/main.tf line 48, in resource "google_project" "new":
+[31m│[0m [0m  48: resource "google_project" "new" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
