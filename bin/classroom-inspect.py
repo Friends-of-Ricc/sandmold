@@ -34,8 +34,8 @@ def run_gcloud_command(command):
         )
         return json.loads(result.stdout)
     except subprocess.CalledProcessError as e:
-        print(f"{Colors.RED}❌ Error running gcloud command: {' '.join(command)}{Colors.ENDC}", file=sys.stderr)
-        print(e.stderr, file=sys.stderr)
+        # Don't print stderr, as it can be noisy for expected permission errors.
+        # The calling function should handle the None return value.
         return None
     except json.JSONDecodeError:
         print(f"{Colors.RED}❌ Error decoding JSON from gcloud command.{Colors.ENDC}", file=sys.stderr)
