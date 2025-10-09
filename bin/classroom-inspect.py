@@ -99,6 +99,32 @@ def display_folder_tree(folder_id, prefix=""):
             print(f"{prefix}{connector}{Colors.CYAN}🧩 {project.get('name')} ({project.get('projectId')}){Colors.ENDC}")
 
 
+def check_identity(org_id):
+    """Checks the gcloud identity and its relation to the target org."""
+    print(f"{Colors.YELLOW}👤 Checking gcloud Identity...{Colors.ENDC}")
+    try:
+        user_email = subprocess.check_output(
+            ["gcloud", "config", "get-value", "account"],
+            text=True,
+            encoding='utf-8'
+        ).strip()
+    except subprocess.CalledProcessError:
+        user_email = "N/A"
+
+    org_command = ["gcloud", "organizations", "describe", org_id, "--format=json"]
+    org_data = run_gcloud_command(org_command)
+    org_domain = org_data.get('displayName', 'N/A') if org_data else 'N/A'
+
+    print(f"   - {Colors.BOLD}User:{Colors.ENDC} {user_email}")
+    print(f"   - {Colors.BOLD}Target Org:{Colors.ENDC} {org_domain} ({org_id})")
+
+    user_domain = user_email.split('@')[-1]
+    if user_domain != org_domain:
+        print(f"   - {Colors.YELLOW}Warning:{Colors.ENDC} User's domain ('{user_domain}') does not match target organization's domain ('{org_domain}').")
+    else:
+        print(f"   - {Colors.GREEN}Domain match confirmed.{Colors.ENDC}")
+
+
 def main():
     """Main function to run the preflight checks."""
     parser = argparse.ArgumentParser(description='Run preflight checks for a classroom YAML file.')
@@ -125,6 +151,7 @@ def main():
         print(f"{Colors.YELLOW}   Please ensure your .env file is correct and sourced.{Colors.ENDC}", file=sys.stderr)
         sys.exit(1)
 
+    check_identity(org_id)
     check_billing_account(billing_id)
 
     resource_manager_url = f"https://console.cloud.google.com/cloud-resource-manager?organization={org_id}"
