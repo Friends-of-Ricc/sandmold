@@ -71,7 +71,8 @@ is_open=$(gcloud billing accounts describe "$BILLING_ACCOUNT_ID" --format="value
 if [ "$is_open" != "True" ]; then
   log_fatal "Billing account '$BILLING_ACCOUNT_ID' is not open or you don't have permissions. Please check BILLING_ACCOUNT_ID in your .env file."
 fi
-log_info "Billing account '$BILLING_ACCOUNT_ID' is open."
+display_name=$(gcloud billing accounts describe "$BILLING_ACCOUNT_ID" --format="value(displayName)" --quiet 2>/dev/null)
+log_info "Billing account '$BILLING_ACCOUNT_ID' ($display_name) is open."
 echo
 
 # Check organization
