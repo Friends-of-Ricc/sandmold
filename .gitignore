@@ -38,3 +38,4 @@ drebes*
 .ruby-version
 .env.*@*
 .env.yaml
+*.log
