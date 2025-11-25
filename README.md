@@ -23,9 +23,9 @@ Sample app:
 ```bash
 $ just classroom-inspect-sampleclass
 [...]
-🌳 Exploring parent folder (1000371719973) in Org: 791852209422 (sredemo.dev)
-├── 📁 test-sandmold-1 (194703823593)
-│   └── 📁 ng1-class-with-apps-rgf8 (114577106522)
+🌳 Exploring parent folder (123456789012) in Org: 987654321098 (example.com)
+├── 📁 test-sandmold-1 (098765432109)
+│   └── 📁 ng1-class-with-apps-rgf8 (543210987654)
 │       ├── 🧩 ng1-std-failing-foobar-ro5m (ng1-std-failing-foobar-ro5m)
 │       ├── 🧩 ng1-std-foobar01-vsb5 (ng1-std-foobar01-vsb5)
 │       ├── 🧩 ng1-std-p3-v7km (ng1-std-p3-v7km)
@@ -34,9 +34,12 @@ $ just classroom-inspect-sampleclass
 
 ## Supported apps
 
-We intend to support the most popular solutions like:
-* **Bank of Anthos** (aka BoA): https://github.com/GoogleCloudPlatform/bank-of-anthos
-* **Online Boutique** (aka Online Boutique): https://github.com/GoogleCloudPlatform/microservices-demo
+Currently, Sandmold supports the following applications out-of-the-box:
+
+*   **Online Boutique**: A fully-functional microservices demo application.
+*   **Foobar**: A simple test application for simulating deployments.
+
+For more details on the available applications and how to add your own, see the [Applications README](applications/README.md).
 
 The idea is that a class teacher can easily build scenario on top of existing blueprints.
 

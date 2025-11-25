@@ -58,3 +58,9 @@ variable "tenant_project_number" {
   description = "The project number of the tenant project"
   type        = number
 }
+
+variable "tags" {
+  description = "A list of network tags to apply to the instance."
+  type        = list(string)
+  default     = ["allow-ssh", "sandmold"]
+}

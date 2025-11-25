@@ -14,14 +14,13 @@ This directory contains scripts and configurations to set up and deploy a sample
 
 ### 1. Configure Environment Variables
 
-Copy `.env.dist` to `.envrc` and populate it with your project-specific details. Then, allow `direnv` to load it.
+Copy `.env.dist` to `.env` and populate it with your project-specific details.
 
 ```bash
-cp .env.dist .envrc
-direnv allow
+cp .env.dist .env
 ```
 
-**Important:** The `.envrc` file should contain all the environment variables required by the scripts, including `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_REGION`, `GOOGLE_IDENTITY`, `ARTIFACT_REGISTRY_NAME`, `PROJECT_NUMBER`, `CLOUD_BUILD_SA`, `SAAS_OFFERING_NAME`, `UNIT_KIND_NAME_GLOBAL`, `UNIT_KIND_NAME_REGIONAL`, and `RELEASE_NAME`.
+**Important:** The `.env` file should contain all the environment variables required by the scripts.
 
 ### 2. Initial Environment Setup
 
@@ -42,7 +41,7 @@ Follow these steps in order:
 
 2.  **Create Unit Kinds:**
     ```bash
-    bin/02-create-two-unit-kinds.sh
+    bin/02-create-unit-kind.sh
     ```
 
 3.  **Build and Push Blueprint:**
@@ -55,33 +54,22 @@ Follow these steps in order:
     bin/04-create-release.sh
     ```
 
-5.  **Create Units:**
-    *   Global Unit:
-        ```bash
-        just create-global-unit my-first-global-vm
-        ```
-    *   Regional Unit:
-        ```bash
-        just create-regional-unit my-first-regional-vm
-        ```
+5.  **Create a Unit:**
+    ```bash
+    bin/05-create-unit.sh <unit-name>
+    ```
+    For example:
+    ```bash
+    bin/05-create-unit.sh my-first-vm
+    ```
 
-6. Provision unit
-
+6.  **Provision the Unit:**
     ```bash
     bin/06-provision-unit.sh <unit-name>
     ```
-
     For example:
-
     ```bash
-    bin/06-provision-unit.sh my-first-global-vm
-    ```
-
-7.  **Trigger Rollout (Provisioning):**
-
-7.  **Trigger Rollout (Provisioning):**
-    ```bash
-    bin/06-create-rollout.sh
+    bin/06-provision-unit.sh my-first-vm
     ```
 
 ## Ops
@@ -96,9 +84,9 @@ When you create a new release (e.g., `v1-0-1`), you need to update the correspon
 
     ```bash
     source .env && \
-    gcloud beta saas-runtime unit-kinds update ${UNIT_KIND_NAME_BASE}-global \
+    gcloud beta saas-runtime unit-kinds update ${UNIT_KIND_NAME} \
         --default-release=${RELEASE_NAME} \
-        --location=global \
+        --location=${GOOGLE_CLOUD_REGION} \
         --project=${GOOGLE_CLOUD_PROJECT}
     ```
 
@@ -130,8 +118,12 @@ To get error logs from the last 12 hours:
 bin/get-error-logs.sh 12
 ```
 
-## Cleanup (Optional)
+## Cleanup
 
-Refer to Google Cloud documentation for detailed cleanup procedures. For test projects, deleting the entire project is often the simplest approach.
+To destroy all the SaaS Runtime resources created by these scripts, you can run the following command. **Warning:** This is a destructive operation.
+
+```bash
+bin/dangerous-destroy-all-saas-entities.sh
+```
 
 ```

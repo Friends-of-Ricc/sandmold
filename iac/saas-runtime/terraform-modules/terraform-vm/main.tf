@@ -32,5 +32,5 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
-  tags = ["allow-ssh", "sandmold"]
+  tags = var.tags
 }
