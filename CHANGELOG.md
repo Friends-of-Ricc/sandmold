@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0
+
+- **Refactor: Deduplicate `iac/` modules and update `README.md` files.**
+  - Merged the `terraform-vm-v2` module into the `terraform-vm` module to eliminate duplicate code.
+  - The `terraform-vm` module is now configurable via a new `tags` variable.
+  - Updated the root `README.md` to accurately reflect the currently supported applications and to scrub sensitive information from sample outputs.
+  - Corrected and clarified the instructions in `iac/saas-runtime/README.md`, removing references to non-existent scripts and unifying the environment setup process.
+  - Standardized on `.env` for environment variables, removing references to `.envrc`.
+
 ## 0.6.0
 
 - **Refactor: Application Cleanup and Deduplication.**
