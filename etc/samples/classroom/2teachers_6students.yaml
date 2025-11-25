@@ -1,3 +1,17 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # This is the SAMPLE YAML from justfile
 apiVersion: sandmold.io/v1alpha1
 kind: Classroom
@@ -10,15 +24,15 @@ metadata:
 spec:
   folder:
     #OBSOLETE displayName: ng2teachers-3x2students
-    #domain: sredemo.dev
+    #domain: example.com
     description: |
       Class with 2 teachers and 6 students,
       2 students per bench (in team).
       This is also the SAMPLE classroom YAML
       used by the justfile targets.
     teachers:
-    - leoy@google.com
-    - ricc@google.com
+    - riccardo@example.com
+    - leonie@example.com
     env:
       - name: GOOGLE_CLOUD_REGION
         value: europe-west1
@@ -30,8 +44,8 @@ spec:
       - bank-of-anthos
       - sandmold-web
       seats:
-      - leoy@google.com
-      - ricc@google.com
+      - riccardo@example.com
+      - leonie@example.com
     - project: foobar01  # will be padded by some random hex/numb, -> "boa01-123abc"
       seats:
       - student01@gmail.com
@@ -42,11 +56,11 @@ spec:
       - student04@gmail.com
     - project: foobar03
       seats:
-      - student06@gmail.com
-      - palladiusbonton@gmail.com
+      - student05@gmail.com
+      - generic.user@example.com
     - project: failing-foobar
       seats:
-      - admin@sredemo.dev
+      - admin@example.com
       env:
       - name: AUTO_FAIL
         value: omega13

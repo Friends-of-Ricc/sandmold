@@ -368,7 +368,7 @@
       },
       {
         "type": "STRING",
-        "value": "ricc@google.com",
+        "value": "user1@example.com",
         "variable": "teacher_email"
       }
     ],
@@ -458,7 +458,7 @@
       },
       {
         "type": "STRING",
-        "value": "ricc@google.com",
+        "value": "user1@example.com",
         "variable": "teacher_email"
       }
     ],

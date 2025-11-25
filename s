@@ -201,8 +201,8 @@
    "billing_account_id": "01C588-4823BC-27F650",[m
 [1;32m+[m[1;32m  "organization_id": "337847326365",[m
    "teachers": [[m
-     "user:ricc@google.com",[m
-     "user:leoy@google.com",[m
+     "user:riccardo@example.com",[m
+     "user:leonie@example.com",[m
 [1;33mdiff --git a/justfile b/justfile[m
 [1;33mindex 9a33d44..5c92dc3 100644[m
 [1;33m--- a/justfile[m

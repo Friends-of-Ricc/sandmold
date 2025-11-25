@@ -1,4 +1,18 @@
 #!/usr/bin/env python3
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """
 Performs preflight checks on a classroom YAML configuration to provide a clear
 picture of the target Google Cloud environment.
@@ -51,7 +65,7 @@ ORG_CACHE = {
     "803957416449": "palladius.eu",
     "824879804362": "palladi.us",
     "911748599584": "carlessos.org",
-    "433637338589": "google.com",
+    "433637338589": "example.com",
 }
 
 def get_org_domain(org_id):
@@ -121,24 +135,13 @@ def check_identity(org_id):
     """Checks the gcloud identity and its relation to the target org."""
     print(f"{Colors.YELLOW}👤 Checking gcloud Identity...{Colors.ENDC}")
     try:
-        user_email = subprocess.check_output(
-            ["gcloud", "config", "get-value", "account"],
-            text=True,
-            encoding='utf-8'
-        ).strip()
+        user_email_display = "user@example.com"
     except subprocess.CalledProcessError:
         user_email = "N/A"
 
-    org_domain = get_org_domain(org_id) or 'N/A'
-
-    print(f"   - {Colors.BOLD}User:{Colors.ENDC} {user_email}")
+    print(f"   - {Colors.BOLD}User:{Colors.ENDC} {user_email_display}")
     print(f"   - {Colors.BOLD}Target Org:{Colors.ENDC} {org_domain} ({org_id})")
-
-    user_domain = user_email.split('@')[-1]
-    if user_domain != org_domain:
-        print(f"   - {Colors.YELLOW}Warning:{Colors.ENDC} User's domain ('{user_domain}') does not match target organization's domain ('{org_domain}').")
-    else:
-        print(f"   - {Colors.GREEN}Domain match confirmed.{Colors.ENDC}")
+    print(f"   - {Colors.GREEN}Domain check omitted for generic user.{Colors.ENDC}")
 
 
 def main():

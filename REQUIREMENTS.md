@@ -79,7 +79,7 @@ apps:
   - app: bank_of_anthos
     project: boa01  # will be padded by some random hex/numb
     users:
-    - student01@gmail.com
+  - leonie@example.com
     - student02@gmail.com
   - app: bank_of_anthos
     project: boa02

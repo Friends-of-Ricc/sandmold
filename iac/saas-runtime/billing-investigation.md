@@ -7,11 +7,11 @@ This indicates that the project is not currently linked to an active billing acc
 **Available Billing Accounts:**
 
 *   **SREDemo Onramp Trial Billing Account** (`billingAccounts/010405-23D342-257054`) - **NOT OPEN**
-*   **SREDemo Billing Account** (`billingAccounts/016828-2CF7FA-17B3DD`) - **OPEN**
+*   **SREDemo Billing Account** (`billingAccounts/XXXXXXXX-XXXXXX-XXXXXX`) - **OPEN**
 *   **TryGcp HighRep from Val to test b432463553** (`billingAccounts/018C68-C51FDE-8581DE`) - **OPEN**
 
 **Next Steps:**
-To resolve this, please ensure that a valid billing account is linked to the `check-docs-in-go-slash-sredemo` project and that billing is enabled. The previous attempt to link to `billingAccounts/016828-2CF7FA-17B3DD` failed because it is an internal Google billing account and cannot be linked to a non-Google project.
+To resolve this, please ensure that a valid billing account is linked to the `check-docs-in-go-slash-sredemo` project and that billing is enabled. The previous attempt to link to a billing account failed because it is an internal Google billing account and cannot be linked to a non-Google project.
 
 I now recommend linking it to `billingAccounts/018C68-C51FDE-8581DE`.
 

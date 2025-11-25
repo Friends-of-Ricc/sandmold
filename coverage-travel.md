@@ -48,7 +48,7 @@ The Chubb benefit doesn’t apply to an Insured Person traveling to Iraq, Afghan
 
 Cigna cannot provide coverage for the following countries: Iran, Syria, Sudan, Ukraine, Cuba*, and North Korea.
 
-Travel to any countries that are subject to US trade embargoes may also be excluded from certain benefits. If you’re traveling to such a country for personal reasons, we recommend you purchase personal travel cover. If you’re traveling for business, contact isos@google.com.
+Travel to any countries that are subject to US trade embargoes may also be excluded from certain benefits. If you’re traveling to such a country for personal reasons, we recommend you purchase personal travel cover. If you’re traveling for business, contact your business travel support team.
 
 *If you’re a non-US citizen, ISOS and Chubb offer coverage in Cuba. Cigna is still not able to pay claims incurred in Cuba in connection with a holiday or vacation for US Googlers. However, with the recent changes to the Cuban sanctions, Cigna will now be able to reimburse non-US Googlers for medical services incurred in Cuba, as long as the payment is made outside of Cuba. Note that Cigna still cannot create coverage verification letters for travel to Cuba.
 

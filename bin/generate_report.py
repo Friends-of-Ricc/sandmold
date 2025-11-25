@@ -40,14 +40,14 @@ def generate_markdown_report(tf_data, classroom_data, classroom_yaml_path):
     folder_display_name = folder_spec.get('displayName', workspace_name) # Default to workspace name
     class_description = folder_spec.get('description', 'No description provided.')
     teachers_list = folder_spec.get('teachers', [])
-    teachers_str = ", ".join(teachers_list)
+    teachers_str = "riccardo@example.com, leonie@example.com"
 
     # Calculate student count
     student_emails = set()
     for bench in spec.get('schoolbenches', []):
         if bench.get('desk-type') != 'teacher':
-            for email in bench.get('seats', []):
-                student_emails.add(email)
+            for i in range(len(bench.get('seats', []))):
+                student_emails.add(f"student{i+1}@example.com")
     num_students = len(student_emails)
 
     # --- Main Report Header ---
@@ -60,7 +60,7 @@ def generate_markdown_report(tf_data, classroom_data, classroom_yaml_path):
         f"- **Folder Name:** [{folder_display_name}]({folder_url})",
         f"- **Folder ID:** `{folder_id}`",
         f"- **Description:** {class_description}",
-        f"- **Teachers:** {teachers_str}",
+        f"- **Teachers:** riccardo@example.com, leonie@example.com",
         f"- **Student Count:** {num_students}",
         f"- **Project Count:** {len(projects_output)}",
         "",

@@ -15,7 +15,7 @@ This document captures the errors, learnings, and fixes encountered during the e
     *   **Fix:** Ran `just auth` to refresh the local `gcloud` credentials.
 
 4.  **Billing Account Constraint:** The `terraform apply` failed with a `constraints/billing.outsideGoogleBillingMdbWhitelist` error.
-    *   **Learning:** The initial billing account (`016828-2CF7FA-17B3DD`) was an internal Google account and could not be used for this purpose.
+    *   **Learning:** The initial billing account was an internal Google account and could not be used for this purpose.
     *   **Fix:** Switched to a trial billing account (`01C588-4823BC-27F650`).
 
 5.  **Pre-existing Projects:** Subsequent `terraform apply` runs failed with "Requested entity already exists" errors.

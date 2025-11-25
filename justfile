@@ -137,6 +137,10 @@ tfplan CLASSROOM_YAML:
 #terraform workspace select -or-create ng2teachers-4realstudents && terraform plan -var-file
 
 
+check-google-license:
+    @echo "Verifying Google license compliance..."
+    gemini -y -p '/commsl:check_google_license Verify all is in place, and if needed apply the addlicense script to the whole git repo.'
+
 test-report-for-apps:
     @echo this is testing just the last part of just classroom-up etc/samples/classroom/with_apps.yaml
     python3 bin/generate_report.py \
