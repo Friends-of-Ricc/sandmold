@@ -5,15 +5,38 @@ author: Riccardo Carlesso
 description: Riccardo lessons learnt on Terraform, Sandmold and SaaS Runtime.
 ---
 
-This summer, I was given the time to do some profound learning on the Ops side. My mission? To sharpen my Terraform skills and explore the frontiers of Google Cloud's SaaS Runtime, all while pair-programming with the Gemini CLI. My project, which I affectionately named "Sandmold," was born from a simple need: to create ephemeral, sandboxed Google Cloud environments for workshops and hackathons.
+# A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI
 
-This article describes my journey. As someone not deeply steeped in the world of Terraform, there were many lessons to be learned, obstacles to overcome, and moments of triumph. I hope that by sharing my failures and successes, I can help others build on this work and navigate their own cloud adventures.
+This summer, I was given the time to do some profound learning on the Ops side. My mission? To sharpen my Terraform skills and explore the frontiers of Google Cloud's SaaS Runtime, all while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a simple need: to create ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons**.
+
+The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
+
+![Multiple apps in multiple desks](image.png)
+
+The analogy is simple:
+
+* A **classroom** corresponds to a GCP Folder.
+* A **bench** is a GCP Project (1-2 students per bench).
+* A project can have N **apps**, each appearing at most once (eg, one Bank of Anthos and one Microservices Demo, but *not* two Banks of Anthos).
+
+This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned, obstacles to overcome, and few moments of triumph. I hope that by sharing my failures and successes, I can help others build on this work and navigate their own cloud adventures.
 
 ## The Vision: A Playground in the Cloud
 
 Before we dive into the technical weeds, let's talk about the dream. The goal of Sandmold was to create a modular, open-source playground that anyone—Googlers, customers, students—could use. I envisioned a system that could spin up complex environments, like the popular Hipster Shop or Bank of Anthos microservices demos, as self-contained "SaaS" offerings. A teacher could provision an entire classroom (a Google Cloud Folder) and then instantiate a personal lab for each student with a few simple commands.
 
 This led me down the path of Google Cloud's SaaS Runtime, a powerful (and very new!) product designed to help developers build and manage multi-tenant SaaS solutions. It was the perfect tool for the job, but as with any new frontier, the map was still being written.
+
+Boy, I was wrong! I forgot I had to kill a few beasts first.
+
+* Code: https://github.com/Friends-of-Ricc/sandmold 
+* Code arhitecture was strngly inspired by Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
+
+![Enter Sandmold, a monster in the beach](images/page4_img2.jpeg)
+
+## Part 1: Terraform and Gemini CLI
+
+Gemini CLI was launched during this project. I was incredibly lucky to have Gemini write the Terraform code for me, and being able to rectify the mistakes by just doing `terraform plan` and `terraform apply`. It was beautiful to see it iterating through mistakes (sometimes very narrow and ostic), fixing them, retrying and getting them fixed. Sometimes it would take it 15min, but I would have coffee or lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
 
 ## My Journey into the SaaS Runtime Rabbit Hole
 
