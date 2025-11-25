@@ -108,6 +108,8 @@ check-sukur:
 list:
     just -l
 
+TERRAFORM_CLASSROOM_FOLDER_DIR := "terraform-modules/terraform-classroom-folder"
+
 docker check:
     docker ps
 
