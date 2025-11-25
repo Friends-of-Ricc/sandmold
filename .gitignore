@@ -17,15 +17,6 @@ terraform_output.json
 **/.terraform.lock.hcl
 iac/terraform_output.json
 
-# Temporary and Generated Files
-.echodo_history
-DECISIONS.md
-FUTURE_QUESTIONS_FOR_GEMINI.md
-t
-terraform_apply.log
-test_file.txt
-doc/article/DO_NOT_COMMIT/
-
 # Python
 .venv
 __pycache__/
@@ -53,3 +44,7 @@ drebes*
 *.log
 s
 sq
+doc/**/*.log
+coverage-travel.md
+.echodo_history
+DECISIONS.md
