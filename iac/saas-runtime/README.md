@@ -1,4 +1,4 @@
-# ☁️ SaaS Runtime Setup for Sandmold
+# 📦 SaaS Runtime Setup for Sandmold
 
 This directory contains scripts and configurations to set up and deploy a sample VM using Google Cloud SaaS Runtime.
 
