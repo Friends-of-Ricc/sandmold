@@ -2,7 +2,7 @@
 
 This directory contains all the Infrastructure as Code configurations and scripts for the Sandmold project. It is divided into two main subdirectories: `saas-runtime/` and `terraform/`.
 
-## `saas-runtime/`
+## ☁️ `saas-runtime/`
 
 This subdirectory is dedicated to setting up and deploying sample Virtual Machines using Google Cloud's SaaS Runtime capabilities. It includes:
 
@@ -12,7 +12,7 @@ This subdirectory is dedicated to setting up and deploying sample Virtual Machin
 
 For a deeper dive into this section, refer to the [SaaS Runtime README](saas-runtime/README.md).
 
-## `terraform/`
+## 🏗️ `terraform/`
 
 This subdirectory holds the core Terraform configurations for provisioning the foundational Google Cloud infrastructure for Sandmold environments. It is structured as follows:
 
