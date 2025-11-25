@@ -12,7 +12,9 @@ __pycache__/
 **/.terraform/*
 *.tfstate
 *.tfstate.*
-workspaces/*/*_apply.log
+terraform_output.json
+**/workspaces/
+**/.terraform.lock.hcl
 
 # Python
 .venv

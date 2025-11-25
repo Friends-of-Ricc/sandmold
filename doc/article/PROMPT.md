@@ -15,3 +15,6 @@ We're going to co-write the article.
 
 Your job is:
 1. Read the code and help me abstract the top features.
+2. read the presentation from `DO_NOT_COMMIT/*pdf` and get ideas from there. 
+  * DO NOT COMMIT that pdf as it has some private images and links.
+  * Feel free however to steal images from there: plenty of beautiful images, like in slide 1, 3, 4, 33, 46!
