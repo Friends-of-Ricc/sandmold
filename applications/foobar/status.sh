@@ -16,7 +16,7 @@
 set -e
 
 # Source the common script
-source "$(dirname "$0")/_common.sh"
+source "$(dirname "$0")/../_common.sh"
 
 # Ensure required environment variables are set
 check_env_vars

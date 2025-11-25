@@ -16,12 +16,13 @@
 set -e
 set -o pipefail
 
-echo "--- Starting Online Boutique Deployment ---"
+source "$(dirname "$0")/../_common.sh"
 
-# Check for required environment variables
-: "${PROJECT_ID?PROJECT_ID not set}"
-: "${CLUSTER_NAME?CLUSTER_NAME not set}"
-: "${CLUSTER_LOCATION?CLUSTER_LOCATION not set}"
+check_env_vars
+
+log_to_gcp "start" "Application start sequence initiated."
+
+echo "--- Starting Online Boutique Deployment ---"
 
 echo "--> Configuring kubectl for project ${PROJECT_ID} and cluster ${CLUSTER_NAME}..."
 gcloud container clusters get-credentials "${CLUSTER_NAME}" --region "${CLUSTER_LOCATION}" --project "${PROJECT_ID}"
@@ -44,6 +45,8 @@ while [ -z "$EXTERNAL_IP" ]; do
   EXTERNAL_IP=$(kubectl get service frontend-external -n default -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
   [ -z "$EXTERNAL_IP" ] && sleep 10
 done
+
+log_to_gcp "start" "Application frontend is available at: http://${EXTERNAL_IP}"
 
 echo "--- ✅ Online Boutique Deployed Successfully ---"
 echo "Application frontend is available at: http://${EXTERNAL_IP}"

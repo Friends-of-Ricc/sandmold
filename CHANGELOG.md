@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.6.0
+
+- **Refactor: Application Cleanup and Deduplication.**
+  - Moved incomplete applications (`bank-of-anthos`, `cheap-jss`, `sandmold-web`) to the `.further_ideas` directory to streamline the project.
+  - Centralized common shell script logic into `applications/_common.sh` to reduce code duplication.
+  - Refactored the `online-boutique` and `foobar` applications to use the new shared `_common.sh` script.
+  - Implemented `stop.sh` and `status.sh` for the `online-boutique` application.
+- **Feat: Open Source Compliance.**
+  - Added a "demonstration purposes only" disclaimer to the `README.md`.
+  - Ensured the `LICENSE` file is Apache 2.0.
+  - Updated `CONTRIBUTING.md` to the standard Google OSS version.
+  - Added Apache 2.0 license headers to all source files.
+  - Scrubbed sensitive information (internal billing accounts, personal emails) from the codebase.
+  - Added a `check-google-license` command to the `justfile` for automated compliance checks.
+
 ## 0.5.7
 
 - **Feat(check-setup): Add interactive setup for env vars.**
