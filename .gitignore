@@ -42,9 +42,6 @@ drebes*
 .env.*@*
 .env.yaml
 *.log
-s
-sq
 doc/**/*.log
 coverage-travel.md
 .echodo_history
-DECISIONS.md
