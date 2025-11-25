@@ -1,4 +1,4 @@
-# Terraform Configuration for Sandmold
+# 🏗️ Terraform Configuration for Sandmold
 
 This directory contains all Terraform configurations for the Sandmold project.
 

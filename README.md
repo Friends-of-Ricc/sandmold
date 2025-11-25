@@ -1,4 +1,4 @@
-# sandmold
+# 🏖️ sandmold
 
 Self: https://github.com/Friends-of-Ricc/sandmold (public)
 
