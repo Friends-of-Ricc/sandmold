@@ -32,7 +32,16 @@ bin/00-setup-env.sh
 
 ## Workflow
 
-Follow these steps in order:
+The recommended way to deploy a complete SaaS environment is to use the `deploy-saas-end2end` command in the `justfile`. This will run all the necessary steps in the correct order.
+
+```bash
+just deploy-saas-end2end
+```
+
+<details>
+<summary>Advanced: Manual Workflow</summary>
+
+If you need more granular control, you can run the scripts individually. Follow these steps in order:
 
 1.  **Create SaaS Offerings:**
     ```bash
@@ -71,6 +80,8 @@ Follow these steps in order:
     ```bash
     bin/06-provision-unit.sh my-first-vm
     ```
+
+</details>
 
 ## Ops
 
@@ -124,6 +135,4 @@ To destroy all the SaaS Runtime resources created by these scripts, you can run 
 
 ```bash
 bin/dangerous-destroy-all-saas-entities.sh
-```
-
 ```

@@ -1,24 +1,33 @@
-TERRAFORM_CLASSROOM_FOLDER_DIR := "terraform-modules/terraform-classroom-folder"
+# --- Main Workflow ---
 
-# list targets
-list:
-    just -l
+# v2 - Deploy SaaS end to end E2E
+deploy-saas-end2end:
+    #!/bin/bash
+    set -euo pipefail
+    SAAS_NAME="sandmold-test-cli-e2e"
+    RELEASE_NAME="e2e-test-$(date +%Y%m%d-%H%M)"
+    TERRAFORM_MODULE_DIR="terraform-modules/terraform-vm"
+
+    echo "Running end-to-end SaaS deployment for '${SAAS_NAME}'"
+    bin/01-create-saas.sh --saas-name "${SAAS_NAME}"
+    bin/02-create-unit-kind.sh --unit-kind-name "${SAAS_NAME}" --saas-name "${SAAS_NAME}"
+    bin/03-build-and-push-blueprint.sh --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
+    bin/04-create-release.sh --release-name "${RELEASE_NAME}" --unit-kind-name "${SAAS_NAME}" --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
+    bin/04a-reposition-uk-default.sh --unit-kind-name "${SAAS_NAME}" --release-name "${RELEASE_NAME}"
+    bin/05-create-unit.sh --instance-name "${SAAS_NAME}" --unit-kind-name "${SAAS_NAME}"
+    bin/06-provision-unit.sh --unit-name "unit-${SAAS_NAME}" --release-name "${RELEASE_NAME}"
+    echo "✅ End-to-end deployment complete!"
+
+# --- Manual Workflow Steps ---
 
 check-setup:
     #!/bin/bash
     bin/00-setup-env.sh
 
-
-# create SaaS Runtime instance
 create-saas:
     #!/bin/bash
     source .env
     bin/01-create-saas.sh
-
-check:
-    #!/bin/bash
-    source .env
-    bin/check-saas-overall-status.sh
 
 create-classroom-folder-unit-kind:
     #!/bin/bash
@@ -35,18 +44,10 @@ build-and-push-blueprint:
     source .env
     bin/05-build-and-push-blueprint.sh {{TERRAFORM_CLASSROOM_FOLDER_DIR}}
 
-docker check:
-    docker ps
-
 create-rollout:
     #!/bin/bash
     source .env
     bin/07-create-rollout.sh
-
-check-logs:
-    #!/bin/bash
-    source .env
-    bin/check-audit-logs.sh
 
 create-sample-unit name:
     #!/bin/bash
@@ -64,6 +65,18 @@ create-regional-unit name:
     source .env
     bin/05-create-unit.sh {{name}} ${UNIT_KIND_NAME_BASE}-regional
     bin/06-provision-unit.sh unit-{{name}}
+
+# --- Verification & Debugging ---
+
+check:
+    #!/bin/bash
+    source .env
+    bin/check-saas-overall-status.sh
+
+check-logs:
+    #!/bin/bash
+    source .env
+    bin/check-audit-logs.sh
 
 cloudbuild-retrieve-log-global BUILD_ID:
     #!/bin/bash
@@ -85,31 +98,23 @@ cloudbuild-retrieve-all-logs:
     echo "1. Global Builds - max 5:"
     gcloud builds list --project="${GOOGLE_CLOUD_PROJECT}" --limit 5 # --sort-by="createTime"
 
+# Smart grepping to ensure we only check for specific keywords in the output or "Titles"
+check-sukur:
+    just check | egrep -i 'sukur|Listing'
+
+# --- Utility ---
+
+# list targets
+list:
+    just -l
+
+docker check:
+    docker ps
+
 clean:
     #!/bin/bash
     rm -rf build/
 
-# v2 - Deploy SaaS end to end E2E
-deploy-saas-end2end:
-    #!/bin/bash
-    set -euo pipefail
-    SAAS_NAME="sandmold-test-cli-e2e"
-    RELEASE_NAME="e2e-test-$(date +%Y%m%d-%H%M)"
-    TERRAFORM_MODULE_DIR="terraform-modules/terraform-vm"
-
-    echo "Running end-to-end SaaS deployment for '${SAAS_NAME}'"
-    bin/01-create-saas.sh --saas-name "${SAAS_NAME}"
-    bin/02-create-unit-kind.sh --unit-kind-name "${SAAS_NAME}" --saas-name "${SAAS_NAME}"
-    bin/03-build-and-push-blueprint.sh --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
-    bin/04-create-release.sh --release-name "${RELEASE_NAME}" --unit-kind-name "${SAAS_NAME}" --terraform-module-dir "${TERRAFORM_MODULE_DIR}"
-    bin/04a-reposition-uk-default.sh --unit-kind-name "${SAAS_NAME}" --release-name "${RELEASE_NAME}"
-    bin/05-create-unit.sh --instance-name "${SAAS_NAME}" --unit-kind-name "${SAAS_NAME}"
-    bin/06-provision-unit.sh --unit-name "unit-${SAAS_NAME}" --release-name "${RELEASE_NAME}"
-    echo "✅ End-to-end deployment complete!"
-
 gcloud-auth-login:
     gcloud auth login --no-launch-browser --update-adc
 
-# Smart grepping to ensure we only check for specific keywords in the output or "Titles"
-check-sukur:
-    just check | egrep -i 'sukur|Listing'
