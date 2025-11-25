@@ -15,6 +15,7 @@ __pycache__/
 terraform_output.json
 **/workspaces/
 **/.terraform.lock.hcl
+iac/terraform_output.json
 
 # Python
 .venv

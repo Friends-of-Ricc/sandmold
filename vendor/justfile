@@ -1,3 +1,9 @@
+########################################################################################################
+# This `justfile` and this folder are useful to download the applications that help me code this app.
+# Consider it a RAG code augmentation for Sandmold. the repos are conveniently git-ignored.
+########################################################################################################
+
+# Lists commands. Keep this first!
 list:
     just -l
 
