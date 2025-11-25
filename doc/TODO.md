@@ -6,4 +6,4 @@ Riccardo. After the Mac revolution on Monday afternoon, you need to remember:
    2. descendant folders and projects (bonus: recursively - but 1L is enough for debugging)
    3. Make it colorful.
 3. Add folder tags.
-4. Add "common" stanza (merges whatever is there to ALL projects)
+4. Add "common" stanza in YAML (merges whatever is there to ALL projects)
