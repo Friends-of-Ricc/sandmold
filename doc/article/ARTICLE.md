@@ -88,16 +88,17 @@ Given that Terraform needs to check resources to exist in the cloud, this feedba
 
 Here are the key concepts I had to wrap my head around:
 
+<img src="image-4.png" alt="Sandmold etymology" width="30%" style="float: right;"> 
+
 *   **SaaS Offering:** This is the big picture, the entire dish. It represents your SaaS product, like "Bank of Anthos as a Service"
 *   **Unit Kind:** This is a specific component of your offering, like the "GKE cluster" or the "PostgreS database". It's an ingredient in your recipe. More importantly, it can *evolve*.
 *   **Release:** A specific, versioned snapshot of your Unit Kind. Think of it as a specific version of your food recipe (eg, lasagne).
 *   **Unit:** An actual, running instance of a Unit Kind. If Unit Kind is the Java class, this is the Java instance; if Unit Kind is a dish on the menu, the Unit is the actual Lasagna which they serve on your table, different from other Lasagnas, but taken from the same baking tray. More importantly, different restaurants (tennants) could run different version of the same menu / lasagna; or in the same restaurant you could A/B test a new recipe with just a very few loyal customers...
 
-![EasySaas ER Diagram](image-4.png)
 
-[This E/R Diagram](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/ER_DIAGRAM.md) explains it in some more details.
+[This E/R Diagram](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/ER_DIAGRAM.md) (and the figure on the side) explains it in some more details.
 
-Understanding this hierarchy was the first, and perhaps most crucial, lesson of my journey. Now, let's get our hands dirty and see how these concepts translate into actual code.
+Understanding this hierarchy, along with these entities cross-dependencies, were the most crucial lesson of my journey. Now, let's get our hands dirty and see how these concepts translate into actual code.
 
 ## Our First SaaS in Terraform folders
 
@@ -112,6 +113,8 @@ With this simple foundation in place, I was ready to move on to the more complex
 First thing, I tried to create a **Classroom** (Folder) in [iac/saas-runtime/terraform-modules/terraform-classroom-folder](https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime/terraform-modules/terraform-classroom-folder).
 
 I hit a few roadblocks, so I parked this to make a working `bash` script instead. 
+
+Meanwhile, I kept taking screenshot and noting error messages in a **Friction Log**. Friction Logs are something we do in Google, where a user tracks the frustration of a certain User Experience in a Google Doc, as actionable feedback (I encountered X while I was expecting Y) and shares with Product Owners who can take action. So my errors weren't lost on the product!
 
 ## The script solution
 
@@ -146,11 +149,21 @@ Everything is beautifully described in the [README](https://github.com/Friends-o
 
 ## What went well
 
-1. Vibecoding setup scripts works really well. So a `bin/check-setup.sh` can yield a friendly:
+1. **Gemini CLI is damn GOOD at terraform**! The feedback loop is virtuous: it writes code, tries to execute it, `terraform plan` fails with an actionable syntax error, Gemini CLI corrects it, tries again, .. and so on. Note that if the error is of syntax, GC will pick it up quite soon (short feedback loop) and will fix it in seconds. If the error is architectural (IAM permission, project can't be created as it already exists or for billing reasons, project can't be deleted, ...) this feedback loop will be a bit longer as it will wait for a response from The Cloud. Again, this is a good time to have a *merenda*.
+
+![Gemini CLI is good](images/page34_img2.jpeg)
+
+
+2. Vibecoding setup scripts works really well. So a `bin/check-setup.sh` can yield a friendly:
 
 ![check-setup is cool](images/page23_img1.jpeg)
 
 The friendliness of this command got me compliments from multiple colleagues, while I didn't write a line of this... and it's `bash`!
+
+Also look at the [Preflights check script](https://github.com/Friends-of-Ricc/sandmold/blob/main/bin/classroom-inspect.py), in Python, which really shines! The idea is: before executing a lengthy Terraform script, let's ensure the Billing, Project, Folder are set, and let's take a look at what projects are are already in that folder! This gives you color visual feedback while you wait for `terraform` to execute for the next few minutes.
+
+![check-setup is cool](images/page26_img2.jpeg)
+
 
 2. **SaaS Runtimes are amazing!**. If you're planning Terraform building blocks with well-defined input/output relarionships, and ever-evolving code, Saas runtime will change your life! In a nutshell, this is *Change Management + Terraform at Google scale*! And note: it's used internally at Google by very big teams, so it's battle-tested!
 
