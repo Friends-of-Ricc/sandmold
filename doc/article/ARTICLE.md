@@ -5,6 +5,7 @@ title: A GCP Terraform Classroom for hackathons: my personal learning with Gemin
 author: Riccardo Carlesso
 description: Riccardo lessons learnt on Terraform, Sandmold and SaaS Runtime.
 medium_article_url: TODO
+slides: https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit
 ---
 
 # A Terraform Classroom for hackathons on GCP: my personal learning with Gemini CLI
@@ -24,9 +25,7 @@ This article describes my journey. As someone not expert of Terraform, there wer
 
 ## Sandmold? Why this horrible name?
 
-<img src="image-3.png" alt="Sandmold etymology" width="30%" style="float: right;">
-
-Well, take a person who is thinking in 🇮🇹 Italian, querying Google Images in a 🇩🇪 German speaking region, and then Google translating to 🇬🇧 English, and double-checking with a 🇷🇺 Russian colleague. There you have it: "formine per sabbia" -> "Gill Förmchen" > "Da" > "Sandmold". Once my American colleagues came for the rescue, the repo was registered, [go links](https://golinks.github.io/golinks/) saved, there was no going back.
+<img src="image-3.png" alt="Sandmold etymology" width="30%" style="float: right;"> Well, take a person who is thinking in 🇮🇹 Italian, querying Google Images in a 🇩🇪 German speaking region, and then Google translating to 🇬🇧 English, and double-checking with a 🇷🇺 Russian colleague. There you have it: "formine per sabbia" -> "Gill Förmchen" > "Da" > "Sandmold". Once my American colleagues came for the rescue, the repo was registered, [go links](https://golinks.github.io/golinks/) saved, there was no going back.
 
 ## What's a Classroom?
 
