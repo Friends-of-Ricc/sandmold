@@ -88,10 +88,14 @@ Given that Terraform needs to check resources to exist in the cloud, this feedba
 
 Here are the key concepts I had to wrap my head around:
 
-*   **SaaS Offering:** This is the big picture, the entire dish. It represents your SaaS product, like "Bank of Anthos as a Service."
-*   **Unit Kind:** This is a specific component of your offering, like the GKE cluster or the database. It's an ingredient in your recipe.
-*   **Release:** A specific, versioned snapshot of your Unit Kind. Think of it as a specific version of your tomato sauce recipe.
-*   **Unit:** An actual, running instance of a Unit Kind. This is the final, plated dish, ready to be served to a customer (or, in our case, a student).
+*   **SaaS Offering:** This is the big picture, the entire dish. It represents your SaaS product, like "Bank of Anthos as a Service"
+*   **Unit Kind:** This is a specific component of your offering, like the "GKE cluster" or the "PostgreS database". It's an ingredient in your recipe. More importantly, it can *evolve*.
+*   **Release:** A specific, versioned snapshot of your Unit Kind. Think of it as a specific version of your food recipe (eg, lasagne).
+*   **Unit:** An actual, running instance of a Unit Kind. If Unit Kind is the Java class, this is the Java instance; if Unit Kind is a dish on the menu, the Unit is the actual Lasagna which they serve on your table, different from other Lasagnas, but taken from the same baking tray. More importantly, different restaurants (tennants) could run different version of the same menu / lasagna; or in the same restaurant you could A/B test a new recipe with just a very few loyal customers...
+
+![EasySaas ER Diagram](image-4.png)
+
+[This E/R Diagram](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/ER_DIAGRAM.md) explains it in some more details.
 
 Understanding this hierarchy was the first, and perhaps most crucial, lesson of my journey. Now, let's get our hands dirty and see how these concepts translate into actual code.
 
@@ -128,6 +132,12 @@ With this simple foundation in place, I was ready to move on to the more complex
 
 The friendliness of this command got me compliments from multiple colleagues, while I didn't write a line of this... and it's `bash`!
 
-2. **SaaS Runtimes are amazing!**. If you're planning Terraform building blocks with well-defined input/output relarionships, and ever-evolving code, Saas runtime will change your life! In a nutshell, this is *Change Management + Terraform at Google scale*!
+2. **SaaS Runtimes are amazing!**. If you're planning Terraform building blocks with well-defined input/output relarionships, and ever-evolving code, Saas runtime will change your life! In a nutshell, this is *Change Management + Terraform at Google scale*! And note: it's used internally at Google by very big teams, so it's battle-tested!
 
 ![SaaS Runtimes](images/page40_img1.jpeg)
+
+## Conclusions
+
+Vibecoding can be a fun and useful tool to dip your toes in some new technology. That should NOT substitute your code.
+
+I think we're going to hear more about **Saas Runtimes** in the near future, and if it was stock, I'd bet some money on it.
