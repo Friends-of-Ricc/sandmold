@@ -12,9 +12,15 @@ slides: https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_
 
 This summer, I was given the time to do some profound learning on the Ops side. My mission? To sharpen my Terraform skills and explore the frontiers of Google Cloud's SaaS Runtime, all while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a simple need: to create ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons**.
 
+![GCP and Terraform classroom](images/page1_img5.jpeg)
+
+
 The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
 
 This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned; I hope that by sharing my failures and successes, I can help others build on this (or similar) work.
+
+* Code: https://github.com/Friends-of-Ricc/sandmold - 
+ Multi-stage architecture strongly inspired by [Fabric FAST](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric) and  Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
 
 ![Multiple apps in multiple desks](images/page4_img2.jpeg)
 
@@ -47,21 +53,29 @@ And to do so, you *just* (literally) run a `just` script which calls terraform a
 
 ![just classroom up](images/page30_img3.jpeg)
 
-Which creates, after some terraforming, a clean `output.tf`:
 
-![output1](images/page30_img1.jpeg)
+
+
+<img src="images/page30_img1.jpeg" alt="Sandmold etymology" width="30%" style="float: right;">  Which creates, after some terraforming, a clean `output.tf`:
+
+Note that a succesfully destroyed classroom *also* leaves a report.md with a link to the destroyed resources.
+
 <!-- ![output2](images/page30_img2.jpeg) -->
 
 
 
 ## The Vision: A Cloud Playground with SaaS Offerings
 
-My vision for Sandmold was to create a modular, open-source playground, easily spinning up complex environments like Hipster Shop or Bank of Anthos as self-contained "SaaS" offerings. This would allow teachers to provision entire classrooms and personal labs for students with simple commands. This pursuit naturally led me to Google Cloud's SaaS Runtime—a powerful, albeit new, product for multi-tenant SaaS. It seemed perfect, but as with any new frontier, there were beasts to slay first!
+My vision for Sandmold was to create a modular, open-source playground, easily spinning up complex environments like Online Boutique or Bank of Anthos as self-contained "SaaS" offerings. This would allow teachers to provision entire classrooms and personal labs for students with simple commands. 
 
-* Code: https://github.com/Friends-of-Ricc/sandmold 
-* Code architecture was strongly inspired by Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
+After a talk with my Terraform expert Roberto, this pursuit naturally led me to Google Cloud's [SaaS Runtime](https://cloud.google.com/products/saas-runtime) — a powerful, yet new, product for multi-tenant SaaS. 
+![SaaS Runtimes](images/page40_img1.jpeg)
 
-![Enter Sandmold, a monster in the beach](images/page4_img2.jpeg)
+It seemed perfect, but as with any new frontier, there were **beasts** to slay first!
+
+![SaaS Runtimes](images/page1_img8.jpeg)
+
+
 
 ## Part 1: Terraform and Gemini CLI
 
