@@ -18,3 +18,12 @@ Your job is:
 2. read the presentation from `DO_NOT_COMMIT/*pdf` and get ideas from there. 
   * DO NOT COMMIT that pdf as it has some private images and links.
   * Feel free however to steal images from there: plenty of beautiful images, like in slide 1, 3, 4, 33, 46!
+
+
+## Article tips
+
+In the article, keep this in mind.
+
+* Rename Heapster Shop and Microservices DEmo as "online boutique" and link to their GH repo: https://github.com/GoogleCloudPlatform/microservices-demo
+* Link "Bank of Anthos" to their repo: https://github.com/GoogleCloudPlatform/bank-of-anthos
+* try to be fun but terse, not verbose, not psychofantic, do not write useless "AI Slops" but be straight to the point.

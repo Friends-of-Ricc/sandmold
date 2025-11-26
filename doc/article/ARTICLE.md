@@ -12,19 +12,22 @@ This summer, I was given the time to do some profound learning on the Ops side. 
 
 The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
 
+<!-- this is for a 
 ![Multiple apps in multiple desks](image.png)
+-->
+<img src="images/page5_img2.jpeg" alt="Sandmold etymology" width="30%" style="float: right;">
 
-The analogy is simple:
+**Why this horrible name?** Well, take a person who is thinking in Italian ("formine per sabbia"), querying Google Images in a German speaking country, and then Google translating, and double-checking with a Russian colleague. There you have it: "Sandmold". The ClassRoom analogy is simple:
 
 * A **classroom** corresponds to a GCP Folder.
 * A **bench** is a GCP Project (1-2 students per bench).
-* A project can have N **apps**, each appearing at most once (eg, one Bank of Anthos and one Microservices Demo, but *not* two Banks of Anthos).
+* A project can have N **apps**, each appearing at most once (eg, one [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos) and one [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), but *not* two [Banks of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
 
 This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned, obstacles to overcome, and few moments of triumph. I hope that by sharing my failures and successes, I can help others build on this work and navigate their own cloud adventures.
 
 ## The Vision: from YAML to a working Playground
 
-As a rubyist, I love YAMLs. This is the promise of my project: 
+As a Rubyist, I love YAMLs. This is the promise of my project:
 
 ![From YAML to Cloud Console..](image-2.png)
 
