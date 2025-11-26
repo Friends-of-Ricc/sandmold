@@ -3,23 +3,23 @@
 # TF: b/463586009
 title: A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI
 author: Riccardo Carlesso
-description: Riccardo lessons learnt on Terraform, Sandmold and SaaS Runtime.
+description: Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime.
 medium_article_url: TODO
 slides: https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit
 ---
 
 # A Terraform Classroom for hackathons on GCP: a tale of learnings with Gemini CLI
 
-This summer, I was given the time to do some profound learning on the **Operations** side. My mission? To sharpen my Terraform skills while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a real world customer need: to create a one-click, ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons** where students have a pre-constructed environment to run certain exercise and the teacher(s) can observe students and check their progress. At the end od the day, a `tf destroy` ensure you won't break the bank (unless its the [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
+This summer, I was given the time to do some profound learning on the **Operations** side. My mission? To sharpen my Terraform skills while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a real world customer need: to create a one-click, ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons** where students have a pre-constructed environment to run certain exercise and the teacher(s) can observe students and check their progress. At the end of the day, a `tf destroy` ensure you won't break the bank (unless its the [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
 
 ![GCP and Terraform classroom](images/page1_img5.jpeg)
 
 
 The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
 
-This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned; I hope that by sharing my failures and successes, I can help others build on this (or similar) work.
+This article describes my journey. As someone not expert in Terraform, there were many lessons to be learned. I hope that by sharing my failures and successes, I can help others build on this (or similar) work.
 
-* Code [here](https://github.com/Friends-of-Ricc/sandmold). Note that the multi-stage architecture strongly inspired by [Fabric FAST](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric) and  Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
+The multi-stage architecture was strongly inspired by [Fabric FAST] and Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
 
 ![Multiple apps in multiple desks](images/page4_img2.jpeg)
 
@@ -82,7 +82,7 @@ It seemed perfect, but as with any new frontier, there were **beasts** to slay f
 
 ## Part 1: Terraform and Gemini CLI
 
-[Gemini CLI](https://github.com/google-gemini/gemini-cli) was launched on June 25th when I was working at this project. I was incredibly lucky to have Gemini write the Terraform code for me, and being able to rectify the mistakes by just doing `terraform plan` and `terraform apply`. It was beautiful to see it iterate through mistakes (sometimes very narrow and arcane), fixing them, retrying and getting them fixed. 
+[Gemini CLI](https://github.com/google-gemini/gemini-cli) was invaluable throughout this project. I was incredibly lucky to have Gemini CLI write the Terraform code for me, and to quickly rectify mistakes through its iterative process with `terraform plan` and `terraform apply`. It was beautiful to see it iterate through mistakes (sometimes very narrow and arcane), fixing them, retrying and getting them fixed. 
 Given that Terraform needs to check resources to exist in the cloud, this feedback loop would be slow at times, sometimes taking up to 15min, but I would have  lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
 
 ## My Journey into the SaaS Runtime Rabbit Hole
@@ -121,38 +121,35 @@ Meanwhile, I kept taking screenshot and noting error messages in a **Friction Lo
 
 ## The script solution
 
-It took me nearly two weeks to create a working, reentrant SaaS definition. I'm very proud of this:
-
-https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime/bin
-
-These scripts allow you to:
+It took me nearly two weeks to create a working, reentrant SaaS definition. I'm very proud of this folder: [iac/saas-runtime/bin/](https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime/bin). These scripts allow you to:
 
 1. [01-create-saas.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/01-create-saas.sh)  Create a SaaS Runtime
 2. [02-create-unit-kind.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/02-create-unit-kind.sh) Create a Unit Kind.
 3. [03-build-and-push-blueprint.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/03-build-and-push-blueprint.sh) Build a Blueprint given a TF module dir, and push it. This was a very hard part.
-4. [04-create-release.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/04-create-release.sh) Create a first release, say "1.0". [04a-reposition-uk-default.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/04a-reposition-uk-default.sh) is needed to tell the UK that the default release is "1.0". This changes the state of the UK and from now on every deployed Unit will have that version. I know, this seems complicated, but it also makes a lot of sense!
+4. [04-create-release.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/04-create-release.sh) Create a first release, say "1.0". [04a-reposition-uk-default.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/04a-reposition-uk-default.sh) is needed to tell the UK that the default release is "1.0". This changes the state of the UK and from now on every deployed Unit will have that version. 
 5. [05-create-unit.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/05-create-unit.sh) Create a Unit based on that UK frozen at that version.
 6. [06-provision-unit.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/06-provision-unit.sh) Just because you have a lasagna in your oven it doesn't mean your customer have it on the table! You need to serve it, and provision in the right `TENANT_PROJECT_ID`, in a specified `LOCATION` with a proper Service Account for actuation!
 7. (optional) [07-create-rollout.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/07-create-rollout.sh). This was optional. You can create a RolloutKind and then a rollout instance - in case you want to have an additional templating layer (like we deploy things to Europe in a different way than how we deploy to US).
 
 And how to invoke them all? Two options:
-1.  [deploy-sukur.rb](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/deploy-sukur.rb) which creates a shell script. 
+
+1.  [deploy-sukur.rb](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/deploy-sukur.rb), a sophisticated heapster script which creates a shell script. 
 2. Or, more simply, `just deploy-saas-end2end`. Code in the [iac/saas-runtime/justfile](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/justfile).
 
 Everything is beautifully described in the [README](https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime).
 
 ## What went wrong
 
-1. 🚔 **[GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough** - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org). If you're a startup and your "Landing Zone" is not correctly secured, you won't feel this pain; but in a structured organization, a wise Org Admin will probably have locked down your ability to bill projects cross-Org, and so on.
+1. 🚔 **[GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough** - *really* tough. This makes it very hard to terraform anything across organizations if your organization is well protected (like my Company org). If you're a startup with an unsecured "Landing Zone," you won't feel this pain. However, in a structured organization, a wise Org Admin will likely have locked down your ability to bill projects across organizations.
 
 2. 📁 **Folders are also hard**. While it’s easy to ask people for a `PROJECT_ID`, it's hard to ask people for a `FOLDER_ID`: they need an `ORGANIZATION_ID` and all the 🚔 Org Policy shenanigans kick in. A project can be orgless, a folder cannot. Projects are fungible, folders carry a history and billing constraints.
 
-3. 💛 **Riccardo likes his scripts, others don’t**. I've reviewed extensively Friction Logs from two colleagues, and I realized that what works for me doesn't necessarily work for all. My reliance on scripts like `justfile`, `jq`, `yq`, `lolcat` extenuated their code reproductions. A big lesson learnt for me: minimize dependencies on external scripts. Rule of the thumb: Note to self: if a script is not on [Cloud Shell](https://docs.cloud.google.com/shell/docs/launching-cloud-shell), do without or document it as an explicit dependency. Yes, `ruby` is in Cloud Shell.. along with `terraform`, `gemini` CLI, `docker`, `gcloud`, `npm` and many others!
+3. 💛 **Riccardo likes his scripts, others don’t**. Reviewing Friction Logs from two colleagues, I realized what works for me doesn't necessarily work for all. My reliance on scripts like `justfile`, `jq`, `yq`, `lolcat` hindered their code reproductions. A big lesson learned for me: minimize dependencies on external scripts. Rule of thumb: If a script isn't on [Cloud Shell](https://docs.cloud.google.com/shell/docs/launching-cloud-shell), either do without it or document it as an explicit dependency. Yes, `ruby` is in Cloud Shell.. along with `terraform`, `gemini` CLI, `docker`, `gcloud`, `npm` and many others!
 
 
 ## What went well
 
-1. **Gemini CLI is damn GOOD at terraform**! The feedback loop is virtuous: it writes code, tries to execute it, `terraform plan` fails with an actionable syntax error, Gemini CLI corrects it, tries again, .. and so on. Note that if the error is of syntax, GC will pick it up quite soon (short feedback loop) and will fix it in seconds. If the error is architectural (IAM permission, project can't be created as it already exists or for billing reasons, project can't be deleted, ...) this feedback loop will be a bit longer as it will wait for a response from The Cloud. Again, this is a good time to have a *merenda*.
+1. **Gemini CLI is damn GOOD at terraform**! The feedback loop is virtuous: it writes code, tries to execute it, `terraform plan` fails with an actionable syntax error, Gemini CLI corrects it, tries again, .. and so on. If the error is syntactic, Gemini CLI detects and fixes it quickly (short feedback loop). However, architectural errors (IAM permissions, project creation/deletion issues) extend this feedback loop, requiring a response from the Cloud. This is a good time for a merenda.
 
 ![Gemini CLI is good](images/page34_img2.jpeg)
 
@@ -168,12 +165,14 @@ Also look at the [Preflights check script](https://github.com/Friends-of-Ricc/sa
 ![check-setup is cool](images/page26_img2.jpeg)
 
 
-2. **SaaS Runtimes are amazing!**. If you're planning Terraform building blocks with well-defined input/output relarionships, and ever-evolving code, Saas runtime will change your life! In a nutshell, this is *Change Management + Terraform at Google scale*! And note: it's used internally at Google by very big teams, so it's battle-tested!
+2. **SaaS Runtimes are amazing!**. If you're planning Terraform building blocks with well-defined input/output relationships, and ever-evolving code, Saas runtime will change your life! In a nutshell, this is *Change Management + Terraform at Google scale*! And note: it's used internally at Google by very big teams, so it's battle-tested!
 
 ![SaaS Runtimes](images/page40_img1.jpeg)
 
 ## Conclusions
 
-Vibecoding can be a fun and useful tool to dip your toes in some new technology. That should NOT substitute your code.
+Vibecoding can be a fun and useful tool to dip your toes in some new technology. This should **not** substitute your own code.
 
 I think we're going to hear more about **Saas Runtimes** in the near future, and if it was stock, I'd bet some money on it.
+
+Finally, if **Gemini CLI** is so great for **terraform**, Operators in the room.. what are you waiting for?!?
