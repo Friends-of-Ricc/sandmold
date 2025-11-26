@@ -1,5 +1,6 @@
 ---
 # this article will go to Medium once finished.
+# TF: b/463586009
 title: A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI
 author: Riccardo Carlesso
 description: Riccardo lessons learnt on Terraform, Sandmold and SaaS Runtime.
@@ -21,9 +22,26 @@ The analogy is simple:
 
 This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned, obstacles to overcome, and few moments of triumph. I hope that by sharing my failures and successes, I can help others build on this work and navigate their own cloud adventures.
 
-## The Vision: A Playground in the Cloud
+## The Vision: from YAML to a working Playground
 
-Before we dive into the technical weeds, let's talk about the dream. The goal of Sandmold was to create a modular, open-source playground that anyone—Googlers, customers, students—could use. I envisioned a system that could spin up complex environments, like the popular Hipster Shop or Bank of Anthos microservices demos, as self-contained "SaaS" offerings. A teacher could provision an entire classroom (a Google Cloud Folder) and then instantiate a personal lab for each student with a few simple commands.
+As a rubyist, I love YAMLs. This is the promise of my project: 
+
+![From YAML to Cloud Console..](image-2.png)
+
+And to do so, you *just* (literally) run a `just` script which calls terraform and creates a Markdown file with the results (`REPORT.md`):
+
+![just classroom up](images/page30_img3.jpeg)
+
+Which creates, after some terraforming, a clean `output.tf`:
+
+![output1](images/page30_img1.jpeg)
+<!-- ![output2](images/page30_img2.jpeg) -->
+
+
+
+## The Vision: A Playground in the Cloud (from Gemini)
+
+Before we dive into the technical weeds, let's talk about the dream. The goal of Sandmold was to create a modular, open-source playground that anyone—Googlers, customers, students — could use. I envisioned a system that could spin up complex environments, like the popular Hipster Shop or Bank of Anthos microservices demos, as self-contained "SaaS" offerings. A teacher could provision an entire classroom (a Google Cloud Folder) and then instantiate a personal lab for each student with a few simple commands.
 
 This led me down the path of Google Cloud's SaaS Runtime, a powerful (and very new!) product designed to help developers build and manage multi-tenant SaaS solutions. It was the perfect tool for the job, but as with any new frontier, the map was still being written.
 
@@ -40,7 +58,7 @@ Gemini CLI was launched during this project. I was incredibly lucky to have Gemi
 
 ## My Journey into the SaaS Runtime Rabbit Hole
 
-SaaS Runtime has its own vocabulary and a specific order of operations. Think of it like making a proper Italian dinner: you can't just throw everything in the pot at once! You have the *antipasto*, the *primo*, the *secondo*. It's a process.
+[SaaS Runtime](https://cloud.google.com/products/saas-runtime) has its own vocabulary and a specific order of operations. Think of it like making a proper Italian dinner: you can't just throw everything in the pot at once! You have the *antipasto*, the *primo*, the *secondo*. It's a process.
 
 Here are the key concepts I had to wrap my head around:
 
@@ -66,3 +84,15 @@ In the language of SaaS Runtime, this humble Terraform module is our **Blueprint
 *(Here would be a great place to insert an image! Perhaps one of the diagrams from slide 46 of your presentation?)*
 
 With this simple foundation in place, I was ready to move on to the more complex and exciting offerings: Bank of Anthos and Hipster Shop.
+
+## What went wrong
+
+* Org Policies are tough - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org).
+
+## What went well
+
+Vibecoding setup scripts works really well. So a `bin/check-setup.sh` can yield a friendly:
+
+![check-setup is cool](image-1.png)
+
+The friendliness of this command got me compliments from multiple colleagues, while I didn't write a line of this... and it's `bash`!
