@@ -99,29 +99,49 @@ Here are the key concepts I had to wrap my head around:
 
 Understanding this hierarchy was the first, and perhaps most crucial, lesson of my journey. Now, let's get our hands dirty and see how these concepts translate into actual code.
 
-## Our First SaaS Offering: A Humble "Hello World" VM
+## Our First SaaS in Terraform folders
 
-Every great journey begins with a single step, and in the world of software, that step is often a "Hello, World!". My first SaaS offering was no different. I created a simple Terraform module to provision a single Google Compute Engine virtual machine. This served as the perfect, low-stakes test case to ensure the entire SaaS Runtime pipeline was working correctly.
+My first test was a standard, no-frills Terraform setup:
 
-The module itself is a standard, no-frills Terraform setup:
-
-*   **`variables.tf`**: This file defines the inputs for our module. Think of these as the knobs and dials for our VM. We can specify things like the `instance_name`, `machine_type`, and the `tenant_project_id` where the VM will live.
-*   **`main.tf`**: This is the heart of the operation. It contains the `google_compute_instance` resource block that tells Terraform what to build. It takes the variables from `variables.tf` and uses them to configure the VM, from its boot disk to its network interface.
-*   **`outputs.tf`**: After the VM is created, we need a way to get information about it. This file defines the outputs, such as the `instance_external_ip` and the `instance_name`.
+* [iac/saas-runtime/terraform-modules/terraform-vm](https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime/terraform-modules/terraform-vm). This is a simple VM on GCP. `variables.tf`, `main.tf`, `outputs.tf`: the usual sauce. The important part was to set up the `tenant_project_id` variable, which gets populated with the project where the instance actually lives.
 
 In the language of SaaS Runtime, this humble Terraform module is our **Blueprint**. We package it up (as we'll see later, this had its own set of adventures) and use it to define a **Unit Kind** called `simple-vm`. When we want to create an actual VM, we provision a **Unit** of this kind.
 
+With this simple foundation in place, I was ready to move on to the more complex and exciting offerings: Bank of Anthos and Online Boutique.
 
+First thing, I tried to create a **Classroom** (Folder) in [iac/saas-runtime/terraform-modules/terraform-classroom-folder](https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime/terraform-modules/terraform-classroom-folder).
 
-With this simple foundation in place, I was ready to move on to the more complex and exciting offerings: Bank of Anthos and Hipster Shop.
+I hit a few roadblocks, so I parked this to make a working `bash` script instead. 
+
+## The script solution
+
+It took me nearly two weeks to create a working, reentrant SaaS definition. I'm very proud of this:
+
+https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime/bin
+
+These scripts allow you to:
+
+1. [01-create-saas.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/01-create-saas.sh)  Create a SaaS Runtime
+2. [02-create-unit-kind.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/02-create-unit-kind.sh) Create a Unit Kind.
+3. [03-build-and-push-blueprint.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/03-build-and-push-blueprint.sh) Build a Blueprint given a TF module dir, and push it. This was a very hard part.
+4. [04-create-release.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/04-create-release.sh) Create a first release, say "1.0". [04a-reposition-uk-default.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/04a-reposition-uk-default.sh) is needed to tell the UK that the default release is "1.0". This changes the state of the UK and from now on every deployed Unit will have that version. I know, this seems complicated, but it also makes a lot of sense!
+5. [05-create-unit.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/05-create-unit.sh) Create a Unit based on that UK frozen at that version.
+6. [06-provision-unit.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/06-provision-unit.sh) Just because you have a lasagna in your oven it doesn't mean your customer have it on the table! You need to serve it, and provision in the right `TENANT_PROJECT_ID`, in a specified `LOCATION` with a proper Service Account for actuation!
+7. (optional) [07-create-rollout.sh](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/07-create-rollout.sh). This was optional. You can create a RolloutKind and then a rollout instance - in case you want to have an additional templating layer (like we deploy things to Europe in a different way than how we deploy to US).
+
+And how to invoke them all? Two options:
+1.  [deploy-sukur.rb](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/bin/deploy-sukur.rb) which creates a shell script. 
+2. Or, more simply, `just deploy-saas-end2end`. Code in the [iac/saas-runtime/justfile](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/justfile).
+
+Everything is beautifully described in the [README](https://github.com/Friends-of-Ricc/sandmold/tree/main/iac/saas-runtime).
 
 ## What went wrong
 
-1. 🚔 [GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org).
+1. 🚔 **[GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough** - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org). If you're a startup and your "Landing Zone" is not correctly secured, you won't feel this pain; but in a structured organization, a wise Org Admin will probably have locked down your ability to bill projects cross-Org, and so on.
 
-2. 📁 **Folders are hard**. While it’s easy to ask people for a `PROJECT_ID`, it's hard to ask people for a `FOLDER_ID`: they need an `ORGANIZATION_ID` and all the 🚔 Org Policy shenanigans kick in. A project can be orgless, a folder cannot.
+2. 📁 **Folders are also hard**. While it’s easy to ask people for a `PROJECT_ID`, it's hard to ask people for a `FOLDER_ID`: they need an `ORGANIZATION_ID` and all the 🚔 Org Policy shenanigans kick in. A project can be orgless, a folder cannot. Projects are fungible, folders carry a history and billing constraints.
 
-3. 💛 **Riccardo likes his scripts, others don’t**. I've reviewed extensively Friction Logs from two colleagues, and I realized that what works for me doesn't necessarily work for all. My reliance on scripts like `justfile`, `jq`, `yq`, `lolcat` extenuated their code reproductions. A big lesson learnt for me: minimize dependencies on external scripts. Rule of the thumb: Note to self: if a script is not on [Cloud Shell](https://docs.cloud.google.com/shell/docs/launching-cloud-shell), do without or document it as an explicit dependency. Yes, `ruby` is in Cloud Shell, along with `terraform`, `gemini` CLI, `docker`, `gcloud`, `npm` and many others!
+3. 💛 **Riccardo likes his scripts, others don’t**. I've reviewed extensively Friction Logs from two colleagues, and I realized that what works for me doesn't necessarily work for all. My reliance on scripts like `justfile`, `jq`, `yq`, `lolcat` extenuated their code reproductions. A big lesson learnt for me: minimize dependencies on external scripts. Rule of the thumb: Note to self: if a script is not on [Cloud Shell](https://docs.cloud.google.com/shell/docs/launching-cloud-shell), do without or document it as an explicit dependency. Yes, `ruby` is in Cloud Shell.. along with `terraform`, `gemini` CLI, `docker`, `gcloud`, `npm` and many others!
 
 
 ## What went well
