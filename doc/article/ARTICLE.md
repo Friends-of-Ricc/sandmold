@@ -19,8 +19,7 @@ The idea is simple: **pre-provision a class for N students who (alone or in pair
 
 This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned; I hope that by sharing my failures and successes, I can help others build on this (or similar) work.
 
-* Code: https://github.com/Friends-of-Ricc/sandmold - 
- Multi-stage architecture strongly inspired by [Fabric FAST](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric) and  Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
+* Code [here](https://github.com/Friends-of-Ricc/sandmold). Note that the multi-stage architecture strongly inspired by [Fabric FAST](https://github.com/GoogleCloudPlatform/cloud-foundation-fabric) and  Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
 
 ![Multiple apps in multiple desks](images/page4_img2.jpeg)
 
@@ -31,11 +30,19 @@ This article describes my journey. As someone not expert of Terraform, there wer
 
 ## Sandmold? Why this horrible name?
 
-<img src="image-3.png" alt="Sandmold etymology" width="30%" style="float: right;"> Well, take a person who is thinking in 🇮🇹 Italian, querying Google Images in a 🇩🇪 German speaking region, and then Google translating to 🇬🇧 English, and double-checking with a 🇷🇺 Russian colleague. There you have it: "formine per sabbia" -> "Gill Förmchen" > "Da" > "Sandmold". Once my American colleagues came for the rescue, the repo was registered, [go links](https://golinks.github.io/golinks/) saved, there was no going back.
+<img src="image-3.png" alt="Sandmold etymology" width="30%" style="float: right;"> Well, take a person who is thinking in 🇮🇹 Italian, querying Google Images in a 🇩🇪 German speaking region, and then Google translating from German shopping sites to 🇬🇧 English, finally double-checking with a 🇷🇺 Russian colleague. There you have it: "formine per sabbia" -> "Gill Förmchen" > "Sandmold" > "Da". Once my American colleagues came for the rescue, the repo was registered, [go links](https://golinks.github.io/golinks/) already created, and there was no going back.
 
 ## What's a Classroom?
 
 The ClassRoom analogy is simple:
+
+Option 1 via gemini.google.com - breathtaking:
+
+![NanoBanana3 Classroom+Bench+Apps](image-5.png)
+
+Option 2 via MCP - which is best?
+
+![alt text](a_humorous_and_colorful_cartoon_.png)
 
 * A **classroom** corresponds to a [GCP Folder](https://docs.cloud.google.com/resource-manager/docs/creating-managing-folders).
 * A **bench** is a [Cloud Project](https://developers.google.com/workspace/guides/create-project) (usually, 1-2 students per bench).
@@ -45,7 +52,7 @@ The ClassRoom analogy is simple:
 
 ## The Vision: from YAML to a working Playground
 
-As a Rubyist, I love YAMLs. This is the promise of my project:
+As a Rubyist, I love YAMLs. This is the promise of my project (and it delivers!):
 
 ![From YAML to Cloud Console..](image-2.png)
 
@@ -54,15 +61,11 @@ And to do so, you *just* (literally) run a `just` script which calls terraform a
 ![just classroom up](images/page30_img3.jpeg)
 
 
-
-
 <img src="images/page30_img1.jpeg" alt="Sandmold etymology" width="30%" style="float: right;">  Which creates, after some terraforming, a clean `output.tf`:
 
 Note that a succesfully destroyed classroom *also* leaves a report.md with a link to the destroyed resources.
 
 <!-- ![output2](images/page30_img2.jpeg) -->
-
-
 
 ## The Vision: A Cloud Playground with SaaS Offerings
 
