@@ -42,22 +42,18 @@ Which creates, after some terraforming, a clean `output.tf`:
 
 
 
-## The Vision: A Playground in the Cloud (from Gemini)
+## The Vision: A Cloud Playground with SaaS Offerings
 
-Before we dive into the technical weeds, let's talk about the dream. The goal of Sandmold was to create a modular, open-source playground that anyone—Googlers, customers, students — could use. I envisioned a system that could spin up complex environments, like the popular Hipster Shop or Bank of Anthos microservices demos, as self-contained "SaaS" offerings. A teacher could provision an entire classroom (a Google Cloud Folder) and then instantiate a personal lab for each student with a few simple commands.
-
-This led me down the path of Google Cloud's SaaS Runtime, a powerful (and very new!) product designed to help developers build and manage multi-tenant SaaS solutions. It was the perfect tool for the job, but as with any new frontier, the map was still being written.
-
-Boy, I was wrong! I forgot I had to kill a few beasts first.
+My vision for Sandmold was to create a modular, open-source playground, easily spinning up complex environments like Hipster Shop or Bank of Anthos as self-contained "SaaS" offerings. This would allow teachers to provision entire classrooms and personal labs for students with simple commands. This pursuit naturally led me to Google Cloud's SaaS Runtime—a powerful, albeit new, product for multi-tenant SaaS. It seemed perfect, but as with any new frontier, there were beasts to slay first!
 
 * Code: https://github.com/Friends-of-Ricc/sandmold 
-* Code arhitecture was strngly inspired by Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
+* Code architecture was strongly inspired by Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
 
 ![Enter Sandmold, a monster in the beach](images/page4_img2.jpeg)
 
 ## Part 1: Terraform and Gemini CLI
 
-Gemini CLI was launched during this project. I was incredibly lucky to have Gemini write the Terraform code for me, and being able to rectify the mistakes by just doing `terraform plan` and `terraform apply`. It was beautiful to see it iterating through mistakes (sometimes very narrow and ostic), fixing them, retrying and getting them fixed. Sometimes it would take it 15min, but I would have coffee or lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
+Gemini CLI was launched during this project. I was incredibly lucky to have Gemini write the Terraform code for me, and being able to rectifying the mistakes by just doing `terraform plan` and `terraform apply`. It was beautiful to see it iterate through mistakes (sometimes very narrow and arcane), fixing them, retrying and getting them fixed. Sometimes it would take it 15min, but I would have coffee or lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
 
 ## My Journey into the SaaS Runtime Rabbit Hole
 
@@ -84,7 +80,7 @@ The module itself is a standard, no-frills Terraform setup:
 
 In the language of SaaS Runtime, this humble Terraform module is our **Blueprint**. We package it up (as we'll see later, this had its own set of adventures) and use it to define a **Unit Kind** called `simple-vm`. When we want to create an actual VM, we provision a **Unit** of this kind.
 
-*(Here would be a great place to insert an image! Perhaps one of the diagrams from slide 46 of your presentation?)*
+
 
 With this simple foundation in place, I was ready to move on to the more complex and exciting offerings: Bank of Anthos and Hipster Shop.
 
@@ -96,6 +92,6 @@ With this simple foundation in place, I was ready to move on to the more complex
 
 Vibecoding setup scripts works really well. So a `bin/check-setup.sh` can yield a friendly:
 
-![check-setup is cool](image-1.png)
+![check-setup is cool](images/page23_img1.jpeg)
 
 The friendliness of this command got me compliments from multiple colleagues, while I didn't write a line of this... and it's `bash`!
