@@ -4,9 +4,10 @@
 title: A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI
 author: Riccardo Carlesso
 description: Riccardo lessons learnt on Terraform, Sandmold and SaaS Runtime.
+medium_article_url: TODO
 ---
 
-# A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI
+# A Terraform Classroom for hackathons on GCP: my personal learning with Gemini CLI
 
 This summer, I was given the time to do some profound learning on the Ops side. My mission? To sharpen my Terraform skills and explore the frontiers of Google Cloud's SaaS Runtime, all while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a simple need: to create ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons**.
 
@@ -65,7 +66,8 @@ My vision for Sandmold was to create a modular, open-source playground, easily s
 
 ## Part 1: Terraform and Gemini CLI
 
-Gemini CLI was launched during this project. I was incredibly lucky to have Gemini write the Terraform code for me, and being able to rectifying the mistakes by just doing `terraform plan` and `terraform apply`. It was beautiful to see it iterate through mistakes (sometimes very narrow and arcane), fixing them, retrying and getting them fixed. Sometimes it would take it 15min, but I would have coffee or lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
+[Gemini CLI](https://github.com/google-gemini/gemini-cli) was launched on June 25th when I was working at this project. I was incredibly lucky to have Gemini write the Terraform code for me, and being able to rectify the mistakes by just doing `terraform plan` and `terraform apply`. It was beautiful to see it iterate through mistakes (sometimes very narrow and arcane), fixing them, retrying and getting them fixed. 
+Given that Terraform needs to check resources to exist in the cloud, this feedback loop would be slow at times, sometimes taking up to 15min, but I would have  lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
 
 ## My Journey into the SaaS Runtime Rabbit Hole
 
@@ -98,7 +100,12 @@ With this simple foundation in place, I was ready to move on to the more complex
 
 ## What went wrong
 
-* [GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org).
+1. 🚔 [GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org).
+
+2. 📁 **Folders are hard**. While it’s easy to ask people for a `PROJECT_ID`, it's hard to ask people for a `FOLDER_ID`: they need an `ORGANIZATION_ID` and all the 🚔 Org Policy shenanigans kick in. A project can be orgless, a folder cannot.
+
+3. 💛 **Riccardo likes his scripts, others don’t**. I've reviewed extensively Friction Logs from two colleagues, and I realized that what works for me doesn't necessarily work for all. My reliance on scripts like `justfile`, `jq`, `yq`, `lolcat` extenuated their code reproductions. A big lesson learnt for me: minimize dependencies on external scripts. Rule of the thumb: Note to self: if a script is not on [Cloud Shell](https://docs.cloud.google.com/shell/docs/launching-cloud-shell), do without or document it as an explicit dependency. Yes, `ruby` is in Cloud Shell, along with `terraform`, `gemini` CLI, `docker`, `gcloud`, `npm` and many others!
+
 
 ## What went well
 
@@ -108,4 +115,6 @@ With this simple foundation in place, I was ready to move on to the more complex
 
 The friendliness of this command got me compliments from multiple colleagues, while I didn't write a line of this... and it's `bash`!
 
-2. 
+2. **SaaS Runtimes are amazing!**. If you're planning Terraform building blocks with well-defined input/output relarionships, and ever-evolving code, Saas runtime will change your life! In a nutshell, this is *Change Management + Terraform at Google scale*!
+
+![SaaS Runtimes](images/page40_img1.jpeg)
