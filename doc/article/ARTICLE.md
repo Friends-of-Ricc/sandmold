@@ -12,18 +12,30 @@ This summer, I was given the time to do some profound learning on the Ops side. 
 
 The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
 
+This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned; I hope that by sharing my failures and successes, I can help others build on this (or similar) work.
+
+![Multiple apps in multiple desks](images/page4_img2.jpeg)
+
+
 <!-- this is for a 
 ![Multiple apps in multiple desks](image.png)
 -->
-<img src="images/page5_img2.jpeg" alt="Sandmold etymology" width="30%" style="float: right;">
 
-**Why this horrible name?** Well, take a person who is thinking in Italian ("formine per sabbia"), querying Google Images in a German speaking country, and then Google translating, and double-checking with a Russian colleague. There you have it: "Sandmold". The ClassRoom analogy is simple:
+## Sandmold? Why this horrible name?
 
-* A **classroom** corresponds to a GCP Folder.
-* A **bench** is a GCP Project (1-2 students per bench).
+<img src="image-3.png" alt="Sandmold etymology" width="30%" style="float: right;">
+
+Well, take a person who is thinking in 🇮🇹 Italian, querying Google Images in a 🇩🇪 German speaking region, and then Google translating to 🇬🇧 English, and double-checking with a 🇷🇺 Russian colleague. There you have it: "formine per sabbia" -> "Gill Förmchen" > "Da" > "Sandmold". Once my American colleagues came for the rescue, the repo was registered, [go links](https://golinks.github.io/golinks/) saved, there was no going back.
+
+## What's a Classroom?
+
+The ClassRoom analogy is simple:
+
+* A **classroom** corresponds to a [GCP Folder](https://docs.cloud.google.com/resource-manager/docs/creating-managing-folders).
+* A **bench** is a [Cloud Project](https://developers.google.com/workspace/guides/create-project) (usually, 1-2 students per bench).
 * A project can have N **apps**, each appearing at most once (eg, one [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos) and one [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), but *not* two [Banks of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
 
-This article describes my journey. As someone not expert of Terraform, there were many lessons to be learned, obstacles to overcome, and few moments of triumph. I hope that by sharing my failures and successes, I can help others build on this work and navigate their own cloud adventures.
+
 
 ## The Vision: from YAML to a working Playground
 
@@ -86,12 +98,14 @@ With this simple foundation in place, I was ready to move on to the more complex
 
 ## What went wrong
 
-* Org Policies are tough - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org).
+* [GCP Org Policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/overview) are tough - *really* tough. This makes it very hard to terraform anything cross-orgs, if your org is well protected (like my Company org).
 
 ## What went well
 
-Vibecoding setup scripts works really well. So a `bin/check-setup.sh` can yield a friendly:
+1. Vibecoding setup scripts works really well. So a `bin/check-setup.sh` can yield a friendly:
 
 ![check-setup is cool](images/page23_img1.jpeg)
 
 The friendliness of this command got me compliments from multiple colleagues, while I didn't write a line of this... and it's `bash`!
+
+2. 
