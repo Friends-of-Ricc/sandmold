@@ -81,14 +81,19 @@ if [ -z "${BILLING_ACCOUNT_ID:-}" ]; then
     log_fatal "Please add the correct BILLING_ACCOUNT_ID to your .env file and run this script again."
 fi
 
-is_open=$(gcloud billing accounts describe "$BILLING_ACCOUNT_ID" --format="value(open)" --quiet 2>/dev/null)
-if [ "$is_open" != "True" ]; then
-  log_fatal "Billing account '$BILLING_ACCOUNT_ID' is not open or you don't have permissions. Please check BILLING_ACCOUNT_ID in your .env file."
-fi
-display_name=$(gcloud billing accounts describe "$BILLING_ACCOUNT_ID" --format="value(displayName)" --quiet 2>/dev/null)
-log_info "Billing account '$BILLING_ACCOUNT_ID' ($display_name) is open."
-echo
-
+    error_output=$(mktemp)
+    if ! is_open=$(gcloud billing accounts describe "$BILLING_ACCOUNT_ID" --format="value(open)" --quiet 2> "$error_output"); then
+        error_content=$(cat "$error_output")
+        rm -f "$error_output"
+        if echo "$error_content" | grep -q "not found"; then
+            log_fatal "Billing account '$BILLING_ACCOUNT_ID' not found. Please verify the BILLING_ACCOUNT_ID in your .env file."
+        elif echo "$error_content" | grep -q "permission denied"; then
+            log_fatal "Permission denied for billing account '$BILLING_ACCOUNT_ID'. Please check your IAM permissions."
+        else
+            log_fatal "Could not access billing account '$BILLING_ACCOUNT_ID'. Please check the ID in your .env file and your permissions. Error: $error_content"
+        fi
+    fi
+    rm -f "$error_output"
 # Check organization
 echo "🔎 Checking organization..."
 if [ -z "${ORGANIZATION_ID:-}" ]; then
