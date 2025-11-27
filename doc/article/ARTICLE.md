@@ -48,9 +48,8 @@ The multi-stage architecture was strongly inspired by Luca's [GenAI Factory](htt
 
 <img src="image-3.png" alt="Sandmold etymology" width="30%" style="float: right;"> Well, take a person who is thinking in 🇮🇹 Italian, querying Google Images in a 🇩🇪 German speaking region, and then Google translating from German shopping sites to 🇬🇧 English, finally double-checking with a 🇷🇺 Russian colleague. There you have it: "formine per sabbia" -> "Gill Förmchen" > "Sandmold" > "Da". Once my American colleagues came for the rescue, the repo was registered, [go links](https://golinks.github.io/golinks/) already created, and there was no going back.
 
-## What's a Classroom?
+## Explain this Classroom taxonomy again?
 
-The ClassRoom analogy is simple:
 
 <!-- 
 Option 1 via gemini.google.com - breathtaking:
@@ -59,11 +58,15 @@ Option 1 via gemini.google.com - breathtaking:
 
 -->
 
-![Nice simple table via NBPro](a_humorous_and_colorful_cartoon_.png)
+
+
+The ClassRoom analogy is simple:
 
 * A **classroom** corresponds to a [GCP Folder](https://docs.cloud.google.com/resource-manager/docs/creating-managing-folders).
 * A **bench** is a [Cloud Project](https://developers.google.com/workspace/guides/create-project) (usually, 1-2 students per bench).
 * A project can have N **apps**, each appearing at most once (eg, one [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos) and one [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), but *not* two [Banks of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
+
+![Nice simple table via NBPro](a_humorous_and_colorful_cartoon_.png)
 
 ## The Vision: from YAML to a working Playground
 
@@ -71,14 +74,15 @@ As a Rubyist, I love YAMLs. As a k8s/Borg developer, and early `chef` *aficionad
 
 ![From YAML to Cloud Console..](image-2.png)
 
+The idea is simple: you maintain a couple of "classroom templates" and adapt for every event to your liking: See [etc/samples/classroom/](https://github.com/Friends-of-Ricc/sandmold/blob/main/etc/samples/classroom/) for some examples, like [2teachers_4realstudents.yaml](https://github.com/Friends-of-Ricc/sandmold/blob/main/etc/samples/classroom/2teachers_4realstudents.yaml)
+
 And to do so, you *just* (literally) run a `just` script which calls terraform and creates a Markdown file with the results (`REPORT.md`):
 
 ![just classroom up](images/page30_img3.jpeg)
 
-
 <img src="images/page30_img1.jpeg" alt="Sandmold etymology" width="30%" style="float: right;">  Which creates, after some terraforming, a clean `output.tf`:
 
-Note that a succesfully destroyed classroom *also* leaves a report.md with a link to the destroyed resources.
+**Note** that a succesfully destroyed classroom *also* leaves a `report.md` with a link to the destroyed resources. This is an idea I took from `pulumi` which is (IMHO) better than Terraform at surfacing the created resources thanks to its [stack README](https://www.pulumi.com/blog/stack-readme/): I borrowed the same idea for my Sandmold!
 
 <!-- ![output2](images/page30_img2.jpeg) -->
 
@@ -112,11 +116,12 @@ It all starts with a HelloWorld..
 
 Here are the key concepts I had to wrap my head around:
 
-<img src="image-8.png" alt="Sandmold etymology" width="40%" style="float: right;"> 
 <!-- hiding the 100% new and the 30% old 
 ![Screenshot from Overview - How it works on DevConsole](image-8.png)
 <img src="image-4.png" alt="Sandmold etymology" width="30%" style="float: right;"> 
 -->
+<img src="image-8.png" alt="Sandmold etymology" width="40%" style="float: right;">
+
 *   **SaaS Offering:** This is the big picture, the entire dish. It represents your SaaS product, like "Bank of Anthos as a Service"
 *   **Unit Kind:** This is a specific component of your offering, like the "GKE cluster" or the "PostgreS database". It's an ingredient in your recipe. More importantly, it can *evolve*.
 *   **Release:** A specific, versioned snapshot of your Unit Kind. Think of it as a specific version of your food recipe (eg, lasagne).
