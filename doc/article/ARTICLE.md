@@ -1,6 +1,6 @@
 ---
 # this article will go to Medium once finished.
-# TF: b/463586009
+bug: b/463586009 # TaskFlow
 title: "A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI"
 author: "Riccardo Carlesso"
 description: "Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime."
@@ -13,13 +13,8 @@ slides: "https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB
 This summer, I was given the time to do some profound learning on the **Operations** side. My mission? To sharpen my Terraform skills while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a real world customer need: to create a one-click, ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons** where students have a pre-constructed environment to run certain exercise and the teacher(s) can observe students and check their progress. At the end of the day, a `tf destroy` ensure you won't break the bank (unless its the [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
 
 <!-- [GCP and Terraform classroom](images/page1_img5.jpeg) -->
-test 1 no BOA
 ![GCP and Terraform classroom](a_photorealistic_image_of_a_mode_1.png)
-test 2 with BOA but uglier
-![GCP and Terraform classroom](a_photorealistic_image_of_a_mode_2.png)
-
-TODO choose one.
-
+<!-- test 2 with BOA but uglier ![GCP and Terraform classroom](a_photorealistic_image_of_a_mode_2.png) -->
 <!-- God I love Gemini CLI + Nanobanana Pro! 
 
 Prompt:
@@ -34,9 +29,9 @@ Now take image images/page1_img5.jpeg . I'd like to use Nanobanana Pro MCP to cr
 
 The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
 
-### What is this article about? Terraform? Cloud? Errors
+### What is this article about? Terraform? Cloud? Vibe coding? Errors make you stronger?
 
-This article is a mixture of things: it's me following a dream, finding it was broken all along, and sharing my learnings on it; while at it, I'm sharing some cool technologies that Operators in the room might find interesting (together with the learnings).
+This article is a mixture of things: it's me following a dream, finding it was broken all along, and sharing my learnings on it (so you won't repeat them). While at it, I'm sharing some cool technologies that AI-savvy devs and Operators in the room might find interesting.
 
 This article describes my "Terraforming a Classroom" journey, and how AI helped it (or killed it?).
 
@@ -57,25 +52,22 @@ The multi-stage architecture was strongly inspired by Luca's [GenAI Factory](htt
 
 The ClassRoom analogy is simple:
 
+<!-- 
 Option 1 via gemini.google.com - breathtaking:
 
 ![NanoBanana3 Classroom+Bench+Apps](image-5.png)
 
-![NanoBanana3 Classroom+Bench+Apps with better Hispter shop](image-7.png)
+-->
 
-Option 2 via MCP - which is best?
-
-![alt text](a_humorous_and_colorful_cartoon_.png)
+![Nice simple table via NBPro](a_humorous_and_colorful_cartoon_.png)
 
 * A **classroom** corresponds to a [GCP Folder](https://docs.cloud.google.com/resource-manager/docs/creating-managing-folders).
 * A **bench** is a [Cloud Project](https://developers.google.com/workspace/guides/create-project) (usually, 1-2 students per bench).
 * A project can have N **apps**, each appearing at most once (eg, one [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos) and one [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo), but *not* two [Banks of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
 
-
-
 ## The Vision: from YAML to a working Playground
 
-As a Rubyist, I love YAMLs. This is the promise of my project (and it delivers!):
+As a Rubyist, I love YAMLs. As a k8s/Borg developer, and early `chef` *aficionado*, I love declarative Infra. This is the promise that my project actually delivers:
 
 ![From YAML to Cloud Console..](image-2.png)
 
@@ -94,7 +86,11 @@ Note that a succesfully destroyed classroom *also* leaves a report.md with a lin
 
 My vision for Sandmold was to create a modular, open-source playground, easily spinning up complex environments like Online Boutique or Bank of Anthos as self-contained "SaaS" offerings. This would allow teachers to provision entire classrooms and personal labs for students with simple commands. 
 
-After a talk with my Terraform expert Roberto, this pursuit naturally led me to Google Cloud's [SaaS Runtime](https://cloud.google.com/products/saas-runtime) — a powerful, yet new, product for multi-tenant SaaS. 
+Let me remind you the GCP metaphor:
+
+![NanoBanana3 Classroom+Bench+Apps with better Hispter shop](image-7.png)
+
+After a coffee with my Terraform expert Roberto, this pursuit naturally led me to Google Cloud's [SaaS Runtime](https://cloud.google.com/products/saas-runtime) — a powerful, yet new, product for multi-tenant SaaS. 
 ![SaaS Runtimes](images/page40_img1.jpeg)
 
 It seemed perfect, but as with any new frontier, there were **beasts** to slay first!
@@ -102,13 +98,15 @@ It seemed perfect, but as with any new frontier, there were **beasts** to slay f
 ![SaaS Runtimes](images/page1_img8.jpeg)
 
 
-
-## Part 1: Terraform and Gemini CLI
+## Part 1: Terraform + Gemini CLI + colorful bash scripts
 
 [Gemini CLI](https://github.com/google-gemini/gemini-cli) was invaluable throughout this project. I was incredibly lucky to have Gemini CLI write the Terraform code for me, and to quickly rectify mistakes through its iterative process with `terraform plan` and `terraform apply`. It was beautiful to see it iterate through mistakes (sometimes very narrow and arcane), fixing them, retrying and getting them fixed. 
 Given that Terraform needs to check resources to exist in the cloud, this feedback loop would be slow at times, sometimes taking up to 15min, but I would have  lunch, or simply I could check emails or do meetings, while Gemini CLI was meticulously trying to fix my code.
 
+
 ## My Journey into the SaaS Runtime Rabbit Hole
+
+It all starts with a HelloWorld..
 
 [SaaS Runtime](https://cloud.google.com/products/saas-runtime) has its own vocabulary and a specific order of operations. Think of it like making a proper Italian dinner: you can't just throw everything in the pot at once! You have the *antipasto*, the *primo*, the *secondo*. It's a process.
 
@@ -199,3 +197,10 @@ Vibecoding can be a fun and useful tool to dip your toes in some new technology.
 I think we're going to hear more about **Saas Runtimes** in the near future, and if it was stock, I'd bet some money on it.
 
 Finally, if **Gemini CLI** is so great for **terraform**, Operators in the room.. what are you waiting for?!?
+
+🔗 Useful Links:
+
+* 🔗 https://github.com/Friends-of-Ricc/sandmold/ My code
+* 🔗 https://github.com/google-gemini/gemini-cli Gemini CLI
+    * You can also try a more agentic experience with Gemini CLI at the core with 🔗 https://antigravity.google/
+* 🔗 https://cloud.google.com/products/saas-runtime => and a great Day 1 tutorial: 🔗 https://docs.cloud.google.com/saas-runtime/docs/deploy-vm
