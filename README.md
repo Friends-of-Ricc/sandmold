@@ -4,6 +4,8 @@ Self: https://github.com/Friends-of-Ricc/sandmold (public)
 
 Create a 🏖️🎲 Sandboxed Playground to run GCP labs in a fire-and-forget Folder.
 
+**Note**: this is NOT an official Google Product.
+
 ## Vision
 
 A multi-seat classroom Terraformed from the ground up to Google Cloud to minimize friction for students.
