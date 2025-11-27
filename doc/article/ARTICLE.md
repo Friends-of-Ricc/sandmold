@@ -1,18 +1,24 @@
 ---
 # this article will go to Medium once finished.
 # TF: b/463586009
-title: A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI
-author: Riccardo Carlesso
-description: Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime.
-medium_article_url: TODO
-slides: https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit
+title: "A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI"
+author: "Riccardo Carlesso"
+description: "Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime."
+medium_article_url: "TODO - WIP"
+slides: "https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit"
 ---
 
 # A Terraform Classroom for hackathons on GCP: a tale of learnings with Gemini CLI
 
 This summer, I was given the time to do some profound learning on the **Operations** side. My mission? To sharpen my Terraform skills while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a real world customer need: to create a one-click, ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons** where students have a pre-constructed environment to run certain exercise and the teacher(s) can observe students and check their progress. At the end of the day, a `tf destroy` ensure you won't break the bank (unless its the [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
 
-![GCP and Terraform classroom](images/page1_img5.jpeg)
+<!-- [GCP and Terraform classroom](images/page1_img5.jpeg) -->
+test 1 no BOA
+![GCP and Terraform classroom](a_photorealistic_image_of_a_mode_1.png)
+test 2 with BOA but uglier
+![GCP and Terraform classroom](a_photorealistic_image_of_a_mode_2.png)
+
+TODO choose one.
 
 <!-- God I love Gemini CLI + Nanobanana Pro! 
 
