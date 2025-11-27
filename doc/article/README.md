@@ -13,6 +13,8 @@ version: "1.0.1"
 # v1.0.0 before sending to Medium
 ---
 
+Note: this article is obsoleted by this Medium Article: https://medium.com/@palladiusbonton/a-terraform-classroom-for-hackathons-on-gcp-a-tale-of-learnings-with-gemini-cli-0948b2174ae2 which has 3% more updated stuff.
+
 # A Terraform Classroom for hackathons on GCP: a tale of learnings with Gemini CLI
 
 This summer, I was given the time to do some profound learning on the **Operations** side. My mission? To sharpen my Terraform skills while pair-programming with the Gemini CLI. My project, which I affectionately named "**Sandmold**", was born from a real world customer need: to create a one-click, ephemeral, sandboxed Google Cloud environments for **workshops** and **hackathons** where students have a pre-constructed environment to run certain exercise and the teacher(s) can observe students and check their progress. At the end of the day, a `tf destroy` ensure you won't break the bank (unless its the [Bank of Anthos](https://github.com/GoogleCloudPlatform/bank-of-anthos)).
