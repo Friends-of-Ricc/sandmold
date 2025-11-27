@@ -5,7 +5,10 @@ title: "A GCP Terraform Classroom for hackathons: my personal learning with Gemi
 author: "Riccardo Carlesso"
 description: "Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime."
 medium_article_url: "TODO - WIP"
-slides: "https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit"
+#slides: "https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit"
+version: "1.0.0a"
+# CHANGELOG
+# v1.0.0 before sending to Medium
 ---
 
 # A Terraform Classroom for hackathons on GCP: a tale of learnings with Gemini CLI
