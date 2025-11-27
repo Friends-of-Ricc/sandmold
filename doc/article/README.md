@@ -4,10 +4,11 @@ bug: b/463586009 # TaskFlow
 title: "A GCP Terraform Classroom for hackathons: my personal learning with Gemini CLI"
 author: "Riccardo Carlesso"
 description: "Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime."
-medium_article_url: "TODO - WIP"
+medium_article_url: https://medium.com/@palladiusbonton/a-terraform-classroom-for-hackathons-on-gcp-a-tale-of-learnings-with-gemini-cli-0948b2174ae2
 #slides: "https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit"
 version: "1.0.1"
 # CHANGELOG
+# v1.1.0 I fixed a few things in the Medium article. Now Medium supercedes officially this article.
 # v1.0.1 renamed to README so folder poinst to it - duh
 # v1.0.0 before sending to Medium
 ---
