@@ -14,12 +14,27 @@ This summer, I was given the time to do some profound learning on the **Operatio
 
 ![GCP and Terraform classroom](images/page1_img5.jpeg)
 
+<!-- God I love Gemini CLI + Nanobanana Pro! 
+
+Prompt:
+
+Now take image images/page1_img5.jpeg . I'd like to use Nanobanana Pro MCP to create a classroom where it seems like the whole
+  cflassroom was created via Terraform, using some image tricks like transparency, watercolors, I dont know! Something where class,
+  workbench, apps they all popup like boxes/parallelepipeds half-transparent from a Terraform pandora's box or Aladdin's lamp,
+  whichever metaphor you want to convey. It should showcase that this is easy to create and dispose with one click, and the delta
+  between the terraformed class and the EMPTY class should be evident to the viewer. Makes sense?
+
+-->
 
 The idea is simple: **pre-provision a class for N students who (alone or in pairs) can solve a generic exercise in a sandboxed environment. Here, teachers would have automatic observability over people**.
 
-This article describes my journey. As someone not expert in Terraform, there were many lessons to be learned. I hope that by sharing my failures and successes, I can help others build on this (or similar) work.
+### What is this article about? Terraform? Cloud? Errors
 
-The multi-stage architecture was strongly inspired by [Fabric FAST] and Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory).
+This article is a mixture of things: it's me following a dream, finding it was broken all along, and sharing my learnings on it; while at it, I'm sharing some cool technologies that Operators in the room might find interesting (together with the learnings).
+
+This article describes my "Terraforming a Classroom" journey, and how AI helped it (or killed it?).
+
+The multi-stage architecture was strongly inspired by Luca's [GenAI Factory](https://github.com/GoogleCloudPlatform/genai-factory). I loved in particular how you get the output from stage1 to build the `TFVAR`s of stage2 (magic line [here](https://github.com/GoogleCloudPlatform/genai-factory/blob/master/cloud-run-single/0-projects/outputs.tf#L73))!
 
 ![Multiple apps in multiple desks](images/page4_img2.jpeg)
 
@@ -39,6 +54,8 @@ The ClassRoom analogy is simple:
 Option 1 via gemini.google.com - breathtaking:
 
 ![NanoBanana3 Classroom+Bench+Apps](image-5.png)
+
+![NanoBanana3 Classroom+Bench+Apps with better Hispter shop](image-7.png)
 
 Option 2 via MCP - which is best?
 
