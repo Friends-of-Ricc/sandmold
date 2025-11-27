@@ -112,13 +112,16 @@ It all starts with a HelloWorld..
 
 Here are the key concepts I had to wrap my head around:
 
+<img src="image-8.png" alt="Sandmold etymology" width="40%" style="float: right;"> 
+<!-- hiding the 100% new and the 30% old 
+![Screenshot from Overview - How it works on DevConsole](image-8.png)
 <img src="image-4.png" alt="Sandmold etymology" width="30%" style="float: right;"> 
-
+-->
 *   **SaaS Offering:** This is the big picture, the entire dish. It represents your SaaS product, like "Bank of Anthos as a Service"
 *   **Unit Kind:** This is a specific component of your offering, like the "GKE cluster" or the "PostgreS database". It's an ingredient in your recipe. More importantly, it can *evolve*.
 *   **Release:** A specific, versioned snapshot of your Unit Kind. Think of it as a specific version of your food recipe (eg, lasagne).
 *   **Unit:** An actual, running instance of a Unit Kind. If Unit Kind is the Java class, this is the Java instance; if Unit Kind is a dish on the menu, the Unit is the actual Lasagna which they serve on your table, different from other Lasagnas, but taken from the same baking tray. More importantly, different restaurants (tennants) could run different version of the same menu / lasagna; or in the same restaurant you could A/B test a new recipe with just a very few loyal customers...
-
+*   The model can be further complicated by using **Tenants**, **feature flags**, and **region** concepts.
 
 [This E/R Diagram](https://github.com/Friends-of-Ricc/sandmold/blob/main/iac/saas-runtime/ER_DIAGRAM.md) (and the figure on the side) explains it in some more details.
 
