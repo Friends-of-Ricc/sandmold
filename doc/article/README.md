@@ -6,8 +6,9 @@ author: "Riccardo Carlesso"
 description: "Riccardo's lessons learned on Terraform, Sandmold and SaaS Runtime."
 medium_article_url: "TODO - WIP"
 #slides: "https://docs.google.com/presentation/d/1JkWncwizk7qUnBfnKCBy-wnHQ5uswtB_U2iThrKsxeU/edit"
-version: "1.0.0a"
+version: "1.0.1"
 # CHANGELOG
+# v1.0.1 renamed to README so folder poinst to it - duh
 # v1.0.0 before sending to Medium
 ---
 
